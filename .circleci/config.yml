@@ -276,7 +276,7 @@ jobs:
           command: |
             ./scripts/deploy-dev.sh
 
-dep-stage:
+  dep-stage:
     docker:
       - image: debian:stretch-slim
         environment:
@@ -301,8 +301,8 @@ dep-stage:
       - run:
           name: Deploy development applications
           command: |
-            ./scripts/deploy-staging.sh
-            
+            ./scripts/deploy-dev.sh          
+
   dep-prod:
     docker:
       - image: debian:stretch-slim
@@ -384,6 +384,16 @@ workflows:
           filters:
             branches:
               only: develop
+      - dep-stage:
+          requires:
+            - ut-components
+            - ut-core-api
+            - ut-api-fields
+            - ut-api-values
+            - at-all
+          filters:
+            branches:
+              only: staging        
       - dep-prod:
           requires:
             - ut-components
@@ -402,14 +412,3 @@ workflows:
               only:
                 - master
                 - docs
-      - dep-stage:
-          requires:
-            - ut-components
-            - ut-core-api
-            - ut-api-fields
-            - ut-api-values
-            - at-all
-          filters:
-            branches:
-              only:
-                - staging
