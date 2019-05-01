@@ -276,11 +276,7 @@ jobs:
           command: |
             ./scripts/deploy-dev.sh
 
-      - store_artifacts:
-          <<: *logging
-          destination: dev-deploy-reports
-
-  dep-stage:
+dep-stage:
     docker:
       - image: debian:stretch-slim
         environment:
