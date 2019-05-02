@@ -301,7 +301,7 @@ jobs:
       - run:
           name: Deploy development applications
           command: |
-            ./scripts/deploy-dev.sh          
+            ./scripts/deploy-staging.sh          
 
   dep-prod:
     docker:

@@ -38,15 +38,15 @@ deploy_app() {
   local fail=0
   
   # Background services
-   cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`" &
-   cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
+  cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`" &
+  cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
   
   # User focused display
+  cf set-env discovery-web DISABLE_COLLECTSTATIC 1
   if [ "$hostname" ]
   then
     cf push -n "$hostname" discovery-web -f "`get_manifest_config web ${branch}`" &
   else
-    cf set-env discovery-web DISABLE_COLLECTSTATIC 1
     cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
   fi
   
