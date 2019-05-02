@@ -38,8 +38,8 @@ deploy_app() {
   local fail=0
   
   # Background services
-  # cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`" &
-  # cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
+   cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`" &
+   cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
   
   # User focused display
   if [ "$hostname" ]
