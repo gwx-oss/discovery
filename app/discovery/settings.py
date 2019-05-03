@@ -375,7 +375,7 @@ REST_API_TEST = False
 #
 # Cloud.gov UAA authentication
 #
-UAA_AUTH = True
+UAA_AUTH = False
 UAA_CLIENT_ID = config_value('UAA_CLIENT_ID')
 UAA_CLIENT_SECRET = config_value('UAA_CLIENT_SECRET')
 UAA_AUTH_URL = config_value('UAA_AUTH_URL', 'https://login.fr.cloud.gov/oauth/authorize')
