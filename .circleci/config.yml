@@ -385,12 +385,6 @@ workflows:
             branches:
               only: develop
       - dep-stage:
-          requires:
-            - ut-components
-            - ut-core-api
-            - ut-api-fields
-            - ut-api-values
-            - at-all
           filters:
             branches:
               only: staging        
