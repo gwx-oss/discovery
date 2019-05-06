@@ -181,7 +181,7 @@ class Command(BaseCommand):
                     address = get_value(addr, 'Line1', vendor, '').strip().title(),
                     city = get_value(addr, 'City', vendor, '').strip().title(),
                     state = get_value(addr, 'stateorProvince', vendor, '').strip().upper(),
-                    zipcode,
+                    zipcode = zipcode,
                     congressional_district = re.sub(r'[^\d]+', '', get_value(reg, 'congressionalDistrict', vendor, ''))
                 )                
                 vendor.sam_location = location
