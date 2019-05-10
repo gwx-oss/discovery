@@ -309,7 +309,8 @@ workflows:
             - at-frontend
           filters:
             branches:
-              only: develop
+              - develop
+              - angular_first_version
       - dep-prod:
           requires:
             - ut-components
