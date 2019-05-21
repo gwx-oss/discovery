@@ -27,6 +27,8 @@ export class FilterKeywordsComponent
   keywords_results: any[] = [];
   _keywords = '';
   items_selected: any[] = [];
+  selected = 0;
+
   @Input()
   opened = true;
   @Output()
@@ -89,6 +91,7 @@ export class FilterKeywordsComponent
     this.searchService.getKeywords().subscribe(data => {
       this.items = data['results'];
       this.searchService.keywords = data['results'];
+
       this.keywords_results = this.searchService.buildKeywordsDropdown(
         this.items
       );
@@ -127,13 +130,14 @@ export class FilterKeywordsComponent
       }
     }
   }
-  addKeywords(code) {
-    if (code === '0') {
+  addKeyword(itemId) {
+    this.items_selected = [];
+    if (itemId === '0') {
       this.reset();
       return;
     }
-    if (!this.searchService.existsIn(this.items_selected, code, 'value')) {
-      this.addItem(code);
+    if (!this.searchService.existsIn(this.items_selected, itemId, 'value')) {
+      this.addItem(itemId);
     }
   }
   getSelected(selectedOnly: boolean): any[] {
@@ -150,6 +154,7 @@ export class FilterKeywordsComponent
   }
   reset() {
     this.items_selected = [];
+    this.selected = 0;
     this.emitClearedSelected.emit(true);
   }
   addItem(id: string) {
@@ -162,7 +167,7 @@ export class FilterKeywordsComponent
 
     this.items_selected.push(item);
     this.emmitSelected.emit(1);
-    this.msgAddedItem.showMsg();
+    // this.msgAddedItem.showMsg();
   }
   removeItem(value: string) {
     for (let i = 0; i < this.items_selected.length; i++) {

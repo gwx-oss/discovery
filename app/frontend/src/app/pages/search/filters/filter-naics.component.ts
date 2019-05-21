@@ -39,6 +39,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   name = 'NAICs';
   queryName = 'naics';
   id = 'filter-naics';
+  selected = 0;
 
   placeholder;
   error_message;
@@ -153,7 +154,8 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
       }
     }
   }
-  addKeywords(code) {
+  addKeyword() {
+    const code = $('#' + this.id + '-input').val();
     if (code === '0') {
       this.reset();
       return;
@@ -175,7 +177,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     }
 
     this.emmitSelected.emit(1);
-    this.msgAddedItem.showMsg();
+    // this.msgAddedItem.showMsg();
   }
   getPoolsIds(id: string): any[] {
     const ids = [];
@@ -252,6 +254,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   reset() {
     this.items_selected = [];
     this.opened = false;
+    this.selected = 0;
     this.emitClearedSelected.emit(true);
   }
   removeItem(value: string) {
@@ -264,5 +267,9 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
       this.emitClearedSelected.emit(true);
     }
     this.emmitSelected.emit(0);
+  }
+
+  onChange(selected)  {
+    alert(selected);
   }
 }

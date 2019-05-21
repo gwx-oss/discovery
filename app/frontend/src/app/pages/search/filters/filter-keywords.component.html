@@ -2,17 +2,10 @@
   {{name}}
 </button>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">
-
-  <div class="usa-search">
-
-    <discovery-autocomplete (emitCode)="addKeywords($event)" [id]="id" [placeholder]="name" [keywords_results]="keywords_results"></discovery-autocomplete>
-
-  </div>
-  <ul *ngIf="items_selected" class="items-selected">
-    <li *ngFor="let keyword of items_selected">
-      <a (click)="removeItem(keyword.value)" title="Remove {{keyword.description}}"><span class="usa-sr-only">Remove
-          {{keyword.value}}</span></a>{{keyword.description}}
-    </li>
-  </ul>
-  <discovery-filter-selected [id]="'msg-keyword-selected'" [label]="'Added keyword'"></discovery-filter-selected>
+  <discovery-spinner *ngIf="keywords_results.length === 0"></discovery-spinner>
+  <select id="{{id}}-input" [(ngModel)]='selected' title="Select Keyworld" (change)="addKeyword(selected)" 
+     tabindex="-1" aria-hidden="true"  class="autocomplete-drop select2-container--default">
+     <option id="0" selected value="0">Select Keyword</option>
+     <option *ngFor="let item of keywords_results" value="{{item.id}}">{{item.text}}</option>
+  </select>
 </div>

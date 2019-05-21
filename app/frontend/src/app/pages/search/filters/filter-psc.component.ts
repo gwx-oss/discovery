@@ -40,6 +40,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
   id = 'filter-pscs';
   placeholder;
   error_message;
+  selected = 0;
 
   json_value = 'id';
   json_description = 'text';
@@ -158,7 +159,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
       this.items_selected.push(item);
     }
     this.emmitSelected.emit(1);
-    this.msgAddedItem.showMsg();
+    // this.msgAddedItem.showMsg();
   }
   getPoolsIds(id: string): any[] {
     const ids = [];
@@ -232,6 +233,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
   reset() {
     this.items_selected = [];
     this.opened = false;
+    this.selected = 0;
     this.emitClearedSelected.emit(true);
   }
   removeItem(value: string) {
