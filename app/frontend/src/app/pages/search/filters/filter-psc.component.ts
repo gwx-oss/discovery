@@ -138,20 +138,21 @@ export class FilterPscComponent implements OnInit, OnChanges {
       }
     }
   }
-  addKeywords(code) {
-    if (code === '0') {
+  addKeywords(item) {
+    if (item === '0') {
       this.reset();
       return;
     }
     if (
-      !this.searchService.existsIn(this.items_selected, code, 'value') &&
-      this.searchService.existsIn(this.items_filtered, code, 'id')
+      !this.searchService.existsIn(this.items_selected, item, 'value') &&
+      this.searchService.existsIn(this.items_filtered, item, 'id')
     ) {
-      this.addItem(code);
+      this.addItem(item);
     }
   }
   addItem(id: string) {
     const item = {};
+    this.items_selected = [];
     if (id && id !== '') {
       item['value'] = id;
       item['description'] = this.getItemDescription(id);
