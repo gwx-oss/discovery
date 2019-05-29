@@ -39,6 +39,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   name = 'NAICs';
   queryName = 'naics';
   id = 'filter-naics';
+  selected = 0;
 
   placeholder;
   error_message;
@@ -153,16 +154,17 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
       }
     }
   }
-  addKeywords(code) {
-    if (code === '0') {
+  addKeyword(item) {
+    this.items_selected = [];
+    if (item === '0') {
       this.reset();
       return;
     }
     if (
-      !this.searchService.existsIn(this.items_selected, code, 'value') &&
-      this.searchService.existsIn(this.items_filtered, code, 'id')
+      !this.searchService.existsIn(this.items_selected, item, 'value') &&
+      this.searchService.existsIn(this.items_filtered, item, 'id')
     ) {
-      this.addItem(code);
+      this.addItem(item);
     }
   }
   addItem(id: string) {
@@ -175,7 +177,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     }
 
     this.emmitSelected.emit(1);
-    this.msgAddedItem.showMsg();
+    // this.msgAddedItem.showMsg();
   }
   getPoolsIds(id: string): any[] {
     const ids = [];
@@ -252,17 +254,23 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
   reset() {
     this.items_selected = [];
     this.opened = false;
+    this.selected = 0;
     this.emitClearedSelected.emit(true);
   }
   removeItem(value: string) {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === value) {
-        this.items_selected.splice(i, 1);
-      }
-    }
+    this.reset();
+    // for (let i = 0; i < this.items_selected.length; i++) {
+    //   if (this.items_selected[i]['value'] === value) {
+    //     this.items_selected.splice(i, 1);
+    //   }
+    // }
     if (this.items_selected.length === 0) {
       this.emitClearedSelected.emit(true);
     }
     this.emmitSelected.emit(0);
+  }
+
+  onChange(selected)  {
+    alert(selected);
   }
 }
