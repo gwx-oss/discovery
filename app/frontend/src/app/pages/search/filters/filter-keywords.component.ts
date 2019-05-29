@@ -131,6 +131,7 @@ export class FilterKeywordsComponent
     }
   }
   addKeyword(itemId) {
+  
     this.items_selected = [];
     if (itemId === '0') {
       this.reset();
@@ -170,11 +171,12 @@ export class FilterKeywordsComponent
     // this.msgAddedItem.showMsg();
   }
   removeItem(value: string) {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === value) {
-        this.items_selected.splice(i, 1);
-      }
-    }
+    this.reset();
+    // for (let i = 0; i < this.items_selected.length; i++) {
+    //   if (this.items_selected[i]['value'] === value) {
+    //     this.items_selected.splice(i, 1);
+    //   }
+    // }
     if (this.items_selected.length === 0) {
       this.emitClearedSelected.emit(true);
     }

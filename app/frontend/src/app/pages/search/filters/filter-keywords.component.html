@@ -8,4 +8,12 @@
      <option id="0" selected value="0">Select Keyword</option>
      <option *ngFor="let item of keywords_results" value="{{item.id}}">{{item.text}}</option>
   </select>
+
+  <ul *ngIf="items_selected" class="items-selected">	
+    <li *ngFor="let keyword of items_selected">	
+      <a (click)="removeItem(keyword.value)" title="Remove {{keyword.description}}"><span class="usa-sr-only">Remove	
+          {{keyword.value}}</span></a>{{keyword.description}}	
+    </li>	
+  </ul>	
+  <discovery-filter-selected [id]="'msg-keyword-selected'" [label]="'Added keyword'"></discovery-filter-selected>
 </div>
