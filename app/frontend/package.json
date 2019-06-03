@@ -47,9 +47,7 @@
     "tslint": "~5.9.1",
     "typescript": "~2.7.2",
     "tar": ">=4.4.2",
-    "webpack-dev-server": ">=3.1.11"
-  },
-  "resolutions": {
+    "webpack-dev-server": ">=3.1.11",
     "fstream": ">=1.0.12"
   }
 }
