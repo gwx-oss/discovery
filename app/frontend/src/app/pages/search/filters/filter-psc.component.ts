@@ -91,7 +91,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
   }
   setFilteredItems(vehicles) {
     this.items_filtered =
-      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
+      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.returnUnique(this.items);
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.keywords_results = this.items_filtered;
   }
