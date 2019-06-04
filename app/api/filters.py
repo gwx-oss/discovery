@@ -323,6 +323,7 @@ class VendorFilter(VendorBaseFilter):
         ms_querysets = []
         errors = []
         poolIds = []
+        setAsides = []
         queryParameters = {}
         self.logger.error(" one  ")
         for qstring in querystrings:
@@ -349,6 +350,8 @@ class VendorFilter(VendorBaseFilter):
         else:       
             try:
                 queryParameters['pool__id__in'] = queryParameters.pop('pool__id').split(",")
+                if 'setasides__code' in queryParameters.keys()
+                    queryParameters['setasides__code__in'] = queryParameters.pop('setasides__code').split(",")
                 poolIds = queryParameters.get('pool__id__in')
                 self.logger.error(" poolIds else {} ".format(poolIds))
                 ms_ids = self.getMebershipIds(queryParameters)
