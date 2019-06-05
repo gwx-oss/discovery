@@ -239,7 +239,7 @@ export class SearchService {
       }
       if (filter['name'] === 'service_categories') {
         if(selectedServiceCategories.length > 0) {
-          params += '%26%28pool__id=' + selectedServiceCategories.join() + '%29';
+          params += '%26%28pool__id__in=' + selectedServiceCategories.join() + '%29';
         }
       }
       if (filter['name'] === 'setasides') {
@@ -247,7 +247,7 @@ export class SearchService {
         for (const setaside of filter['selected']) {
           setAsides.push(setaside['value']);
         }
-        params += '%26%28setasides__code=' + setAsides.join() + '%29';
+        params += '%26%28setasides__code__in=' + setAsides.join() + '%29';
       }
       if (filter['name'] === 'naics') {
         for (const naic of filter['selected']) {
