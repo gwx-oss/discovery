@@ -243,9 +243,11 @@ export class SearchService {
         }
       }
       if (filter['name'] === 'setasides') {
+        let setAsides = [];
         for (const setaside of filter['selected']) {
-          params += '%26%28setasides__code=' + setaside['value'] + '%29';
+          setAsides.push(setaside['value']);
         }
+        params += '%26%28setasides__code=' + setAsides.join() + '%29';
       }
       if (filter['name'] === 'naics') {
         for (const naic of filter['selected']) {

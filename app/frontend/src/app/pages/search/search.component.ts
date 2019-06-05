@@ -354,12 +354,17 @@ export class SearchComponent implements OnInit {
       this.params = params;
     }
   }
+  
   getContractCompareResults(vehicles) {
     let count = 0;
     let total_vendors = 0;
 
     for (const vehicle of vehicles) {
       var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
+      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0) {
+        count++;
+        continue;
+      }
       this.searchService
         .getVehicleVendorsMeetCriteria(
           this.searchService.activeFilters,
@@ -431,11 +436,24 @@ export class SearchComponent implements OnInit {
     }
     return count;
   }
+  getActiveServiceCategoriesCount() {
+    let count = 0;
+    for (const filter of this.searchService.activeFilters) {
+      if (filter['name'] === 'service_categories') {
+        count = filter.length;
+      }
+    }
+    return count;
+  }
   getVendorsTotalByVehicle(vehicles) {
     let count = 0;
     const vendor_totals = [];
     for (const vehicle of vehicles) {
       var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
+      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0) {
+        count++;
+        continue;
+      }
       this.searchService
         .getVehicleVendorsMeetCriteria([], vehicle.id, selectedServiceCategory)
         .subscribe(
