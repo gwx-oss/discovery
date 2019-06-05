@@ -274,10 +274,8 @@ class VendorFilter(VendorBaseFilter):
     membership = CharFilter(field_name='membership', method='filter_membership')
     logger = logging.getLogger('django')	
 
-    def getMebershipIds(self, queryParameters):
+    def getMebershipIds(self, ms_queryset):
         ms_ids = list()
-        self.logger.error(" queryParameters{} ".format(queryParameters))
-        ms_queryset = vendors.PoolMembership.objects.filter(**queryParameters).only("vendor_id", "pool_id")
         self.logger.error(" first query {} ".format(ms_queryset.query))
         vendorIdsByPool = {}
         poolMembershipIdsByVendors = {}
@@ -328,8 +326,6 @@ class VendorFilter(VendorBaseFilter):
         for qstring in querystrings:
             query = qstring.split('=')
             try:
-                if 'setasides__code__in' == query[0]:
-                    query[1] = query[1].split(",")
                 if 'pool__id__in' == query[0]: 
                     poolIds = query[1].split(",")
                     query[1] = poolIds
@@ -349,7 +345,8 @@ class VendorFilter(VendorBaseFilter):
         else:       
             try:
                 self.logger.error(" poolIds else {} ".format(poolIds))
-                ms_ids = self.getMebershipIds(queryParameters)
+                ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
+                ms_ids = self.getMebershipIds(ms_queryset)
                 self.logger.error(" ms_ids else {} ".format(ms_ids))
                 if len(ms_ids) == 0:
                     qs = qs.filter(pools__id=0)
