@@ -330,8 +330,6 @@ class VendorFilter(VendorBaseFilter):
             try:
                 if 'setasides__code__in' == query[0]:
                     query[1] = query[1].split(",")
-                self.logger.error(" query[0] {} ".format(query[0]))
-                self.logger.error(" query[1] {} ".format(query[1]))
                 if 'pool__id__in' == query[0]: 
                     poolIds = query[1].split(",")
                     query[1] = poolIds
