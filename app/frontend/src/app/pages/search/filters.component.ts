@@ -287,6 +287,9 @@ export class FiltersComponent implements OnInit {
   filterServiceCategoriesByVehiclesInFilter(vehicles: any[]) {
     this.filterServiceCategories.setFilteredItems(vehicles);
   }
+  filterServiceCategoriesInFilter(serviceCategories: any[]) {
+    this.filterServiceCategories.setFilteredItemsByServiceCategories(serviceCategories);
+  }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(
       vehicle
