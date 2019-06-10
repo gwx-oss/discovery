@@ -81,6 +81,16 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
       }
     }
   }
+  setFilteredItemsByServiceCategories(serviceCategories) {
+    this.items_filtered = [];
+    for(let serviceCategory of serviceCategories) {
+      for (const prop of this.items) {
+        if (prop['id'] === serviceCategory.value) {
+          this.items_filtered.push(prop);
+        }
+      }
+    }
+  }
   returnFilteredItems(pools: any[]) {
     let items = [];
     items = this.filterByPool(pools);

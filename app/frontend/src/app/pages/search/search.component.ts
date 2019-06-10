@@ -227,6 +227,15 @@ export class SearchComponent implements OnInit {
     }
     return categories;
   }
+  returnUnique(items: any[]): any[] {
+    const unique_items = [];
+    for (const item of items) {
+      if (!this.searchService.existsIn(unique_items, item.id, 'id')) {
+        unique_items.push(item);
+      }
+    }
+    return unique_items;
+  }
   submitSelectedFilters(filters) {
     if (filters.length === 0) {
       this.filtersComponent.resetFilters();
@@ -275,9 +284,15 @@ export class SearchComponent implements OnInit {
 
           this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
-          this.filtersComponent.filterServiceCategoriesByVehiclesInFilter(
-            vehicles_ids
-          );
+          if(this.service_categories_selected && this.service_categories_selected.length > 0) {
+            this.filtersComponent.filterServiceCategoriesInFilter(
+              this.service_categories_selected
+            );
+          } else {
+            this.filtersComponent.filterServiceCategoriesByVehiclesInFilter(
+              vehicles_ids
+            );
+          }
           this.filters = this.filtersComponent.getSelectedFilters();
           this.searchService.activeFilters = this.filters;
           if (!this.route.snapshot.queryParamMap.has('vendors')) {
@@ -386,7 +401,7 @@ export class SearchComponent implements OnInit {
 
             item['capabilities'] = 0;
             item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle.id);
-            item['pscs'] = this.filtersComponent.getPSCsByVehicle(vehicle.id);
+            item['pscs'] = this.returnUnique(this.filtersComponent.getPSCsByVehicle(vehicle.id));
             const info = this.filtersComponent.getVehicleInfo(vehicle.id);
             item['tier'] = info['tier'].name;
             item['gsa'] = info['poc'];
