@@ -16,7 +16,7 @@
       <tr>
         <th></th>
         <th scope="col">Company</th>
-        <th scope="col" [hidden]="service_categories_selected.length >= 0">
+        <th scope="col" [hidden]="service_categories_selected.length === 0 || isHideEligibleServiceCategory">
           Eligible Service Categories
         </th>
         <th scope="col" class="sbd">
@@ -78,7 +78,7 @@
             item.name | titlecase
           }}</a>
         </td>
-        <td [hidden]="service_categories_selected.length >= 0">
+        <td [hidden]="service_categories_selected.length === 0 || isHideEligibleServiceCategory">
           <span [innerHTML]="poolMeetCriteria(item.pools_ids)"></span>
         </td>
         <td>{{ item.contracts }}</td>
