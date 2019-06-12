@@ -57,6 +57,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   contracts_w_no_records;
   filters;
   loading = true;
+  isHideEligibleServiceCategory = false;
 
   constructor(
     private searchService: SearchService,
@@ -89,6 +90,9 @@ export class TblVendorsComponent implements OnInit, OnChanges {
       } else {
         filters.push(filter);
       }
+      if (filter.name === 'pscs' || filter.name === 'naics') {
+         this.isHideEligibleServiceCategory = true;
+      }
     }
     return filters;
   }
@@ -100,7 +104,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     }
     return categories;
   }
-
+ 
   poolMeetCriteria(pools: any[]): string {
     const categories = [];
     let str = '';
@@ -125,6 +129,9 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         str += '<li>' + cat + '</li>';
       }
       str += '</ul>';
+    }
+    if(str.length > 0) {
+      this.isHideEligibleServiceCategory = false;
     }
     return str;
   }

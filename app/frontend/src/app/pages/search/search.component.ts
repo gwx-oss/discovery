@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ActiveFiltersComponent } from './filters/active-filters.component';
 import { ModalService } from '../../common/modal.service';
 import { FiltersComponent } from './filters.component';
+
 declare const document: any;
 declare const $: any;
 @Component({
@@ -23,7 +24,7 @@ export class SearchComponent implements OnInit {
   activeFiltersComponent: ActiveFiltersComponent;
   @ViewChild(FiltersComponent)
   filtersComponent: FiltersComponent;
-
+  
   vw_contracts = true;
   vw_vendors = false;
   error_message;
@@ -284,7 +285,7 @@ export class SearchComponent implements OnInit {
 
           this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
-          if(this.naics_selected.length > 0) {
+          if(this.naics_selected.length > 0 || this.pscs_selected.length > 0) {
             this.filtersComponent.filterServiceCategoriesInFilter(
               this.service_categories_selected
             );
