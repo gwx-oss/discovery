@@ -117,7 +117,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         if (pool === vehicle) {
           if (
             !this.searchService.existsIn(categories, serviceCategory, '')
-          ) {
+          && serviceCategory != undefined) {
             categories.push(serviceCategory);
           }
         }
@@ -132,6 +132,8 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     }
     if(str.length > 0) {
       this.isHideEligibleServiceCategory = false;
+    } else {
+      this.isHideEligibleServiceCategory = true;
     }
     return str;
   }
