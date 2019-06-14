@@ -32,6 +32,9 @@ export class FilterSbdComponent implements OnInit {
   error_message;
   json_value = 'code';
   json_description = 'description';
+  disable=false;
+  isHidden=true;
+
   constructor(
     private searchService: SearchService,
     private route: ActivatedRoute
@@ -92,6 +95,41 @@ export class FilterSbdComponent implements OnInit {
       ).checked = false;
     }
     this.opened = false;
+    this.disable = false;
+  }
+  hide() {
+   document.getElementById(this.id).style.display = "none";
+  }
+  unhide() {
+    document.getElementById(this.id).style.display = "block";
+  }
+  hideUnhide() {
+    if(this.isHidden) {
+      this.unhide();
+    } else {
+      this.hide();
+    }
+    this.isHidden = !this.isHidden;
+  }
+  enableOrDisableFilter(vehicles) {
+    let unrestricted = false;
+    let other =  false;
+    for(let vehicle of vehicles) {
+      if(vehicle.indexOf('Unrestricted') !== -1) {
+        unrestricted = true;
+      }
+      else {
+        other = true;
+      }
+    }
+    if(unrestricted && !other) {
+      this.disable = true;   
+      this.hide();
+      this.isHidden = true;
+      this.opened = false;
+    } else {
+      this.disable = false;
+    }
   }
   addItem(key: string, title: string) {
     const item = {};

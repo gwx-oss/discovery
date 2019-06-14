@@ -213,13 +213,16 @@ export class FiltersComponent implements OnInit {
   }
   filterOthersByVehicles(vehicles: any[]) {
     let arr = [];
+    let vehicleDiscriptions = [];
     if (vehicles[0] === 'All') {
       arr = vehicles;
     } else {
       for (const i of vehicles) {
         arr.push(i.value);
+        vehicleDiscriptions.push(i.description);
       }
     }
+    this.filterSbdComponent.enableOrDisableFilter(vehicleDiscriptions);
     this.filterServiceCategories.setFilteredItems(arr);
     this.filterNaicsComponent.setFilteredItems(arr);
     this.filterPscComponent.setFilteredItems(arr);
