@@ -26,6 +26,9 @@ The Discovery Vagrantfile is meant to be configurable depending on the needs of 
 You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example ([docker/django-env.example.vars](https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars)) but you will need to create a file called **docker/django-env.vars** that has sensitive application information.
 
 ```bash
+
+# If you using Git on Windows, make sure you selected 'Checkout as-is' during setup. Then make sure that you run: git config --global  core.autocrlf false, so Git will not perform any conversions when checking out or committing text files.
+
 # Fetch Discovery project
 $ git clone https://github.com/PSHCDevOps/discovery.git {project_directory}
 $ cd {project_directory}
@@ -35,6 +38,9 @@ $ cp vagrant/config.default.yml vagrant/config.yml
 
 # docker/django-env.vars is ignored by Git so your configuration will not be versioned
 $ cp docker/django-env.example.vars docker/django-env.vars
+
+
+
 ```
 
 _See the sections below for notes on the available configurations..._
