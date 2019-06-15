@@ -1,4 +1,4 @@
-<button [disabled]="disable" class="usa-accordion-button" (click)="hideUnhide()" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
+<button id="sbd-button" [disabled]="disable" class="usa-accordion-button" (click)="hideUnhide()" [attr.aria-expanded]="opened" [attr.aria-controls]="id">
   {{name}}
 </button>
 <div id="{{id}}" class="usa-accordion-content" [attr.aria-hidden]="!opened">

@@ -87,13 +87,16 @@ export class FilterSbdComponent implements OnInit {
   getItems() {
     return this.items;
   }
-  reset() {
-    this.items_selected = [];
+  resetSelectedItems() {
     for (let i = 0; i < this.items.length; ++i) {
       document.getElementById(
         this.id + '-' + this.items[i][this.json_value]
       ).checked = false;
     }
+  }
+  reset() {
+    this.items_selected = [];
+    this.resetSelectedItems();
     this.opened = false;
     this.disable = false;
   }
@@ -114,19 +117,24 @@ export class FilterSbdComponent implements OnInit {
   enableOrDisableFilter(vehicles) {
     let unrestricted = false;
     let other =  false;
+    let unrestrictedCount = 0;
     for(let vehicle of vehicles) {
       if(vehicle.indexOf('Unrestricted') !== -1) {
         unrestricted = true;
+        unrestrictedCount++;
       }
       else {
         other = true;
       }
     }
     if(unrestricted && !other) {
+      this.resetSelectedItems();
       this.disable = true;   
-      this.hide();
+      if(!this.opened && unrestrictedCount === 1) {
+        this.opened = !this.opened;
+      }
       this.isHidden = true;
-      this.opened = false;
+      this.hide();
     } else {
       this.disable = false;
     }
