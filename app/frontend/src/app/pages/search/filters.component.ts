@@ -230,6 +230,9 @@ export class FiltersComponent implements OnInit {
 
   selectContractVehicleInFilter(vehicle: string) {
     this.filterContractVehiclesComponent.selectItem(vehicle);
+    if(!vehicle.includes('SB') && !vehicle.includes('PSS') ) {
+      this.filterSbdComponent.enableOrDisableFilter(['Unrestricted Vehicle']);
+    }
   }
 
   removeServiceCategories(vehicle: string) {
