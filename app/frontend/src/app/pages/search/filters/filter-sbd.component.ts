@@ -102,9 +102,11 @@ export class FilterSbdComponent implements OnInit {
   }
   hide() {
    document.getElementById(this.id).style.display = "none";
+   document.getElementById(this.id).setAttribute('aria-expanded', 'false');
   }
   unhide() {
     document.getElementById(this.id).style.display = "block";
+    document.getElementById(this.id).setAttribute('aria-expanded', 'true');
   }
   hideUnhide() {
     if(this.isHidden) {
@@ -117,11 +119,10 @@ export class FilterSbdComponent implements OnInit {
   enableOrDisableFilter(vehicles) {
     let unrestricted = false;
     let other =  false;
-    let unrestrictedCount = 0;
+
     for(let vehicle of vehicles) {
       if(vehicle.indexOf('Unrestricted') !== -1) {
         unrestricted = true;
-        unrestrictedCount++;
       }
       else {
         other = true;
@@ -129,10 +130,8 @@ export class FilterSbdComponent implements OnInit {
     }
     if(unrestricted && !other) {
       this.resetSelectedItems();
-      this.disable = true;   
-      if(!this.opened && unrestrictedCount === 1) {
-        this.opened = !this.opened;
-      }
+      this.items_selected = [];
+      this.disable = true; 
       this.isHidden = true;
       this.hide();
     } else {
