@@ -10,6 +10,7 @@ import {
 import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
 import { FilterSelectedComponent } from './filter-selected.component';
+
 declare let document: any;
 @Component({
   selector: 'discovery-filter-service-categories',
@@ -27,6 +28,8 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
   opened = false;
   @Output()
   emmitSelected: EventEmitter<number> = new EventEmitter();
+  @Output()
+  emmitRemovedItems: EventEmitter<any> = new EventEmitter();
   @Output()
   emmitLoaded: EventEmitter<string> = new EventEmitter();
   @Output()
@@ -90,6 +93,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
         }
       }
     }
+    this.items_filtered.sort(this.searchService.sortByVehicleAsc);
   }
   returnFilteredItems(pools: any[]) {
     let items = [];
@@ -121,6 +125,15 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
   }
   getItems() {
     return this.items;
+  }
+
+  isUnrestrictedItemsSelected() {
+    for(const item of this.items_selected) {
+      if(['BMO', 'HCATS', 'OASIS'].indexOf(this.returnVehicleId(item.value)) >= 0) {
+        return true;
+      }
+    }
+    return false;
   }
   getServiceCategoriesByVehicle(vehicle: string): any[] {
     const items: any[] = [];
@@ -235,6 +248,10 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
         this.items_selected.splice(i, 1);
       }
     }
+    if(!this.isUnrestrictedItemsSelected()) {
+      this.emmitRemovedItems.emit(['Vehicle'])
+    }
+
     this.emmitSelected.emit(0);
   }
 

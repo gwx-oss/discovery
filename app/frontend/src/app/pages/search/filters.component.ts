@@ -230,15 +230,16 @@ export class FiltersComponent implements OnInit {
 
   selectContractVehicleInFilter(vehicle: string) {
     this.filterContractVehiclesComponent.selectItem(vehicle);
-    if(!vehicle.includes('SB') && !vehicle.includes('PSS') ) {
+    if(this.filterServiceCategories.isUnrestrictedItemsSelected()) {
       this.filterSbdComponent.enableOrDisableFilter(['Unrestricted Vehicle']);
     }
   }
-
+  enableSmallBusiness(vehcile: any) {
+    this.filterSbdComponent.enableOrDisableFilter(vehcile);
+  }
   removeServiceCategories(vehicle: string) {
     this.filterServiceCategories.removeItems(vehicle);
   }
-
   getServiceCategories() {
     const service_categories = this.filterServiceCategories.getItems();
     return service_categories;
