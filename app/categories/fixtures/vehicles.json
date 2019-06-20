@@ -89,5 +89,18 @@
     "numeric_pool": false,
     "display_number": true
   }
+},
+{
+  "model": "categories.vehicle",
+  "pk": "ERM",
+  "fields": {
+    "name": "Electronic Records Management",
+    "tier": 2,
+    "poc": "schedule36@gsa.gov",
+    "ordering_guide": "https://www.gsa.gov/buying-selling/purchasing-programs/gsa-schedules/list-of-gsa-schedules/schedule-36imaging-document-solution/records-management-solutions",
+    "small_business": true,
+    "numeric_pool": false,
+    "display_number": false
+  }
 }
 ]
