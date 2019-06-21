@@ -318,7 +318,7 @@ class Command(BaseCommand):
 
         except Pool.DoesNotExist as e:
             logger.debug("Pool {} not found for spreadsheet".format(pool))
-            raise(e)
+        #    raise(e)
 
         except Pool.MultipleObjectsReturned as e:
             logger.debug("More than one pool matched {}. Integrity error!".format(pool))
