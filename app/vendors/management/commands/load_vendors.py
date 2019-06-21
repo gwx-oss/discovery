@@ -307,6 +307,7 @@ class Command(BaseCommand):
         print("Processing pool: {}".format(pool))
         
         try:
+            
             pool_data = Pool.objects.get(number=pool, vehicle__id__iexact=vehicle)
             
             for index, record in df.iterrows():
@@ -318,7 +319,7 @@ class Command(BaseCommand):
 
         except Pool.DoesNotExist as e:
             logger.debug("Pool {} not found for spreadsheet".format(pool))
-        #    raise(e)
+            raise(e)
 
         except Pool.MultipleObjectsReturned as e:
             logger.debug("More than one pool matched {}. Integrity error!".format(pool))

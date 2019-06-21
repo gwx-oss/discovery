@@ -13,6 +13,7 @@ class VendorsTest(case.RequestTestCase):
 
     
     def test_load(self):
+        call_command('parse_categories')
         call_command('load_vendors', vpp=1)
         call_command('load_sam')
     
