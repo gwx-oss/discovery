@@ -103,10 +103,12 @@ export class FilterSbdComponent implements OnInit {
   hide() {
    document.getElementById(this.id).style.display = "none";
    document.getElementById(this.id).setAttribute('aria-expanded', 'false');
+   document.getElementById('sbd-button').setAttribute('aria-expanded', 'false');
   }
   unhide() {
     document.getElementById(this.id).style.display = "block";
     document.getElementById(this.id).setAttribute('aria-expanded', 'true');
+    document.getElementById('sbd-button').setAttribute('aria-expanded', 'true');
   }
   hideUnhide() {
     if(this.isHidden) {
