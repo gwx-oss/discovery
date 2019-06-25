@@ -20,7 +20,7 @@ export class AutocompleteComponent implements OnChanges {
   @Input()
   placeholder = '';
   @Input()
-  width = '185px';
+  width = '225px';
   @Output()
   emitCode: EventEmitter<string> = new EventEmitter();
   keywords = '';
@@ -30,6 +30,14 @@ export class AutocompleteComponent implements OnChanges {
       this.setKeywordAutoComplete(this.keywords_results, this.id);
     }
   }
+  ngOnInit(): void {
+    var self = this;
+    $(function() {
+      $('#' + self.id + '-autocomplete .autocomplete-drop').on('change', function(){
+        self.addKeywords();
+      }); 
+    }); 
+}
   addKeywords() {
     const code = $('#' + this.id + '-input').val();
     if (code !== null) {
