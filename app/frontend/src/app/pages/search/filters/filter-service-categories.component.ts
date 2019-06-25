@@ -126,14 +126,12 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
   getItems() {
     return this.items;
   }
-
-  isUnrestrictedItemsSelected() {
+  getSelectedVehcileNames() {
+    let vehicleNames = [];
     for(const item of this.items_selected) {
-      if(['BMO', 'HCATS', 'OASIS'].indexOf(this.returnVehicleId(item.value)) >= 0) {
-        return true;
-      }
+      vehicleNames.push(this.returnVehicleId(item.value));
     }
-    return false;
+    return vehicleNames;
   }
   getServiceCategoriesByVehicle(vehicle: string): any[] {
     const items: any[] = [];
@@ -248,10 +246,7 @@ export class FilterServiceCategoriesComponent implements OnInit, OnChanges {
         this.items_selected.splice(i, 1);
       }
     }
-    if(!this.isUnrestrictedItemsSelected()) {
-      this.emmitRemovedItems.emit(['Vehicle'])
-    }
-
+    this.emmitRemovedItems.emit(this.getSelectedVehcileNames())
     this.emmitSelected.emit(0);
   }
 

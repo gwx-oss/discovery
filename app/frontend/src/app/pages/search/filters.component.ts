@@ -227,15 +227,30 @@ export class FiltersComponent implements OnInit {
     this.filterNaicsComponent.setFilteredItems(arr);
     this.filterPscComponent.setFilteredItems(arr);
   }
-
+  getVehcileDescriptions() {
+    let vehicles = this.filterServiceCategories.getSelectedVehcileNames();
+    let vehicleDesciprtions = [];
+    for(let vehicle of vehicles) {
+      vehicleDesciprtions.push(this.filterContractVehiclesComponent.getItemDescription(vehicle));
+    }
+    return vehicleDesciprtions;
+  }
   selectContractVehicleInFilter(vehicle: string) {
     this.filterContractVehiclesComponent.selectItem(vehicle);
-    if(this.filterServiceCategories.isUnrestrictedItemsSelected()) {
-      this.filterSbdComponent.enableOrDisableFilter(['Unrestricted Vehicle']);
-    }
+    this.filterSbdComponent.enableOrDisableFilter(this.getVehcileDescriptions());
   }
-  enableSmallBusiness(vehcile: any) {
-    this.filterSbdComponent.enableOrDisableFilter(vehcile);
+  enableSmallBusiness(vehciles: any) {
+    if(vehciles.length > 0) {
+      this.filterSbdComponent.enableOrDisableFilter(this.getVehcileDescriptions());
+    } else {
+      let vehicleItems = this.filterContractVehiclesComponent.getSelected(true);
+      let vehicleDescriptions = [];
+      for(let vehicle of vehicleItems) {
+        vehicleDescriptions.push(this.filterContractVehiclesComponent.getItemDescription(vehicle.value));
+      }
+      this.filterSbdComponent.enableOrDisableFilter(vehciles);
+    }
+    
   }
   removeServiceCategories(vehicle: string) {
     this.filterServiceCategories.removeItems(vehicle);
