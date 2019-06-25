@@ -138,7 +138,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
       }
     }
   }
-  addKeywords(item) {
+  addKeyword(item) {
     if (item === '0') {
       this.reset();
       return;
