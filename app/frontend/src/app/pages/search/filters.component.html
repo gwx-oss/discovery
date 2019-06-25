@@ -91,7 +91,7 @@
           [items]="pools"
           (emitVehicleId)="selectContractVehicleInFilter($event)"
           (emmitSelected)="activateSubmit($event)"
-          (emmitRemovedItems)="enableSmallBusiness($event)" 
+          (emmitRemovedItems)="enableOrDisableSmallBusiness($event)" 
           (emmitLoaded)="getResults($event)"
         ></discovery-filter-service-categories>
       </li>

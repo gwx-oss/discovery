@@ -239,7 +239,7 @@ export class FiltersComponent implements OnInit {
     this.filterContractVehiclesComponent.selectItem(vehicle);
     this.filterSbdComponent.enableOrDisableFilter(this.getVehcileDescriptions());
   }
-  enableSmallBusiness(vehciles: any) {
+  enableOrDisableSmallBusiness(vehciles: any) {
     if(vehciles.length > 0) {
       this.filterSbdComponent.enableOrDisableFilter(this.getVehcileDescriptions());
     } else {
@@ -248,7 +248,7 @@ export class FiltersComponent implements OnInit {
       for(let vehicle of vehicleItems) {
         vehicleDescriptions.push(this.filterContractVehiclesComponent.getItemDescription(vehicle.value));
       }
-      this.filterSbdComponent.enableOrDisableFilter(vehciles);
+      this.filterSbdComponent.enableOrDisableFilter(vehicleDescriptions);
     }
     
   }
