@@ -248,7 +248,7 @@ export class FiltersComponent implements OnInit {
       for(let vehicle of vehicleItems) {
         vehicleDescriptions.push(this.filterContractVehiclesComponent.getItemDescription(vehicle.value));
       }
-      this.filterSbdComponent.enableOrDisableFilter(vehciles);
+      this.filterSbdComponent.enableOrDisableFilter(vehicleDescriptions);
     }
     
   }
