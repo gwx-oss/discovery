@@ -239,7 +239,7 @@ export class FiltersComponent implements OnInit {
     this.filterContractVehiclesComponent.selectItem(vehicle);
     this.filterSbdComponent.enableOrDisableFilter(this.getVehcileDescriptions());
   }
-  enableSmallBusiness(vehciles: any) {
+  enableOrDisableSmallBusiness(vehciles: any) {
     if(vehciles.length > 0) {
       this.filterSbdComponent.enableOrDisableFilter(this.getVehcileDescriptions());
     } else {
