@@ -160,6 +160,7 @@ export class FilterKeywordsComponent
   }
   addItem(id: string) {
     const item = {};
+    this.emitClearedSelected.emit(true);
 
     if (id && id !== '') {
       item['value'] = id;
