@@ -276,7 +276,7 @@ class Command(BaseCommand):
 
         print('Loading keywords')
 
-        Keyword.objects.all().delete()
+        # Keyword.objects.all().delete()
 
         for index, record in data.iterrows():
             kw, created = Keyword.objects.get_or_create(name=record['Keywords'])
