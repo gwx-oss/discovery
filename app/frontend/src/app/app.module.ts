@@ -15,6 +15,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { Error404Component } from './pages/error404/error404.component';
 import { SearchModule } from './pages/search/search.module';
 import { ContractsComponent } from './pages/contracts/contracts.component';
+import { ErmComponent } from './pages/contract-vehicles/erm.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { ContractsComponent } from './pages/contracts/contracts.component';
     BmoInfoComponent,
     HcatsComponent,
     PssComponent,
-    HeroComponent
+    HeroComponent,
+    ErmComponent
   ],
   imports: [
     BrowserModule,

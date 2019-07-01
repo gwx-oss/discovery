@@ -1,0 +1,56 @@
+<section class="usa-hero">
+  <div class="usa-grid text-center">
+    <h1>ERM</h1>
+    <h3>Electronic Records Management</h3>
+  </div>
+</section>
+
+<section class="usa-section">
+  <div class="usa-grid">
+    <div class="usa-width-one-sixth">&nbsp;</div>
+    <div class="usa-width-one-half">
+      <p class="usa-font-lead">GSA Schedule 36 “The Office, Imaging, and Document Solution”</p>
+      <p class="usa-font-lead">SIN 51 600 “Electronic Records Management Solutions”</p>
+      <p class="usa-font-lead">As technology has evolved and federal space has been reduced, the need for 
+        managing both physical and electronic records has grown in scale and 
+        complexity. In response to these challenges and to help agencies comply with 
+        federal records management statutes and regulations, GSA’s <a href="https://www.gsa.gov/about-us/organization/office-of-governmentwide-policy/office-of-shared-solutions-and-performance-improvement/unified-shared-services-management-ussm" target="_blank">Unified Shared 
+        Services Management (USSM)</a> office and the National Archives and Records 
+        Administration (NARA) worked together to develop <a href="https://www.archives.gov/records-mgmt/policy/universalermrequirements" target="_blank">Universal Electronic Records 
+        Management (ERM)</a> Requirements. Simultaneously, GSA’s <a href="https://www.gsa.gov/about-us/organization/federal-acquisition-service/office-of-general-supplies-and-services/integrated-workplace-acquisition-center" target="_blank">Integrated Workplace Acquisition Center
+        </a> (IWAC) incorporated these new requirements into Multiple Award Schedule (MAS) 36.
+      </p>
+      <p class="usa-font-lead">Electronic Records management products and services are now structured 
+        under <a href="https://www.gsaelibrary.gsa.gov/ElibMain/scheduleSummary.do?scheduleNumber=36" target="_blank">Schedule 36</a>  as SIN 51 600, “Electronic Records Management Solutions.”
+      </p>
+      <p class="usa-font-lead"><a href="https://www.gsaelibrary.gsa.gov/ElibMain/sinDetails.do?executeQuery=YES&scheduleNumber=36&flag=&filter=&specialItemNumber=51+600" target="_blank">SIN 51 600</a> provides a comprehensive capability to solve the complex challenges 
+        posed by the movement, manipulation, archiving, security, and management of 
+        electronic records. The abilities to maintain records securely, manage access
+        and retrieval, preserve records for as long as necessary, and execute disposition 
+        are included. This SIN also includes any ancillary supplies and/or services 
+        necessary to provide a total electronic records management solution.
+      </p>
+      <p class="usa-font-lead">Benefits of Using GSA MAS 36 for Your Records Management Needs:</p>
+      <ul class="usa-font-lead">
+        <li>Contractors have already been vetted for technical, performance, and fiscal responsibility.
+        </li>
+        <li>Discounted pricing, terms, and conditions are pre-negotiated.
+        </li>
+        <li>Schedule orders count toward small-business goals.
+        </li>
+        <li>Contractors under Special Item Number (SIN) 51 600 have certified that 
+          they are capable of meeting NARA’s ERM requirements, helping to ensure 
+          records are reliable and authentic, have integrity, remain useable, and 
+          include the necessary content and context. Vendors certify which of the 11 
+          ERM Elements they can provide:
+        </li>
+      </ul>
+      <h3>ERM Service Categories – SINs</h3>
+      <div *ngIf="pools.length===0">Loading...</div>
+      <ul *ngIf="pools.length>0" class="usa-font-lead">
+        <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'ERM', service_categories: pool.id}">{{pool.number}}
+            - {{pool.name}}</a></li>
+      </ul>
+    </div>
+  </div>
+</section>

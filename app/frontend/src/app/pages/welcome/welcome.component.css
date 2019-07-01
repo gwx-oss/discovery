@@ -10,3 +10,7 @@ a.vehicle:hover {
 a {
   text-decoration: none !important;
 }
+
+.widthCustom{
+  width:18.58%;
+}
