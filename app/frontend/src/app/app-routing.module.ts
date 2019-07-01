@@ -10,6 +10,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { Error404Component } from './pages/error404/error404.component';
 import { ContractsComponent } from './pages/contracts/contracts.component';
 import { SearchComponent } from './pages/search/search.component';
+import { ErmComponent } from './pages/contract-vehicles/erm.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'bmo', component: BmoInfoComponent },
   { path: 'hcats', component: HcatsComponent },
   { path: 'pss', component: PssComponent },
+  { path: 'erm', component: ErmComponent },
   { path: '404', component: Error404Component },
   { path: '', component: WelcomeComponent }
 ];
