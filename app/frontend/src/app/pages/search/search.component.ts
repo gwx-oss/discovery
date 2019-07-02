@@ -422,6 +422,7 @@ export class SearchComponent implements OnInit {
                 this.vendors_no_results = true;
               } else {
                 this.sort_by = this.compare_tbl[0]['id'];
+                this.compare_tbl = this.compare_tbl.sort(this.searchService.sortByDescriptionAsc);
                 this.total_vendors_met_criteria = total_vendors;
                 if (
                   this.route.snapshot.queryParamMap.has('vendors') ||
