@@ -377,7 +377,7 @@ export class SearchComponent implements OnInit {
 
     for (const vehicle of vehicles) {
       var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
-      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0) {
+      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0 && !this.isKeywordFilterOn()) {
         count++;
         continue;
       }
@@ -462,12 +462,24 @@ export class SearchComponent implements OnInit {
     }
     return count;
   }
+  isKeywordFilterOn() {
+    let isKeywordOn = false;
+    for (const filter of this.searchService.activeFilters) {
+      if (filter['name'] === 'keywords') {
+         if(filter.selected.length > 0) {
+            isKeywordOn = true;
+         }
+      }
+    }
+    return isKeywordOn;
+  }
   getVendorsTotalByVehicle(vehicles) {
     let count = 0;
     const vendor_totals = [];
     for (const vehicle of vehicles) {
       var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
-      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0) {
+      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0 &&
+      !this.isKeywordFilterOn()) {
         count++;
         continue;
       }
