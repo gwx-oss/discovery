@@ -10,11 +10,12 @@
     <div class="usa-width-one-sixth">&nbsp;</div>
     <div class="usa-width-one-half">
       <p class="usa-font-lead">GSA Schedule 36 “The Office, Imaging, and Document Solution”</p>
-      <p class="usa-font-lead">SIN 51 600 “Electronic Records Management Solutions”</p>
+      <p class="usa-font-lead">SIN 51 600 <a href="https://www.gsa.gov/buying-selling/purchasing-programs/gsa-schedules/list-of-gsa-schedules/schedule-36imaging-document-solution/records-management-solutions" target="_blank">“Electronic Records Management Solutions”</a> (ERM)</p>
+      <p class="usa-font-lead">Administered by GSA’s <a href="https://www.gsa.gov/about-us/organization/federal-acquisition-service/office-of-general-supplies-and-services/integrated-workplace-acquisition-center" target="_blank">Integrated Workplace Acquisition Center (IWAC)</a></p>
       <p class="usa-font-lead">As technology has evolved and federal space has been reduced, the need for 
         managing both physical and electronic records has grown in scale and 
         complexity. In response to these challenges and to help agencies comply with 
-        federal records management statutes and regulations, GSA’s <a href="https://www.gsa.gov/about-us/organization/office-of-governmentwide-policy/office-of-shared-solutions-and-performance-improvement/unified-shared-services-management-ussm" target="_blank">Unified Shared 
+        federal records management statutes and regulations, <a href="https://ussm.gsa.gov/" target="_blank">GSA’s Unified Shared 
         Services Management (USSM)</a> office and the National Archives and Records 
         Administration (NARA) worked together to develop <a href="https://www.archives.gov/records-mgmt/policy/universalermrequirements" target="_blank">Universal Electronic Records 
         Management (ERM)</a> Requirements. Simultaneously, GSA’s <a href="https://www.gsa.gov/about-us/organization/federal-acquisition-service/office-of-general-supplies-and-services/integrated-workplace-acquisition-center" target="_blank">Integrated Workplace Acquisition Center
@@ -45,7 +46,7 @@
           ERM Elements they can provide:
         </li>
       </ul>
-      <h3>ERM Service Categories – SINs</h3>
+      <h3>ERM Record Types:</h3>
       <div *ngIf="pools.length===0">Loading...</div>
       <ul *ngIf="pools.length>0" class="usa-font-lead">
         <li *ngFor="let pool of pools"><a [routerLink]="['/search']" [queryParams]="{vehicles: 'ERM', service_categories: pool.id}">{{pool.number}}
@@ -55,12 +56,12 @@
     <div class="usa-width-one-fourth">
       <h3>ERM Links:</h3>
       <ul>
-        <li><a href="https://gsa.gov/recordsmanagementsolutions" target="_blank">ERM Home Page</a></li>
-        <li><a href="https://cmls.gsa.gov/CMLSPubCategory?searchKey=records+management" target="_blank">
-          Records Management Fact Sheet </a></li>
-        <li><a href="https://www.archives.gov/records-mgmt/policy/universalermrequirements"
-            target="_blank">Federal Records Requirements</a></li>
-        <li><a href="mailto:recordsmanagement@gsa.gov" target="_blank">Contact ERM</a></li>
+        <li><a href="https://www.gsa.gov/buying-selling/purchasing-programs/gsa-schedules/list-of-gsa-schedules/schedule-36the-office-imaging-document-solution" target="_blank">GSA Schedule 36 Home Page</a></li>
+        <li><a href="https://www.gsa.gov/buying-selling/purchasing-programs/gsa-schedules/list-of-gsa-schedules/schedule-36imaging-document-solution/records-management-solutions" target="_blank">
+          ERM on Schedule 36 info page</a></li>
+        <li><a href="https://www.gsaelibrary.gsa.gov/ElibMain/sinDetails.do?executeQuery=YES&scheduleNumber=36&flag=&filter=&specialItemNumber=51+600"
+            target="_blank">ERM Contracts</a></li>
+        <li><a href="mailto:recordsmanagement@gsa.gov" target="_blank">Contact ERM and Schedule 36</a></li>
       </ul>
     </div>
   </div>
