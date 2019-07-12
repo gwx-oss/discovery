@@ -24,7 +24,8 @@
     "jquery": "^3.4.1",
     "rxjs": "^6.3.2",
     "zone.js": "^0.8.26",
-    "lodash": ">=4.17.11"
+    "lodash": "^4.17.13",
+    "lodash.mergewith":"4.6.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.5",
