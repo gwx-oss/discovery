@@ -272,11 +272,11 @@ class VendorFilter(VendorBaseFilter):
     contract = RelatedFilter("ContractBaseFilter")
     
     membership = CharFilter(field_name='membership', method='filter_membership')
+    logger = logging.getLogger('django')	
 
-    def getMebershipIds(self, poolVehcileId, poolIds):
+    def getMebershipIds(self, ms_queryset):
         ms_ids = list()
-        ms_queryset = vendors.PoolMembership.objects.filter(pool__id__in=poolIds, pool__vehicle__id=poolVehcileId).only("vendor_id", "pool_id")
-        
+        self.logger.error(" first query {} ".format(ms_queryset.query))
         vendorIdsByPool = {}
         poolMembershipIdsByVendors = {}
         for membership in ms_queryset:
@@ -322,28 +322,32 @@ class VendorFilter(VendorBaseFilter):
         errors = []
         poolIds = []
         queryParameters = {}
-
+        self.logger.error(" one  ")
         for qstring in querystrings:
             query = qstring.split('=')
             try:
+                if 'pool__id__in' == query[0]: 
+                    poolIds = query[1].split(",")
+                    query[1] = poolIds
                 queryParameters[query[0]] = query[1]
                 ms_querysets.append(ms_queryset.filter(**{query[0]: query[1]}))	
             except ValidationError as exc:
                 errors[qstring] = exc.detail
 
-        if 'pool__id' in queryParameters.keys(): 
-            poolIds = queryParameters.get('pool__id').split(",")
-
         if(len(poolIds) <= 1):
             try:
                 ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
                 ms_ids = list(ms_queryset.values_list('id', flat=True))
+                self.logger.error(" ms_ids if  {} ".format(ms_ids))
+                self.logger.error(" query if {} ".format(ms_queryset.query))
             except ValidationError as exc:
                 errors[qstring] = exc.detail
         else:       
             try:
-                poolVehcileId = queryParameters.get('pool__vehicle__id')
-                ms_ids = self.getMebershipIds(poolVehcileId, poolIds)
+                self.logger.error(" poolIds else {} ".format(poolIds))
+                ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
+                ms_ids = self.getMebershipIds(ms_queryset)
+                self.logger.error(" ms_ids else {} ".format(ms_ids))
                 if len(ms_ids) == 0:
                     qs = qs.filter(pools__id=0)
                     return qs

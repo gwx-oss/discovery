@@ -40,6 +40,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
   id = 'filter-pscs';
   placeholder;
   error_message;
+  selected = 0;
 
   json_value = 'id';
   json_description = 'text';
@@ -90,7 +91,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
   }
   setFilteredItems(vehicles) {
     this.items_filtered =
-      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.items;
+      vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.returnUnique(this.items);
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.keywords_results = this.items_filtered;
   }
@@ -137,20 +138,21 @@ export class FilterPscComponent implements OnInit, OnChanges {
       }
     }
   }
-  addKeywords(code) {
-    if (code === '0') {
+  addKeyword(item) {
+    if (item === '0') {
       this.reset();
       return;
     }
     if (
-      !this.searchService.existsIn(this.items_selected, code, 'value') &&
-      this.searchService.existsIn(this.items_filtered, code, 'id')
+      !this.searchService.existsIn(this.items_selected, item, 'value') &&
+      this.searchService.existsIn(this.items_filtered, item, 'id')
     ) {
-      this.addItem(code);
+      this.addItem(item);
     }
   }
   addItem(id: string) {
     const item = {};
+    this.items_selected = [];
     if (id && id !== '') {
       item['value'] = id;
       item['description'] = this.getItemDescription(id);
@@ -158,7 +160,7 @@ export class FilterPscComponent implements OnInit, OnChanges {
       this.items_selected.push(item);
     }
     this.emmitSelected.emit(1);
-    this.msgAddedItem.showMsg();
+    // this.msgAddedItem.showMsg();
   }
   getPoolsIds(id: string): any[] {
     const ids = [];
@@ -232,14 +234,16 @@ export class FilterPscComponent implements OnInit, OnChanges {
   reset() {
     this.items_selected = [];
     this.opened = false;
+    this.selected = 0;
     this.emitClearedSelected.emit(true);
   }
   removeItem(value: string) {
-    for (let i = 0; i < this.items_selected.length; i++) {
-      if (this.items_selected[i]['value'] === value) {
-        this.items_selected.splice(i, 1);
-      }
-    }
+    this.reset();
+    // for (let i = 0; i < this.items_selected.length; i++) {
+    //   if (this.items_selected[i]['value'] === value) {
+    //     this.items_selected.splice(i, 1);
+    //   }
+    // }
     if (this.items_selected.length === 0) {
       this.emitClearedSelected.emit(true);
     }

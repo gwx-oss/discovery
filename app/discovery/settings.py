@@ -41,7 +41,8 @@ VEHICLES = (
     'hcats',
     'bmo_sb',
     'bmo',
-    'pss'
+    'pss',
+    'erm'
 )
 
 #

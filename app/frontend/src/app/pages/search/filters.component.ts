@@ -213,26 +213,48 @@ export class FiltersComponent implements OnInit {
   }
   filterOthersByVehicles(vehicles: any[]) {
     let arr = [];
+    let vehicleDiscriptions = [];
     if (vehicles[0] === 'All') {
       arr = vehicles;
     } else {
       for (const i of vehicles) {
         arr.push(i.value);
+        vehicleDiscriptions.push(i.description);
       }
     }
+    this.filterSbdComponent.enableOrDisableFilter(vehicleDiscriptions);
     this.filterServiceCategories.setFilteredItems(arr);
     this.filterNaicsComponent.setFilteredItems(arr);
     this.filterPscComponent.setFilteredItems(arr);
   }
-
+  getVehcileDescriptions() {
+    let vehicles = this.filterServiceCategories.getSelectedVehcileNames();
+    let vehicleDesciprtions = [];
+    for(let vehicle of vehicles) {
+      vehicleDesciprtions.push(this.filterContractVehiclesComponent.getItemDescription(vehicle));
+    }
+    return vehicleDesciprtions;
+  }
   selectContractVehicleInFilter(vehicle: string) {
     this.filterContractVehiclesComponent.selectItem(vehicle);
+    this.filterSbdComponent.enableOrDisableFilter(this.getVehcileDescriptions());
   }
-
+  enableOrDisableSmallBusiness(vehciles: any) {
+    if(vehciles.length > 0) {
+      this.filterSbdComponent.enableOrDisableFilter(this.getVehcileDescriptions());
+    } else {
+      let vehicleItems = this.filterContractVehiclesComponent.getSelected(true);
+      let vehicleDescriptions = [];
+      for(let vehicle of vehicleItems) {
+        vehicleDescriptions.push(this.filterContractVehiclesComponent.getItemDescription(vehicle.value));
+      }
+      this.filterSbdComponent.enableOrDisableFilter(vehicleDescriptions);
+    }
+    
+  }
   removeServiceCategories(vehicle: string) {
     this.filterServiceCategories.removeItems(vehicle);
   }
-
   getServiceCategories() {
     const service_categories = this.filterServiceCategories.getItems();
     return service_categories;
@@ -286,6 +308,9 @@ export class FiltersComponent implements OnInit {
   }
   filterServiceCategoriesByVehiclesInFilter(vehicles: any[]) {
     this.filterServiceCategories.setFilteredItems(vehicles);
+  }
+  filterServiceCategoriesInFilter(serviceCategories: any[]) {
+    this.filterServiceCategories.setFilteredItemsByServiceCategories(serviceCategories);
   }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(

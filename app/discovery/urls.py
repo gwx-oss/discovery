@@ -31,5 +31,6 @@ urlpatterns = [
     url(r'^hcats.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^bmo.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^pss.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^erm.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
 ]

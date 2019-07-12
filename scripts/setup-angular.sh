@@ -22,4 +22,4 @@ curl -sL https://deb.nodesource.com/setup_10.x | bash - >>"$LOG_FILE" 2>&1
 apt-get install -y nodejs >>"$LOG_FILE" 2>&1
 
 echo "> Installing Angular JS environment" | tee -a "$LOG_FILE"
-npm install -g @angular/cli@latest >>"$LOG_FILE" 2>&1
+npm install -g @angular/cli@7.3.9 >>"$LOG_FILE" 2>&1
