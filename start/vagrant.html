@@ -234,7 +234,10 @@
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>The Discovery Vagrantfile is meant to be configurable depending on the needs of the developer.  To keep everything that needs to be versioned, we use a pattern of a default Vagrant configuration file that can be overridden if an override exists.  All Vagrant related configurations are in the <strong>vagrant</strong> directory.</p>
 <p>You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Fetch Discovery project</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># If you using Git on Windows, make sure you selected &#39;Checkout as-is&#39; during setup. Then make sure that you run: git config --global  core.autocrlf false, so Git will not perform any conversions when checking out or committing text files.</span>
+
+
+<span class="c1"># Fetch Discovery project</span>
 $ git clone https://github.com/PSHCDevOps/discovery.git <span class="o">{</span>project_directory<span class="o">}</span>
 $ <span class="nb">cd</span> <span class="o">{</span>project_directory<span class="o">}</span>
 
