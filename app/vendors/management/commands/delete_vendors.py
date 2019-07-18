@@ -7,7 +7,7 @@ from vendors.models import Vendor, PoolMembership, Contact
 class Command(BaseCommand):
     def handle(self, *args, **options):
         print("Processing delete vendors: {}")
-        SetAside.objects.all().delete()
+        #SetAside.objects.all().delete()
         Zone.objects.all().delete()
         Contact.objects.all().delete()
         PoolMembership.objects.all().delete()
