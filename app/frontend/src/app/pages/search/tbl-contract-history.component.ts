@@ -286,9 +286,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   setPreviousNext() {
     if (this.contracts['next'] !== null) {
       const str = this.contracts['next'];
-      if (str.indexOf('&page=') !== -1) {
-        const arr_next = str.split('&page=');
-        console.log(str.indexOf('&page='));
+      if (str.indexOf('page=') !== -1) {
+        const arr_next = str.split('page=');
         if (arr_next[1].indexOf('&') !== -1) {
           const page = arr_next[1].split('&');
           this.next = +page[0];
@@ -299,8 +298,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     }
     if (this.contracts['previous'] !== null) {
       const str = this.contracts['previous'];
-      if (str.indexOf('&page=') !== -1) {
-        const arr_prev = str.split('&page=');
+      if (str.indexOf('page=') !== -1) {
+        const arr_prev = str.split('page=');
         if (arr_prev[1].indexOf('&') !== -1) {
           const page = arr_prev[1].split('&');
           this.prev = +page[0];
