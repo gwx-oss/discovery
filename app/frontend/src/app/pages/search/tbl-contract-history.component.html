@@ -196,8 +196,6 @@
   <!-- End Scroll Window -->
 </div>
 <div *ngIf="items_total > items_per_page">
-  <p>next = {{next}}</p>
-  <p>prev = {{prev}}</p>
   <p>Page <strong>{{current_page}}</strong> of <strong>{{num_total_pages}}</strong></p>
   <button class="usa-button-secondary" (click)="prevPage()" title="Go to page {{prev}}" style="margin-right:10px"
     [disabled]="current_page===1 || !enable_paging">Previous</button>
