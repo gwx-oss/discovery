@@ -192,11 +192,14 @@ def get_phone(award):
 @catch_key_error
 def get_location(award):
     loc = award['vendor']['vendorSiteDetails']['vendorLocation']
+    zipcode = ''
+    if 'strip' in loc['ZIPCode']:
+        zipcode = loc['ZIPCode'].strip()[:5]
     return {
         'address': loc['streetAddress'].strip().title(),
         'city': loc['city'].strip().title(),
         'state': loc['state']['#text'].strip().upper(),
-        'zipcode': loc['ZIPCode'].strip()[:5],
+        'zipcode': zipcode,
         'congressional_district': '{:02d}'.format(int(loc['congressionalDistrictCode']))
     }
 
