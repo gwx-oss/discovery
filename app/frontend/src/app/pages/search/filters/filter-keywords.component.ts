@@ -91,7 +91,6 @@ export class FilterKeywordsComponent
     this.searchService.getKeywords().subscribe(data => {
       this.items = data['results'];
       this.searchService.keywords = data['results'];
-      console.log(data['results']);
       this.keywords_results = this.searchService.buildKeywordsDropdown(
         this.items
       );
