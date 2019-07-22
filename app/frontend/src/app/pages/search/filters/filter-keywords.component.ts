@@ -91,7 +91,7 @@ export class FilterKeywordsComponent
     this.searchService.getKeywords().subscribe(data => {
       this.items = data['results'];
       this.searchService.keywords = data['results'];
-
+      console.log(data['results']);
       this.keywords_results = this.searchService.buildKeywordsDropdown(
         this.items
       );
@@ -157,6 +157,7 @@ export class FilterKeywordsComponent
     this.items_selected = [];
     this.selected = 0;
     this.emitClearedSelected.emit(true);
+    $('#select2-filter-keywords-input-container').text('Select Keywords');
   }
   addItem(id: string) {
     const item = {};
