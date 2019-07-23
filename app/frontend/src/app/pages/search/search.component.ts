@@ -79,18 +79,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    $('body').on('click','#select2-filter-keywords-input-container,.select2-selection__arrow',function(){
-      if($('#select2-filter-keywords-input-container').text() == 'Select Keywords'){
-        $('#select2-filter-keywords-input-results .select2-results__option').each(function(i,ele){
-            if($(ele).text() == 'Select Keywords'){
-              $(ele).attr('aria-selected',true).addClass('select2-results__option--highlighted');
-            }else{
-              $(ele).attr('aria-selected',false).removeClass('select2-results__option--highlighted');
-            }
-        });
-        $('.select2-results__options').scrollTop(0,0);
-      }
-    });
+    this.resetKeyword();
     /** Check to see if there are any queryparams */
     if (this.route.snapshot.queryParamMap.keys.length > 0) {
       this.spinner = true;
@@ -765,4 +754,18 @@ export class SearchComponent implements OnInit {
   closeModal(id: string) {
     this.modalService.close(id);
     }  
+  resetKeyword(){
+    $('body').on('click','#select2-filter-keywords-input-container,.select2-selection__arrow',function(){
+      if($('#select2-filter-keywords-input-container').text() == 'Select Keywords'){
+        $('#select2-filter-keywords-input-results .select2-results__option').each(function(i,ele){
+            if($(ele).text() == 'Select Keywords'){
+              $(ele).attr('aria-selected',true).addClass('select2-results__option--highlighted');
+            }else{
+              $(ele).attr('aria-selected',false).removeClass('select2-results__option--highlighted');
+            }
+        });
+        $('.select2-results__options').scrollTop(0,0);
+      }
+    });
+  }  
 } 
