@@ -148,7 +148,7 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
           );
           this.setPreviousNext();
           window.scroll({
-            top: 90,
+            top: 0,
             left: 0,
             behavior: 'smooth'
           });
@@ -297,7 +297,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         if (arr_next[1].indexOf('&') !== -1) {
           const page = arr_next[1].split('&');
           this.next = +page[0];
-        } else {
+        }
+        else {
           this.next = +arr_next[1];
         }
       }
