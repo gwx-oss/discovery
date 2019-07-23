@@ -88,7 +88,7 @@ export class FilterKeywordsComponent
   ngOnChanges() {}
 
   setKeywordsList() {
-    this.searchService.getKeywords().subscribe(data => {
+    this.searchService.getKeywords().subscribe(data => {      
       this.items = data['results'];
       this.searchService.keywords = data['results'];
       this.keywords_results = this.searchService.buildKeywordsDropdown(
@@ -106,7 +106,7 @@ export class FilterKeywordsComponent
           this.addItem(id);
         }
         /** Open accordion */
-        this.opened = true;
+        this.opened = true;        
       }
       this.emmitLoaded.emit(this.queryName);
     });
