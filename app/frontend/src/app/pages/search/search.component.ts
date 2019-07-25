@@ -304,13 +304,9 @@ export class SearchComponent implements OnInit {
           this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
           if(this.naics_selected.length > 0 || this.pscs_selected.length > 0 || this.keywords_selected.length > 0) {
-            this.filtersComponent.filterServiceCategoriesInFilter(
-              this.service_categories_selected
-            );
+            this.filtersComponent.filterServiceCategoriesInFilter(this.service_categories_selected);
           } else {
-            this.filtersComponent.filterServiceCategoriesByVehiclesInFilter(
-              vehicles_ids
-            );
+            this.filtersComponent.filterServiceCategoriesByVehiclesInFilter(vehicles_ids);
           }
           this.filters = this.filtersComponent.getSelectedFilters();
           this.searchService.activeFilters = this.filters;
@@ -395,7 +391,7 @@ export class SearchComponent implements OnInit {
 
     for (const vehicle of vehicles) {
       var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
-      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0 && !this.isKeywordFilterOn()) {
+      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0) {
         count++;
         continue;
       }
@@ -480,24 +476,12 @@ export class SearchComponent implements OnInit {
     }
     return count;
   }
-  isKeywordFilterOn() {
-    let isKeywordOn = false;
-    for (const filter of this.searchService.activeFilters) {
-      if (filter['name'] === 'keywords') {
-         if(filter.selected.length > 0) {
-            isKeywordOn = true;
-         }
-      }
-    }
-    return isKeywordOn;
-  }
   getVendorsTotalByVehicle(vehicles) {
     let count = 0;
     const vendor_totals = [];
     for (const vehicle of vehicles) {
       var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
-      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0 &&
-      !this.isKeywordFilterOn()) {
+      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0) {
         count++;
         continue;
       }
