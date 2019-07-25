@@ -240,9 +240,10 @@ class PoolSummarySerializer(BasePoolSerializer):
     naics = NaicsSummarySerializer(many=True)
     psc = PscSummarySerializer(many=True)
     vehicle = VehicleSummarySerializer()
-    
+    keywords = KeywordSummarySerializer(many=True)
+
     class Meta(BasePoolSerializer.Meta):
-        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc', 'url']
+        fields = BasePoolSerializer.Meta.fields + ['naics', 'psc', 'keywords', 'url']
         
     @classmethod    
     def load_related(cls, queryset, prefix = ''):

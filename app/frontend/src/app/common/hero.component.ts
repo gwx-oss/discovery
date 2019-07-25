@@ -48,17 +48,19 @@ export class HeroComponent implements OnInit {
       this.option = 'naic';
     } else {
       this.loading = true;
-      this.searchService.getKeywords().subscribe(
-        data => {
-          this.searchService.keywords = this.keywords_results;
-          this.buildKeywordsDropdown(data['results']);
-          this.initPools();
-        },
-        error => {
-          this.error_message = <any>error;
-          this.server_error = true;
-        }
-      );
+      this.initPools();
+      this.searchService.keywords = this.keywords_results;
+      // this.searchService.getKeywords().subscribe(
+      //   data => {
+      //     this.searchService.keywords = this.keywords_results;
+      //     this.buildKeywordsDropdown(data['results']);
+      //     this.initPools();
+      //   },
+      //   error => {
+      //     this.error_message = <any>error;
+      //     this.server_error = true;
+      //   }
+      // );
     }
   }
   onChange() {}
@@ -85,6 +87,7 @@ export class HeroComponent implements OnInit {
     this.searchService.getPools(['All']).subscribe(
       data => {
         this.searchService.pools = data['results'];
+        this.buildKeywordsDropdown(this.searchService.pools);
         this.buildNaicsItems(this.searchService.pools);
         this.buildPscsItems(this.searchService.pools);
         this.option = 'naic';
@@ -132,11 +135,16 @@ export class HeroComponent implements OnInit {
 
   buildKeywordsDropdown(obj: any[]) {
     const keywords = [];
-    for (const item of obj) {
-      const keyword = {};
-      keyword['text'] = item['name'];
-      keyword['id'] = item['id'];
-      keywords.push(keyword);
+    for (const pool of obj) {
+      for (const item of pool.keywords) {
+        const keyword = {};
+        keyword['text'] = item['name'];
+        keyword['id'] = item['id'];
+        keyword['pool_id'] = pool.id;
+        if (!this.searchService.existsIn(keywords, item.id, 'id')) {
+          keywords.push(keyword);
+        }
+      }
     }
     this.keywords_results = keywords;
     // this.keywords_results.sort(this.searchService.sortByTextAsc);

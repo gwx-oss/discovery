@@ -285,6 +285,13 @@ export class FiltersComponent implements OnInit {
     }
     return items;
   }
+  getKeywordssSelected(): any[] {
+    let items = [];
+    if (this.filterKeywordsComponent.getSelected(true).length > 0) {
+      items = this.filterKeywordsComponent.getSelected(true);
+    }
+    return items;
+  }
   clearContractVehicles(bool: boolean) {
     if (bool) {
       if (

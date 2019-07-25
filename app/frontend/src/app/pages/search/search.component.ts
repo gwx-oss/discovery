@@ -60,6 +60,7 @@ export class SearchComponent implements OnInit {
   vendors_request_complete = false;
   naics_selected: any[] = [];
   pscs_selected: any[] = [];
+  keywords_selected: any[] = [];
   service_categories_selected: any[] = [];
   params: string;
   table_scroll_set = false;
@@ -197,6 +198,7 @@ export class SearchComponent implements OnInit {
     let categories = [];
     const naics = this.filtersComponent.getNaicsSelected();
     const pscs = this.filtersComponent.getPscsSelected();
+    const keywords = this.filtersComponent.getKeywordssSelected();
     categories = this.getSelected(filters, 'service_categories');
     if (naics.length > 0) {
       for (const naic of naics) {
@@ -215,6 +217,20 @@ export class SearchComponent implements OnInit {
     if (pscs.length > 0) {
       for (const psc of pscs) {
         for (const pool of psc.pools_ids) {
+          if (!this.searchService.existsIn(categories, pool, 'value')) {
+            categories.push({
+              value: pool,
+              description: this.filtersComponent.getServiceCategoriesDescription(
+                pool
+              )
+            });
+          }
+        }
+      }
+    }
+    if (keywords.length > 0) {
+      for (const keyword of keywords) {
+        for (const pool of keyword.pools_ids) {
           if (!this.searchService.existsIn(categories, pool, 'value')) {
             categories.push({
               value: pool,
@@ -253,6 +269,7 @@ export class SearchComponent implements OnInit {
     this.service_categories = this.filtersComponent.getServiceCategories();
     this.naics_selected = this.getSelected(filters, 'naics');
     this.pscs_selected = this.getSelected(filters, 'pscs');
+    this.keywords_selected = this.getSelected(filters, 'keywords');
     this.service_categories_selected = this.returnSelectedServiceCategories(
       filters
     );
@@ -285,7 +302,7 @@ export class SearchComponent implements OnInit {
 
           this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
-          if(this.naics_selected.length > 0 || this.pscs_selected.length > 0) {
+          if(this.naics_selected.length > 0 || this.pscs_selected.length > 0 || this.keywords_selected.length > 0) {
             this.filtersComponent.filterServiceCategoriesInFilter(
               this.service_categories_selected
             );
