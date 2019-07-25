@@ -28,7 +28,8 @@ export class FilterKeywordsComponent
   _keywords = '';
   items_selected: any[] = [];
   selected = 0;
-
+  @Input()
+  pool_items: any[] = [];
   @Input()
   opened = true;
   @Output()
@@ -57,6 +58,12 @@ export class FilterKeywordsComponent
     return this._keywords;
   }
   ngOnInit() {}
+
+  ngOnChanges() {
+    if (this.pool_items.length > 1) {
+      this.setKeywordsList();
+    }
+  }
   ngAfterContentInit() {
     if (this.searchService.keywords && this.searchService.keywords.length > 0) {
       const items = this.searchService.buildKeywordsDropdown(
@@ -85,18 +92,12 @@ export class FilterKeywordsComponent
       this.setKeywordsList();
     }
   }
-  ngOnChanges() {}
 
   setKeywordsList() {
-    this.searchService.getKeywords().subscribe(data => {      
-      this.items = data['results'];
-      this.searchService.keywords = data['results'];
-      this.keywords_results = this.searchService.buildKeywordsDropdown(
-        this.items
-      );
-
-      /** Grab the queryparams and sets default values
-       *  on inputs Ex. checked, selected, keywords, etc */
+    // const items = this.searchService.buildKeywordsDropdown(this.searchService.keywords);
+    this.keywords_results = this.searchService.buildKeywordsDropdown(this.pool_items);
+     /** Grab the queryparams and sets default values
+      *  on inputs Ex. checked, selected, keywords, etc */
       if (this.route.snapshot.queryParamMap.has(this.queryName)) {
         const values: string[] = this.route.snapshot.queryParamMap
           .get(this.queryName)
@@ -109,7 +110,6 @@ export class FilterKeywordsComponent
         this.opened = true;        
       }
       this.emmitLoaded.emit(this.queryName);
-    });
   }
   getItemId(value: string): string {
     if (value) {
@@ -158,6 +158,21 @@ export class FilterKeywordsComponent
     this.emitClearedSelected.emit(true);
     $('#select2-filter-keywords-input-container').text('Select Keywords');
   }
+  getPoolsIds(id: string): any[] {
+    const ids = [];
+    for (const prop of this.keywords_results) {
+      if (prop.id == id) {
+        if(Array.isArray(prop.pool_id)) {
+          for(const item of prop.pool_id) {
+            ids.push(item);
+          }
+        } else {
+          ids.push(prop.pool_id);
+        }
+      }
+    }
+    return ids;
+  }
   addItem(id: string) {
     const item = {};
     this.emitClearedSelected.emit(true);
@@ -165,6 +180,7 @@ export class FilterKeywordsComponent
     if (id && id !== '') {
       item['value'] = id;
       item['description'] = this.getItemDescription(+id);
+      item['pools_ids'] = this.getPoolsIds(id);
     }
 
     this.items_selected.push(item);
