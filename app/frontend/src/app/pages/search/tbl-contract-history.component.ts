@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { SearchService } from './search.service';
+import { Z_FIXED } from 'zlib';
 declare const $: any;
 @Component({
   selector: 'discovery-tbl-contract-history',
@@ -146,6 +147,11 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
             (this.items_total + this.items_per_page - 1) / this.items_per_page
           );
           this.setPreviousNext();
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
           this.enable_paging = true;
           this.spinner = false;
           if (this.num_results === 0) {
@@ -291,7 +297,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         if (arr_next[1].indexOf('&') !== -1) {
           const page = arr_next[1].split('&');
           this.next = +page[0];
-        } else {
+        }
+        else {
           this.next = +arr_next[1];
         }
       }

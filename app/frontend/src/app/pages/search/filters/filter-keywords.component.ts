@@ -107,7 +107,7 @@ export class FilterKeywordsComponent
           this.addItem(id);
         }
         /** Open accordion */
-        this.opened = true;
+        this.opened = true;        
       }
       this.emmitLoaded.emit(this.queryName);
   }
@@ -156,6 +156,7 @@ export class FilterKeywordsComponent
     this.items_selected = [];
     this.selected = 0;
     this.emitClearedSelected.emit(true);
+    $('#select2-filter-keywords-input-container').text('Select Keywords');
   }
   getPoolsIds(id: string): any[] {
     const ids = [];
