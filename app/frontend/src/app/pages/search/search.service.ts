@@ -484,13 +484,15 @@ export class SearchService {
     return false;
   }
   get(obj: any[], value: string, key: string): any {
-    for (let i = 0; i < obj.length; i++) {
-      if (key !== '') {
-        if (obj[i][key] === value) {
-          return obj[i];
+    if(obj) {
+      for (let i = 0; i < obj.length; i++) {
+        if (key !== '') {
+          if (obj[i][key] === value) {
+            return obj[i];
+          }
         }
-      }
-    } 
+      } 
+    }
   }
   getItemDescription(
     obj: any[],
@@ -532,22 +534,24 @@ export class SearchService {
   }
   buildKeywordsDropdown(obj: any[]): any[] {
     const keywords = [];
-    for (const pool of obj) {
-      for (const item of pool.keywords) {
-     
-        const keyword = this.get(keywords, item.id, 'id');
-        if(keyword) {
-          keyword['pool_id'].push(pool.id);
-        } else {
-          const kw = {};
-          kw['text'] = item.name;
-          kw['id'] = item.id;
-          kw['pool_id'] = [];
-          kw['pool_id'].push(pool.id);
-          keywords.push(kw);
+    if(obj) {
+      for (const pool of obj) {
+        for (const item of pool.keywords) {
+      
+          const keyword = this.get(keywords, item.id, 'id');
+          if(keyword) {
+            keyword['pool_id'].push(pool.id);
+          } else {
+            const kw = {};
+            kw['text'] = item.name;
+            kw['id'] = item.id;
+            kw['pool_id'] = [];
+            kw['pool_id'].push(pool.id);
+            keywords.push(kw);
+          }
         }
       }
-  }
+   }
   return keywords;
   }
 

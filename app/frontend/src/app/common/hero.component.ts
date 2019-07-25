@@ -135,6 +135,7 @@ export class HeroComponent implements OnInit {
 
   buildKeywordsDropdown(obj: any[]) {
     const keywords = [];
+    if(obj) {
     for (const pool of obj) {
       for (const item of pool.keywords) {
         const keyword = {};
@@ -145,6 +146,7 @@ export class HeroComponent implements OnInit {
           keywords.push(keyword);
         }
       }
+    }
     }
     this.keywords_results = keywords;
     // this.keywords_results.sort(this.searchService.sortByTextAsc);
