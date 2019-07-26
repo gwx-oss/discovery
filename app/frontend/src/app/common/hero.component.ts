@@ -41,6 +41,7 @@ export class HeroComponent implements OnInit {
   }
   ngOnInit() {
     if (this.searchService.keywords && this.searchService.keywords.length) {
+      this.loading = true;
       this.buildKeywordsDropdown(this.searchService.keywords);
       this.buildNaicsItems(this.searchService.pools);
       this.buildPscsItems(this.searchService.pools);
@@ -49,7 +50,7 @@ export class HeroComponent implements OnInit {
     } else {
       this.loading = true;
       this.initPools();
-      this.searchService.keywords = this.keywords_results;
+      // this.searchService.keywords = this.keywords_results;
       // this.searchService.getKeywords().subscribe(
       //   data => {
       //     this.searchService.keywords = this.keywords_results;
@@ -133,20 +134,24 @@ export class HeroComponent implements OnInit {
     this.pscs.sort(this.searchService.sortByIdAsc);
   }
 
-  buildKeywordsDropdown(obj: any[]) {
+  buildKeywordsDropdown(pools: any[]) {
     const keywords = [];
-    if(obj) {
-    for (const pool of obj) {
-      for (const item of pool.keywords) {
-        const keyword = {};
-        keyword['text'] = item['name'];
-        keyword['id'] = item['id'];
-        keyword['pool_id'] = pool.id;
-        if (!this.searchService.existsIn(keywords, item.id, 'id')) {
-          keywords.push(keyword);
-        }
+    if(pools) {
+      for (let i = 0; i < pools.length; i++) {
+        const pool = pools[i];
+        if(pool.keywords) {
+          for (let j = 0; j < pool.keywords.length; j++) {  
+            const item = pool.keywords[j];
+            const keyword = {};
+            keyword['text'] = item['name'];
+            keyword['id'] = item['id'];
+            keyword['pool_id'] = pool.id;
+            if (!this.searchService.existsIn(keywords, item.id, 'id')) {
+              keywords.push(keyword);
+            }
+          }
+        }  
       }
-    }
     }
     this.keywords_results = keywords;
     // this.keywords_results.sort(this.searchService.sortByTextAsc);
