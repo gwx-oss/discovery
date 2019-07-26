@@ -61,7 +61,7 @@ export class FilterKeywordsComponent
 
   ngOnChanges() {
     if (this.pool_items.length > 1) {
-      this.setKeywordsList();
+      this.setKeywords();
     }
   }
   ngAfterContentInit() {
@@ -89,11 +89,11 @@ export class FilterKeywordsComponent
         clearTimeout(this.timer);
       }, 300);
     } else {
-      this.setKeywordsList();
+      this.setKeywords();
     }
   }
 
-  setKeywordsList() {
+  setKeywords() {
     // const items = this.searchService.buildKeywordsDropdown(this.searchService.keywords);
     this.keywords_results = this.searchService.buildKeywordsDropdown(this.pool_items);
      /** Grab the queryparams and sets default values
