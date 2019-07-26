@@ -532,25 +532,28 @@ export class SearchService {
     }
     return n;
   }
-  buildKeywordsDropdown(obj: any[]): any[] {
+  buildKeywordsDropdown(pools: any[]): any[] {
     const keywords = [];
-    if(obj) {
-      for (const pool of obj) {
-        for (const item of pool.keywords) {
-      
-          const keyword = this.get(keywords, item.id, 'id');
-          if(keyword) {
-            keyword['pool_id'].push(pool.id);
-          } else {
-            const kw = {};
-            kw['text'] = item.name;
-            kw['id'] = item.id;
-            kw['pool_id'] = [];
-            kw['pool_id'].push(pool.id);
-            keywords.push(kw);
-          }
+    if(pools) {
+      for (let i = 0; i < pools.length; i++) {
+        const pool = pools[i];
+        if(pool.keywords) {
+          for (let j = 0; j < pool.keywords.length; j++) {
+            var item = pool.keywords[j];
+            const keyword = this.get(keywords, item.id, 'id');
+            if(keyword) {
+              keyword['pool_id'].push(pool.id);
+            } else {
+              const kw = {};
+              kw['text'] = item.name;
+              kw['id'] = item.id;
+              kw['pool_id'] = [];
+              kw['pool_id'].push(pool.id);
+              keywords.push(kw);
+            }
+          }  
         }
-      }
+      }  
    }
   return keywords;
   }
