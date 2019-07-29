@@ -35,8 +35,10 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   enable_paging = false;
   history_no_results = false;
   spinner = false;
+  loading = true;
   table = {orderBy:'', sortBy:'asc'};
   interval;
+  emitActivateSpinner: any;
 
   constructor(private searchService: SearchService) {}
 
@@ -76,6 +78,11 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         this.table.orderBy
       );
     }
+  }
+  showSpinner(bool: boolean) {
+    setTimeout(() => {
+      this.emitActivateSpinner.emit(bool);
+    });
   }
   get contracts() {
     return this._contracts;
@@ -117,6 +124,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     state: string,
     ordering: string
   ) {
+    this.loading = true;
+    this.showSpinner(true);
     let page_path = '';
     if (page > 1) {
       page_path = '&page=' + page;
@@ -146,6 +155,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
           this.num_total_pages = Math.floor(
             (this.items_total + this.items_per_page - 1) / this.items_per_page
           );
+          this.loading = false;
+          this.showSpinner(false);
           this.setPreviousNext();
           window.scroll({
             top: 0,
