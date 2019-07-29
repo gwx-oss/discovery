@@ -74,9 +74,7 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
           .split('__');
 
         for (const id of values) {
-          if (!this.searchService.existsIn(this.items_selected, id, 'value')) {
-            this.addItem(id);
-          }
+          this.addItem(id);
         }
         /** Open accordion */
         this.opened = true;        
@@ -134,9 +132,9 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
   }
   getItemDescription(id: number): string {
     if (id) {
-      for (let i = 0; i < this.keywords_results.length; i++) {
-        if (+this.keywords_results[i]['id'] === id) {
-          return this.keywords_results[i]['text'];
+      for (let i = 0; i < this.items.length; i++) {
+        if (+this.items[i]['id'] === id) {
+          return this.items[i]['text'];
         }
       }
     }
@@ -172,7 +170,7 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
   }
   getPoolsIds(id: string): any[] {
     const ids = [];
-    for (const prop of this.keywords_results) {
+    for (const prop of this.items) {
       if (prop.id == id) {
         if(Array.isArray(prop.pool_id)) {
           for(const item of prop.pool_id) {
