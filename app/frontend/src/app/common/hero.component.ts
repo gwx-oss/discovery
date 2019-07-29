@@ -50,18 +50,6 @@ export class HeroComponent implements OnInit {
     } else {
       this.loading = true;
       this.initPools();
-      // this.searchService.keywords = this.keywords_results;
-      // this.searchService.getKeywords().subscribe(
-      //   data => {
-      //     this.searchService.keywords = this.keywords_results;
-      //     this.buildKeywordsDropdown(data['results']);
-      //     this.initPools();
-      //   },
-      //   error => {
-      //     this.error_message = <any>error;
-      //     this.server_error = true;
-      //   }
-      // );
     }
   }
   onChange() {}
