@@ -547,6 +547,7 @@ export class SearchService {
               const kw = {};
               kw['text'] = item.name;
               kw['id'] = item.id;
+              kw['vehicle_id'] = pool.vehicle.id;
               kw['pool_id'] = [];
               kw['pool_id'].push(pool.id);
               keywords.push(kw);

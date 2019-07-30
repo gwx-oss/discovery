@@ -19,17 +19,16 @@ declare const $: any;
   templateUrl: './filter-keywords.component.html',
   styles: []
 })
-export class FilterKeywordsComponent
-  implements OnInit, OnChanges, AfterContentInit {
+export class FilterKeywordsComponent  implements OnInit, OnChanges {
   @ViewChild(FilterSelectedComponent)
   msgAddedItem: FilterSelectedComponent;
+  @Input()
   items: any[] = [];
   keywords_results: any[] = [];
   _keywords = '';
+  items_filtered: any[] = [];
   items_selected: any[] = [];
   selected = 0;
-  @Input()
-  pool_items: any[] = [];
   @Input()
   opened = true;
   @Output()
@@ -60,42 +59,13 @@ export class FilterKeywordsComponent
   ngOnInit() {}
 
   ngOnChanges() {
-    if (this.pool_items.length > 1) {
-      this.setKeywords();
-    }
-  }
-  ngAfterContentInit() {
-    if (this.searchService.keywords && this.searchService.keywords.length > 0) {
-      const items = this.searchService.buildKeywordsDropdown(
-        this.searchService.keywords
-      );
-      this.emmitLoaded.emit(this.queryName);
-      this.timer = setTimeout(() => {
-        this.keywords_results = items;
-        /** Grab the queryparams and sets default values
-         *  on inputs Ex. checked, selected, keywords, etc */
-        if (this.route.snapshot.queryParamMap.has(this.queryName)) {
-          const values: string[] = this.route.snapshot.queryParamMap
-            .get(this.queryName)
-            .split('__');
-
-          for (const id of values) {
-            this.addItem(id);
-          }
-          /** Open accordion */
-          this.opened = true;
-        }
-
-        clearTimeout(this.timer);
-      }, 300);
-    } else {
+    if (this.items.length > 1) {
       this.setKeywords();
     }
   }
 
   setKeywords() {
-    // const items = this.searchService.buildKeywordsDropdown(this.searchService.keywords);
-    this.keywords_results = this.searchService.buildKeywordsDropdown(this.pool_items);
+    this.items = this.searchService.buildKeywordsDropdown(this.items);
      /** Grab the queryparams and sets default values
       *  on inputs Ex. checked, selected, keywords, etc */
       if (this.route.snapshot.queryParamMap.has(this.queryName)) {
@@ -109,7 +79,47 @@ export class FilterKeywordsComponent
         /** Open accordion */
         this.opened = true;        
       }
+      if (this.route.snapshot.queryParamMap.has('vehicles')) {
+        const values: string[] = this.route.snapshot.queryParamMap
+          .get('vehicles')
+          .split('__');
+  
+        this.setFilteredItems(values);
+      } else {
+        this.setFilteredItems(['All']);
+      }
       this.emmitLoaded.emit(this.queryName);
+  }
+  setFilteredItems(vehicles) {
+    this.items_filtered =
+      vehicles[0] !== 'All'
+        ? this.filterByVehicles(vehicles)
+        : this.returnUnique(this.items);
+    this.items_filtered.sort(this.searchService.sortByIdAsc);
+    this.keywords_results = this.items_filtered;
+  }
+  returnUnique(items: any[]): any[] {
+    const unique_items = [];
+    for (const item of items) {
+      if (!this.searchService.existsIn(unique_items, item.id, 'id')) {
+        unique_items.push(item);
+      }
+    }
+    return unique_items;
+  }
+  filterByVehicles(vehicles: any[]) {
+    const items: any[] = [];
+    for (const item of vehicles) {
+      for (const prop of this.items) {
+        const arr = item.split('_');
+        if (prop['vehicle_id'].indexOf(arr[0]) !== -1) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
+            items.push(prop);
+          }
+        }
+      }
+    }
+    return items;
   }
   getItemId(value: string): string {
     if (value) {
@@ -122,9 +132,9 @@ export class FilterKeywordsComponent
   }
   getItemDescription(id: number): string {
     if (id) {
-      for (let i = 0; i < this.keywords_results.length; i++) {
-        if (+this.keywords_results[i]['id'] === id) {
-          return this.keywords_results[i]['text'];
+      for (let i = 0; i < this.items.length; i++) {
+        if (+this.items[i]['id'] === id) {
+          return this.items[i]['text'];
         }
       }
     }
@@ -160,7 +170,7 @@ export class FilterKeywordsComponent
   }
   getPoolsIds(id: string): any[] {
     const ids = [];
-    for (const prop of this.keywords_results) {
+    for (const prop of this.items) {
       if (prop.id == id) {
         if(Array.isArray(prop.pool_id)) {
           for(const item of prop.pool_id) {
