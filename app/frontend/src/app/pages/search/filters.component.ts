@@ -226,6 +226,7 @@ export class FiltersComponent implements OnInit {
     this.filterServiceCategories.setFilteredItems(arr);
     this.filterNaicsComponent.setFilteredItems(arr);
     this.filterPscComponent.setFilteredItems(arr);
+    this.filterKeywordsComponent.setFilteredItems(arr);
   }
   getVehcileDescriptions() {
     let vehicles = this.filterServiceCategories.getSelectedVehcileNames();
@@ -312,6 +313,9 @@ export class FiltersComponent implements OnInit {
   }
   filterPscsByVehiclesInFilter(vehicles: any[]) {
     this.filterPscComponent.setFilteredItems(vehicles);
+  }
+  filterKeywordsByVehiclesInFilter(vehicles: any[]) {
+    this.filterKeywordsComponent.setFilteredItems(vehicles);
   }
   filterServiceCategoriesByVehiclesInFilter(vehicles: any[]) {
     this.filterServiceCategories.setFilteredItems(vehicles);
