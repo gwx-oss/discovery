@@ -303,6 +303,7 @@ export class SearchComponent implements OnInit {
 
           this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
+          this.filtersComponent.filterKeywordsByVehiclesInFilter(vehicles_ids);
           if(this.naics_selected.length > 0 || this.pscs_selected.length > 0 || this.keywords_selected.length > 0) {
             this.filtersComponent.filterServiceCategoriesInFilter(this.service_categories_selected);
           } else {
