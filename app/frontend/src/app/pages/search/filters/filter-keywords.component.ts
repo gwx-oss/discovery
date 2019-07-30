@@ -79,15 +79,18 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
         /** Open accordion */
         this.opened = true;        
       }
-      if (this.route.snapshot.queryParamMap.has('vehicles')) {
-        const values: string[] = this.route.snapshot.queryParamMap
-          .get('vehicles')
-          .split('__');
-  
-        this.setFilteredItems(values);
-      } else {
-        this.setFilteredItems(['All']);
-      }
+     /** Check if there are selected vehicles
+     *  and sort dropdown based on vehicle id
+     */
+    if (this.route.snapshot.queryParamMap.has('vehicles')) {
+      const values: string[] = this.route.snapshot.queryParamMap
+        .get('vehicles')
+        .split('__');
+
+      this.setFilteredItems(values);
+    } else {
+      this.setFilteredItems(['All']);
+    }
       this.emmitLoaded.emit(this.queryName);
   }
   setFilteredItems(vehicles) {
@@ -119,6 +122,14 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
         }
       }
     }
+    return items;
+  }
+  getKeywordsByVehicle(vehicle: string): any[] {
+    // console.log(vehicle);
+    let items: any[] = [];
+    const abr = vehicle.substr(0, 3);
+    const unique_items = this.filterByVehicles([vehicle]);
+    items = unique_items.filter(keywords => keywords.vehicle_id !== -1);
     return items;
   }
   getItemId(value: string): string {
@@ -185,17 +196,13 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
   }
   addItem(id: string) {
     const item = {};
-    this.emitClearedSelected.emit(true);
-
     if (id && id !== '') {
       item['value'] = id;
       item['description'] = this.getItemDescription(+id);
       item['pools_ids'] = this.getPoolsIds(id);
+      this.items_selected.push(item);
     }
-
-    this.items_selected.push(item);
     this.emmitSelected.emit(1);
-    // this.msgAddedItem.showMsg();
   }
   removeItem(value: string) {
     this.reset();

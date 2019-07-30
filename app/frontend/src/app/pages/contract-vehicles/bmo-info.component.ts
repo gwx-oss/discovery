@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../search/search.service';
 import { Router } from '@angular/router';
-declare let API_HOST: string;
 
 @Component({
   selector: 'discovery-bmo-info',
@@ -19,7 +18,6 @@ export class BmoInfoComponent implements OnInit {
   pools: any[] = [];
   vehicle = 'BMO';
   error_message;
-  pdfUrl = API_HOST + '/static/discovery_site/files/Service_Category_Descriptions.pdf';
   constructor(private searchService: SearchService, private router: Router) {}
 
   ngOnInit() {
