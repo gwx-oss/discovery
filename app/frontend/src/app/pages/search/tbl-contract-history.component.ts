@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 import { SearchService } from './search.service';
 import { Z_FIXED } from 'zlib';
 declare const $: any;
@@ -38,7 +38,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   loading = true;
   table = {orderBy:'', sortBy:'asc'};
   interval;
-  emitActivateSpinner: any;
+  @Output()
+  emitActivateSpinner: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private searchService: SearchService) {}
 

@@ -75,6 +75,9 @@ export class VendorDetailComponent implements OnInit, OnChanges {
       ele.innerHTML = 'More';
     }
   }
+  showSpinner(bool: boolean) {
+    this.spinner = bool;
+  }
   getVendorDetails(duns) {
     this.searchService.getVendorDetails(duns).subscribe(
       data => {
