@@ -42,9 +42,9 @@ export class HeroComponent implements OnInit {
   ngOnInit() {
     if (this.searchService.keywords && this.searchService.keywords.length) {
       this.loading = true;
-      this.buildKeywordsDropdown(this.searchService.keywords);
       this.buildNaicsItems(this.searchService.pools);
       this.buildPscsItems(this.searchService.pools);
+      this.buildKeywordsDropdown(this.searchService.keywords);
       this.loading = false;
       this.option = 'naic';
     } else {
@@ -123,7 +123,7 @@ export class HeroComponent implements OnInit {
   }
 
   buildKeywordsDropdown(pools: any[]) {
-    const keywords = [];
+    const keywords: any[] = [];
     if(pools) {
       for (let i = 0; i < pools.length; i++) {
         const pool = pools[i];
@@ -142,7 +142,7 @@ export class HeroComponent implements OnInit {
       }
     }
     this.keywords_results = keywords;
-    // this.keywords_results.sort(this.searchService.sortByTextAsc);
+    this.keywords_results.sort(this.searchService.sortByIdAsc);
   }
 
   searchKeywords() {
