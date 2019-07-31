@@ -20,8 +20,7 @@ apt-get install -y wget unzip xvfb libappindicator1 libxss1 libasound2 libx11-xc
 if ! which google-chrome >/dev/null
 then
   echo "> Downloading and installing Chrome browser" | tee -a "$LOG_FILE"
-  sudo apt-get install --only-upgrade google-chrome-stable
-  #wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb >>"$LOG_FILE" 2>&1
+  wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb >>"$LOG_FILE" 2>&1
   dpkg -i /tmp/chrome.deb >>"$LOG_FILE" 2>&1
   apt --fix-broken install -y
 fi
@@ -29,7 +28,7 @@ fi
 if ! which chromedriver >/dev/null
 then
   echo "> Downloading and installing Chrome driver" | tee -a "$LOG_FILE"
-  wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip >>"$LOG_FILE" 2>&1
+  wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip >>"$LOG_FILE" 2>&1
   unzip /tmp/chromedriver.zip -d "$BIN_DIR" >>"$LOG_FILE" 2>&1
   chmod 755 "$BIN_DIR/chromedriver" >>"$LOG_FILE" 2>&1
 fi
