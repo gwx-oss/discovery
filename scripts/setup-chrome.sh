@@ -20,7 +20,8 @@ apt-get install -y wget unzip xvfb libappindicator1 libxss1 libasound2 libx11-xc
 if ! which google-chrome >/dev/null
 then
   echo "> Downloading and installing Chrome browser" | tee -a "$LOG_FILE"
-  wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb >>"$LOG_FILE" 2>&1
+  sudo apt-get install --only-upgrade google-chrome-stable
+  #wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb >>"$LOG_FILE" 2>&1
   dpkg -i /tmp/chrome.deb >>"$LOG_FILE" 2>&1
   apt --fix-broken install -y
 fi
