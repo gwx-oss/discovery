@@ -28,7 +28,7 @@ fi
 if ! which chromedriver >/dev/null
 then
   echo "> Downloading and installing Chrome driver" | tee -a "$LOG_FILE"
-  wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip >>"$LOG_FILE" 2>&1
+  wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip >>"$LOG_FILE" 2>&1
   unzip /tmp/chromedriver.zip -d "$BIN_DIR" >>"$LOG_FILE" 2>&1
   chmod 755 "$BIN_DIR/chromedriver" >>"$LOG_FILE" 2>&1
 fi
