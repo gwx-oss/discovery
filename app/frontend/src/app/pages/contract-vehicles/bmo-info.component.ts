@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../search/search.service';
 import { Router } from '@angular/router';
-
+declare let API_HOST: string;
+declare let pdfUrl:string;
 @Component({
   selector: 'discovery-bmo-info',
   templateUrl: './bmo-info.component.html',
@@ -18,6 +19,7 @@ export class BmoInfoComponent implements OnInit {
   pools: any[] = [];
   vehicle = 'BMO';
   error_message;
+  API_HOST = ""
   constructor(private searchService: SearchService, private router: Router) {}
 
   ngOnInit() {
@@ -30,8 +32,9 @@ export class BmoInfoComponent implements OnInit {
     );
   }
 
-  routeToLink(pool: any, vehicles: string, serviceCategories: string) {	
-    serviceCategories = this.searchService.formatServiceCategories(serviceCategories, pool.number);	
-    this.router.navigate(['/search'], { queryParams: { vehicles: vehicles, service_categories:serviceCategories }});	
+  routeToLink(pool: any, vehicles: string, serviceCategories: string) {
+    serviceCategories = this.searchService.formatServiceCategories(serviceCategories, pool.number);
+    this.router.navigate(['/search'], { queryParams: { vehicles: vehicles, service_categories:serviceCategories }});
   }
+  pdfUrl = API_HOST + '/static/discovery_site/files/Service_Category_Descriptions.pdf';
 }

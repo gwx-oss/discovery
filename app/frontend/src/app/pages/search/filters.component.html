@@ -55,6 +55,7 @@
     <ul class="usa-accordion" aria-multiselectable="true">
       <li>
         <discovery-filter-keywords
+          [items]="pools"
           [opened]="true"
           (emitClearedSelected)="clearContractVehicles($event)"
           (emmitSelected)="activateSubmit($event)"

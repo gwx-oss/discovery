@@ -41,24 +41,15 @@ export class HeroComponent implements OnInit {
   }
   ngOnInit() {
     if (this.searchService.keywords && this.searchService.keywords.length) {
-      this.buildKeywordsDropdown(this.searchService.keywords);
+      this.loading = true;
       this.buildNaicsItems(this.searchService.pools);
       this.buildPscsItems(this.searchService.pools);
+      this.buildKeywordsDropdown(this.searchService.keywords);
       this.loading = false;
       this.option = 'naic';
     } else {
       this.loading = true;
-      this.searchService.getKeywords().subscribe(
-        data => {
-          this.searchService.keywords = this.keywords_results;
-          this.buildKeywordsDropdown(data['results']);
-          this.initPools();
-        },
-        error => {
-          this.error_message = <any>error;
-          this.server_error = true;
-        }
-      );
+      this.initPools();
     }
   }
   onChange() {}
@@ -85,6 +76,7 @@ export class HeroComponent implements OnInit {
     this.searchService.getPools(['All']).subscribe(
       data => {
         this.searchService.pools = data['results'];
+        this.buildKeywordsDropdown(this.searchService.pools);
         this.buildNaicsItems(this.searchService.pools);
         this.buildPscsItems(this.searchService.pools);
         this.option = 'naic';
@@ -130,16 +122,27 @@ export class HeroComponent implements OnInit {
     this.pscs.sort(this.searchService.sortByIdAsc);
   }
 
-  buildKeywordsDropdown(obj: any[]) {
-    const keywords = [];
-    for (const item of obj) {
-      const keyword = {};
-      keyword['text'] = item['name'];
-      keyword['id'] = item['id'];
-      keywords.push(keyword);
+  buildKeywordsDropdown(pools: any[]) {
+    const keywords: any[] = [];
+    if(pools) {
+      for (let i = 0; i < pools.length; i++) {
+        const pool = pools[i];
+        if(pool.keywords) {
+          for (let j = 0; j < pool.keywords.length; j++) {  
+            const item = pool.keywords[j];
+            const keyword = {};
+            keyword['text'] = item['name'];
+            keyword['id'] = item['id'];
+            keyword['pool_id'] = pool.id;
+            if (!this.searchService.existsIn(keywords, item.id, 'id')) {
+              keywords.push(keyword);
+            }
+          }
+        }  
+      }
     }
     this.keywords_results = keywords;
-    // this.keywords_results.sort(this.searchService.sortByTextAsc);
+    this.keywords_results.sort(this.searchService.sortByIdAsc);
   }
 
   searchKeywords() {

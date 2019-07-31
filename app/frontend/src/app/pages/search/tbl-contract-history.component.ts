@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 import { SearchService } from './search.service';
+import { Z_FIXED } from 'zlib';
 declare const $: any;
 @Component({
   selector: 'discovery-tbl-contract-history',
@@ -34,8 +35,11 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
   enable_paging = false;
   history_no_results = false;
   spinner = false;
+  loading = true;
   table = {orderBy:'', sortBy:'asc'};
   interval;
+  @Output()
+  emitActivateSpinner: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private searchService: SearchService) {}
 
@@ -75,6 +79,11 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         this.table.orderBy
       );
     }
+  }
+  showSpinner(bool: boolean) {
+    setTimeout(() => {
+      this.emitActivateSpinner.emit(bool);
+    });
   }
   get contracts() {
     return this._contracts;
@@ -116,6 +125,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
     state: string,
     ordering: string
   ) {
+    this.loading = true;
+    this.showSpinner(true);
     let page_path = '';
     if (page > 1) {
       page_path = '&page=' + page;
@@ -145,7 +156,14 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
           this.num_total_pages = Math.floor(
             (this.items_total + this.items_per_page - 1) / this.items_per_page
           );
+          this.loading = false;
+          this.showSpinner(false);
           this.setPreviousNext();
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
           this.enable_paging = true;
           this.spinner = false;
           if (this.num_results === 0) {
@@ -291,7 +309,8 @@ export class TblContractHistoryComponent implements OnInit, OnChanges {
         if (arr_next[1].indexOf('&') !== -1) {
           const page = arr_next[1].split('&');
           this.next = +page[0];
-        } else {
+        }
+        else {
           this.next = +arr_next[1];
         }
       }

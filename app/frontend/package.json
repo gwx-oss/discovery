@@ -22,10 +22,11 @@
     "@angular/router": "^6.1.8",
     "core-js": "^2.5.4",
     "jquery": "^3.4.1",
-    "rxjs": "^6.3.2",
-    "zone.js": "^0.8.26",
     "lodash": "^4.17.13",
-    "lodash.mergewith":"4.6.2"
+    "lodash.mergewith": "4.6.2",
+    "rxjs": "^6.3.2",
+    "zlib": "^1.0.5",
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.5",

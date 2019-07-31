@@ -60,6 +60,7 @@ export class SearchComponent implements OnInit {
   vendors_request_complete = false;
   naics_selected: any[] = [];
   pscs_selected: any[] = [];
+  keywords_selected: any[] = [];
   service_categories_selected: any[] = [];
   params: string;
   table_scroll_set = false;
@@ -79,6 +80,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.resetKeyword();
     /** Check to see if there are any queryparams */
     if (this.route.snapshot.queryParamMap.keys.length > 0) {
       this.spinner = true;
@@ -197,6 +199,7 @@ export class SearchComponent implements OnInit {
     let categories = [];
     const naics = this.filtersComponent.getNaicsSelected();
     const pscs = this.filtersComponent.getPscsSelected();
+    const keywords = this.filtersComponent.getKeywordssSelected();
     categories = this.getSelected(filters, 'service_categories');
     if (naics.length > 0) {
       for (const naic of naics) {
@@ -215,6 +218,20 @@ export class SearchComponent implements OnInit {
     if (pscs.length > 0) {
       for (const psc of pscs) {
         for (const pool of psc.pools_ids) {
+          if (!this.searchService.existsIn(categories, pool, 'value')) {
+            categories.push({
+              value: pool,
+              description: this.filtersComponent.getServiceCategoriesDescription(
+                pool
+              )
+            });
+          }
+        }
+      }
+    }
+    if (keywords.length > 0) {
+      for (const keyword of keywords) {
+        for (const pool of keyword.pools_ids) {
           if (!this.searchService.existsIn(categories, pool, 'value')) {
             categories.push({
               value: pool,
@@ -253,6 +270,7 @@ export class SearchComponent implements OnInit {
     this.service_categories = this.filtersComponent.getServiceCategories();
     this.naics_selected = this.getSelected(filters, 'naics');
     this.pscs_selected = this.getSelected(filters, 'pscs');
+    this.keywords_selected = this.getSelected(filters, 'keywords');
     this.service_categories_selected = this.returnSelectedServiceCategories(
       filters
     );
@@ -285,14 +303,11 @@ export class SearchComponent implements OnInit {
 
           this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
           this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
-          if(this.naics_selected.length > 0 || this.pscs_selected.length > 0) {
-            this.filtersComponent.filterServiceCategoriesInFilter(
-              this.service_categories_selected
-            );
+          this.filtersComponent.filterKeywordsByVehiclesInFilter(vehicles_ids);
+          if(this.naics_selected.length > 0 || this.pscs_selected.length > 0 || this.keywords_selected.length > 0) {
+            this.filtersComponent.filterServiceCategoriesInFilter(this.service_categories_selected);
           } else {
-            this.filtersComponent.filterServiceCategoriesByVehiclesInFilter(
-              vehicles_ids
-            );
+            this.filtersComponent.filterServiceCategoriesByVehiclesInFilter(vehicles_ids);
           }
           this.filters = this.filtersComponent.getSelectedFilters();
           this.searchService.activeFilters = this.filters;
@@ -377,7 +392,7 @@ export class SearchComponent implements OnInit {
 
     for (const vehicle of vehicles) {
       var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
-      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0 && !this.isKeywordFilterOn()) {
+      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0) {
         count++;
         continue;
       }
@@ -462,24 +477,12 @@ export class SearchComponent implements OnInit {
     }
     return count;
   }
-  isKeywordFilterOn() {
-    let isKeywordOn = false;
-    for (const filter of this.searchService.activeFilters) {
-      if (filter['name'] === 'keywords') {
-         if(filter.selected.length > 0) {
-            isKeywordOn = true;
-         }
-      }
-    }
-    return isKeywordOn;
-  }
   getVendorsTotalByVehicle(vehicles) {
     let count = 0;
     const vendor_totals = [];
     for (const vehicle of vehicles) {
       var selectedServiceCategory = this.searchService.getServiceCategoryFilterByVehicle(vehicle.id);
-      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0 &&
-      !this.isKeywordFilterOn()) {
+      if(vehicles.length > 1 && selectedServiceCategory.length == 0 && this.getActiveServiceCategoriesCount() !== 0) {
         count++;
         continue;
       }
@@ -752,5 +755,19 @@ export class SearchComponent implements OnInit {
   }
   closeModal(id: string) {
     this.modalService.close(id);
-  }
-}
+    }  
+  resetKeyword(){
+    $('body').on('click','#select2-filter-keywords-input-container,.select2-selection__arrow',function(){
+      if($('#select2-filter-keywords-input-container').text() == 'Select Keywords'){
+        $('#select2-filter-keywords-input-results .select2-results__option').each(function(i,ele){
+            if($(ele).text() == 'Select Keywords'){
+              $(ele).attr('aria-selected',true).addClass('select2-results__option--highlighted');
+            }else{
+              $(ele).attr('aria-selected',false).removeClass('select2-results__option--highlighted');
+            }
+        });
+        $('.select2-results__options').scrollTop(0,0);
+      }
+    });
+  }  
+} 
