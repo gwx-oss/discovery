@@ -12,27 +12,24 @@ fi
 
 BIN_DIR="/usr/local/bin"
   
-sudo add-apt-repository universe
-
 apt-get update >>"$LOG_FILE" 2>&1 
 
 echo "> Installing Chrome dependencies" | tee -a "$LOG_FILE"
-
-apt-get install -y wget unzip xvfb libgconf2-4 libnss3-1d libxss1 libappindicator1 libxss1 libasound2 libx11-xcb1 libminizip1 libwebpmux2 libgtk-3-0 >>"$LOG_FILE" 2>&1
+apt-get install -y wget unzip xvfb libxss1 libappindicator1 libindicator7 libasound2 libx11-xcb1 libminizip1 libwebpmux2 libgtk-3-0 >>"$LOG_FILE" 2>&1
 
 if ! which google-chrome >/dev/null
 then
   echo "> Downloading and installing Chrome browser" | tee -a "$LOG_FILE"
   wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb >>"$LOG_FILE" 2>&1
-  sudo apt-get install -f
   dpkg -i /tmp/chrome.deb >>"$LOG_FILE" 2>&1
+  sudo apt-get install -f
   apt --fix-broken install -y
 fi
 
 if ! which chromedriver >/dev/null
 then
   echo "> Downloading and installing Chrome driver" | tee -a "$LOG_FILE"
-  wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip >>"$LOG_FILE" 2>&1
+  wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip >>"$LOG_FILE" 2>&1
   unzip /tmp/chromedriver.zip -d "$BIN_DIR" >>"$LOG_FILE" 2>&1
   chmod 755 "$BIN_DIR/chromedriver" >>"$LOG_FILE" 2>&1
 fi
