@@ -36,5 +36,5 @@ export class BmoInfoComponent implements OnInit {
     serviceCategories = this.searchService.formatServiceCategories(serviceCategories, pool.number);
     this.router.navigate(['/search'], { queryParams: { vehicles: vehicles, service_categories:serviceCategories }});
   }
-  pdfUrl = API_HOST + '/static/discovery_site/files/Service_Category_Descriptions.pdf';
+  pdfUrl = API_HOST + '/discovery_site/files/Service_Category_Descriptions.pdf';
 }
