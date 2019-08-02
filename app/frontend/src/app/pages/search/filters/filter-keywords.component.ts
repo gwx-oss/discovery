@@ -93,6 +93,26 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
     }
       this.emmitLoaded.emit(this.queryName);
   }
+  filterByServiceCategories(serviceCategories) {
+    const items: any[] = [];
+    for (const item of serviceCategories) {
+      for (const prop of this.items) {
+        for(const pool of prop['pool_id']) {
+          if (pool === item.value) {
+            if (!this.searchService.existsIn(items, prop.id, 'id')) {
+              items.push(prop);
+            }
+          }
+        }
+      }
+    }
+    return items;
+  }
+  setKeywordsByServiceCategories(serviceCategories) {
+    this.items_filtered = this.filterByServiceCategories(serviceCategories);
+    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+    this.keywords_results = this.items_filtered;
+  }
   setFilteredItems(vehicles) {
     this.items_filtered =
       vehicles[0] !== 'All'

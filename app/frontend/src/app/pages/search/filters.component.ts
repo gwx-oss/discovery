@@ -314,6 +314,15 @@ export class FiltersComponent implements OnInit {
   filterPscsByVehiclesInFilter(vehicles: any[]) {
     this.filterPscComponent.setFilteredItems(vehicles);
   }
+  setPscsByServiceCategories(serviceCategories: any[]) {
+    this.filterPscComponent.setPscsByServiceCategories(serviceCategories);
+  }
+  getPscsByServiceCategories(serviceCategories: any[]) {
+    return this.filterPscComponent.getPscsByServiceCategories(serviceCategories);
+  }
+  setKeywordsByServiceCategories(serviceCategories: any[]) {
+    this.filterKeywordsComponent.setKeywordsByServiceCategories(serviceCategories);
+  }
   filterKeywordsByVehiclesInFilter(vehicles: any[]) {
     this.filterKeywordsComponent.setFilteredItems(vehicles);
   }
@@ -340,6 +349,12 @@ export class FiltersComponent implements OnInit {
   getPSCsByVehicle(vehicle: string) {
     const obj: any[] = this.filterPscComponent.getPSCsByVehicle(vehicle);
     return obj;
+  }
+  setNaicsByServiceCategories(serviceCategories: any[]) {
+    this.filterNaicsComponent.setNaicsByServiceCategories(serviceCategories);
+  }
+  getNaicsByServiceCategories(serviceCategories: any[]) {
+    return this.filterNaicsComponent.getNaicsByServiceCategories(serviceCategories);
   }
   getVehicleInfo(vehicle: string) {
     const obj: any[] = this.filterContractVehiclesComponent.getVehicleInfo(
