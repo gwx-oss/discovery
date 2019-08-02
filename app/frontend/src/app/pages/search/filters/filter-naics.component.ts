@@ -211,6 +211,30 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     return items;
   }
 
+  filterByServiceCategories(serviceCategories) {
+    const items: any[] = [];
+    for (const item of serviceCategories) {
+      for (const prop of this.items) {
+        if (prop['pool_id'] === item.value) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
+            items.push(prop);
+          }
+        }
+      }
+    }
+    return items;
+  }
+  setNaicsByServiceCategories(serviceCategories) {
+    this.items_filtered = this.filterByServiceCategories(serviceCategories);
+    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+    this.keywords_results = this.items_filtered;
+  }
+  
+  getNaicsByServiceCategories(serviceCategories) {
+    this.setNaicsByServiceCategories(serviceCategories);
+    return this.keywords_results;
+  }
+  
   buildItemsByVehicle(obj: any[]) {
     const naics = [];
     for (const pool of obj) {

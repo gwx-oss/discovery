@@ -95,6 +95,15 @@ export class FilterPscComponent implements OnInit, OnChanges {
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.keywords_results = this.items_filtered;
   }
+  setPscsByServiceCategories(serviceCategories) {
+    this.items_filtered = this.filterByServiceCategories(serviceCategories);
+    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+    this.keywords_results = this.items_filtered;
+  }
+  getPscsByServiceCategories(serviceCategories) {
+    this.setPscsByServiceCategories(serviceCategories)
+    return this.keywords_results;
+  }
   buildPSCsItems(obj: any[]): any[] {
     const pscs = [];
     for (const pool of obj) {
@@ -185,13 +194,25 @@ export class FilterPscComponent implements OnInit, OnChanges {
     }
     return items;
   }
+  filterByServiceCategories(serviceCategories: any[]) {
+    const items: any[] = [];
+    for (const item of serviceCategories) {
+      for (const prop of this.items) {
+        if (prop['pool_id'] === item.value) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
+            items.push(prop);
+          }
+        }
+      }
+    }
+    return items;
+  }
   getPSCsByVehicle(vehicle: string): any[] {
     let items: any[] = [];
     const abr = vehicle.substr(0, 3);
     items = this.items.filter(pscs => pscs.vehicle_id.indexOf(abr) !== -1);
     return items;
   }
-
   buildItemsByVehicle(obj: any[]) {
     const pscs = [];
     for (const pool of obj) {
