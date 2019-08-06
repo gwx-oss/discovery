@@ -95,13 +95,19 @@ export class FilterPscComponent implements OnInit, OnChanges {
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.keywords_results = this.items_filtered;
   }
-  setPscsByServiceCategories(serviceCategories) {
+  getPscsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    this.items_filtered = this.filterByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
+    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+    this.keywords_results = this.items_filtered;
+    return this.keywords_results;
+  }
+  setPscsByServiceCategories(serviceCategories: any[]) {
     this.items_filtered = this.filterByServiceCategories(serviceCategories);
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.keywords_results = this.items_filtered;
   }
-  getPscsByServiceCategories(serviceCategories) {
-    this.setPscsByServiceCategories(serviceCategories)
+  getPscsByServiceCategories(serviceCategories: any[]) {
+    this.setPscsByServiceCategories(serviceCategories);
     return this.keywords_results;
   }
   buildPSCsItems(obj: any[]): any[] {
@@ -186,6 +192,19 @@ export class FilterPscComponent implements OnInit, OnChanges {
       for (const prop of this.items) {
         const arr = item.split('_');
         if (prop['vehicle_id'].indexOf(arr[0]) !== -1) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
+            items.push(prop);
+          }
+        }
+      }
+    }
+    return items;
+  }
+  filterByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    const items: any[] = [];
+    for (const item of serviceCategories) {
+      for (const prop of this.items) {
+        if (prop['pool_id'] === item.value && prop['vehicle_id'] === vehicleId) {
           if (!this.searchService.existsIn(items, prop.id, 'id')) {
             items.push(prop);
           }
