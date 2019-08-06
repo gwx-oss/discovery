@@ -286,7 +286,7 @@ export class FiltersComponent implements OnInit {
     }
     return items;
   }
-  getKeywordssSelected(): any[] {
+  getKeywordsSelected(): any[] {
     let items = [];
     if (this.filterKeywordsComponent.getSelected(true).length > 0) {
       items = this.filterKeywordsComponent.getSelected(true);
@@ -317,6 +317,9 @@ export class FiltersComponent implements OnInit {
   setPscsByServiceCategories(serviceCategories: any[]) {
     this.filterPscComponent.setPscsByServiceCategories(serviceCategories);
   }
+  getPscsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    return this.filterPscComponent.getPscsByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
+  }
   getPscsByServiceCategories(serviceCategories: any[]) {
     return this.filterPscComponent.getPscsByServiceCategories(serviceCategories);
   }
@@ -331,6 +334,9 @@ export class FiltersComponent implements OnInit {
   }
   filterServiceCategoriesInFilter(serviceCategories: any[]) {
     this.filterServiceCategories.setFilteredItemsByServiceCategories(serviceCategories);
+  }
+  getSelectedServiceCategories(): any[] {
+    return this.filterServiceCategories.getSelected(true);
   }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(
@@ -355,6 +361,9 @@ export class FiltersComponent implements OnInit {
   }
   getNaicsByServiceCategories(serviceCategories: any[]) {
     return this.filterNaicsComponent.getNaicsByServiceCategories(serviceCategories);
+  }
+  getNaicsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    return this.filterNaicsComponent.getNaicsByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
   }
   getVehicleInfo(vehicle: string) {
     const obj: any[] = this.filterContractVehiclesComponent.getVehicleInfo(

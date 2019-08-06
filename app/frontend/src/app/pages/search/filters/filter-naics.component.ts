@@ -211,7 +211,7 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     return items;
   }
 
-  filterByServiceCategories(serviceCategories) {
+  filterByServiceCategories(serviceCategories: any[]) {
     const items: any[] = [];
     for (const item of serviceCategories) {
       for (const prop of this.items) {
@@ -224,14 +224,35 @@ export class FilterNaicsComponent implements OnInit, OnChanges {
     }
     return items;
   }
-  setNaicsByServiceCategories(serviceCategories) {
+  filterByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    const items: any[] = [];
+    for (const item of serviceCategories) {
+      for (const prop of this.items) {
+        if (prop['pool_id'] === item.value && prop['vehicle_id'] === vehicleId) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
+            items.push(prop);
+          }
+        }
+      }
+    }
+    return items;
+  }
+  setNaicsByServiceCategories(serviceCategories : any[]) {
     this.items_filtered = this.filterByServiceCategories(serviceCategories);
     this.items_filtered.sort(this.searchService.sortByCodeAsc);
     this.keywords_results = this.items_filtered;
   }
-  
-  getNaicsByServiceCategories(serviceCategories) {
+  setNaicsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string ) {
+    this.items_filtered = this.filterByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
+    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+    this.keywords_results = this.items_filtered;
+  }
+  getNaicsByServiceCategories(serviceCategories: any[]) {
     this.setNaicsByServiceCategories(serviceCategories);
+    return this.keywords_results;
+  }
+  getNaicsByServiceCategoriesAndVehicle(serviceCategories: any[], vehcileId: string) {
+    this.setNaicsByServiceCategoriesAndVehicle(serviceCategories, vehcileId);
     return this.keywords_results;
   }
   

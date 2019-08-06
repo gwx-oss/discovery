@@ -199,7 +199,7 @@ export class SearchComponent implements OnInit {
     let categories = [];
     const naics = this.filtersComponent.getNaicsSelected();
     const pscs = this.filtersComponent.getPscsSelected();
-    const keywords = this.filtersComponent.getKeywordssSelected();
+    const keywords = this.filtersComponent.getKeywordsSelected();
     categories = this.getSelected(filters, 'service_categories');
     if (naics.length > 0) {
       for (const naic of naics) {
@@ -301,8 +301,7 @@ export class SearchComponent implements OnInit {
             }
           }
 
-        
-          if(this.service_categories_selected.length > 0) {
+         if(this.service_categories_selected.length > 0) {
             this.filtersComponent.setNaicsByServiceCategories(this.service_categories_selected);
             this.filtersComponent.setPscsByServiceCategories(this.service_categories_selected);
             this.filtersComponent.setKeywordsByServiceCategories(this.service_categories_selected);
@@ -418,14 +417,11 @@ export class SearchComponent implements OnInit {
             );
             item['vendors_results_total'] = data['count'];
             item['description'] = vehicle.name;
-            item[
-              'service_categories'
-            ] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle.id);
-
+            item['service_categories'] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle.id);
             item['capabilities'] = 0;
             if(this.service_categories_selected.length > 0) {
-              item['pscs'] = this.filtersComponent.getPscsByServiceCategories(this.service_categories_selected);
-              item['naics'] = this.filtersComponent.getNaicsByServiceCategories(this.service_categories_selected);
+              item['pscs'] = this.filtersComponent.getPscsByServiceCategoriesAndVehicle(this.service_categories_selected, vehicle.id);
+              item['naics'] = this.filtersComponent.getNaicsByServiceCategoriesAndVehicle(this.service_categories_selected, vehicle.id);
             } else {
               item['pscs'] = this.returnUnique(this.filtersComponent.getPSCsByVehicle(vehicle.id));
               item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle.id);
