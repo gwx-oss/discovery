@@ -8,6 +8,7 @@ from contracts import models as contracts
 
 import os
 
+capabilitiesUrls = {}
 
 class SinSerializer(ModelSerializer):
     class Meta:
@@ -388,7 +389,25 @@ class BasePoolMembershipSerializer(ModelSerializer):
     class Meta:
         model = vendors.PoolMembership
         fields = ['id', 'piid', 'contacts', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
-        
+
+    def load_capabilities(self, vehicle):
+        if len(capabilitiesUrls) == 0:
+            file_path = "static/discovery_site/capability_statements/{}/{}".format(vehicle, "urls.txt")
+            if vehicle and os.path.isfile(file_path):
+                capabilities = open(file_path, "r")
+            
+                for row in capabilities:
+                    tokens = row.split("=")
+                    capabilitiesUrls[tokens[0]] = tokens[1]
+                capabilities.close()
+
+    def get_capabilities(self, vehicle, duns):
+        self.load_capabilities(vehicle)
+        if duns in capabilitiesUrls:
+            return capabilitiesUrls[duns]
+        else:
+            return ''    
+
     def get_capability_statement(self, item):
         request = self.context.get('request')
         duns = item.vendor.duns
@@ -396,10 +415,11 @@ class BasePoolMembershipSerializer(ModelSerializer):
         
         cs_path = "static/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns)
         cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
-    
+     
         if vehicle and os.path.isfile(cs_path):
-            return cs_url    
-        return ''
+            return cs_url
+        else:
+            return self.get_capabilities(vehicle, duns)
     
     def get_contacts(self, item):
         queryset = vendors.Contact.objects.filter(responsibility=item).order_by('order')
