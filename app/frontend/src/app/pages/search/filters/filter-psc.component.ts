@@ -96,19 +96,14 @@ export class FilterPscComponent implements OnInit, OnChanges {
     this.keywords_results = this.items_filtered;
   }
   getPscsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
-    this.items_filtered = this.filterByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
-    this.items_filtered.sort(this.searchService.sortByIdAsc);
-    this.keywords_results = this.items_filtered;
-    return this.keywords_results;
+    const items = this.filterByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
+    items.sort(this.searchService.sortByIdAsc);
+    return items;
   }
   setPscsByServiceCategories(serviceCategories: any[]) {
     this.items_filtered = this.filterByServiceCategories(serviceCategories);
     this.items_filtered.sort(this.searchService.sortByIdAsc);
     this.keywords_results = this.items_filtered;
-  }
-  getPscsByServiceCategories(serviceCategories: any[]) {
-    this.setPscsByServiceCategories(serviceCategories);
-    return this.keywords_results;
   }
   buildPSCsItems(obj: any[]): any[] {
     const pscs = [];
