@@ -24,10 +24,12 @@ export class AutocompleteComponent implements OnChanges {
   @Output()
   emitCode: EventEmitter<string> = new EventEmitter();
   keywords = '';
+  isComplete = false;
   constructor() {}
   ngOnChanges() {
     if (this.keywords_results && this.keywords_results.length > 0) {
       this.setKeywordAutoComplete(this.keywords_results, this.id);
+      this.isComplete = true;
     }
   }
   ngOnInit(): void {
