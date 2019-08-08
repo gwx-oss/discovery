@@ -286,7 +286,7 @@ export class FiltersComponent implements OnInit {
     }
     return items;
   }
-  getKeywordssSelected(): any[] {
+  getKeywordsSelected(): any[] {
     let items = [];
     if (this.filterKeywordsComponent.getSelected(true).length > 0) {
       items = this.filterKeywordsComponent.getSelected(true);
@@ -314,6 +314,18 @@ export class FiltersComponent implements OnInit {
   filterPscsByVehiclesInFilter(vehicles: any[]) {
     this.filterPscComponent.setFilteredItems(vehicles);
   }
+  setPscsByServiceCategories(serviceCategories: any[]) {
+    this.filterPscComponent.setPscsByServiceCategories(serviceCategories);
+  }
+  getPscsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    return this.filterPscComponent.getPscsByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
+  }
+  getPscsByServiceCategories(serviceCategories: any[]) {
+    return this.filterPscComponent.getPscsByServiceCategories(serviceCategories);
+  }
+  setKeywordsByServiceCategories(serviceCategories: any[]) {
+    this.filterKeywordsComponent.setKeywordsByServiceCategories(serviceCategories);
+  }
   filterKeywordsByVehiclesInFilter(vehicles: any[]) {
     this.filterKeywordsComponent.setFilteredItems(vehicles);
   }
@@ -322,6 +334,9 @@ export class FiltersComponent implements OnInit {
   }
   filterServiceCategoriesInFilter(serviceCategories: any[]) {
     this.filterServiceCategories.setFilteredItemsByServiceCategories(serviceCategories);
+  }
+  getSelectedServiceCategories(): any[] {
+    return this.filterServiceCategories.getSelected(true);
   }
   getVehicleDescription(vehicle: string) {
     const desc = this.filterContractVehiclesComponent.getItemDescription(
@@ -340,6 +355,15 @@ export class FiltersComponent implements OnInit {
   getPSCsByVehicle(vehicle: string) {
     const obj: any[] = this.filterPscComponent.getPSCsByVehicle(vehicle);
     return obj;
+  }
+  setNaicsByServiceCategories(serviceCategories: any[]) {
+    this.filterNaicsComponent.setNaicsByServiceCategories(serviceCategories);
+  }
+  getNaicsByServiceCategories(serviceCategories: any[]) {
+    return this.filterNaicsComponent.getNaicsByServiceCategories(serviceCategories);
+  }
+  getNaicsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    return this.filterNaicsComponent.getNaicsByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
   }
   getVehicleInfo(vehicle: string) {
     const obj: any[] = this.filterContractVehiclesComponent.getVehicleInfo(

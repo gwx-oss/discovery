@@ -199,7 +199,7 @@ export class SearchComponent implements OnInit {
     let categories = [];
     const naics = this.filtersComponent.getNaicsSelected();
     const pscs = this.filtersComponent.getPscsSelected();
-    const keywords = this.filtersComponent.getKeywordssSelected();
+    const keywords = this.filtersComponent.getKeywordsSelected();
     categories = this.getSelected(filters, 'service_categories');
     if (naics.length > 0) {
       for (const naic of naics) {
@@ -301,9 +301,15 @@ export class SearchComponent implements OnInit {
             }
           }
 
-          this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
-          this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
-          this.filtersComponent.filterKeywordsByVehiclesInFilter(vehicles_ids);
+         if(this.service_categories_selected.length > 0) {
+            this.filtersComponent.setNaicsByServiceCategories(this.service_categories_selected);
+            this.filtersComponent.setPscsByServiceCategories(this.service_categories_selected);
+            this.filtersComponent.setKeywordsByServiceCategories(this.service_categories_selected);
+          } else {
+            this.filtersComponent.filterNaicsByVehiclesInFilter(vehicles_ids);
+            this.filtersComponent.filterPscsByVehiclesInFilter(vehicles_ids);
+            this.filtersComponent.filterKeywordsByVehiclesInFilter(vehicles_ids);
+          }
           if(this.naics_selected.length > 0 || this.pscs_selected.length > 0 || this.keywords_selected.length > 0) {
             this.filtersComponent.filterServiceCategoriesInFilter(this.service_categories_selected);
           } else {
@@ -411,13 +417,16 @@ export class SearchComponent implements OnInit {
             );
             item['vendors_results_total'] = data['count'];
             item['description'] = vehicle.name;
-            item[
-              'service_categories'
-            ] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle.id);
-
+            item['service_categories'] = this.filtersComponent.getServiceCategoriesByVehicle(vehicle.id);
             item['capabilities'] = 0;
-            item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle.id);
-            item['pscs'] = this.returnUnique(this.filtersComponent.getPSCsByVehicle(vehicle.id));
+            if(this.service_categories_selected.length > 0) {
+              item['pscs'] = this.filtersComponent.getPscsByServiceCategoriesAndVehicle(this.service_categories_selected, vehicle.id);
+              item['naics'] = this.filtersComponent.getNaicsByServiceCategoriesAndVehicle(this.service_categories_selected, vehicle.id);
+            } else {
+              item['pscs'] = this.returnUnique(this.filtersComponent.getPSCsByVehicle(vehicle.id));
+              item['naics'] = this.filtersComponent.getNaicsByVehicle(vehicle.id);
+            }
+
             const info = this.filtersComponent.getVehicleInfo(vehicle.id);
             item['tier'] = info['tier'].name;
             item['gsa'] = info['poc'];

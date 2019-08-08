@@ -92,8 +92,23 @@ export class FilterPscComponent implements OnInit, OnChanges {
   setFilteredItems(vehicles) {
     this.items_filtered =
       vehicles[0] !== 'All' ? this.filterByVehicles(vehicles) : this.returnUnique(this.items);
-    this.items_filtered.sort(this.searchService.sortByCodeAsc);
+    this.items_filtered.sort(this.searchService.sortByIdAsc);
     this.keywords_results = this.items_filtered;
+  }
+  getPscsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    this.items_filtered = this.filterByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
+    this.items_filtered.sort(this.searchService.sortByIdAsc);
+    this.keywords_results = this.items_filtered;
+    return this.keywords_results;
+  }
+  setPscsByServiceCategories(serviceCategories: any[]) {
+    this.items_filtered = this.filterByServiceCategories(serviceCategories);
+    this.items_filtered.sort(this.searchService.sortByIdAsc);
+    this.keywords_results = this.items_filtered;
+  }
+  getPscsByServiceCategories(serviceCategories: any[]) {
+    this.setPscsByServiceCategories(serviceCategories);
+    return this.keywords_results;
   }
   buildPSCsItems(obj: any[]): any[] {
     const pscs = [];
@@ -185,13 +200,38 @@ export class FilterPscComponent implements OnInit, OnChanges {
     }
     return items;
   }
+  filterByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
+    const items: any[] = [];
+    for (const item of serviceCategories) {
+      for (const prop of this.items) {
+        if (prop['pool_id'] === item.value && prop['vehicle_id'] === vehicleId) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
+            items.push(prop);
+          }
+        }
+      }
+    }
+    return items;
+  }
+  filterByServiceCategories(serviceCategories: any[]) {
+    const items: any[] = [];
+    for (const item of serviceCategories) {
+      for (const prop of this.items) {
+        if (prop['pool_id'] === item.value) {
+          if (!this.searchService.existsIn(items, prop.id, 'id')) {
+            items.push(prop);
+          }
+        }
+      }
+    }
+    return items;
+  }
   getPSCsByVehicle(vehicle: string): any[] {
     let items: any[] = [];
     const abr = vehicle.substr(0, 3);
     items = this.items.filter(pscs => pscs.vehicle_id.indexOf(abr) !== -1);
     return items;
   }
-
   buildItemsByVehicle(obj: any[]) {
     const pscs = [];
     for (const pool of obj) {
