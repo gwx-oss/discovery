@@ -320,9 +320,6 @@ export class FiltersComponent implements OnInit {
   getPscsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
     return this.filterPscComponent.getPscsByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
   }
-  getPscsByServiceCategories(serviceCategories: any[]) {
-    return this.filterPscComponent.getPscsByServiceCategories(serviceCategories);
-  }
   setKeywordsByServiceCategories(serviceCategories: any[]) {
     this.filterKeywordsComponent.setKeywordsByServiceCategories(serviceCategories);
   }
@@ -358,9 +355,6 @@ export class FiltersComponent implements OnInit {
   }
   setNaicsByServiceCategories(serviceCategories: any[]) {
     this.filterNaicsComponent.setNaicsByServiceCategories(serviceCategories);
-  }
-  getNaicsByServiceCategories(serviceCategories: any[]) {
-    return this.filterNaicsComponent.getNaicsByServiceCategories(serviceCategories);
   }
   getNaicsByServiceCategoriesAndVehicle(serviceCategories: any[], vehicleId: string) {
     return this.filterNaicsComponent.getNaicsByServiceCategoriesAndVehicle(serviceCategories, vehicleId);
