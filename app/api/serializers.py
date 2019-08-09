@@ -7,6 +7,7 @@ from vendors import models as vendors
 from contracts import models as contracts
 
 import os
+import logging
 
 capabilitiesUrls = {}
 
@@ -383,6 +384,7 @@ class ContactSerializer(ModelSerializer):
 
 
 class BasePoolMembershipSerializer(ModelSerializer):
+    logger = logging.getLogger('django')
     capability_statement = SerializerMethodField()
     contacts = SerializerMethodField()
     
@@ -400,6 +402,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
                     tokens = row.split("=")
                     capabilitiesUrls[tokens[0]] = tokens[1]
                 capabilities.close()
+            self.logger.error("capabilities loaded {} ".format(capabilities))    
 
     def get_capabilities(self, vehicle, duns):
         self.load_capabilities(vehicle)
