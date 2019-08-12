@@ -254,5 +254,4 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
       }
     });
   }
-  }
 }
