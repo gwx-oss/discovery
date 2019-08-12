@@ -60,6 +60,7 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.items.length > 1) {
+      this.resetKeyword();
       this.setKeywords();
     }
   }
@@ -77,7 +78,7 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
           this.addItem(id);
         }
         /** Open accordion */
-        this.opened = true;        
+        this.opened = true;
       }
      /** Check if there are selected vehicles
      *  and sort dropdown based on vehicle id
@@ -171,7 +172,7 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
     }
   }
   addKeyword(itemId) {
-  
+
     this.items_selected = [];
     if (itemId === '0') {
       this.reset();
@@ -235,5 +236,23 @@ export class FilterKeywordsComponent  implements OnInit, OnChanges {
       this.emitClearedSelected.emit(true);
     }
     this.emmitSelected.emit(0);
+  }
+  resetKeyword() {
+    $('body').on('mouseleave','.select2-results',function(){
+      $(this).find('.select2-results__option').each(function(i,v){$(v).removeClass('select2-results__option--highlighted')});
+    });
+    $('body').on('click','#select2-filter-keywords-input-container,.select2-selection__arrow',function(){
+      if($('#select2-filter-keywords-input-container').text() == 'Select Keywords'){
+        $('#select2-filter-keywords-input-results .select2-results__option').each(function(i,ele){
+            if($(ele).text() == 'Select Keywords'){
+              $(ele).attr('aria-selected',true).addClass('select2-results__option--highlighted');
+            }else{
+              $(ele).attr('aria-selected',false).removeClass('select2-results__option--highlighted');
+            }
+        });
+        $('.select2-results__options').scrollTop(0,0);
+      }
+    });
+  }
   }
 }
