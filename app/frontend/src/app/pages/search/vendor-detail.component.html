@@ -163,6 +163,12 @@
                               </li>
                             </ul>
                           </div>
+                          <div class="pad-top" *ngIf="item?.capability && item.capability !== ''">
+                            <span class="uppercase db" >Capability Statement: </span>
+                            <div class="pad-left">
+                              <a href="{{item.capability}}" target="_blank" >Open</a>
+                            </div>
+                          </div>
                           <div class="other-info" [class.hide]="!more_info">
                             <div class="pad-top">
                               <span class="uppercase db">Contact info: </span>
@@ -170,19 +176,6 @@
                                 class="pad-left"
                                 [innerHTML]="getContactInfo(item.contacts)"
                               ></div>
-                            </div>
-                            <div
-                              class="pad-top"
-                              *ngIf="item?.capability && item.capability !== ''"
-                            >
-                              <span class="uppercase db"
-                                >Capability Statement:
-                              </span>
-                              <div class="pad-left">
-                                <a href="{{item.capability}}" target="_blank"
-                                  >Open</a
-                                >
-                              </div>
                             </div>
                             <div class="pad-top">
                               <span class="uppercase db"
