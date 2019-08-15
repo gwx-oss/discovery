@@ -234,7 +234,11 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   }
   returnSetAside(arr: any[], code: string): boolean {
     if (arr.length > 0) {
-      return arr.includes(code);
+      if (arr.indexOf(code) >= 0){
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
