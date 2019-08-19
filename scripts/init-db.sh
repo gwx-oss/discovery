@@ -23,6 +23,8 @@ fi
 #run application setup commands
 
 echo "> Migrating Django database structure" | tee -a "$LOG_FILE"
+#python3 manage.py migrate --fake categories  --noinput >>"$LOG_FILE" 2>&1
+#python3 manage.py migrate --fake vendors  --noinput >>"$LOG_FILE" 2>&1
 python3 manage.py migrate --noinput >>"$LOG_FILE" 2>&1
 
 echo "> Ensuring Django cache table" | tee -a "$LOG_FILE"
