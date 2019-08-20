@@ -204,11 +204,22 @@ export class TblVendorsComponent implements OnInit, OnChanges {
       }
     }
   }
+  hideLoader() {
+    setTimeout(() => {
+      if(/*@cc_on!@*/false || !!document.DOCUMENT_NODE){
+        if($('.overlay').hasClass('show')){
+          $('discovery-search-spinner').attr('ng-reflect-show','false');
+          $('.overlay').removeClass('show').addClass('hide');
+        }
+      }
+    }, 5000);
+  }
   showVendorDetails(duns: string) {
     this.router.navigate(['/search'], {
       queryParams: { duns: duns },
       queryParamsHandling: 'merge'
     });
+    this.hideLoader(); 
     this.emitDuns.emit(duns);
   }
   prevPage() {
