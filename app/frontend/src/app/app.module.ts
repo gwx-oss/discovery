@@ -16,7 +16,6 @@ import { Error404Component } from './pages/error404/error404.component';
 import { SearchModule } from './pages/search/search.module';
 import { ContractsComponent } from './pages/contracts/contracts.component';
 import { ErmComponent } from './pages/contract-vehicles/erm.component';
-import * as $ from 'jquery';
 @NgModule({
   declarations: [
     AppComponent,
