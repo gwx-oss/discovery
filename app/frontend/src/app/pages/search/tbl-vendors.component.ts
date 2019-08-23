@@ -280,9 +280,14 @@ export class TblVendorsComponent implements OnInit, OnChanges {
         }
       }
       vendor['setasides'] = [];
+      vendor['setasidesByPool'] = {};
       for (const pool of item.pools) {
+        if(!vendor['setasidesByPool'][pool.pool.id]) {
+          vendor['setasidesByPool'][pool.pool.id] = [];
+        }
         pools_ids_arr.push(pool.pool.id);
         for (const aside of pool.setasides) {
+        
           if (
             !this.searchService.existsIn(
               vendor['setasides'],
@@ -292,6 +297,16 @@ export class TblVendorsComponent implements OnInit, OnChanges {
             this.vehicle === pool.pool.vehicle.id
           ) {
             vendor['setasides'].push(aside['code']);
+          }
+          if (
+            !this.searchService.existsIn(
+              vendor['setasidesByPool'][pool.pool.id],
+              aside['code'],
+              ''
+            ) &&
+            this.vehicle === pool.pool.vehicle.id
+          ) {
+            vendor['setasidesByPool'][pool.pool.id].push(aside['code']);
           }
         }
       }
@@ -342,10 +357,26 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     return start + ' - ' + end;
   }
 
-  returnSetAside(arr: any[], code: string): boolean {
+  isExist(arr: any, code: string): boolean {
     if (arr.length > 0) {
       return (arr.indexOf(code) >= 0) ? true : false;
     } else {
+      return false;
+    }
+  }
+  returnSetAside(item: any, code: string): boolean {
+    if(this.service_categories_selected.length === 0) {
+      return this.isExist(item.setasides, code);
+    } else if(this.service_categories_selected.length === 1) {
+      const setAsides = item.setasidesByPool[this.service_categories_selected[0].value];
+      return this.isExist(setAsides, code);
+    } else {
+      for(const serviceCategory of this.service_categories_selected) {
+        const setAsides = item.setasidesByPool[serviceCategory.value];
+        if(this.isExist(setAsides, code)) {
+          return true;
+        }
+      }
       return false;
     }
   }
