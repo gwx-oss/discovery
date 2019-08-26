@@ -94,75 +94,139 @@
                       <tr>
                         <!-- <th></th> -->
                         <th scope="col">Contract Membership</th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
-                          <span class="tooltip"
-                            >SB<span class="tooltiptext"
-                              >Small Business</span
-                            ></span
-                          >
-                        </th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
-                          <span class="tooltip"
-                            >SDB<span class="tooltiptext"
-                              >Small Disadvantaged Business</span
-                            ></span
-                          >
-                        </th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
-                          <span class="tooltip"
-                            >8(A)<span class="tooltiptext">8(A)</span></span
-                          >
-                        </th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
-                          <span class="tooltip"
-                            >HubZ<span class="tooltiptext">HUBZone</span></span
-                          >
-                        </th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
-                          <span class="tooltip"
-                            >WO<span class="tooltiptext"
-                              >Woman Owned</span
-                            ></span
-                          >
-                        </th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
-                          <span class="tooltip"
-                            >VO<span class="tooltiptext"
-                              >Veteran Owned</span
-                            ></span
-                          >
-                        </th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
-                          <span class="tooltip"
-                            >SDVO<span class="tooltiptext"
-                              >Service Disabled Veteran Owned</span
-                            ></span
-                          >
-                        </th>
-                        <th scope="col" [class.hide]="!sbd_col" class="sbd">
-                          <span class="tooltip left"
-                            >VA VIP<span class="tooltiptext"
-                              >Veterans Affair VIP</span
-                            ></span
-                          >
-                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of vendor.pools; let i = index">
-                        <td scope="row">
+                        <td>
                           <strong
-                            class="db"
                             [innerHTML]="getVehicleDescription(item.vehicle_id)"
                           ></strong>
                           <div class="pad-top">
-                            <span class="uppercase db">Contract Numbers: </span>
-                            <ul class="ul-no-bullets pad-left">
-                              <li *ngFor="let p of item.piids">
-                                <strong>{{ p.piid }}</strong>
-                              </li>
-                            </ul>
-                          </div>
+                              <table class="usa-table-borderless">
+                                    <tr>
+                                      <th>Contract Numbers: </th>
+                                      <th  [class.hide]="!sbd_col">
+                                          <span class="tooltip"
+                                            >SB<span class="tooltiptext"
+                                              >Small Business</span
+                                            ></span
+                                          >
+                                        </th>
+                                        <th [class.hide]="!sbd_col" >
+                                          <span class="tooltip"
+                                            >SDB<span class="tooltiptext"
+                                              >Small Disadvantaged Business</span
+                                            ></span
+                                          >
+                                        </th>
+                                        <th  [class.hide]="!sbd_col" >
+                                          <span class="tooltip"
+                                            >8(A)<span class="tooltiptext">8(A)</span></span
+                                          >
+                                        </th>
+                                        <th  [class.hide]="!sbd_col" >
+                                          <span class="tooltip"
+                                            >HubZ<span class="tooltiptext">HUBZone</span></span
+                                          >
+                                        </th>
+                                        <th  [class.hide]="!sbd_col">
+                                          <span class="tooltip"
+                                            >WO<span class="tooltiptext"
+                                              >Woman Owned</span
+                                            ></span
+                                          >
+                                        </th>
+                                        <th [class.hide]="!sbd_col" >
+                                          <span class="tooltip"
+                                            >VO<span class="tooltiptext"
+                                              >Veteran Owned</span
+                                            ></span
+                                          >
+                                        </th>
+                                        <th [class.hide]="!sbd_col" >
+                                          <span class="tooltip"
+                                            >SDVO<span class="tooltiptext"
+                                              >Service Disabled Veteran Owned</span
+                                            ></span
+                                          >
+                                        </th>
+                                        <th  [class.hide]="!sbd_col" >
+                                          <span class="tooltip left"
+                                            >VA VIP<span class="tooltiptext"
+                                              >Veterans Affair VIP</span
+                                            ></span
+                                          >
+                                        </th>
+                                      </tr>
+                                    
+                                   <tbody>
+                                  
+                                      <tr *ngFor="let p of item.piids">
+                                        <td><strong> - {{ p.piid }}</strong></td>
+                                        <td
+                                        [class.hide]="!sbd_col"
+                                        class="sbd"
+                                        [innerHtml]="
+                                          returnSetAside(item.setasides, 'SB') ? '&bull;' : ''
+                                        "
+                                      ></td>
+                                      <td
+                                        [class.hide]="!sbd_col"
+                                        class="sbd"
+                                        [innerHtml]="
+                                          returnSetAside(item.setasides, '27') ? '&bull;' : ''
+                                        "
+                                      ></td>
+                                      <td
+                                        [class.hide]="!sbd_col"
+                                        class="sbd"
+                                        [innerHtml]="
+                                          returnSetAside(item.setasides, 'A6') ? '&bull;' : ''
+                                        "
+                                      ></td>
+                                      <td
+                                        [class.hide]="!sbd_col"
+                                        class="sbd"
+                                      [innerHtml]="
+                                        returnSetAside(item.setasides, 'XX') ? '&bull;' : ''
+                                      "
+                                    ></td>
+                                    <td
+                                      [class.hide]="!sbd_col"
+                                      class="sbd"
+                                      [innerHtml]="
+                                        returnSetAside(item.setasides, 'A2') ? '&bull;' : ''
+                                      "
+                                    ></td>
+                                    <td
+                                      [class.hide]="!sbd_col"
+                                      class="sbd"
+                                      [innerHtml]="
+                                        returnSetAside(item.setasides, 'A5') ? '&bull;' : ''
+                                      "
+                                    ></td>
+                                    <td
+                                      [class.hide]="!sbd_col"
+                                      class="sbd"
+                                      [innerHtml]="
+                                        returnSetAside(item.setasides, 'QF') ? '&bull;' : ''
+                                      "
+                                    ></td>
+                                    <td
+                                      [class.hide]="!sbd_col"
+                                      class="sbd"
+                                      [innerHtml]="
+                                        returnSetAside(item.setasides, 'VIP')
+                                          ? '&bull;'
+                                          : '                          '
+                                      "
+                                    ></td>
+                                    </tr>      
+                                  </tbody> 
+                              </table>
+                          </div>    
+              
                           <div class="pad-top" *ngIf="item?.capability && item.capability !== ''">
                             <span class="uppercase db" >Capability Statement: </span>
                             <div class="pad-left">
@@ -213,65 +277,6 @@
                             </div>
                           </div>
                         </td>
-
-                        <td
-                          [class.hide]="!sbd_col"
-                          class="sbd"
-                          [innerHtml]="
-                            returnSetAside(item.setasides, 'SB') ? '&bull;' : ''
-                          "
-                        ></td>
-                        <td
-                          [class.hide]="!sbd_col"
-                          class="sbd"
-                          [innerHtml]="
-                            returnSetAside(item.setasides, '27') ? '&bull;' : ''
-                          "
-                        ></td>
-                        <td
-                          [class.hide]="!sbd_col"
-                          class="sbd"
-                          [innerHtml]="
-                            returnSetAside(item.setasides, 'A6') ? '&bull;' : ''
-                          "
-                        ></td>
-                        <td
-                          [class.hide]="!sbd_col"
-                          class="sbd"
-                          [innerHtml]="
-                            returnSetAside(item.setasides, 'XX') ? '&bull;' : ''
-                          "
-                        ></td>
-                        <td
-                          [class.hide]="!sbd_col"
-                          class="sbd"
-                          [innerHtml]="
-                            returnSetAside(item.setasides, 'A2') ? '&bull;' : ''
-                          "
-                        ></td>
-                        <td
-                          [class.hide]="!sbd_col"
-                          class="sbd"
-                          [innerHtml]="
-                            returnSetAside(item.setasides, 'A5') ? '&bull;' : ''
-                          "
-                        ></td>
-                        <td
-                          [class.hide]="!sbd_col"
-                          class="sbd"
-                          [innerHtml]="
-                            returnSetAside(item.setasides, 'QF') ? '&bull;' : ''
-                          "
-                        ></td>
-                        <td
-                          [class.hide]="!sbd_col"
-                          class="sbd"
-                          [innerHtml]="
-                            returnSetAside(item.setasides, 'VIP')
-                              ? '&bull;'
-                              : ''
-                          "
-                        ></td>
                       </tr>
                     </tbody>
                   </table>
