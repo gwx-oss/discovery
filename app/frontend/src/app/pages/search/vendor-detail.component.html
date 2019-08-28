@@ -90,12 +90,6 @@
                     {{ !sbd_col ? 'Show' : 'Hide' }} Small Business Designation
                   </button>
                   <table class="usa-table-borderless">
-                    <thead>
-                      <tr>
-                        <!-- <th></th> -->
-                        <th scope="col">Contract Membership</th>
-                      </tr>
-                    </thead>
                     <tbody>
                       <tr *ngFor="let item of vendor.pools; let i = index">
                         <td>
@@ -103,9 +97,9 @@
                             [innerHTML]="getVehicleDescription(item.vehicle_id)"
                           ></strong>
                           <div class="pad-top">
-                              <table class="usa-table-borderless">
+                              <table>
                                     <tr>
-                                      <th>Contract Numbers: </th>
+                                      <th>Contract Membership: </th>
                                       <th  [class.hide]="!sbd_col">
                                           <span class="tooltip"
                                             >SB<span class="tooltiptext"
@@ -159,65 +153,66 @@
                                           >
                                         </th>
                                       </tr>
-                                    
                                    <tbody>
-                                  
-                                      <tr *ngFor="let p of item.piids">
+                                    <tr>
+                                      <td>Contract Numbers:	</td>
+                                    </tr>  
+                                    <tr *ngFor="let p of item.piids">
                                         <td><strong> - {{ p.piid }}</strong></td>
                                         <td
                                         [class.hide]="!sbd_col"
                                         class="sbd"
                                         [innerHtml]="
-                                          returnSetAside(item.setasides, 'SB') ? '&bull;' : ''
+                                          returnSetAside(item, p, 'SB') ? '&bull;' : ''
                                         "
                                       ></td>
                                       <td
                                         [class.hide]="!sbd_col"
                                         class="sbd"
                                         [innerHtml]="
-                                          returnSetAside(item.setasides, '27') ? '&bull;' : ''
+                                          returnSetAside(item, p, '27') ? '&bull;' : ''
                                         "
                                       ></td>
                                       <td
                                         [class.hide]="!sbd_col"
                                         class="sbd"
                                         [innerHtml]="
-                                          returnSetAside(item.setasides, 'A6') ? '&bull;' : ''
+                                          returnSetAside(item, p, 'A6') ? '&bull;' : ''
                                         "
                                       ></td>
                                       <td
                                         [class.hide]="!sbd_col"
                                         class="sbd"
                                       [innerHtml]="
-                                        returnSetAside(item.setasides, 'XX') ? '&bull;' : ''
+                                        returnSetAside(item, p, 'XX') ? '&bull;' : ''
                                       "
                                     ></td>
                                     <td
                                       [class.hide]="!sbd_col"
                                       class="sbd"
                                       [innerHtml]="
-                                        returnSetAside(item.setasides, 'A2') ? '&bull;' : ''
+                                        returnSetAside(item, p, 'A2') ? '&bull;' : ''
                                       "
                                     ></td>
                                     <td
                                       [class.hide]="!sbd_col"
                                       class="sbd"
                                       [innerHtml]="
-                                        returnSetAside(item.setasides, 'A5') ? '&bull;' : ''
+                                        returnSetAside(item, p, 'A5') ? '&bull;' : ''
                                       "
                                     ></td>
                                     <td
                                       [class.hide]="!sbd_col"
                                       class="sbd"
                                       [innerHtml]="
-                                        returnSetAside(item.setasides, 'QF') ? '&bull;' : ''
+                                        returnSetAside(item, p, 'QF') ? '&bull;' : ''
                                       "
                                     ></td>
                                     <td
                                       [class.hide]="!sbd_col"
                                       class="sbd"
                                       [innerHtml]="
-                                        returnSetAside(item.setasides, 'VIP')
+                                        returnSetAside(item, p, 'VIP')
                                           ? '&bull;'
                                           : '                          '
                                       "
