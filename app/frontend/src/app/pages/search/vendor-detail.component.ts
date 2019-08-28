@@ -180,6 +180,8 @@ export class VendorDetailComponent implements OnInit, OnChanges {
         vehicle['vehicle_id'] = item.pool.vehicle.id;
         vehicle['contacts'] = item.contacts;
         vehicle['piids'] = [{ piid: item.piid }];
+        vehicle['piidsByContract'] = {};
+        vehicle['piidsByContract'][item.piid] = [];
         vehicle['service_categories'] = [{ pool_id: item.pool.id }];
         vehicle['capability'] = item.capability_statement;
         vehicle['setasides'] = [];
@@ -189,6 +191,9 @@ export class VendorDetailComponent implements OnInit, OnChanges {
       }
       for (const v of vehicles) {
         if (v.vehicle_id === item.pool.vehicle.id) {
+          if(!v['piidsByContract'][item.piid]) {
+            v['piidsByContract'][item.piid] = [];
+          }
           if (!this.searchService.existsIn(v['piids'], item.piid, 'piid')) {
             v['piids'].push({ piid: item.piid });
           }
@@ -206,6 +211,11 @@ export class VendorDetailComponent implements OnInit, OnChanges {
               !this.searchService.existsIn(v['setasides'], aside['code'], '')
             ) {
               v['setasides'].push(aside['code']);
+            }
+            if (
+              !this.searchService.existsIn(v['piidsByContract'][item.piid], aside['code'], '')
+            ) {
+              v['piidsByContract'][item.piid].push(aside['code']);
             }
           }
           for (const zone of item.zones) {
@@ -232,8 +242,9 @@ export class VendorDetailComponent implements OnInit, OnChanges {
       }
     }
   }
-  returnSetAside(arr: any[], code: string): boolean {
-    if (arr.length > 0) {
+  returnSetAside(item: any, p: any, code: string): boolean {
+    if (item.setasides.length > 0) {
+      const arr = item.piidsByContract[p.piid]; 
       if (arr.indexOf(code) >= 0){
         return true;
       } else {
