@@ -99,7 +99,7 @@
                           <div class="pad-top">
                               <table>
                                     <tr>
-                                      <th>Contract Membership: </th>
+                                      <th>Contract Membership </th>
                                       <th  [class.hide]="!sbd_col">
                                           <span class="tooltip"
                                             >SB<span class="tooltiptext"
@@ -155,10 +155,10 @@
                                       </tr>
                                    <tbody>
                                     <tr>
-                                      <td>Contract Numbers:	</td>
+                                      <td><span class="uppercase db">Contract Numbers: </span></td>
                                     </tr>  
                                     <tr *ngFor="let p of item.piids">
-                                        <td><strong> - {{ p.piid }}</strong></td>
+                                        <td><strong> - {{ p.piid }} </strong></td>
                                         <td
                                         [class.hide]="!sbd_col"
                                         class="sbd"
