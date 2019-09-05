@@ -44,6 +44,7 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   zindex = 30;
   loading = false;
   duns_number;
+  sbdByContract:boolean = false; 
   constructor(private searchService: SearchService, private router: Router) {}
   ngOnInit() {}
   ngOnChanges() {
@@ -155,8 +156,8 @@ export class VendorDetailComponent implements OnInit, OnChanges {
     }
     return states;
   }
-  toggleSBD() {
-    this.sbd_col = !this.sbd_col;
+  toggleSBDsByContract() {
+    this.sbdByContract = !this.sbdByContract;
   }
   toggleMoreInfo() {
     this.more_info = !this.more_info;
@@ -242,9 +243,25 @@ export class VendorDetailComponent implements OnInit, OnChanges {
       }
     }
   }
-  returnSetAside(item: any, p: any, code: string): boolean {
+  returnSetAside(arr: any[], code: string): boolean {
+    if (arr.length > 0) {
+      if (arr.indexOf(code) >= 0){
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+  returnSetAsideByContract(item: any, p: any, code: string): boolean {
     if (item.setasides.length > 0) {
-      const arr = item.piidsByContract[p.piid]; 
+      let arr = []; 
+      if(this.sbdByContract) {
+        arr = item.piidsByContract[p.piid]; 
+      } else {
+        arr = item.setasides; 
+      }
       if (arr.indexOf(code) >= 0){
         return true;
       } else {
