@@ -373,7 +373,7 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     } else {
       for(const serviceCategory of this.service_categories_selected) {
         const setAsides = item.setasidesByPool[serviceCategory.value];
-        if(this.isExist(setAsides, code)) {
+        if(setAsides && this.isExist(setAsides, code)) {
           return true;
         }
       }
