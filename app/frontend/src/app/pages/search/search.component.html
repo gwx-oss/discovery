@@ -442,6 +442,7 @@
                                 >
                                   <input
                                     id="r-{{vehicle.id}}"
+                                    (change)="updatechangedVehicleOption(vehicle.id)"
                                     type="radio"
                                     [checked]="i === 0"
                                     [(ngModel)]="sort_by"
@@ -464,6 +465,7 @@
                               service_categories_selected
                             "
                             [total_vendors]="vehicle_vendors_total"
+                            [selected_vehicle]="changedVehicleOption"
                             [obligated_amounts_list]="obligated_amounts_list"
                             [vehicle]="sort_by"
                             (emitNoResults)="noResults($event)"

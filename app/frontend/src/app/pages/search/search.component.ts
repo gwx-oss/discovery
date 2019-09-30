@@ -50,6 +50,7 @@ export class SearchComponent implements OnInit {
   obligated_amounts_list: any = [];
   agency_performance_list: any = [];
   vehicle_vendors_total: number;
+  changedVehicleOption:string = "BMO_SB";
   more_info = false;
   interval;
   int_vehicles;
@@ -273,6 +274,9 @@ export class SearchComponent implements OnInit {
     this.service_categories_selected = this.returnSelectedServiceCategories(
       filters
     );
+
+    // console.log(this.searchService.activeFilters);
+
     this.searchService
       .getVehiclesToCompare(this.searchService.activeFilters)
       .subscribe(
@@ -329,6 +333,11 @@ export class SearchComponent implements OnInit {
         }
       );
   }
+
+  updatechangedVehicleOption(newVehicle){
+    this.changedVehicleOption = newVehicle;
+  }
+
   noResults() {
     this.spinner = false;
     this.show_results = true;
@@ -356,6 +365,8 @@ export class SearchComponent implements OnInit {
         params +=
           '&setasides=' +
           this.searchService.getSelectedFilterList(filter['selected'], ',');
+
+        //params += '&vehicles=' + this.searchService.getSelectedFilterList(filter['selected'], ',');
       }
       if (filter['name'] === 'naics') {
         params +=

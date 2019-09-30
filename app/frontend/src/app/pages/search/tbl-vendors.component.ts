@@ -24,6 +24,8 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   @Input()
   total_vendors: number;
   @Input()
+  selected_vehicle: string;
+  @Input()
   service_categories_selected: any[] = [];
   @Input()
   params: string;
@@ -65,12 +67,23 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
   ngOnChanges() {
     if (this.vehicle) {
       this.current_page = 1;
       this.filters = this.setOnlyVehicleSelected(this.vehicle);
       this.getVendors(this.current_page);
+    }
+    if(this.selected_vehicle != "") {
+      if( this.params.indexOf('vehicle') == -1 ) {
+        this.params += "&vehicles="+this.selected_vehicle
+      } else {
+        //Replacing the value of vechicle alone
+        let vehicle_index = this.params.indexOf('vehicles=');
+        this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
+      }      
     }
   }
   showSpinner(bool: boolean) {
