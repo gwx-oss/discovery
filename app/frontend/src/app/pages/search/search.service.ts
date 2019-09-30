@@ -11,8 +11,8 @@ declare const $: any;
   providedIn: 'root'
 })
 export class SearchService {
-  // rivate apiUrl = API_HOST + '/api/';
-  private apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
+  private apiUrl = API_HOST;
+  // private apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
   _pools;
   _keywords;
   _active_filters: any[];
