@@ -26,8 +26,8 @@ PROJ_DIR = os.path.dirname(BASE_DIR)
 #
 # API settings
 #
-#API_HOST = config_value('API_HOST', '')
-API_HOST = "https://api.gsa.gov/acquisition/discovery/v2/"
+API_HOST = config_value('API_HOST', '')
+
 SAM_API_URL = "https://api.data.gov/sam/v8/registrations/"
 SAM_API_KEY = config_value('SAM_API_KEY', '')
 

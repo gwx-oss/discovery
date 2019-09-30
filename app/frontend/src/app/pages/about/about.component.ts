@@ -12,10 +12,11 @@ export class AboutComponent implements OnInit {
   loading = true;
   error_message;
   constructor(private httpClient: HttpClient) {}
-  
+  private apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
+
   ngOnInit() {
     this.httpClient
-      .get(API_HOST + '/api/metadata?api_key=DEMO_KEY')
+      .get(this.apiUrl + '/api/metadata?api_key=DEMO_KEY')
       .subscribe(data => {
         this.loading = false;
         this.sam_load_date = data['sam_load_date'];
