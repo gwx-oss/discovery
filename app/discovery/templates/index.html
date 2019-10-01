@@ -7,8 +7,7 @@
     <base href="/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" 
-      content="default-src 'self' https://api.gsa.gov; script-src 'self' https://api.gsa.gov 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src='self' https://api.gsa.gov">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.gsa.gov">
     <link rel="icon" type="image/x-icon" href="{% static 'frontend/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'frontend/assets/uswds/css/uswds.min.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/styles.css' %}">
