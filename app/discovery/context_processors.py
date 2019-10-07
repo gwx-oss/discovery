@@ -12,5 +12,5 @@ def google_analytics(request):
     }
 def api_key(request):
     return { 
-        "API_KEY": settings.API_KEY
+        "API_KEY": settings.SAM_API_KEY
     }
