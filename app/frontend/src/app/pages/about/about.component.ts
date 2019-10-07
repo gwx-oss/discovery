@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SearchService } from '../search/search.service';
 declare let API_HOST: string;
 // declare let $: any;
 @Component({
@@ -11,12 +12,15 @@ export class AboutComponent implements OnInit {
   fpds_load_date;
   loading = true;
   error_message;
-  constructor(private httpClient: HttpClient) {}
-  private apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
+  constructor(private httpClient: HttpClient,  private searchService: SearchService) {}
 
   ngOnInit() {
-    this.httpClient
-      .get(this.apiUrl + '/api/metadata?api_key=DEMO_KEY')
+    let apiUrl = API_HOST + '/api/metadata/';
+    if(API_HOST.indexOf('localhost') === -1) {
+      apiUrl = this.searchService.getAPIUrl();
+    } 
+    
+    this.httpClient.get(apiUrl)
       .subscribe(data => {
         this.loading = false;
         this.sam_load_date = data['sam_load_date'];
