@@ -6,12 +6,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { stringify } from '@angular/compiler/src/util';
 declare let API_HOST: string;
+declare let API_KEY: string;
 declare const $: any;
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService implements OnInit {
-  private apiUrl = API_HOST + '/api/';
+export class SearchService  {
+  private apiUrl: string;
   _pools;
   _keywords;
   _active_filters: any[];
@@ -28,20 +29,20 @@ export class SearchService implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  setApiUrl() {
     this.apiUrl = this.getAPIUrl();
-    console.log('url here' + this.apiUrl);
   }
-  
+
   getAPIUrl() {
     let apiUrl : string = '';
     if(API_HOST.indexOf('discovery.gsa.gov') !== -1) {
       console.log('making prod url');
       apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
+    } else if(API_HOST.indexOf('localhost') !== -1) {
+      apiUrl = API_HOST + '/api/';
     } else {
       console.log('making dev url');
-      apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
-      // apiUrl = 'https://api.gsa.gov/acquisition/discovery/DEV/v2/';
+      apiUrl = 'https://api.gsa.gov/acquisition/discovery/DEV/v2/';
     }
     return apiUrl;
   }
@@ -314,9 +315,9 @@ export class SearchService implements OnInit {
       return url;
     }
     if(url.indexOf('?') !== -1) {
-      url = url + '&api_key=rNQkSmMrU3ZP6f1nR7smMBt1ABpGpXkij1hvzY0z';
+      url = url + '&api_key=' + API_KEY;
     } else {
-      url = url + '?api_key=rNQkSmMrU3ZP6f1nR7smMBt1ABpGpXkij1hvzY0z';
+      url = url + '?api_key=' + API_KEY;
     }
     return url;
   }

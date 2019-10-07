@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SearchService } from '../search/search.service';
 declare let API_HOST: string;
+declare let API_KEY: string;
 // declare let $: any;
 @Component({
   templateUrl: './about.component.html',
@@ -17,8 +18,8 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
     let apiUrl = API_HOST + '/api/metadata/';
     if(API_HOST.indexOf('localhost') === -1) {
-      apiUrl = this.searchService.getAPIUrl();
-    } 
+      apiUrl = this.searchService.getAPIUrl() + 'api/metadata?API_KEY=' + API_KEY;
+    }
     
     this.httpClient.get(apiUrl)
       .subscribe(data => {
