@@ -170,6 +170,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'discovery.context_processors.api_host',
                 'discovery.context_processors.google_analytics',
+                'discovery.context_processors.sam_api_key',
             ],
         },
     },

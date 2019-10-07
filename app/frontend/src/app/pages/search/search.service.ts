@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { stringify } from '@angular/compiler/src/util';
 declare let API_HOST: string;
-declare let API_KEY: string;
+declare let SAM_API_KEY: string;
 declare const $: any;
 @Injectable({
   providedIn: 'root'
@@ -315,9 +315,9 @@ export class SearchService  {
       return url;
     }
     if(url.indexOf('?') !== -1) {
-      url = url + '&api_key=' + API_KEY;
+      url = url + '&api_key=' + SAM_API_KEY;
     } else {
-      url = url + '?api_key=' + API_KEY;
+      url = url + '?api_key=' + SAM_API_KEY;
     }
     return url;
   }
