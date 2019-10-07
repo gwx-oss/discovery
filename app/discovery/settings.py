@@ -31,6 +31,7 @@ API_HOST = config_value('API_HOST', '')
 SAM_API_URL = "https://api.data.gov/sam/v8/registrations/"
 SAM_API_KEY = config_value('SAM_API_KEY', '')
 
+API_KEY = config_value('SAM_API_KEY', 'PxiWZDETd2WFl9cSHsAfymJwtL52EUtfqppH6eCW')
 #
 # Discovery related settings
 #
