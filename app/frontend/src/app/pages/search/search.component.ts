@@ -50,7 +50,8 @@ export class SearchComponent implements OnInit {
   obligated_amounts_list: any = [];
   agency_performance_list: any = [];
   vehicle_vendors_total: number;
-  changedVehicleOption:string = "BMO_SB";
+  changedVehicleOption:string = "";
+  isVehiclechanged:number = 0;
   more_info = false;
   interval;
   int_vehicles;
@@ -336,6 +337,7 @@ export class SearchComponent implements OnInit {
 
   updatechangedVehicleOption(newVehicle){
     this.changedVehicleOption = newVehicle;
+    this.isVehiclechanged = 1;
   }
 
   noResults() {
