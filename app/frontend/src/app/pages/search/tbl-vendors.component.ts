@@ -26,6 +26,8 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   @Input()
   selected_vehicle: string;
   @Input()
+  isVehiclechanged: number;
+  @Input()
   service_categories_selected: any[] = [];
   @Input()
   params: string;
@@ -76,14 +78,20 @@ export class TblVendorsComponent implements OnInit, OnChanges {
       this.filters = this.setOnlyVehicleSelected(this.vehicle);
       this.getVendors(this.current_page);
     }
-    if(this.selected_vehicle != "") {
-      if( this.params.indexOf('vehicle') == -1 ) {
-        this.params += "&vehicles="+this.selected_vehicle
-      } else {
-        //Replacing the value of vechicle alone
-        let vehicle_index = this.params.indexOf('vehicles=');
-        this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
-      }      
+    if(this.selected_vehicle != "" ) {
+      if (this.isVehiclechanged == 1){ //if the vehicle radio button list changed
+        if( this.params.indexOf('vehicle') == -1 ) {
+          this.params += "&vehicles="+this.selected_vehicle
+        } else {
+          //Replacing the value of vechicle alone
+          let vehicle_index = this.params.indexOf('vehicles=');
+          this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
+        } 
+      }else{
+        this.params = "&vehicles="+this.selected_vehicle
+          // let vehicle_index = this.params.indexOf('vehicles=');
+          // this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
+      }
     }
   }
   showSpinner(bool: boolean) {

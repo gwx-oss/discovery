@@ -72,7 +72,6 @@ class VendorCSV(BaseCSVView):
         
         self.states_param = 'states'
         self.states = []
-        
         # Queries
         self.setaside_data = categories.SetAside.objects.all().order_by('far_order')
         self.pool_data = categories.Pool.objects.all().distinct()
@@ -291,12 +290,14 @@ class VendorCSV(BaseCSVView):
     def _render_vendors(self, writer):
         labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'No. of Contracts', 'Vehicles']
         labels.extend([sa_obj.name for sa_obj in self.setaside_data])
+        labels.append("Selected Vehicle")
         writer.writerow(labels)
         
         for vendor in self.vendor_data.iterator():
             setaside_list = []
-            v_pools = vendor.pools.all()
-            
+            v_pools_all = vendor.pools.all()
+            v_pools = vendor.pools.filter(pool__vehicle__id__in=self.vehicles)
+
             for sa in self.setaside_data:
                 if sa.id in v_pools.values_list('setasides', flat=True):
                     setaside_list.append('X')
@@ -323,14 +324,17 @@ class VendorCSV(BaseCSVView):
             
             vehicle_map = {}
             vendor_vehicles = []  
-            for v_pool in v_pools:
+            selected_vehicles = []
+            for v_pool in v_pools_all:
                 if v_pool.pool.vehicle.id not in vehicle_map:
                     vendor_vehicles.append(" ".join(v_pool.pool.vehicle.id.split('_')))
                     vehicle_map[v_pool.pool.vehicle.id] = True      
-            
+            if len(vendor_vehicles) > 1:
+                selected_vehicles = str(self.vehicles).replace('[', '').replace(']', '').strip("'")
             v_row = [format_duns(vendor.duns), vendor.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
             v_row.extend(setaside_list)
-            
+            if selected_vehicles:
+                v_row.append(selected_vehicles)
             writer.writerow(v_row)
 
 
@@ -359,7 +363,6 @@ class VendorCSV(BaseCSVView):
         self._process_amount(writer)
         self._process_countries(writer)
         self._process_states(writer)
-        
         self._render_vendors(writer)
         
         track_page_load(request)
