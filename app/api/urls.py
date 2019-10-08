@@ -23,6 +23,6 @@ router.register('placesofperformance', views.PlaceOfPerformanceViewSet)
 router.register('contracts', views.ContractViewSet)
 
 urlpatterns = [
-    url(r'^metadata/$', views.ListMetadataView.as_view())
+    url(r'^metadata', views.ListMetadataView.as_view())
 ]
 urlpatterns += router.urls

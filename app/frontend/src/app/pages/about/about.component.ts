@@ -16,7 +16,7 @@ export class AboutComponent implements OnInit {
   constructor(private httpClient: HttpClient,  private searchService: SearchService) {}
 
   ngOnInit() {
-    let apiUrl = API_HOST + '/api/metadata/';
+    let apiUrl = API_HOST + '/api/metadata';
     if(API_HOST.indexOf('localhost') === -1) {
       apiUrl = this.searchService.getAPIUrl() + 'api/metadata?API_KEY=' + SAM_API_KEY;
     }
