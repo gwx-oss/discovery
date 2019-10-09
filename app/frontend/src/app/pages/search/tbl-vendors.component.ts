@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { SearchService } from './search.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { IfStmt } from '@angular/compiler';
 declare const window: any;
 @Component({
   selector: 'discovery-tbl-vendors',
@@ -88,9 +89,11 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
         } 
       }else{
-        this.params = "&vehicles="+this.selected_vehicle
-          // let vehicle_index = this.params.indexOf('vehicles=');
-          // this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
+        //this.params += "&vehicles="+this.selected_vehicle
+        let vehicle_index = this.params.indexOf('vehicles=');
+        if(vehicle_index >= 0){
+          this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
+        }
       }
     }
   }
