@@ -27,7 +27,9 @@ export class SearchService  {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.setApiUrl();
+  }
 
   setApiUrl() {
     this.apiUrl = this.getAPIUrl();
