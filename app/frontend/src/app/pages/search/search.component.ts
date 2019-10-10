@@ -50,6 +50,8 @@ export class SearchComponent implements OnInit {
   obligated_amounts_list: any = [];
   agency_performance_list: any = [];
   vehicle_vendors_total: number;
+  changedVehicleOption:string = "";
+  isVehiclechanged:number = 0;
   more_info = false;
   interval;
   int_vehicles;
@@ -329,6 +331,12 @@ export class SearchComponent implements OnInit {
         }
       );
   }
+
+  updatechangedVehicleOption(newVehicle){
+    this.changedVehicleOption = newVehicle;
+    this.isVehiclechanged = 1;
+  }
+
   noResults() {
     this.spinner = false;
     this.show_results = true;
@@ -457,6 +465,7 @@ export class SearchComponent implements OnInit {
                 }
               }
             }
+            this.updatechangedVehicleOption(this.sort_by);
           },
           error => {
             this.error_message = <any>error;
