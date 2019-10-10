@@ -448,6 +448,7 @@
                                     [(ngModel)]="sort_by"
                                     name="sort_by"
                                     value="{{vehicle.id}}"
+                                    class="vehicle_list_radio_btn"
                                   />
                                   <label for="r-{{vehicle.id}}">{{
                                     vehicle.description
@@ -466,6 +467,7 @@
                             "
                             [total_vendors]="vehicle_vendors_total"
                             [selected_vehicle]="changedVehicleOption"
+                            [isVehiclechanged] = "isVehiclechanged"
                             [obligated_amounts_list]="obligated_amounts_list"
                             [vehicle]="sort_by"
                             (emitNoResults)="noResults($event)"
