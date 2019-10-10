@@ -82,6 +82,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.searchService.setApiUrl();
     /** Check to see if there are any queryparams */
     if (this.route.snapshot.queryParamMap.keys.length > 0) {
       this.spinner = true;
