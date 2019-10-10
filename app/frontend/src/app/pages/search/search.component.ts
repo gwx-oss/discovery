@@ -470,6 +470,7 @@ export class SearchComponent implements OnInit {
                 }
               }
             }
+            this.updatechangedVehicleOption(this.sort_by);
           },
           error => {
             this.error_message = <any>error;
@@ -568,7 +569,7 @@ export class SearchComponent implements OnInit {
       document.getElementById('slides-container').style.marginLeft = -w + 'px';
     }
 
-    this.showScrollTip();
+    this.showScrollTip();   
   }
   showScrollTip() {
     if (
@@ -684,6 +685,7 @@ export class SearchComponent implements OnInit {
     }
     return total;
   }
+
   // buildContractCompare() {
   //   const compare: any[] = [];
   //   this.contracts_w_no_records = [];
@@ -776,5 +778,5 @@ export class SearchComponent implements OnInit {
   }
   closeModal(id: string) {
     this.modalService.close(id);
-    }
+    }  
 }

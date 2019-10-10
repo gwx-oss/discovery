@@ -79,22 +79,20 @@ export class TblVendorsComponent implements OnInit, OnChanges {
       this.filters = this.setOnlyVehicleSelected(this.vehicle);
       this.getVendors(this.current_page);
     }
-    if(this.selected_vehicle != "" ) {
-      if (this.isVehiclechanged == 1){ //if the vehicle radio button list changed
-        if( this.params.indexOf('vehicle') == -1 ) {
-          this.params += "&vehicles="+this.selected_vehicle
-        } else {
-          //Replacing the value of vechicle alone
-          let vehicle_index = this.params.indexOf('vehicles=');
-          this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
-        } 
-      }else{
-        //this.params += "&vehicles="+this.selected_vehicle
-        let vehicle_index = this.params.indexOf('vehicles=');
-        if(vehicle_index >= 0){
-          this.params = this.params.replace(this.params.substring(vehicle_index+9), this.selected_vehicle);
+    if(this.selected_vehicle != "" && this.isVehiclechanged == 1) {
+       if(this.params.indexOf('vehicles=') != -1){
+        let param_arr = this.params.split('&');
+        let i = 0;
+        for(i=0;i<param_arr.length;i++){
+          if(param_arr[i].indexOf('vehicles=') != -1){ //changing previous/existing vehicle alone
+           let vehicle_index = param_arr[i].indexOf('vehicles=');
+           param_arr[i] = param_arr[i].replace(param_arr[i].substring(vehicle_index+9), this.selected_vehicle);
+          }
         }
-      }
+        this.params = param_arr.join('&');
+       }else{ //adding vehicle as new property
+        this.params += "&vehicles="+this.selected_vehicle;
+       }
     }
   }
   showSpinner(bool: boolean) {
