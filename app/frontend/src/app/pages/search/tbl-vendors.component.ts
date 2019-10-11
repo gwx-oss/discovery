@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { SearchService } from './search.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { IfStmt } from '@angular/compiler';
 declare const window: any;
 @Component({
   selector: 'discovery-tbl-vendors',
@@ -23,6 +24,10 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   agency_performance_list: any[] = [];
   @Input()
   total_vendors: number;
+  @Input()
+  selected_vehicle: string;
+  @Input()
+  isVehiclechanged: number;
   @Input()
   service_categories_selected: any[] = [];
   @Input()
@@ -65,13 +70,30 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
   ngOnChanges() {
     if (this.vehicle) {
       this.current_page = 1;
       this.filters = this.setOnlyVehicleSelected(this.vehicle);
       this.getVendors(this.current_page);
     }
+    if(this.selected_vehicle != "" && this.isVehiclechanged == 1) {
+      if(this.params.indexOf('vehicles=') != -1){
+       let param_arr = this.params.split('&');
+       let i = 0;
+       for(i=0;i<param_arr.length;i++){
+         if(param_arr[i].indexOf('vehicles=') != -1){ //changing previous/existing vehicle alone
+          let vehicle_index = param_arr[i].indexOf('vehicles=');
+          param_arr[i] = param_arr[i].replace(param_arr[i].substring(vehicle_index+9), this.selected_vehicle);
+         }
+       }
+       this.params = param_arr.join('&');
+      }else{ //adding vehicle as new property
+       this.params += "&vehicles="+this.selected_vehicle;
+      }
+   }
   }
   showSpinner(bool: boolean) {
     setTimeout(() => {
