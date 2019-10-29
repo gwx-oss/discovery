@@ -460,7 +460,7 @@ describe('Advanced Search Page', function() {
 			 element(by.css("[for='filter-sbd-A6']")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('setasides=A6');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('Electronic Records Management');
@@ -473,13 +473,13 @@ describe('Advanced Search Page', function() {
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[4]")).getText()).toContain('30');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[5]")).getText()).toContain('462');
 			 resetButton.click();
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			break;
 		case 'HUBZone':
 			 element(by.css("[for='filter-sbd-XX']")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('setasides=XX');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('Electronic Records Management');
@@ -492,13 +492,13 @@ describe('Advanced Search Page', function() {
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[4]")).getText()).toContain('4');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[5]")).getText()).toContain('187');
 			 resetButton.click();
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 break;
 		case 'SB':
 			 element(by.css("[for='filter-sbd-SB']")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('setasides=SB');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('Electronic Records Management');
@@ -511,7 +511,7 @@ describe('Advanced Search Page', function() {
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[4]")).getText()).toContain('158');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[5]")).getText()).toContain('3162');
 			 resetButton.click();
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 break;
 		case 'SDB':
 			 element(by.css("[for='filter-sbd-27']")).click();
@@ -528,13 +528,13 @@ describe('Advanced Search Page', function() {
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[3]")).getText()).toContain('12');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[4]")).getText()).toContain('1153');
 			 resetButton.click();
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 break;
 		case 'SDVO':
 			 element(by.css("[for='filter-sbd-QF']")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('setasides=QF');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('Electronic Records Management');
@@ -547,26 +547,26 @@ describe('Advanced Search Page', function() {
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[4]")).getText()).toContain('30');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[5]")).getText()).toContain('496');
 			 resetButton.click();
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 break;
 		case 'VIP':
 			 element(by.css("[for='filter-sbd-VIP']")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('setasides=VIP');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('Electronic Records Management');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[1]")).getText()).toContain('9');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[2]")).getText()).toContain('6');
 			 resetButton.click();
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 break;
 		case 'VO':
 			 element(by.css("[for='filter-sbd-A5']")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('setasides=A5');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('Electronic Records Management');
@@ -579,13 +579,13 @@ describe('Advanced Search Page', function() {
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[4]")).getText()).toContain('30');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[5]")).getText()).toContain('180');
 			 resetButton.click();
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 break;
 		case 'WO':
 			 element(by.css("[for='filter-sbd-A2']")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('setasides=A2');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('Electronic Records Management');
@@ -598,7 +598,7 @@ describe('Advanced Search Page', function() {
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[4]")).getText()).toContain('29');
 			 expect(element(by.xpath("(//button[@class='tooltip-bottom'])[5]")).getText()).toContain('846');
 			 resetButton.click();
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 break;
 		}
 		
@@ -615,7 +615,7 @@ describe('Advanced Search Page', function() {
 			 element(by.xpath("//*[@id='filter-zone']//button")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('zone=1');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('BMO Unrestricted');
@@ -643,7 +643,7 @@ describe('Advanced Search Page', function() {
 			 element(by.xpath("//*[@id='filter-zone']//button")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('zone=2');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('BMO Unrestricted');
@@ -670,7 +670,7 @@ describe('Advanced Search Page', function() {
 			 element(by.xpath("//*[@id='filter-zone']//button")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('zone=3');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('BMO Unrestricted');
@@ -697,7 +697,7 @@ describe('Advanced Search Page', function() {
 			 element(by.xpath("//*[@id='filter-zone']//button")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('zone=4');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('BMO Unrestricted');
@@ -724,7 +724,7 @@ describe('Advanced Search Page', function() {
 			 element(by.xpath("//*[@id='filter-zone']//button")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('zone=5');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('BMO Unrestricted');
@@ -751,7 +751,7 @@ describe('Advanced Search Page', function() {
 			 element(by.xpath("//*[@id='filter-zone']//button")).click();
 			 submitButton.click();			 
 			 browser.ignoreSynchronization = true;		
-			 browser.sleep(3000);
+			 browser.sleep(5000);
 			 expect(browser.getCurrentUrl()).toContain('zone=6');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[1])[1]")).getText()).toContain('BMO Small Business');
 			 expect(element(by.xpath("(//*[@id='tbl-compare']//th/following-sibling::th[2])[1]")).getText()).toContain('BMO Unrestricted');
