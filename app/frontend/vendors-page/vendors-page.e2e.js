@@ -47,7 +47,7 @@ describe('Vendors Page', function() {
 			 browser.sleep(3000);
 	     });
 		 
-		 it('should navigate to Discovery ERM Vendors Page', function(){
+		 it('should navigate to Discovery ERM Vendors Page @smoke', function(){
 			 advancedSearchLink.click();
 			 selectContractVehicle('ERM');
 			 browser.ignoreSynchronization = true;					 
@@ -67,7 +67,7 @@ describe('Vendors Page', function() {
 		 
 		 it('should display vendors table on ERM Vendors Page', function(){
 			 expect(vendorsTable.isDisplayed()).toBe(true);
-			 expect(vendorsTableRows.count()).toEqual(46);
+			 expect(vendorsTableRows.count()).toEqual(50);
 		 });
 		 
 		 it('should display footer on Vendors Page', function(){
@@ -77,7 +77,7 @@ describe('Vendors Page', function() {
 			 expect(opinionMatterFooter.isDisplayed()).toBe(true);
 		 });
 		 
-		 it('should navigate to Contract History Page', function(){
+		 it('should navigate to Contract History Page @smoke', function(){
 			 element(by.xpath('(//tbody/tr//td[2]/a)[1]')).getText().then(function(vendor){
 				 element(by.xpath('(//tbody/tr//td[2]/a)[1]')).click();
 				 browser.sleep(5000);
@@ -97,7 +97,7 @@ describe('Vendors Page', function() {
 			 expect(contractHistoryTable.isDisplayed()).toBe(true);
 		 });
 		 
-		 it('should navigate to Vendors Details Page', function(){
+		 it('should navigate to Vendors Details Page @smoke', function(){
 			 browser.ignoreSynchronization = true;					 
 			 vendorDetailsTab.click();
 			 browser.sleep(3000);

@@ -25,7 +25,7 @@ describe('About Page', function() {
 			 browser.sleep(3000);
 	     });
 		 
-		 it('should navigate to About Page', function(){
+		 it('should navigate to About Page @smoke', function(){
 			 aboutLink.click();
 			 expect(discoveryLogo.isDisplayed()).toBe(true);
 			 expect(discoveryLogoText.getText()).toEqual('DISCOVERY');
@@ -35,7 +35,7 @@ describe('About Page', function() {
 			 expect(contractsLink.isDisplayed()).toBe(true);	 
 		 });
 		 
-		 it('should display text on About Page', function(){		
+		 it('should display text on About Page @smoke', function(){		
 			 expect(aboutTitle.isDisplayed()).toBe(true);
 			 expect(aboutTitle.getText()).toEqual('About us');
 			 expect(aboutText.isDisplayed()).toBe(true);

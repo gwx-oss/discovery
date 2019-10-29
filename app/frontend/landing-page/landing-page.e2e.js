@@ -73,7 +73,7 @@ describe('Landing Page', function() {
 			 browser.sleep(3000);
 	     });
 		 
-		 it('should navigate to Discovery Landing Page', function(){
+		 it('should navigate to Discovery Landing Page @smoke', function(){
 			 expect(discoveryLogo.isDisplayed()).toBe(true);
 			 expect(discoveryLogoText.getText()).toEqual('DISCOVERY');
 			 expect(homeLink.isDisplayed()).toBe(true);
@@ -83,13 +83,13 @@ describe('Landing Page', function() {
 			 expect(homePageTitle.getText()).toEqual('Search by NAICS, PSC, or Keywords to compare contracts');		 
 		 });
 		 
-		 it('should be able to click on links on Discovery Landing Page NavBar', function(){
+		 it('should be able to click on links on Discovery Landing Page NavBar @smoke', function(){
 			 verifyLink(advancedSearchLink, '/search');
 			 verifyLink(aboutLink, '/about');
 			 verifyLink(contractsLink, '/contracts');	 
 		 });
 		 
-		 it('should display contract vehicles on Discovery Landing Page', function(){
+		 it('should display contract vehicles on Discovery Landing Page @smoke', function(){
 			 expect(contractVehicles.getText()).toEqual('Contract Vehicles on Discovery');
 			 expect(OASISvehicleLink.isDisplayed()).toBe(true);
 			 expect(BMOvehicleLink.isDisplayed()).toBe(true);
@@ -103,7 +103,7 @@ describe('Landing Page', function() {
 			 expect(ERMvehicleLinkText.getText()).toEqual('Electronic Records Management');
 		 });
 		 
-		 it('should be able to click on contract vehicles link on Discovery Landing Page', function(){
+		 it('should be able to click on contract vehicles link on Discovery Landing Page @smoke', function(){
 			 verifyLink(OASISvehicleLink, '/oasis');
 			 verifyLink(BMOvehicleLink, '/bmo');
 			 verifyLink(HCATSvehicleLink, '/hcats');
@@ -141,16 +141,19 @@ describe('Landing Page', function() {
 		 
 		 it('should display GSA Tools links on Discovery Landing Page', function(){
 			 expect(CALCLinkFooter.isDisplayed()).toBe(true);
-			 verifyLinkInNewTab(CALCLinkFooter,'https://calc.gsa.gov');			 
+			 verifyLinkInNewTab(CALCLinkFooter,'https://calc.gsa.gov');	
+			 browser.ignoreSynchronization = true;
 			 
 			 expect(ITsolutionLinkFooter.isDisplayed()).toBe(true);
 			 verifyLinkInNewTab(ITsolutionLinkFooter,'https://navigator.gsa.gov');
+			 browser.ignoreSynchronization = true;
 			 
 			 expect(eLibraryLinkFooter.isDisplayed()).toBe(true);
 			 verifyLinkInNewTab(eLibraryLinkFooter,'https://www.gsaelibrary.gsa.gov');
+			 browser.ignoreSynchronization = true;
 			 
-			 expect(AGLinkFooter.isDisplayed()).toBe(true);			 
-			 verifyLinkInNewTab(AGLinkFooter,'https://hallways.cap.gsa.gov');
+			 //expect(AGLinkFooter.isDisplayed()).toBe(true);			 
+			 //verifyLinkInNewTab(AGLinkFooter,'https://hallways.cap.gsa.gov');
 		 });
 		 
 		 it('should display search results when user searches on Discovery Landing Page', function(){

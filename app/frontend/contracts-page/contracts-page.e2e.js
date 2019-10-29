@@ -9,7 +9,7 @@ describe('Contracts Page', function() {
 			 browser.sleep(3000);
 	     });
 		 
-		 it('should navigate to Contracts Page', function(){
+		 it('should navigate to Contracts Page @smoke', function(){
 			 contractsLink.click();
 			 expect(discoveryLogo.isDisplayed()).toBe(true);
 			 expect(discoveryLogoText.getText()).toEqual('DISCOVERY');
@@ -24,7 +24,7 @@ describe('Contracts Page', function() {
 			 expect(contractsTitle.getText()).toEqual('Contracts');
 		 });
 		 
-		 it('should display all contracts on Contracts Page', function(){		
+		 it('should display all contracts on Contracts Page @smoke', function(){		
 			 expect(contracts.count()).toEqual(5);
 			 verifyContract('OASIS','One Acquisition Solution for Integrated Service');
 			 verifyContract('BMO','Building Maintenance and Operations');
@@ -40,7 +40,7 @@ describe('Contracts Page', function() {
 			 expect(opinionMatterFooter.isDisplayed()).toBe(true);
 		 });
 		 
-		 it('should display Contract\'s Page for each contract', function(){		
+		 it('should display Contract\'s Page for each contract @smoke', function(){		
 			 navigateToContract('OASIS');
 			 contractsPage('OASIS','One Acquisition Solution for Integrated Service');
 			 browser.navigate().back();
@@ -821,7 +821,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_1');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('42');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('45');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-2')])[1]")).getText()).toEqual('Desktop Applications');			 
 			 browser.navigate().back();
 			break;
@@ -831,7 +831,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_2');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('41');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('45');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-6')])[1]")).getText()).toEqual('Electronic Messages');			 
 			 browser.navigate().back();
 			break;
@@ -841,7 +841,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_3');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('36');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('39');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-9')])[1]")).getText()).toEqual('Social Media');			 
 			 browser.navigate().back();
 			break;
@@ -851,7 +851,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_4');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('42');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('44');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-0')])[1]")).getText()).toEqual('Cloud Services');			 
 			 browser.navigate().back();
 			break;
@@ -861,7 +861,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_5');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('37');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('40');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-10')])[1]")).getText()).toEqual('Websites');			 
 			 browser.navigate().back();
 			break;
@@ -871,7 +871,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_6');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('44');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('48');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-4')])[1]")).getText()).toEqual('Digital Media (Photo)');			 
 			 browser.navigate().back();
 			break;
@@ -881,7 +881,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_7');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('40');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('44');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-3')])[1]")).getText()).toEqual('Digital Media (Audio)');			 
 			 browser.navigate().back();
 			break;
@@ -891,7 +891,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_8');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('40');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('44');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-5')])[1]")).getText()).toEqual('Digital Media (Video)');			 
 			 browser.navigate().back();
 			break;
@@ -901,7 +901,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_9');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('43');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('47');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-1')])[1]")).getText()).toEqual('Databases');			 
 			 browser.navigate().back();
 			break;
@@ -911,7 +911,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_10');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('39');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('41');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-8')])[1]")).getText()).toEqual('Shared Drives');			 
 			 browser.navigate().back();
 			break;
@@ -921,7 +921,7 @@ describe('Contracts Page', function() {
 			 browser.ignoreSynchronization = true;
 			 expect(browser.getCurrentUrl()).toContain('service_categories=ERM_11');
 			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Electronic Records Management');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('41');
+			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('43');
 			 expect(element(by.xpath("(//li[contains(@id,'ERM-7')])[1]")).getText()).toEqual('Engineering Drawings');			 
 			 browser.navigate().back();
 			break;
