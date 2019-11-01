@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -97,9 +97,12 @@ export class SearchService  {
   getSearchOptions(key: string): string[] {
     return this.search_options[key];
   }
+  getApiKeyHeader() {
+    return { headers: new HttpHeaders({'X-Api-Key':  SAM_API_KEY })};
+  }
   getContractVehicles(): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'vehicles');
-    return this.http.get<any[]>(url).pipe(
+    let url = this.apiUrl + 'vehicles';
+    return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
@@ -110,50 +113,52 @@ export class SearchService  {
   //     catchError(this.handleError)
   //   );
   // }
+
+
+  
   getPSCsByTerm(str: string): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'psc?description__contains=' + str);
-    return this.http.get<any[]>(url)
+    let url = this.apiUrl + 'psc?description__contains=' + str;
+    return this.http.get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getPSCsByNAICs(naics): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'psc?naics__code__in=' + this.arrToString(naics));
+    let url = this.apiUrl + 'psc?naics__code__in=' + this.arrToString(naics);
     return this.http
-      .get<any[]>(url)
+      .get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getContractPricingType(): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'contracts/values/pricing_type__name');
-    return this.http.get<any[]>(url)
+    let url = this.apiUrl + 'contracts/values/pricing_type__name';
+    return this.http.get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getSetAsides(): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl +'setasides?description');
-    return this.http.get<any[]>(url).pipe(
+    let url = this.apiUrl +'setasides?description';
+    return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
   getServiceCategories(vehicles): Observable<any[]> {
     if (vehicles[0] === 'All') {
-      let url = this.getUrlWithKey(this.apiUrl + 'pools?page=0');
-      return this.http.get<any[]>(url).pipe(
+      let url = this.apiUrl + 'pools?page=0';
+      return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
         tap(data => data),
         catchError(this.handleError)
       );
     } else {
-      let url = this.getUrlWithKey(this.apiUrl + 'pools?vehicle__id__in=' + 
-          this.arrToString(vehicles));
+      let url = this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles);
       return this.http
-        .get<any[]>(url)
+        .get<any[]>(url, this.getApiKeyHeader())
         .pipe(
           tap(data => data),
           catchError(this.handleError)
@@ -162,15 +167,14 @@ export class SearchService  {
   }
   getPools(vehicles): Observable<any[]> {
     if (vehicles[0] === 'All') {
-      let url = this.getUrlWithKey(this.apiUrl + 'pools?page=0');
-      return this.http.get<any[]>(url).pipe(
+      let url = this.apiUrl + 'pools?page=0';
+      return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
         tap(data => data),
         catchError(this.handleError)
       );
     } else {
-      let url = this.getUrlWithKey(this.apiUrl + 'pools?vehicle__id__in=' 
-        + this.arrToString(vehicles));
-      return this.http.get<any[]>(url)
+      let url = this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles);
+      return this.http.get<any[]>(url, this.getApiKeyHeader())
         .pipe(
           tap(data => data),
           catchError(this.handleError)
@@ -179,37 +183,37 @@ export class SearchService  {
   }
 
   getZone(): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'zones/?page=0');
-    return this.http.get<any[]>(url).pipe(
+    let url = this.apiUrl + 'zones/?page=0';
+    return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
 
   getKeywords(): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'keywords?page=0');
-    return this.http.get<any[]>(url).pipe(
+    let url = this.apiUrl + 'keywords?page=0';
+    return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
   getPoolsByVehicle(vehicle: string): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'pools?vehicle__id=' + vehicle);
-    return this.http.get<any[]>(url)
+    let url = this.apiUrl + 'pools?vehicle__id=' + vehicle;
+    return this.http.get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getNaics(vehicles): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'pools');
+    let url = this.apiUrl + 'pools';
     if (vehicles[0] === 'All') {
-      return this.http.get<any[]>(url).pipe(
+      return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
         tap(data => data),
         catchError(this.handleError)
       );
     } else {
-      let url = this.getUrlWithKey(this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles));
+      let url = this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles);
       return this.http
         .get<any[]>(url)
         .pipe(
@@ -219,17 +223,17 @@ export class SearchService  {
     }
   }
   getNaicsCodes(vehicle): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'pools/values/naics__code?vehicle__id=' + vehicle);
+    let url = this.apiUrl + 'pools/values/naics__code?vehicle__id=' + vehicle;
     return this.http
-      .get<any[]>(url)
+      .get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getPlaceOfPerformance(): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'placesofperformance/?page=0');
-    return this.http.get<any[]>(url)
+    let url = this.apiUrl + 'placesofperformance/?page=0';
+    return this.http.get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -246,9 +250,9 @@ export class SearchService  {
     if (page) {
       params += page;
     }
-    let url = this.getUrlWithKey(this.apiUrl + 'vendors?membership=' + params);
+    let url = this.apiUrl + 'vendors?membership=' + params;
     console.log(url);
-    return this.http.get<any[]>(url)
+    return this.http.get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -312,17 +316,6 @@ export class SearchService  {
     }
     return params;
   }
-  getUrlWithKey(url: string) {
-    if(API_HOST.indexOf('localhost') !== -1) {
-      return url;
-    }
-    if(url.indexOf('?') !== -1) {
-      url = url + '&api_key=' + SAM_API_KEY;
-    } else {
-      url = url + '?api_key=' + SAM_API_KEY;
-    }
-    return url;
-  }
   getVehicleVendorsMeetCriteria(
     filters: any[],
     vehicle: string,
@@ -331,10 +324,10 @@ export class SearchService  {
     let params = '';
     params += '%28pool__vehicle__id=' + vehicle + '%29';
     params += this.buildOtherParams(filters, selectedServiceCategory);
-    let url = this.getUrlWithKey(this.apiUrl + 'vendors/count/duns?membership=' + params);
+    let url = this.apiUrl + 'vendors/count/duns?membership=' + params;
     console.log(url);
     return this.http
-      .get<any[]>(url)
+      .get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -372,10 +365,10 @@ export class SearchService  {
           this.getSelectedFilterList(filter['selected'], ',');
       }
     }
-    let url = this.getUrlWithKey(this.apiUrl + 'pools/values/vehicle?' + params.substr(1));
+    let url = this.apiUrl + 'pools/values/vehicle?' + params.substr(1);
     console.log(url);
     return this.http
-      .get<any[]>(url)
+      .get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -383,8 +376,8 @@ export class SearchService  {
   }
 
   getVendorsCountByVehicle(vehicle: string): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle);
-    return this.http.get<any[]>(url)
+    let url = this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle;
+    return this.http.get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -394,34 +387,32 @@ export class SearchService  {
     const arr = range.split('-');
     const from = arr[0];
     const to = arr[1];
-    let url = this.getUrlWithKey(this.apiUrl + 
-      'contracts/values/vendor__duns?obligated_amount__range=' +
-      from + ',' + to);
-    return this.http.get<any[]>(url)
+    let url = this.apiUrl + 'contracts/values/vendor__duns?obligated_amount__range=' + from + ',' + to;
+    return this.http.get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getAgencyPerformanceNames(): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'agencies/?page=0');
-    return this.http.get<any[]>(url).pipe(
+    let url = this.apiUrl + 'agencies/?page=0';
+    return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
   getAgencyPerformanceDuns(ids: string): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'contracts/values/vendor__duns?agency_id__in=' + ids);
-    return this.http.get<any[]>(url)
+    let url = this.apiUrl + 'contracts/values/vendor__duns?agency_id__in=' + ids;
+    return this.http.get<any[]>(url, this.getApiKeyHeader())
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getVendorDetails(duns: string): Observable<any[]> {
-    let url = this.getUrlWithKey(this.apiUrl + 'vendors/' + duns);
+    let url = this.apiUrl + 'vendors/' + duns;
     console.log(url);
-    return this.http.get<any[]>(url).pipe(
+    return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
@@ -451,9 +442,9 @@ export class SearchService  {
     if (ordering !== '') {
       params += '&ordering=' + ordering;
     }
-    let url = this.getUrlWithKey(this.apiUrl + params + page);
+    let url = this.apiUrl + params + page;
     console.log(url);
-    return this.http.get<any[]>(url).pipe(
+    return this.http.get<any[]>(url, this.getApiKeyHeader()).pipe(
       tap(data => data),
       catchError(this.handleError)
     );

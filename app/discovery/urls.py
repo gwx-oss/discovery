@@ -12,7 +12,7 @@ from contracts import views as contracts
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Discovery dsfdfs",
+        title="Discovery API",
         host="https://api.gsa.gov/",
         default_version='v2',
         description="Discovery API Documentation",
