@@ -9,17 +9,24 @@ from drf_yasg import openapi
 
 from vendors import views as vendors
 from contracts import views as contracts
+from drf_yasg.generators import OpenAPISchemaGenerator
+
+class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
+    def get_schema(self, *args, **kwargs):
+        schema = super().get_schema(*args, **kwargs)
+        schema.basePath = '/acquisition/discovery/DEV/v2/'
+        return schema
 
 schema_view = get_schema_view(
     openapi.Info(
         title="Discovery API",
-        host="https://api.gsa.gov/",
         default_version='v2',
         description="Discovery API Documentation",
-        url='https://api.gsa.gov/acquisition/discovery/v2/',
         contact=openapi.Contact(email="pshc-dev@gsa.gov"),
     ),
+    url="https://api.gsa.gov/",
     public=True,
+    generator_class=CustomOpenAPISchemaGenerator,
 )
 
 urlpatterns = [
@@ -48,5 +55,6 @@ urlpatterns = [
     url(r'^bmo.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^pss.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^erm.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^accounts.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
 ]
