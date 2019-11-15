@@ -414,17 +414,17 @@ class BasePoolMembershipSerializer(ModelSerializer):
         if vehicle in capabilitiesUrls and duns in capabilitiesUrls[vehicle]:
             return capabilitiesUrls[vehicle][duns]
 
-    # def get_capability_statement(self, item):
-    #     request = self.context.get('request')
-    #     duns = item.vendor.duns
-    #     vehicle = item.pool.vehicle.id
-    #     cs_path = "static/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns)
-    #     cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
+    def get_capability_statement(self, item):
+        request = self.context.get('request')
+        duns = item.vendor.duns
+        vehicle = item.pool.vehicle.id
+        cs_path = "static/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns)
+        cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
      
-    #     if vehicle and os.path.isfile(cs_path):
-    #         return cs_url
-    #     else:
-    #         return self.get_capabilities(vehicle, duns)
+        if vehicle and os.path.isfile(cs_path):
+            return cs_url
+        else:
+            return self.get_capabilities(vehicle, duns)
 
     def get_contacts(self, item):
         queryset = vendors.Contact.objects.filter(responsibility=item).order_by('order')
