@@ -164,11 +164,21 @@
                               </li>
                             </ul>
                           </div>
-                          <div class="pad-top" *ngIf="item?.capability && item.capability !== ''">
+                          <!-- <div class="pad-top" *ngIf="item?.capability && item.capability !== ''">
                             <span class="uppercase db" >Capability Statement: </span>
                             <div class="pad-left">
                               <a href="{{item.capability}}" target="_blank" >Open</a>
                             </div>
+                          </div> -->
+                          <div *ngIf="contract_urls_atleast_one" class="pad-top" >
+                            <span [hidden]="checkCapabiStateAvailability(item.piids)" class="uppercase db">Capability Statement: </span>
+                            <ul  *ngFor="let p of item.piids"  class="ul-no-bullets pad-left">
+                              <li *ngIf="contract_urls[p.piid] != 'Not Available'">
+                               <span  class="pad-left">
+                                  <a href="{{ contract_urls[p.piid] }}" target="_blank" >{{ p.piid }}</a>
+                               </span>
+                              </li>
+                            </ul>
                           </div>
                           <div class="other-info" [class.hide]="!more_info">
                             <div class="pad-top">
