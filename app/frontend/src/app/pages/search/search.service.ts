@@ -13,6 +13,7 @@ declare const $: any;
 })
 export class SearchService  {
   private apiUrl: string;
+  private calcapiUrl: string;
   _pools;
   _keywords;
   _active_filters: any[];
@@ -29,10 +30,14 @@ export class SearchService  {
     private route: ActivatedRoute
   ) {
     this.setApiUrl();
+    this.setCalcApiUrl();
   }
 
   setApiUrl() {
     this.apiUrl = this.getAPIUrl();
+  }
+  setCalcApiUrl() {
+    this.calcapiUrl ="https://calc-dev.app.cloud.gov/api/";
   }
 
   getAPIUrl() {
@@ -418,8 +423,16 @@ export class SearchService  {
         catchError(this.handleError)
       );
   }
-  getVendorDetails(duns: string): Observable<any[]> {
+  getVendorDetails(duns: string): Observable<any> {
     let url = this.getUrlWithKey(this.apiUrl + 'vendors/' + duns);
+    console.log(url);
+    return this.http.get<any[]>(url).pipe(
+      tap(data => data),
+      catchError(this.handleError)
+    );
+  }
+  getCapabilityStatementLink(contractnumber: string): Observable<any[]> {
+    let url = this.calcapiUrl + 'contract/capability_statement/url/' + contractnumber;
     console.log(url);
     return this.http.get<any[]>(url).pipe(
       tap(data => data),

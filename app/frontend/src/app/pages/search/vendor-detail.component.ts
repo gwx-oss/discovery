@@ -36,6 +36,9 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   piids_selected: any[] = [];
   spinner = true;
   sbd_col = true;
+  contract_urls:any;
+  contract_urls_atleast_one:any = false;
+  pools:any;
   more_info = false;
   contract_nums: any[] = [];
   num_show = 3;
@@ -79,10 +82,30 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   showSpinner(bool: boolean) {
     this.spinner = bool;
   }
+  checkContractUrlsAvailability(){
+    alert();
+  }
   getVendorDetails(duns) {
     this.searchService.getVendorDetails(duns).subscribe(
       data => {
         this.vendor = data;
+        let pids=[];
+        for(let i=0;i<data.pools.length;i++){
+          pids.push(data.pools[i].piid);
+        }
+        var pidsunique = pids.filter((v, i, a) => a.indexOf(v) === i);
+        var contract_numbers = pidsunique.join();
+        this.searchService.getCapabilityStatementLink(contract_numbers).subscribe(
+          data => {
+            for(var i=0;i<pidsunique.length;i++){
+              if(data[pidsunique[i]] != "Not Available"){
+                this.contract_urls_atleast_one = true;
+              }
+            }
+            this.contract_urls = data;
+          },
+          error => (this.error_message = <any>error)
+          );
         this.loading = false;
         this.vendor['pools'] = this.buildPoolsInfo(data);
         this.emitHideSpinner.emit(false);
@@ -184,9 +207,10 @@ export class VendorDetailComponent implements OnInit, OnChanges {
         vehicle['piidsByContract'] = {};
         vehicle['piidsByContract'][item.piid] = [];
         vehicle['service_categories'] = [{ pool_id: item.pool.id }];
-        vehicle['capability'] = item.capability_statement;
+        vehicle['capability'];
         vehicle['setasides'] = [];
         vehicle['zones'] = [];
+        
         // vehicle['zones'] = item.zones.sort(this.searchService.sortByIdAsc);
         vehicles.push(vehicle);
       }
@@ -243,6 +267,20 @@ export class VendorDetailComponent implements OnInit, OnChanges {
       }
     }
   }
+  checkCapabiStateAvailability(contracts:any){
+    var needToHide = false;
+    var notAvailableCount = 0;
+    for(var i=0;i<contracts.length;i++){
+      if( this.contract_urls[contracts[i].piid] == "Not Available"){
+        notAvailableCount++;
+      }
+    }
+    if(notAvailableCount == contracts.length){
+      needToHide = true;
+    }
+    return needToHide;
+  }
+ 
   returnSetAside(arr: any[], code: string): boolean {
     if (arr.length > 0) {
       if (arr.indexOf(code) >= 0){
