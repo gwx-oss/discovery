@@ -415,6 +415,7 @@ class BasePoolMembershipSerializer(ModelSerializer):
             return capabilitiesUrls[vehicle][duns]
 
     def get_capability_statement(self, item):
+        return
         # request = self.context.get('request')
         # duns = item.vendor.duns
         # vehicle = item.pool.vehicle.id
