@@ -182,7 +182,8 @@
                             <ul  *ngFor="let p of item.piids"  class="ul-no-bullets pad-left">
                               <li *ngIf="contract_urls[p.piid] != 'Not Available'">
                                <span  class="pad-left">
-                                  <a href="{{ contract_urls[p.piid] }}" target="_blank" >{{ p.piid }}</a>
+                                  <!-- <a href="{{ contract_urls[p.piid] }}" target="_blank" >{{ p.piid }}</a> -->
+                                  <a href="{{calc_url+'contract/capability_statement/'+p.piid }}" target="_blank" >{{ p.piid }}</a>
                                </span>
                               </li>
                             </ul>
