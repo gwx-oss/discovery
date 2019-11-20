@@ -37,7 +37,7 @@ export class SearchService  {
     this.apiUrl = this.getAPIUrl();
   }
   setCalcApiUrl() {
-    this.calcapiUrl ="https://calc-dev.app.cloud.gov/api/";
+    this.calcapiUrl = this.getCalcAPIUrl();
   }
 
   getAPIUrl() {
@@ -46,12 +46,28 @@ export class SearchService  {
       console.log('making prod url');
       apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
     } else if(API_HOST.indexOf('localhost') !== -1) {
+      console.log('making calc  dev url');
       apiUrl = API_HOST + '/api/';
     } else {
       console.log('making dev url');
       apiUrl = 'https://api.gsa.gov/acquisition/discovery/DEV/v2/';
     }
     return apiUrl;
+  }
+
+  getCalcAPIUrl() {
+    let calcapiUrl : string = '';
+    if(API_HOST.indexOf('discovery.gsa.gov') !== -1) {
+      console.log('making calc prod url');
+      calcapiUrl = "https://calc.gsa.gov/api/";
+    } else if(API_HOST.indexOf('localhost') !== -1) {
+      console.log('making calc  dev url');
+      calcapiUrl = "https://calc-dev.app.cloud.gov/api/";
+    } else {
+      console.log('making calc  dev url');
+      calcapiUrl = "https://calc-dev.app.cloud.gov/api/";
+    }
+    return calcapiUrl;
   }
 
   get pools(): any[] {

@@ -10,7 +10,7 @@ import {
 import { SearchService } from './search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TblContractHistoryComponent } from './tbl-contract-history.component';
-
+declare let API_HOST: string;
 @Component({
   selector: 'discovery-vendor-detail',
   templateUrl: './vendor-detail.component.html',
@@ -47,15 +47,32 @@ export class VendorDetailComponent implements OnInit, OnChanges {
   zindex = 30;
   loading = false;
   duns_number;
+  calc_url:string =this.getCalcAPIURL();
   sbdByContract:boolean = false; 
   constructor(private searchService: SearchService, private router: Router) {}
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
   ngOnChanges() {
     if (this.duns && this.duns !== '') {
       this.loading = true;
       this.duns_number = this.duns;
       this.getVendorDetails(this.duns);
     }
+  }
+  getCalcAPIURL(){
+      let calcurl = ""
+      if(API_HOST.indexOf('discovery.gsa.gov') !== -1) {
+        console.log('making calc prod url to get file');
+        calcurl = "https://calc.gsa.gov/api/";
+      } else if(API_HOST.indexOf('localhost') !== -1) {
+        console.log('making calc  dev url to get file');
+        calcurl = "https://calc-dev.app.cloud.gov/api/";
+      } else {
+        console.log('making calc  dev url to get file');
+        calcurl = "https://calc-dev.app.cloud.gov/api/";
+      }
+      return calcurl;
   }
   backToSearchResults() {
     this.router.navigate(['/search'], {
