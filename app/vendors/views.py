@@ -297,7 +297,7 @@ class VendorCSV(BaseCSVView):
             setaside_list = []
             v_pools_all = vendor.pools.all()
             v_pools = vendor.pools.filter(pool__vehicle__id__in=self.vehicles)
-
+            
             for sa in self.setaside_data:
                 if sa.id in v_pools.values_list('setasides', flat=True):
                     setaside_list.append('X')
@@ -325,10 +325,12 @@ class VendorCSV(BaseCSVView):
             vehicle_map = {}
             vendor_vehicles = []  
             selected_vehicles = []
+            
             for v_pool in v_pools_all:
                 if v_pool.pool.vehicle.id not in vehicle_map:
                     vendor_vehicles.append(" ".join(v_pool.pool.vehicle.id.split('_')))
-                    vehicle_map[v_pool.pool.vehicle.id] = True      
+                    vehicle_map[v_pool.pool.vehicle.id] = True
+
             if len(vendor_vehicles) > 0:
                 selected_vehicles = str(self.vehicles).replace('[', '').replace(']', '').strip("'")
             v_row = [format_duns(vendor.duns), vendor.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
