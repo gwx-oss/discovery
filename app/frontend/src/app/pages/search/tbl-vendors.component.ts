@@ -71,7 +71,6 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    
   }
   ngOnChanges() {
     if (this.vehicle) {
