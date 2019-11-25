@@ -11,7 +11,6 @@ import os
 import logging
 import requests
 
-capabilitiesUrls = {}
 
 class SinSerializer(ModelSerializer):
     class Meta:
@@ -396,36 +395,16 @@ class BasePoolMembershipSerializer(ModelSerializer):
         fields = ['id', 'piid', 'contacts', 'expiration_8a_date', 'contract_end_date', 'capability_statement']
 
     def load_capabilities(self):
-        for vehicle in settings.VEHICLES:
-            vehicle = vehicle.upper()
-            file_path = "static/discovery_site/capability_statements/{}/{}".format(vehicle, "urls.txt")
-            if os.path.isfile(file_path):
-                readCapabilities = open(file_path, "r")
-                capabilitiesUrls[vehicle] = {}
-                for row in readCapabilities:
-                    DunsAndUrl = row.split("=")
-                    capabilitiesUrls[vehicle][DunsAndUrl[0]] = DunsAndUrl[1]
-                readCapabilities.close()
-                self.logger.error(" capabilities loaded for  {} ".format(vehicle))
+        return 
+
 
     def get_capabilities(self, vehicle, duns):
-        if len(capabilitiesUrls) == 0:
-            self.load_capabilities()
-        if vehicle in capabilitiesUrls and duns in capabilitiesUrls[vehicle]:
-            return capabilitiesUrls[vehicle][duns]
+        return
+
 
     def get_capability_statement(self, item):
         return
-        # request = self.context.get('request')
-        # duns = item.vendor.duns
-        # vehicle = item.pool.vehicle.id
-        # cs_path = "static/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns)
-        # cs_url = request.build_absolute_uri("/discovery_site/capability_statements/{}/{}.pdf".format(vehicle, duns))
-     
-        # if vehicle and os.path.isfile(cs_path):
-        #     return cs_url
-        # else:
-        #     return self.get_capabilities(vehicle, duns)
+
 
     def get_contacts(self, item):
         queryset = vendors.Contact.objects.filter(responsibility=item).order_by('order')
