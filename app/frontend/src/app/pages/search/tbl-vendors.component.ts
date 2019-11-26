@@ -71,7 +71,6 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-
   }
   ngOnChanges() {
     if (this.vehicle) {
@@ -80,20 +79,20 @@ export class TblVendorsComponent implements OnInit, OnChanges {
       this.getVendors(this.current_page);
     }
     if(this.selected_vehicle != "" && this.isVehiclechanged == 1) {
-      if(this.params.indexOf('vehicles=') != -1){
-       let param_arr = this.params.split('&');
-       let i = 0;
-       for(i=0;i<param_arr.length;i++){
-         if(param_arr[i].indexOf('vehicles=') != -1){ //changing previous/existing vehicle alone
-          let vehicle_index = param_arr[i].indexOf('vehicles=');
-          param_arr[i] = param_arr[i].replace(param_arr[i].substring(vehicle_index+9), this.selected_vehicle);
-         }
+       if(this.params.indexOf('vehicles=') != -1){
+        let param_arr = this.params.split('&');
+        let i = 0;
+        for(i=0;i<param_arr.length;i++){
+          if(param_arr[i].indexOf('vehicles=') != -1){ //changing previous/existing vehicle alone
+           let vehicle_index = param_arr[i].indexOf('vehicles=');
+           param_arr[i] = param_arr[i].replace(param_arr[i].substring(vehicle_index+9), this.selected_vehicle);
+          }
+        }
+        this.params = param_arr.join('&');
+       }else{ //adding vehicle as new property
+        this.params += "&vehicles="+this.selected_vehicle;
        }
-       this.params = param_arr.join('&');
-      }else{ //adding vehicle as new property
-       this.params += "&vehicles="+this.selected_vehicle;
-      }
-   }
+    }
   }
   showSpinner(bool: boolean) {
     setTimeout(() => {

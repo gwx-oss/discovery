@@ -72,7 +72,6 @@ class VendorCSV(BaseCSVView):
         
         self.states_param = 'states'
         self.states = []
-        
         # Queries
         self.setaside_data = categories.SetAside.objects.all().order_by('far_order')
         self.pool_data = categories.Pool.objects.all().distinct()
@@ -366,7 +365,6 @@ class VendorCSV(BaseCSVView):
         self._process_amount(writer)
         self._process_countries(writer)
         self._process_states(writer)
-        
         self._render_vendors(writer)
         
         track_page_load(request)

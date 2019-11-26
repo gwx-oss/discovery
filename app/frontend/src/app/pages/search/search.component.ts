@@ -82,6 +82,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.searchService.setApiUrl();
     /** Check to see if there are any queryparams */
     if (this.route.snapshot.queryParamMap.keys.length > 0) {
       this.spinner = true;
@@ -275,6 +276,9 @@ export class SearchComponent implements OnInit {
     this.service_categories_selected = this.returnSelectedServiceCategories(
       filters
     );
+
+    // console.log(this.searchService.activeFilters);
+
     this.searchService
       .getVehiclesToCompare(this.searchService.activeFilters)
       .subscribe(
@@ -364,6 +368,8 @@ export class SearchComponent implements OnInit {
         params +=
           '&setasides=' +
           this.searchService.getSelectedFilterList(filter['selected'], ',');
+
+        //params += '&vehicles=' + this.searchService.getSelectedFilterList(filter['selected'], ',');
       }
       if (filter['name'] === 'naics') {
         params +=
@@ -564,7 +570,7 @@ export class SearchComponent implements OnInit {
       document.getElementById('slides-container').style.marginLeft = -w + 'px';
     }
 
-    this.showScrollTip();
+    this.showScrollTip();   
   }
   showScrollTip() {
     if (
@@ -680,6 +686,7 @@ export class SearchComponent implements OnInit {
     }
     return total;
   }
+
   // buildContractCompare() {
   //   const compare: any[] = [];
   //   this.contracts_w_no_records = [];
@@ -772,5 +779,5 @@ export class SearchComponent implements OnInit {
   }
   closeModal(id: string) {
     this.modalService.close(id);
-    }
+    }  
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
@@ -6,12 +6,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { stringify } from '@angular/compiler/src/util';
 declare let API_HOST: string;
+declare let SAM_API_KEY: string;
 declare const $: any;
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService {
-  private apiUrl = API_HOST + '/api/';
+export class SearchService  {
+  private apiUrl: string;
+  private calcapiUrl: string;
   _pools;
   _keywords;
   _active_filters: any[];
@@ -26,7 +28,48 @@ export class SearchService {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.setApiUrl();
+    this.setCalcApiUrl();
+  }
+
+  setApiUrl() {
+    this.apiUrl = this.getAPIUrl();
+  }
+  setCalcApiUrl() {
+    this.calcapiUrl = this.getCalcAPIUrl();
+  }
+
+  getAPIUrl() {
+    let apiUrl : string = '';
+    if(API_HOST.indexOf('discovery.gsa.gov') !== -1) {
+      console.log('making prod url');
+      apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
+    } else if(API_HOST.indexOf('localhost') !== -1) {
+      console.log('making calc  dev url');
+      apiUrl = API_HOST + '/api/';
+    } else {
+      console.log('making dev url');
+      apiUrl = 'https://api.gsa.gov/acquisition/discovery/DEV/v2/';
+    }
+    return apiUrl;
+  }
+
+  getCalcAPIUrl() {
+    let calcapiUrl : string = '';
+    if(API_HOST.indexOf('discovery.gsa.gov') !== -1) {
+      console.log('making calc prod url');
+      calcapiUrl = "https://calc.gsa.gov/api/";
+    } else if(API_HOST.indexOf('localhost') !== -1) {
+      console.log('making calc  dev url');
+      calcapiUrl = "https://calc-dev.app.cloud.gov/api/";
+    } else {
+      console.log('making calc  dev url');
+      calcapiUrl = "https://calc-dev.app.cloud.gov/api/";
+    }
+    return calcapiUrl;
+  }
+
   get pools(): any[] {
     return this._pools;
   }
@@ -76,7 +119,8 @@ export class SearchService {
     return this.search_options[key];
   }
   getContractVehicles(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + 'vehicles').pipe(
+    let url = this.getUrlWithKey(this.apiUrl + 'vehicles');
+    return this.http.get<any[]>(url).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
@@ -88,48 +132,49 @@ export class SearchService {
   //   );
   // }
   getPSCsByTerm(str: string): Observable<any[]> {
-    return this.http
-      .get<any[]>(this.apiUrl + 'psc?description__contains=' + str)
+    let url = this.getUrlWithKey(this.apiUrl + 'psc?description__contains=' + str);
+    return this.http.get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getPSCsByNAICs(naics): Observable<any[]> {
+    let url = this.getUrlWithKey(this.apiUrl + 'psc?naics__code__in=' + this.arrToString(naics));
     return this.http
-      .get<any[]>(
-        this.apiUrl + 'psc?naics__code__in=' + this.arrToString(naics)
-      )
+      .get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getContractPricingType(): Observable<any[]> {
-    return this.http
-      .get<any[]>(this.apiUrl + 'contracts/values/pricing_type__name')
+    let url = this.getUrlWithKey(this.apiUrl + 'contracts/values/pricing_type__name');
+    return this.http.get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getSetAsides(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + 'setasides?description').pipe(
+    let url = this.getUrlWithKey(this.apiUrl +'setasides?description');
+    return this.http.get<any[]>(url).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
   getServiceCategories(vehicles): Observable<any[]> {
     if (vehicles[0] === 'All') {
-      return this.http.get<any[]>(this.apiUrl + 'pools?page=0').pipe(
+      let url = this.getUrlWithKey(this.apiUrl + 'pools?page=0');
+      return this.http.get<any[]>(url).pipe(
         tap(data => data),
         catchError(this.handleError)
       );
     } else {
+      let url = this.getUrlWithKey(this.apiUrl + 'pools?vehicle__id__in=' + 
+          this.arrToString(vehicles));
       return this.http
-        .get<any[]>(
-          this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles)
-        )
+        .get<any[]>(url)
         .pipe(
           tap(data => data),
           catchError(this.handleError)
@@ -138,15 +183,15 @@ export class SearchService {
   }
   getPools(vehicles): Observable<any[]> {
     if (vehicles[0] === 'All') {
-      return this.http.get<any[]>(this.apiUrl + 'pools?page=0').pipe(
+      let url = this.getUrlWithKey(this.apiUrl + 'pools?page=0');
+      return this.http.get<any[]>(url).pipe(
         tap(data => data),
         catchError(this.handleError)
       );
     } else {
-      return this.http
-        .get<any[]>(
-          this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles)
-        )
+      let url = this.getUrlWithKey(this.apiUrl + 'pools?vehicle__id__in=' 
+        + this.arrToString(vehicles));
+      return this.http.get<any[]>(url)
         .pipe(
           tap(data => data),
           catchError(this.handleError)
@@ -155,37 +200,39 @@ export class SearchService {
   }
 
   getZone(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + 'zones/?page=0').pipe(
+    let url = this.getUrlWithKey(this.apiUrl + 'zones/?page=0');
+    return this.http.get<any[]>(url).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
 
   getKeywords(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + 'keywords?page=0').pipe(
+    let url = this.getUrlWithKey(this.apiUrl + 'keywords?page=0');
+    return this.http.get<any[]>(url).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
   getPoolsByVehicle(vehicle: string): Observable<any[]> {
-    return this.http
-      .get<any[]>(this.apiUrl + 'pools?vehicle__id=' + vehicle)
+    let url = this.getUrlWithKey(this.apiUrl + 'pools?vehicle__id=' + vehicle);
+    return this.http.get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getNaics(vehicles): Observable<any[]> {
+    let url = this.getUrlWithKey(this.apiUrl + 'pools');
     if (vehicles[0] === 'All') {
-      return this.http.get<any[]>(this.apiUrl + 'pools').pipe(
+      return this.http.get<any[]>(url).pipe(
         tap(data => data),
         catchError(this.handleError)
       );
     } else {
+      let url = this.getUrlWithKey(this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles));
       return this.http
-        .get<any[]>(
-          this.apiUrl + 'pools?vehicle__id__in=' + this.arrToString(vehicles)
-        )
+        .get<any[]>(url)
         .pipe(
           tap(data => data),
           catchError(this.handleError)
@@ -193,18 +240,17 @@ export class SearchService {
     }
   }
   getNaicsCodes(vehicle): Observable<any[]> {
+    let url = this.getUrlWithKey(this.apiUrl + 'pools/values/naics__code?vehicle__id=' + vehicle);
     return this.http
-      .get<any[]>(
-        this.apiUrl + 'pools/values/naics__code?vehicle__id=' + vehicle
-      )
+      .get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getPlaceOfPerformance(): Observable<any[]> {
-    return this.http
-      .get<any[]>(this.apiUrl + 'placesofperformance/?page=0')
+    let url = this.getUrlWithKey(this.apiUrl + 'placesofperformance/?page=0');
+    return this.http.get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -221,9 +267,9 @@ export class SearchService {
     if (page) {
       params += page;
     }
-    console.log(this.apiUrl + 'vendors?membership=' + params);
-    return this.http
-      .get<any[]>(this.apiUrl + 'vendors?membership=' + params)
+    let url = this.getUrlWithKey(this.apiUrl + 'vendors?membership=' + params);
+    console.log(url);
+    return this.http.get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -287,6 +333,17 @@ export class SearchService {
     }
     return params;
   }
+  getUrlWithKey(url: string) {
+    if(API_HOST.indexOf('localhost') !== -1) {
+      return url;
+    }
+    if(url.indexOf('?') !== -1) {
+      url = url + '&api_key=' + SAM_API_KEY;
+    } else {
+      url = url + '?api_key=' + SAM_API_KEY;
+    }
+    return url;
+  }
   getVehicleVendorsMeetCriteria(
     filters: any[],
     vehicle: string,
@@ -295,9 +352,10 @@ export class SearchService {
     let params = '';
     params += '%28pool__vehicle__id=' + vehicle + '%29';
     params += this.buildOtherParams(filters, selectedServiceCategory);
-    console.log(this.apiUrl + 'vendors/count/duns?membership=' + params);
+    let url = this.getUrlWithKey(this.apiUrl + 'vendors/count/duns?membership=' + params);
+    console.log(url);
     return this.http
-      .get<any[]>(this.apiUrl + 'vendors/count/duns?membership=' + params)
+      .get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -335,9 +393,10 @@ export class SearchService {
           this.getSelectedFilterList(filter['selected'], ',');
       }
     }
-    console.log(this.apiUrl + 'pools/values/vehicle?' + params.substr(1));
+    let url = this.getUrlWithKey(this.apiUrl + 'pools/values/vehicle?' + params.substr(1));
+    console.log(url);
     return this.http
-      .get<any[]>(this.apiUrl + 'pools/values/vehicle?' + params.substr(1))
+      .get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -345,10 +404,8 @@ export class SearchService {
   }
 
   getVendorsCountByVehicle(vehicle: string): Observable<any[]> {
-    return this.http
-      .get<any[]>(
-        this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle
-      )
+    let url = this.getUrlWithKey(this.apiUrl + 'vendors/count/id?pools__pool__vehicle__id=' + vehicle);
+    return this.http.get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
@@ -358,38 +415,42 @@ export class SearchService {
     const arr = range.split('-');
     const from = arr[0];
     const to = arr[1];
-    return this.http
-      .get<any[]>(
-        this.apiUrl +
-          'contracts/values/vendor__duns?obligated_amount__range=' +
-          from +
-          ',' +
-          to
-      )
+    let url = this.getUrlWithKey(this.apiUrl + 
+      'contracts/values/vendor__duns?obligated_amount__range=' +
+      from + ',' + to);
+    return this.http.get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
   getAgencyPerformanceNames(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + 'agencies/?page=0').pipe(
+    let url = this.getUrlWithKey(this.apiUrl + 'agencies/?page=0');
+    return this.http.get<any[]>(url).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
   }
   getAgencyPerformanceDuns(ids: string): Observable<any[]> {
-    return this.http
-      .get<any[]>(
-        this.apiUrl + 'contracts/values/vendor__duns?agency_id__in=' + ids
-      )
+    let url = this.getUrlWithKey(this.apiUrl + 'contracts/values/vendor__duns?agency_id__in=' + ids);
+    return this.http.get<any[]>(url)
       .pipe(
         tap(data => data),
         catchError(this.handleError)
       );
   }
-  getVendorDetails(duns: string): Observable<any[]> {
-    console.log(this.apiUrl + 'vendors/' + duns);
-    return this.http.get<any[]>(this.apiUrl + 'vendors/' + duns).pipe(
+  getVendorDetails(duns: string): Observable<any> {
+    let url = this.getUrlWithKey(this.apiUrl + 'vendors/' + duns);
+    console.log(url);
+    return this.http.get<any[]>(url).pipe(
+      tap(data => data),
+      catchError(this.handleError)
+    );
+  }
+  getCapabilityStatementLink(contractnumber: string): Observable<any[]> {
+    let url = this.calcapiUrl + 'contract/capability_statement/url/' + contractnumber;
+    console.log(url);
+    return this.http.get<any[]>(url).pipe(
       tap(data => data),
       catchError(this.handleError)
     );
@@ -419,8 +480,9 @@ export class SearchService {
     if (ordering !== '') {
       params += '&ordering=' + ordering;
     }
-    console.log(this.apiUrl + params + page);
-    return this.http.get<any[]>(this.apiUrl + params + page).pipe(
+    let url = this.getUrlWithKey(this.apiUrl + params + page);
+    console.log(url);
+    return this.http.get<any[]>(url).pipe(
       tap(data => data),
       catchError(this.handleError)
     );

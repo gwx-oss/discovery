@@ -40,6 +40,7 @@ export class HeroComponent implements OnInit {
     return this._keywords;
   }
   ngOnInit() {
+    this.searchService.setApiUrl();
     if (this.searchService.keywords && this.searchService.keywords.length) {
       this.loading = true;
       this.buildNaicsItems(this.searchService.pools);

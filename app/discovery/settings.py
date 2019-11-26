@@ -133,7 +133,9 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_celery_results',
     
-    'corsheaders'
+    'corsheaders',
+
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -170,6 +172,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'discovery.context_processors.api_host',
                 'discovery.context_processors.google_analytics',
+                'discovery.context_processors.sam_api_key',
             ],
         },
     },
@@ -387,6 +390,7 @@ REFERRER_POLICY = 'origin'
 CORS_ORIGIN_ALLOW_ALL = True
 
 CSP_DEFAULT_SRC = ("'self'", "'unsafe-eval'")
+CSP_CONNECT_SRC = ("'self'", 'api.gsa.gov', 'calc-dev.app.cloud.gov', 'localhost', 'calc.gsa.gov')
 CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'", 'www.google-analytics.com', 'dap.digitalgov.gov')
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "fonts.googleapis.com")
 CSP_IMG_SRC = ("'self'", 'www.google-analytics.com')
