@@ -2,33 +2,59 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
-from django.contrib import admin
 
 from rest_framework.documentation import include_docs_urls
-from uaa_client.decorators import staff_login_required
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
 from vendors import views as vendors
+from contracts import views as contracts
+from drf_yasg.generators import OpenAPISchemaGenerator
 
+class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
+    def get_schema(self, *args, **kwargs):
+        schema = super().get_schema(*args, **kwargs)
+        schema.basePath = '/acquisition/discovery/DEV/v2/'
+        return schema
 
-admin.autodiscover()
-urlpatterns = []
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Discovery API",
+        default_version='v2',
+        description="Discovery API Documentation",
+        contact=openapi.Contact(email="pshc-dev@gsa.gov"),
+    ),
+    url="https://api.gsa.gov/",
+    public=True,
+    generator_class=CustomOpenAPISchemaGenerator,
+)
 
-if settings.UAA_AUTH:
-    admin.site.login = staff_login_required(admin.site.login)
-    urlpatterns.append(url(r'^auth/', include('uaa_client.urls')))
-
-urlpatterns.extend([
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', TemplateView.as_view(template_name='index.html')),
-    
+urlpatterns = [
+    # API related endpoints        
     url(r'^api/', include('api.urls')),
-    url(r'^api/', include_docs_urls(title="Discovery API", public=True)),
-    url(r'^docs/', RedirectView.as_view(url='/api', permanent=False)),
-    url(r'^developers?/', RedirectView.as_view(url='/api', permanent=False)),
-        
-    url(r'^results/$', TemplateView.as_view(template_name='pool.html')),
-    url(r'^results/csv', vendors.PoolCSV, name="pool-csv"),
-    
-    url(r'^vendor/(?P<vendor_duns>\w+)/$', TemplateView.as_view(template_name='vendor.html')),
-    url(r'^vendor/(?P<vendor_duns>\w+)/csv/$', vendors.VendorCSV, name="vendor-csv"),
-])
+    #url(r'^api/', include_docs_urls(title="Discovery API", public=True)),
+    url(r'^swagger(?P<format>.json|.yaml)$', schema_view.without_ui(cache_timeout=None), name='schema-json'),
+    url(r'^api/$', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
+    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
+    url(r'^api$', RedirectView.as_view(url='/api/', permanent=False)),
+    url(r'^docs/?', RedirectView.as_view(url='/api/', permanent=False)),
+    url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
+
+    # Data export endpoints
+    url(r'^csv/vendors', vendors.VendorCSV.as_view(), name="vendor-csv"),
+    url(r'^csv/contracts/(?P<vendor_duns>\w+)', contracts.ContractCSV.as_view(), name="contract-csv"),
+
+    # Frontend routes
+    url(r'^404$', TemplateView.as_view(template_name='index.html')),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^search.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^about.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^contracts.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^oasis.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^hcats.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^bmo.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^pss.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^erm.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^accounts.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
+]

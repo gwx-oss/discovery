@@ -2,16 +2,27 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 
 from rest_framework.fields import CharField, IntegerField
+from rest_framework.exceptions import ValidationError
 
 from rest_framework_filters.filterset import FilterSet, FilterSetMetaclass
 from rest_framework_filters.filters import BooleanFilter, NumberFilter, CharFilter, DateFilter, DateTimeFilter, RelatedFilter, BaseInFilter, BaseRangeFilter
 from rest_framework_filters.backends import ComplexFilterBackend
+from rest_framework_filters.complex_ops import combine_complex_queryset, decode_complex_ops
 
 from categories import models as categories
 from vendors import models as vendors
 from contracts import models as contracts
 
 import re
+import logging
+
+
+def filter_operators():
+    return {
+        '&': QuerySet.intersection,
+        '|': QuerySet.union,
+        '-': QuerySet.difference,
+    }
 
 
 class CharInFilter(BaseInFilter, CharFilter):
@@ -28,11 +39,7 @@ class NumberRangeFilter(BaseRangeFilter, NumberFilter):
 
 
 class DiscoveryComplexFilterBackend(ComplexFilterBackend):
-    operators = {
-        '&': QuerySet.intersection,
-        '|': QuerySet.union,
-        '-': QuerySet.difference,
-    }
+    operators = filter_operators()
 
 
 class MetaFilterSet(FilterSetMetaclass):
@@ -130,8 +137,7 @@ class MetaFilterSet(FilterSetMetaclass):
 
 class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _number = ('keywords__id',)
-    _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
+    _fuzzy_text = ('code', 'description', 'sin__code')
     
     class Meta:
         model = categories.Naics
@@ -140,13 +146,23 @@ class NaicsFilter(FilterSet, metaclass = MetaFilterSet):
 
 class PscFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _number = ('keywords__id',)
-    _fuzzy_text = ('code', 'description', 'sin__code', 'keywords__name')
-    
-    naics = RelatedFilter(NaicsFilter)
+    _fuzzy_text = ('code', 'description', 'sin__code')
     
     class Meta:
         model = categories.PSC
+        fields = ()
+
+
+class KeywordFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _number = ('id', 'parent__id')
+    _fuzzy_text = ('name', 'parent__name', 'calc', 'sin__code')
+
+    naics = RelatedFilter(NaicsFilter)
+    psc = RelatedFilter(PscFilter)
+    
+    class Meta:
+        model = categories.Keyword
         fields = ()
 
 
@@ -169,6 +185,8 @@ class PoolFilter(FilterSet, metaclass = MetaFilterSet):
     
     vehicle = RelatedFilter(VehicleFilter)
     naics = RelatedFilter(NaicsFilter)
+    psc = RelatedFilter(PscFilter)
+    keywords = RelatedFilter(KeywordFilter)
     
     class Meta:
         model = categories.Pool
@@ -220,6 +238,7 @@ class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
     
     _fuzzy_text = ('piid',)
     _date_time = ('expiration_8a_date', 'contract_end_date')
+    _number = ('id',)
     
     pool = RelatedFilter(PoolFilter)
     setasides = RelatedFilter(SetAsideFilter)
@@ -232,7 +251,7 @@ class PoolMembershipFilter(FilterSet, metaclass = MetaFilterSet):
         fields = ()
 
 
-class VendorFilter(FilterSet, metaclass = MetaFilterSet):
+class VendorBaseFilter(FilterSet, metaclass = MetaFilterSet):
     
     _boolean = ('sam_exclusion',)
     _token_text = ('cage', 'sam_status')
@@ -243,37 +262,110 @@ class VendorFilter(FilterSet, metaclass = MetaFilterSet):
     sam_location = RelatedFilter(LocationFilter)
     pools = RelatedFilter(PoolMembershipFilter)
     
-    setasides = CharFilter(field_name='setasides', method='filter_setasides')
-    
     class Meta:
         model = vendors.Vendor
         fields = ()
-        
-    def filter_setasides(self, qs, name, value):
-        value_components = value.split(':')
-        setasides = value_components[0].split(',')
-        pool_ids = value_components[1].split(',') if len(value_components) > 1 else []
+      
 
-        if len(pool_ids):
-            ids = list(vendors.PoolMembership.objects.filter(pool__id__in=pool_ids).values_list('id', flat=True))
-        else:
-            ids = []
+class VendorFilter(VendorBaseFilter):
+  
+    contract = RelatedFilter("ContractBaseFilter")
+    
+    membership = CharFilter(field_name='membership', method='filter_membership')
+    logger = logging.getLogger('django')	
 
-        for code in setasides:
-            if len(ids):
-                memberships = vendors.PoolMembership.objects.filter(setasides__code=code, id__in=ids)
+    def getMebershipIds(self, ms_queryset):
+        ms_ids = list()
+        self.logger.error(" first query {} ".format(ms_queryset.query))
+        vendorIdsByPool = {}
+        poolMembershipIdsByVendors = {}
+        for membership in ms_queryset:
+            if membership.pool_id in vendorIdsByPool: 
+                vendorIdsByPool[membership.pool_id].add(membership.vendor_id)
+            else: 
+                vendorIds = set()
+                vendorIds.add(membership.vendor_id)
+                vendorIdsByPool[membership.pool_id] = vendorIds
+
+            if membership.vendor_id in poolMembershipIdsByVendors:
+                poolMembershipIdsByVendors[membership.vendor_id].append(membership.id)
             else:
-                memberships = vendors.PoolMembership.objects.filter(setasides__code=code)
+                membershipIds = [membership.id]
+                poolMembershipIdsByVendors[membership.vendor_id] = membershipIds
+                
+        vendorIdIntersections = set()
+        checkFirstIteration = True
+        for key in vendorIdsByPool: 
+            if checkFirstIteration:
+                vendorIdIntersections = vendorIdsByPool.get(key)
+                checkFirstIteration = False
+            else:
+                vendorIdIntersections = vendorIdIntersections & vendorIdsByPool.get(key)
+                
+        for vendorId in vendorIdIntersections:
+            ms_ids.extend(poolMembershipIdsByVendors.get(vendorId))
 
-            setaside_ids = list(memberships.values_list('id', flat=True))
-            ids = list(set(ids) & set(setaside_ids))
+        return ms_ids
 
-        if len(ids) > 0:
-            qs = qs.filter(pools__id__in=ids)
-        else:
-            qs = qs.filter(pools__id=0)
+
+    def filter_membership(self, qs, name, value):
         
+        try:
+            complex_ops = decode_complex_ops(value, filter_operators(), True)
+        except ValidationError as exc:
+            raise ValidationError({'membership': exc.detail})
+        
+        # Collect the individual filtered membership querysets
+        querystrings = [op.querystring for op in complex_ops]
+        ms_queryset = vendors.PoolMembership.objects.all()
+        ms_querysets = []
+        errors = []
+        poolIds = []
+        queryParameters = {}
+        self.logger.error(" one  ")
+        for qstring in querystrings:
+            query = qstring.split('=')
+            try:
+                if 'pool__id__in' == query[0]: 
+                    poolIds = query[1].split(",")
+                    query[1] = poolIds
+                queryParameters[query[0]] = query[1]
+                ms_querysets.append(ms_queryset.filter(**{query[0]: query[1]}))	
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+
+        if(len(poolIds) <= 1):
+            try:
+                ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
+                ms_ids = list(ms_queryset.values_list('id', flat=True))
+                self.logger.error(" ms_ids if  {} ".format(ms_ids))
+                self.logger.error(" query if {} ".format(ms_queryset.query))
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+        else:       
+            try:
+                self.logger.error(" poolIds else {} ".format(poolIds))
+                ms_queryset = combine_complex_queryset(ms_querysets, complex_ops)
+                ms_ids = self.getMebershipIds(ms_queryset)
+                self.logger.error(" ms_ids else {} ".format(ms_ids))
+                if len(ms_ids) == 0:
+                    qs = qs.filter(pools__id=0)
+                    return qs
+
+            except ValidationError as exc:
+                errors[qstring] = exc.detail
+     
+        if errors:
+            raise ValidationError(errors)           
+        
+        if len(querystrings) > 0:
+            qs = qs.filter(pools__id__in=ms_ids)
+
         return qs
+
+        
+class PoolMembershipVendorFilter(PoolMembershipFilter):
+    vendor = RelatedFilter(VendorBaseFilter)
 
 
 class ContractStatusFilter(FilterSet, metaclass = MetaFilterSet):
@@ -300,26 +392,44 @@ class PlaceOfPerformanceFilter(FilterSet, metaclass = MetaFilterSet):
     
     _token_text = ('country_code', 'state')
     _fuzzy_text = ('country_name', 'zipcode')
+    _number = ('id',)
     
     class Meta:
         model = contracts.PlaceOfPerformance
         fields = ()
 
 
-class ContractFilter(FilterSet, metaclass = MetaFilterSet):
+class AgencyFilter(FilterSet, metaclass = MetaFilterSet):
     
-    _token_text = ('agency_id',)
-    _fuzzy_text = ('piid', 'base_piid', 'agency_name', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
-    _number = ('id', 'obligated_amount', 'annual_revenue', 'number_of_employees')
+    _token_text = ('id',)
+    _fuzzy_text = ('name',)
+    
+    class Meta:
+        model = contracts.Agency
+        fields = ()
+
+
+class ContractBaseFilter(FilterSet, metaclass = MetaFilterSet):
+    
+    _fuzzy_text = ('piid', 'base_piid', 'NAICS', 'PSC', 'point_of_contact', 'vendor_phone')
+    _number = ('id', 'obligated_amount')
     _date_time = ('date_signed', 'completion_date')
     
     status = RelatedFilter(ContractStatusFilter)
     pricing_type = RelatedFilter(PricingStructureFilter)
-        
-    vendor = RelatedFilter(VendorFilter)
-    vendor_location = RelatedFilter(LocationFilter)
     
+    agency = RelatedFilter(AgencyFilter)
+    vendor_location = RelatedFilter(LocationFilter)
     place_of_performance = RelatedFilter(PlaceOfPerformanceFilter)
+    
+    class Meta:
+        model = contracts.Contract
+        fields = ()
+
+
+class ContractFilter(ContractBaseFilter, metaclass = MetaFilterSet):
+
+    vendor = RelatedFilter(VendorFilter)
     
     psc_naics = CharFilter(field_name='NAICS', method='filter_psc_naics')
         
@@ -329,6 +439,14 @@ class ContractFilter(FilterSet, metaclass = MetaFilterSet):
         
     def filter_psc_naics(self, qs, name, value):
         naics_code = re.sub(r'[^\d]+$', '', value)
-        psc_codes = list(categories.PSC.objects.filter(naics__code=naics_code).distinct().values_list('code', flat=True))
         
-        return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))
+        try:
+            naics = categories.Naics.objects.get(code=naics_code)
+            sin_codes = list(naics.sin.all().values_list('code', flat=True))
+            psc_codes = list(categories.PSC.objects.filter(sin__code__in=sin_codes).distinct().values_list('code', flat=True))
+            return qs.filter(Q(PSC__in=psc_codes) | Q(NAICS=naics_code))
+        
+        except Exception:
+            pass
+        
+        return qs.filter(NAICS=naics_code)

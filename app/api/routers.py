@@ -12,6 +12,7 @@ class DiscoveryAPIRouter(SimpleRouter):
             mapping={
                 'get': 'list'
             },
+            detail=False,
             name='{basename}-list',
             initkwargs={'suffix': 'List'}
         ),
@@ -21,6 +22,7 @@ class DiscoveryAPIRouter(SimpleRouter):
             mapping={
                 'get': 'retrieve'
             },
+            detail=False,
             name='{basename}-detail',
             initkwargs={'suffix': 'Instance'}
         ),
@@ -30,6 +32,7 @@ class DiscoveryAPIRouter(SimpleRouter):
             mapping={
                 'get': 'values'
             },
+            detail=False,
             name='{basename}-values',
             initkwargs={'suffix': 'Values'}
         ),
@@ -39,6 +42,7 @@ class DiscoveryAPIRouter(SimpleRouter):
             mapping={
                 'get': 'count'
             },
+            detail=False,
             name='{basename}-count',
             initkwargs={'suffix': 'Count'}
         )

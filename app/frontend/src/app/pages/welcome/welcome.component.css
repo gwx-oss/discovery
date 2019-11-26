@@ -1,0 +1,20 @@
+a.vehicle {
+  padding: 1px 15px;
+  display: block;
+  width: 100%;
+}
+a.vehicle:hover {
+  background-color: #fff;
+  box-shadow: 0px 0px 2px #eee;
+}
+a {
+  text-decoration: none !important;
+}
+
+.widthCustom{
+  width:18.58%;
+  margin-right: 1.2%;
+}
+.widthCustom:nth-child(1){
+  margin-left: 1.0%;
+}
