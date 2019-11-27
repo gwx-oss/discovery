@@ -349,7 +349,6 @@ workflows:
             - ut-api-values
             - ut-frontend
             - at-backend
-            - at-frontend
           filters:
             branches:
               only: master
