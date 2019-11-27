@@ -37,7 +37,7 @@ core: &core
     apt-get update
     apt-get install -y git g++ gcc make procps
     apt-get install python-setuptools -y
-    apt-get install python3-pip
+    apt-get install python3-pip -y
 
 django: &django
   name: Install requirements
