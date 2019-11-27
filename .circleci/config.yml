@@ -335,6 +335,12 @@ workflows:
       - dep-stage:
           requires:
             - ut-components
+            - ut-core-api
+            - ut-api-fields
+            - ut-api-values
+            - ut-frontend
+            - at-backend
+            - at-frontend
           filters:
             branches:
               only: staging        
