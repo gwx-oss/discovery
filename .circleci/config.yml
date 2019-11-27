@@ -41,7 +41,8 @@ django: &django
   name: Install requirements
   command: |
     cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
-
+    
+    apt-get install python3-pip	
     pip install --no-cache-dir -r ./requirements.txt
     pip install --no-cache-dir -r ./requirements-dev.txt
 
