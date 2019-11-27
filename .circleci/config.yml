@@ -36,13 +36,13 @@ core: &core
   command: |
     apt-get update
     apt-get install -y git g++ gcc make procps
+    apt-get install python3-pip -y
 
 django: &django
   name: Install requirements
   command: |
     cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
     
-    apt-get install python3-pip	-y
     pip install --no-cache-dir -r ./requirements.txt
     pip install --no-cache-dir -r ./requirements-dev.txt
 
