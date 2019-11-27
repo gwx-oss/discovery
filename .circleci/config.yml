@@ -319,7 +319,6 @@ workflows:
       - ut-api-values
       - ut-frontend
       - at-backend
-      - at-frontend
       - dep-dev:
           requires:
             - ut-components
@@ -328,7 +327,6 @@ workflows:
             - ut-api-values
             - ut-frontend
             - at-backend
-            - at-frontend
           filters:
             branches:
               only: develop
@@ -340,7 +338,6 @@ workflows:
             - ut-api-values
             - ut-frontend
             - at-backend
-            - at-frontend
           filters:
             branches:
               only: staging        
