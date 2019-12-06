@@ -43,13 +43,10 @@ export class SearchService  {
   getAPIUrl() {
     let apiUrl : string = '';
     if(API_HOST.indexOf('discovery.gsa.gov') !== -1) {
-      console.log('making prod url');
       apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
     } else if(API_HOST.indexOf('localhost') !== -1) {
-      console.log('making calc  dev url');
       apiUrl = API_HOST + '/api/';
     } else {
-      console.log('making dev url');
       apiUrl = 'https://api.gsa.gov/acquisition/discovery/DEV/v2/';
     }
     return apiUrl;
