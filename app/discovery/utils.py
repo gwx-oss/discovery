@@ -1,8 +1,6 @@
 from django.conf import settings
 
 from inspect import getframeinfo, stack
-from urllib.parse import urlparse
-
 import psutil
 import logging
 import os
@@ -92,14 +90,3 @@ def csv_memory(message = "Memory"):
     mem = memory_in_mb()
     
     return('"{}","{}",{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f}'.format(caller.filename, message, mem['total'], mem['available'], mem['used'], mem['free'], mem['active'], mem['inactive'], mem['buffers'], mem['cached'], mem['shared']))
-
-def getHostName():
-    return settings.API_HOST
-
-def getApiBasePath():
-    if 'localhost' in settings.API_HOST:
-        return '/api/'
-    else:
-        data = urlparse(settings.API_HOST)
-        return data.path
-    

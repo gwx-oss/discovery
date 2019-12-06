@@ -6,16 +6,20 @@ from django.views.generic.base import RedirectView
 from rest_framework.documentation import include_docs_urls
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from urllib.parse import urlparse
 
 from vendors import views as vendors
 from contracts import views as contracts
 from drf_yasg.generators import OpenAPISchemaGenerator
-from discovery.utils import getHostName, getApiBasePath
 
 class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
     def get_schema(self, *args, **kwargs):
         schema = super().get_schema(*args, **kwargs)
-        schema.basePath = getApiBasePath()
+        if 'localhost' in settings.API_HOST:
+            schema.basePath = '/api/'
+        else:
+            data = urlparse(settings.API_HOST)
+            schema.basePath = data.path
         return schema
 
 schema_view = get_schema_view(
@@ -25,7 +29,7 @@ schema_view = get_schema_view(
         description="Discovery API Documentation",
         contact=openapi.Contact(email="pshc-dev@gsa.gov"),
     ),
-    url=getHostName(),
+    url=settings.API_HOST,
     public=True,
     generator_class=CustomOpenAPISchemaGenerator,
 )
