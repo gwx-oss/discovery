@@ -15,7 +15,8 @@ from discovery.utils import getHostName, getBaseUrl
 class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
     def get_schema(self, *args, **kwargs):
         schema = super().get_schema(*args, **kwargs)
-        schema.basePath = getBaseUrl()
+        # schema.basePath = getBaseUrl()
+        schema.basePath = '/acquisition/discovery/DEV/v2/'
         return schema
 
 schema_view = get_schema_view(
@@ -25,7 +26,8 @@ schema_view = get_schema_view(
         description="Discovery API Documentation",
         contact=openapi.Contact(email="pshc-dev@gsa.gov"),
     ),
-    url=getHostName(),
+    url="https://api.gsa.gov/",
+    # url=getHostName(),
     public=True,
     generator_class=CustomOpenAPISchemaGenerator,
 )
