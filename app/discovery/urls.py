@@ -10,7 +10,7 @@ from drf_yasg import openapi
 from vendors import views as vendors
 from contracts import views as contracts
 from drf_yasg.generators import OpenAPISchemaGenerator
-from discovery.utils import getHostName, getBaseUrl
+# from discovery.utils import getHostName, getBaseUrl
 
 class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
     def get_schema(self, *args, **kwargs):
