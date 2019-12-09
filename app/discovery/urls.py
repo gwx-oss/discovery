@@ -4,38 +4,38 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 
 from rest_framework.documentation import include_docs_urls
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+# from drf_yasg.views import get_schema_view
+# from drf_yasg import openapi
 
 from vendors import views as vendors
 from contracts import views as contracts
-from drf_yasg.generators import OpenAPISchemaGenerator
+# from drf_yasg.generators import OpenAPISchemaGenerator
 
-class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
-    def get_schema(self, *args, **kwargs):
-        schema = super().get_schema(*args, **kwargs)
-        schema.basePath = '/acquisition/discovery/DEV/v2/'
-        return schema
+# class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
+#     def get_schema(self, *args, **kwargs):
+#         schema = super().get_schema(*args, **kwargs)
+#         schema.basePath = '/acquisition/discovery/DEV/v2/'
+#         return schema
 
-schema_view = get_schema_view(
-    openapi.Info(
-        title="Discovery API",
-        default_version='v2',
-        description="Discovery API Documentation",
-        contact=openapi.Contact(email="pshc-dev@gsa.gov"),
-    ),
-    url="https://api.gsa.gov/",
-    public=True,
-    generator_class=CustomOpenAPISchemaGenerator,
-)
+# schema_view = get_schema_view(
+#     openapi.Info(
+#         title="Discovery API",
+#         default_version='v2',
+#         description="Discovery API Documentation",
+#         contact=openapi.Contact(email="pshc-dev@gsa.gov"),
+#     ),
+#     url="https://api.gsa.gov/",
+#     public=True,
+#     generator_class=CustomOpenAPISchemaGenerator,
+# )
 
 urlpatterns = [
     # API related endpoints        
     url(r'^api/', include('api.urls')),
     #url(r'^api/', include_docs_urls(title="Discovery API", public=True)),
-    url(r'^swagger(?P<format>.json|.yaml)$', schema_view.without_ui(cache_timeout=None), name='schema-json'),
-    url(r'^api/$', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
-    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
+    # url(r'^swagger(?P<format>.json|.yaml)$', schema_view.without_ui(cache_timeout=None), name='schema-json'),
+    # url(r'^api/$', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
+    # url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
     url(r'^api$', RedirectView.as_view(url='/api/', permanent=False)),
     url(r'^docs/?', RedirectView.as_view(url='/api/', permanent=False)),
     url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
