@@ -91,19 +91,19 @@ def csv_memory(message = "Memory"):
     return('"{}","{}",{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f},{:.4f}'.format(caller.filename, message, mem['total'], mem['available'], mem['used'], mem['free'], mem['active'], mem['inactive'], mem['buffers'], mem['cached'], mem['shared']))
 
 
-def getHostName():
-    if "localhost" in settings.API_HOST:
-       return settings.API_HOST
-    else:
-        return 'https://api.gsa.gov/'
+# def getHostName():
+#     if "localhost" in settings.API_HOST:
+#        return settings.API_HOST
+#     else:
+#         return 'https://api.gsa.gov/'
 
   
-def getBaseUrl():
-    if "localhost" in settings.API_HOST:
-            return '/api/'
-    elif "discovery.gsa.gov" in settings.API_HOST:
-        return "/acquisition/discovery/v2/"
-    else:
-        return "/acquisition/discovery/DEV/v2/"
+# def getBaseUrl():
+#     if "localhost" in settings.API_HOST:
+#             return '/api/'
+#     elif "discovery.gsa.gov" in settings.API_HOST:
+#         return "/acquisition/discovery/v2/"
+#     else:
+#         return "/acquisition/discovery/DEV/v2/"
 
 
