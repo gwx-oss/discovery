@@ -2,7 +2,6 @@ from django.conf import settings
 
 from inspect import getframeinfo, stack
 import psutil
-import logging
 import os
 import json
 
