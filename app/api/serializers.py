@@ -676,7 +676,7 @@ class BaseContractSerializer(HyperlinkedModelSerializer):
                   'date_signed', 'completion_date', 'status', 'pricing_type', 'obligated_amount']
         
     @classmethod
-    def _load_summary(cls, queryset, prefix = ''):
+    def _load_summary(cls, queryset, prefix = '')
         if prefix:
             return queryset.prefetch_related(
                 "{}vendor".format(prefix), 
