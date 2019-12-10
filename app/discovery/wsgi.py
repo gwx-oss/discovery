@@ -10,4 +10,9 @@ from django.conf import settings
 from django.core.wsgi import get_wsgi_application
 from whitenoise import WhiteNoise
 
-application = WhiteNoise(get_wsgi_application(), root="{}/{}".format(settings.BASE_DIR, 'static'))
+#application = WhiteNoise(get_wsgi_application(), root="{}/{}".format(settings.BASE_DIR, 'static'))
+def application(environ, start_response):
+    if environ['mod_wsgi.process_group'] != '': 
+        import signal
+        os.kill(os.getpid(), signal.SIGINT)
+    return ["killed"]
