@@ -10,11 +10,12 @@ from drf_yasg import openapi
 from vendors import views as vendors
 from contracts import views as contracts
 from drf_yasg.generators import OpenAPISchemaGenerator
+from discovery.utils import getHostName, getBaseUrl
 
 class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
     def get_schema(self, *args, **kwargs):
         schema = super().get_schema(*args, **kwargs)
-        schema.basePath = '/acquisition/discovery/DEV/v2/'
+        schema.basePath = getBaseUrl()
         return schema
 
 schema_view = get_schema_view(
@@ -24,7 +25,7 @@ schema_view = get_schema_view(
         description="Discovery API Documentation",
         contact=openapi.Contact(email="pshc-dev@gsa.gov"),
     ),
-    url="https://api.gsa.gov/",
+    url=getHostName(),
     public=True,
     generator_class=CustomOpenAPISchemaGenerator,
 )
