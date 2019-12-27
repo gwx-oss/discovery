@@ -1,3 +1,15 @@
+<style>
+  .contrct_list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .contrct_list li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+</style>
 <div *ngIf="!loading">
   <div class="text-right pad-top-bottom">
     <button class="usa-button-secondary" (click)="toggleSBD()">
@@ -16,6 +28,7 @@
       <tr>
         <th></th>
         <th scope="col">Company</th>
+        <th scope="col">Capability Statement</th>
         <th scope="col" [hidden]="service_categories_selected.length === 0 || isHideEligibleServiceCategory">
           Eligible Service Categories
         </th>
@@ -77,6 +90,12 @@
           <a (click)="showVendorDetails(item.duns)">{{
             item.name | titlecase
           }}</a>
+        </td>
+        <td>
+          <ul class="contrct_list" *ngFor="let con_num of item.contractnumber; let i = index">
+            <li *ngIf="contract_urls[con_num] != 'Not Available'"><a href="{{calc_url+'contract/capability_statement/'+con_num }}" target="_blank">{{con_num}}</a></li>
+            <!-- <ng-template #elseBlock >{{contract_urls[con_num]}}</ng-template> ; else elseBlock-->
+          </ul>
         </td>
         <td [hidden]="service_categories_selected.length === 0 || isHideEligibleServiceCategory">
           <span [innerHTML]="poolMeetCriteria(item.pools_ids)"></span>
