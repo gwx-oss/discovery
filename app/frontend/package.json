@@ -24,7 +24,7 @@
     "jquery": "^3.4.1",
     "lodash": "^4.17.13",
     "lodash.mergewith": "4.6.2",
-    "rxjs": "^6.3.2",
+    "rxjs": "6.3.2",
     "zlib": "^1.0.5",
     "zone.js": "^0.8.26",
     "mixin-deep": "^1.3.2",
@@ -55,6 +55,8 @@
     "fstream": ">=1.0.12",
     "js-yaml": "3.13.1",
     "handlebars": ">=4.3.0",
-    "serialize-javascript": ">=2.1.1"
+    "serialize-javascript": ">=2.1.1",
+    "minimist": ">=1.2.2",
+    "acorn": ">=5.7.4"
   }
 }
