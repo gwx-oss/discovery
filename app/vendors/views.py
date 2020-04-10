@@ -16,7 +16,6 @@ from contracts import models as contracts
 import csv
 import time
 
-
 # Filters:
 # 
 #     keywords={KEYWORD},...
@@ -288,7 +287,8 @@ class VendorCSV(BaseCSVView):
 
  
     def _render_vendors(self, writer):
-        labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'No. of Contracts', 'Vehicles']
+        #labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'No. of Contracts', 'Vehicles']
+        labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'Vehicles']
         labels.extend([sa_obj.name for sa_obj in self.setaside_data])
         labels.append("Selected Vehicle")
         writer.writerow(labels)
@@ -308,7 +308,6 @@ class VendorCSV(BaseCSVView):
                 location = "{}, {} {}".format(vendor.sam_location.city, vendor.sam_location.state, vendor.sam_location.zipcode)
             else:
                 location = 'NA'
-            
             if len(self.naics) > 0:
                 naics_data = categories.Naics.objects.filter(code__in=self.naics)
                 sin_codes = {}
@@ -333,7 +332,8 @@ class VendorCSV(BaseCSVView):
 
             if len(vendor_vehicles) > 0:
                 selected_vehicles = str(self.vehicles).replace('[', '').replace(']', '').strip("'")
-            v_row = [format_duns(vendor.duns), vendor.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
+            #v_row = [format_duns(vendor.duns), vendor.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
+            v_row = [format_duns(vendor.duns), vendor.name, location, ", ".join(vendor_vehicles)]
             v_row.extend(setaside_list)
             if selected_vehicles:
                 v_row.append(selected_vehicles)
@@ -350,7 +350,6 @@ class VendorCSV(BaseCSVView):
         writer.writerow(('URL: ' + self.request.build_absolute_uri(),))
         writer.writerow(('Time: ' + time.strftime('%b %d, %Y %l:%M%p %Z'),))
         writer.writerow(('', ))
-        
         self._process_keywords(writer)
         self._process_naics(writer)
         self._process_psc(writer)
