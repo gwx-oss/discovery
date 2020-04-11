@@ -57,6 +57,7 @@
     "handlebars": ">=4.3.0",
     "serialize-javascript": ">=2.1.1",
     "minimist": ">=1.2.2",
-    "acorn": ">=5.7.4"
+    "acorn": ">=5.7.4",
+    "kind-of": ">=6.0.3"
   }
 }
