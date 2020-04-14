@@ -66,7 +66,7 @@ export class FiltersComponent implements OnInit {
   emitServerError: EventEmitter<number> = new EventEmitter();
   @Output()
   emitReset: EventEmitter<boolean> = new EventEmitter();
-  APP_ASSETS = '/frontend/';
+  APP_ASSETS = '/';
   disabled_btn = true;
   num_items_selected = 0;
   loaded_filters: any[] = [];

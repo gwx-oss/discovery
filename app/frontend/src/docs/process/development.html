@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Discovery development process &mdash; GSA Discovery 3.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Discovery testing process" href="testing.html" />
+    <link rel="prev" title="Discovery static assets" href="../architecture/assets.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSA Discovery
+          
+
+          
+            
+            <img src="../_static/discovery.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../readme.html">Discovery overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../readme.html#documentation-outline">Documentation outline</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#getting-set-up-with-discovery">Getting set up with Discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-architecture-and-design">Discovery architecture and design</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../readme.html#discovery-related-processes">Discovery related processes</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Development processes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html">Testing processes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deployment.html">Deployment process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="management.html">Discovery management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="contributing.html">Contributing to Discovery</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#useful-links">Useful links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../readme.html#related-projects">Related projects</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://discovery.gsa.gov/">Discovery live</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../start/readme.html">Getting started with Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/development.html">Discovery development options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/vagrant.html">Discovery on Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/docker.html">Discovery on Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/setup.html">Discovery setup</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/readme.html">Architecture and design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/technologies.html">Discovery technologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/design.html">Discovery system and frontend design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/data.html">Discovery data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/assets.html">Discovery static assets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Processes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Discovery processes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery development process</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-control-and-branching-strategy">Version control and branching strategy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#branch-hosting-environment-mappings">Branch / Hosting environment mappings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forking-and-development-flow">Forking and development flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#issues-and-pull-requests">Issues and pull requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#merges-and-deployments">Merges and deployments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quality-assurance">Quality assurance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Discovery testing process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Discovery deployment process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="management.html">Discovery management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to Discovery</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">DISCOVERY home</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/GSA/">GitHub</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSA Discovery</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../readme.html">Discovery overview</a> &raquo;</li>
+        
+      <li>Discovery development process</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="discovery-development-process">
+<span id="discovery-development-process"></span><h1>Discovery development process<a class="headerlink" href="#discovery-development-process" title="Permalink to this headline">¶</a></h1>
+<p><strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Process Overview</span></a></strong> | <a class="reference internal" href="testing.html"><span class="doc">Testing Processes</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
+<div class="section" id="version-control-and-branching-strategy">
+<span id="version-control-and-branching-strategy"></span><h2>Version control and branching strategy<a class="headerlink" href="#version-control-and-branching-strategy" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application is managed through Git and hosted as a <a class="reference external" href="https://github.com/PSHCDevOps/discovery">source repository on GitHub</a>.  Certain libraries have also been forked to the <a class="reference external" href="https://github.com/PSHCDevOps">PSHCDevOps GitHub organization</a> as needed to patch for the Discovery system.</p>
+<div class="section" id="branch-hosting-environment-mappings">
+<span id="branch-hosting-environment-mappings"></span><h3>Branch / Hosting environment mappings<a class="headerlink" href="#branch-hosting-environment-mappings" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>master</strong> branch maps to <strong>production</strong> hosting environment</li>
+<li><strong>develop</strong> <em>(default)</em> branch maps to <strong>staging</strong> hosting environment</li>
+<li><strong>gh-pages</strong> branch is a special documentation site hosted on GitHub generated from this documentation</li>
+<li><strong>docs</strong> branch is an optional branch that can deploy documentation updates before production release</li>
+</ul>
+</div>
+<div class="section" id="forking-and-development-flow">
+<span id="forking-and-development-flow"></span><h3>Forking and development flow<a class="headerlink" href="#forking-and-development-flow" title="Permalink to this headline">¶</a></h3>
+<p>All maintainers may work off of the official source repository in feature or hotfix branches derived from the <strong>develop</strong> branch, which can be pushed and tested before ultimately creating a pull request that gets merged into the <strong>develop</strong> branch when ready <em>(and reviewed if multiple developers working on project)</em>.  When <strong>develop</strong> is deployed to the <a class="reference external" href="https://discovery-dev.app.cloud.gov/">development staging environment</a> and everything is reviewed and functioning properly, then <strong>develop</strong> can be merged into <strong>master</strong> triggering a production deployment.  Neither the <strong>develop</strong> or <strong>master</strong> branch can be pushed to directly by design.</p>
+<p>All external contributors should fork the repository and create feature or hotfix branches derived from the <strong>develop</strong> branch.  When ready a pull request should be issued, which a maintainer can merge into a official repository test branch before merging into the <strong>develop</strong> branch.  The reason for creating an intermediate branch is that we can not expose CircleCI environment variables to non maintainers and we need to ensure all tests pass before merging from a feature or hotfix branch into <strong>develop</strong>.  Once the changes are merged to <strong>develop</strong>, the updates follow the same develop process as defined above for maintainers.</p>
+<p>Currently deployments to production may be made anytime an update is ready to deploy.  This <strong>&#8220;may&#8221;</strong> get a little more structured in the future.  We want to encourage fast deployments to the production system though instead of manufacturing delays in the process.</p>
+<p><br/></p>
+</div>
+</div>
+<div class="section" id="issues-and-pull-requests">
+<span id="issues-and-pull-requests"></span><h2>Issues and pull requests<a class="headerlink" href="#issues-and-pull-requests" title="Permalink to this headline">¶</a></h2>
+<p>All external contributors, end users, and maintainers are encouraged to file issues in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">Discovery issue queue</a> and/or create pull requests on the official source repository with suggested updates and fixes.</p>
+<p>Pull requests should be clearly defined and follow general Discovery application conventions unless attempting to replace a convention throughout the application codebase.  Any pull requests not meeting these criteria will be delayed or rejected.</p>
+<p><br/></p>
+</div>
+<div class="section" id="merges-and-deployments">
+<span id="merges-and-deployments"></span><h2>Merges and deployments<a class="headerlink" href="#merges-and-deployments" title="Permalink to this headline">¶</a></h2>
+<p>All deployments to production and staging environments are expected to be the result of a CircleCI job, so there should be no manual deployments to either environment.  Staging deployments are triggered by merges to the <strong>develop</strong> branch, and production deployments are triggered by merges to the <strong>master</strong> branch.  Outside of testing, manual deployments are bad!</p>
+<p>It may be necessary to create temporary test Cloud.gov spaces using the <strong>scripts/setup-cf-space.sh</strong> script, but this should not affect the production or staging application hosting environments.  This would also require more Cloud Foundry resources, which may not be available on the hosting environment.</p>
+<p>All pull requests to the <strong>develop</strong> branch will be reviewed by the Discovery management team and current application maintainers.</p>
+<p><br/></p>
+</div>
+<div class="section" id="quality-assurance">
+<span id="quality-assurance"></span><h2>Quality assurance<a class="headerlink" href="#quality-assurance" title="Permalink to this headline">¶</a></h2>
+<p>All updates to the Discovery application should be made and tested <em>(unit and acceptance)</em> in isolated branches, which can then be merged on success to the <strong>develop</strong> branch, and <strong>ONLY</strong> the <strong>develop</strong> branch.  All merges to <strong>master</strong> should be from <strong>develop</strong> branch updates <em>(which is why the develop branch is the default branch)</em>.</p>
+<p>This process enforces a review process before ending up in the production environment which can help us catch bugs and issues sooner than our users do.  It is better for us to be frustrated with site issues that our end users.  All updates are reviewed by Discovery management and the current maintainers before deploying to production.</p>
+<p>If issues are found, hotfix branches can be created from the <strong>develop</strong> branch and advance through the update process as normal.  This is one benefit to having a quick develop, test, production release cycle detached from timed sprints.</p>
+<p><br/></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testing.html" class="btn btn-neutral float-right" title="Discovery testing process" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../architecture/assets.html" class="btn btn-neutral" title="Discovery static assets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, GSA Federal Acquisition Service
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'3.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
