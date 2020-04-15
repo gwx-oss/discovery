@@ -16,6 +16,7 @@ import { Error404Component } from './pages/error404/error404.component';
 import { SearchModule } from './pages/search/search.module';
 import { ContractsComponent } from './pages/contracts/contracts.component';
 import { ErmComponent } from './pages/contract-vehicles/erm.component';
+import { DocsComponent } from './pages/docs/docs.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { ErmComponent } from './pages/contract-vehicles/erm.component';
     HcatsComponent,
     PssComponent,
     HeroComponent,
-    ErmComponent
+    ErmComponent,
+    DocsComponent
   ],
   imports: [
     BrowserModule,

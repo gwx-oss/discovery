@@ -23,8 +23,11 @@ _*/
 /db/*.sql
 /docker/django-env.vars
 /docs/build
+/docs/static
 /logs/*.log
 /logs/*.csv
 /logs/celerybeat.pid
 /vagrant/config.yml
 celerybeat-schedule
+
+/.idea/
