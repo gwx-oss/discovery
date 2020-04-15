@@ -10,3 +10,10 @@
   border-left: 0px !important;
   font-weight: normal !important;
 }
+section.covid-19-banner{
+  background-color: #cddc86;
+}
+section.covid-19-banner .covid-19-holder{
+  padding:5px 35px;
+  text-align: center;
+}
