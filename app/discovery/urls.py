@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^api/$', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
     url(r'^api$', RedirectView.as_view(url='/api/', permanent=False)),
-    url(r'^docs/?', RedirectView.as_view(url='/api/', permanent=False)),
+    url(r'^docs/?', RedirectView.as_view(url='/docs/', permanent=False)),
     url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
 
     # Data export endpoints
