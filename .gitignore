@@ -15,7 +15,7 @@ __pycache__
 /.coverage
 /.vagrant/
 /tmp/
-_*/
+# removed for /docs assets _*/
 .~lock.*
 
 /app/discovery/local_settings.py
