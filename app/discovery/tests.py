@@ -14,7 +14,7 @@ class SmokeTest(case.RequestTestCase):
         self.validated_path('/api/')
         
     def test_docs_found_2(self):
-        self.validated_temp_redirect('/docs/')
+        self.validated_path('/docs/')
         
     def test_docs_found_3(self):
         self.validated_temp_redirect('/developer/')

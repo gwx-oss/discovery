@@ -56,6 +56,6 @@ urlpatterns = [
     url(r'^pss.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^erm.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^accounts.*$', TemplateView.as_view(template_name='index.html')),
-    #url(r'^docs.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^docs.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
 ]
