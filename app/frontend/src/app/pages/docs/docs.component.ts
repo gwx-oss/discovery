@@ -9,23 +9,7 @@ declare let SAM_API_KEY: string;
   styleUrls: ['./docs.component.css']
 })
 export class DocsComponent implements OnInit {
-  sam_load_date;
-  fpds_load_date;
-  loading = true;
-  error_message;
-  constructor(private httpClient: HttpClient,  private searchService: SearchService) {}
+  constructor() {}
 
-  ngOnInit() {
-    let apiUrl = API_HOST + '/api/metadata';
-    if(API_HOST.indexOf('localhost') === -1) {
-      apiUrl = this.searchService.getAPIUrl() + 'metadata?API_KEY=' + SAM_API_KEY;
-    }
-    
-    this.httpClient.get(apiUrl)
-      .subscribe(data => {
-        this.loading = false;
-        this.sam_load_date = data['sam_load_date'];
-        this.fpds_load_date = data['fpds_load_date'];
-      });
-  }
+  ngOnInit() {}
 }
