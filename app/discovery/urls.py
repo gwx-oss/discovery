@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
     url(r'^api$', RedirectView.as_view(url='/api/', permanent=False)),
     url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
+    #url(r'^docs/$', RedirectView.as_view(url='/docs/', permanent=False)),
 
     # Data export endpoints
     url(r'^csv/vendors', vendors.VendorCSV.as_view(), name="vendor-csv"),
@@ -56,5 +57,6 @@ urlpatterns = [
     url(r'^pss.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^erm.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^accounts.*$', TemplateView.as_view(template_name='index.html')),
+    url(r'^docs.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
 ]
