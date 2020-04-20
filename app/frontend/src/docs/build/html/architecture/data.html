@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Discovery data &mdash; GSA Discovery 3.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Discovery static assets" href="assets.html" />
+    <link rel="prev" title="Discovery system and frontend design" href="design.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSA Discovery
+          
+
+          
+            
+            <img src="../_static/discovery.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../readme.html">Discovery overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../readme.html#documentation-outline">Documentation outline</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#getting-set-up-with-discovery">Getting set up with Discovery</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../readme.html#discovery-architecture-and-design">Discovery architecture and design</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="technologies.html">Technologies required</a></li>
+<li class="toctree-l4"><a class="reference internal" href="design.html">Application system and interface design</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Discovery data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="assets.html">Static assets</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#discovery-related-processes">Discovery related processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme.html#useful-links">Useful links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../readme.html#related-projects">Related projects</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://discovery.gsa.gov/">Discovery live</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../start/readme.html">Getting started with Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/development.html">Discovery development options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/vagrant.html">Discovery on Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/docker.html">Discovery on Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/setup.html">Discovery setup</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Architecture</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Architecture and design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Discovery technologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Discovery system and frontend design</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classification-information">Classification information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#keywords">Keywords</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#naics-codes">NAICS codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#psc-codes">PSC codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-setaside-categories">Vendor setaside categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contract-vehicles">Contract vehicles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vendor-pools">Vendor pools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vendor-information">Vendor information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pool-membership">Pool membership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sam-registrations">SAM registrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#capability-statements">Capability statements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contract-information">Contract information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fpds-records">FPDS records</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#scheduling-updates-and-monitoring-progress">Scheduling updates and monitoring progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-look-at-how-discovery-data-fits-together">A look at how Discovery data fits together</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assets.html">Discovery static assets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Processes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../process/readme.html">Discovery processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/development.html">Discovery development process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/testing.html">Discovery testing process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/deployment.html">Discovery deployment process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/management.html">Discovery management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/contributing.html">Contributing to Discovery</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSA Discovery</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../readme.html">Discovery overview</a> &raquo;</li>
+        
+      <li>Discovery data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="discovery-data">
+<span id="discovery-data"></span><h1>Discovery data<a class="headerlink" href="#discovery-data" title="Permalink to this headline">¶</a></h1>
+<p><strong>&lt;</strong> <a class="reference internal" href="design.html"><span class="doc">System and Interface Design</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Architecture Overview</span></a></strong> | <a class="reference internal" href="assets.html"><span class="doc">Static Assets</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
+<div class="section" id="overview">
+<span id="overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application system pulls in all available data from bundled spreadsheets and external API&#8217;s.  These API&#8217;s help us stay up to date with events happening in the federal contracting space related to vehicles that are followed by Discovery.  The API updates occur on a periodic basis, at least once a day, and spreadsheet data is parsed from <strong>app/data</strong> spreadsheets on every deployment.</p>
+<p>Currently the OASIS, HCATS, BMO, and PSS vehicles are supported but there are plans to add more vehicles in the near future.</p>
+<p>Below is a diagram representing the flow of information for the Discovery system from the various API&#8217;s we fetch data from.</p>
+<p><img alt="Discovery data" src="../_images/Discovery-DataFlow-APIs.png" /></p>
+<p>As you can see an internal worker server constantly polls for tasks, the updates data from the appropriate API, and writes that data to the PostgreSQL database, as well as the task results for audit purposes.</p>
+<p><br/></p>
+</div>
+<div class="section" id="classification-information">
+<span id="classification-information"></span><h2>Classification information<a class="headerlink" href="#classification-information" title="Permalink to this headline">¶</a></h2>
+<p>The basic information that holds everything together in the system is classification information.  This data is currently stored as fixtures in the application source code, and are updated with releases of the Discovery application.</p>
+<p>The <strong>./run parse_categories</strong> command is executed on every deployment of the Discovery scheduler.</p>
+<p>There is a Celery task wrapper for this command in case it ever pulls data from a remote API on a periodic basis, but it also comes in handy for testing the scheduler and worker processes ocassionally, due to it&#8217;s speed of execution.</p>
+<p><br/></p>
+<div class="section" id="keywords">
+<span id="keywords"></span><h3>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h3>
+<p>Keywords are assigned to contract vehicle pools and can be used to filter down relevant vendors and contracts.</p>
+<p>You can find a list of all the available keywords in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/keywords.json">keyword fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/pool_index.xlsx">pool index spreadsheet</a>.</p>
+<p><br/></p>
+</div>
+<div class="section" id="naics-codes">
+<span id="naics-codes"></span><h3>NAICS codes<a class="headerlink" href="#naics-codes" title="Permalink to this headline">¶</a></h3>
+<p>NAICS codes allow vendors, contracts, and other meta information to be categorized in the Discovery system.</p>
+<p>You can find a list of all the available NAICS codes in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/naics.json">NAICS fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/naics_2012.xls">NAICS 2012 spreadsheet</a> and <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/naics_2017.xlsx">NAICS 2017 spreadsheet</a>.</p>
+<p><br/></p>
+</div>
+<div class="section" id="psc-codes">
+<span id="psc-codes"></span><h3>PSC codes<a class="headerlink" href="#psc-codes" title="Permalink to this headline">¶</a></h3>
+<p>PSC codes allow vendors, contracts, and other meta information to be categorized in the Discovery system.</p>
+<p>You can find a list of all the available PSC codes in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/psc.json">PSC fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/psc.xls">PSC spreadsheet</a>.</p>
+<p><br/></p>
+</div>
+<div class="section" id="vendor-setaside-categories">
+<span id="vendor-setaside-categories"></span><h3>Vendor setaside categories<a class="headerlink" href="#vendor-setaside-categories" title="Permalink to this headline">¶</a></h3>
+<p>Certain small businesses have certain regulated advantageds over others in the proceurement process.  These are known as setasides or classifications that a business may have, such as veteran owned, minority owned, 8a, HUBZone, etc...</p>
+<p>You can find a list of all the available setasides in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/setasides.json">setaside fixture data</a>.</p>
+<p><br/></p>
+</div>
+<div class="section" id="contract-vehicles">
+<span id="contract-vehicles"></span><h3>Contract vehicles<a class="headerlink" href="#contract-vehicles" title="Permalink to this headline">¶</a></h3>
+<p>The Discovery application maintains information on contract vehicles.  Vendors complete work for the government as members of vehicle pools.</p>
+<p>You can find a list of all the available contract vehicles in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json">contract vehicle fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/categories/fixtures/vehicles.json">pool index spreadsheet</a>.</p>
+<p><br/></p>
+</div>
+<div class="section" id="vendor-pools">
+<span id="vendor-pools"></span><h3>Vendor pools<a class="headerlink" href="#vendor-pools" title="Permalink to this headline">¶</a></h3>
+<p>The Discovery application maintains pools of vendors for each vehicle.  Each pool is then used to classify vendors in the system in filtered queries.</p>
+<p>You can find a list of all the available vendor pools in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/pools.json">vendor pool fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/app/data/pool_index.xlsx">pool index spreadsheet</a>.</p>
+<p><br/></p>
+</div>
+</div>
+<div class="section" id="vendor-information">
+<span id="vendor-information"></span><h2>Vendor information<a class="headerlink" href="#vendor-information" title="Permalink to this headline">¶</a></h2>
+<p>Vendors make up the core data type in the Discovery system.  All related data displays are grouped around vendors currently.  Vendor information is provided both through CSV file information provided by GSA PSHC staff in the <strong>vendors/data</strong> directory and through SAM API registration data that is returned for the DUNS number of the vendor in the SAM system.</p>
+<p>You can find examples of vendor data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/vendors.json">vendor fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/app/data/pools">pool data spreadsheets</a>.</p>
+<p><br/></p>
+<div class="section" id="pool-membership">
+<span id="pool-membership"></span><h3>Pool membership<a class="headerlink" href="#pool-membership" title="Permalink to this headline">¶</a></h3>
+<p>Each vendor is classified into different pools using a PIID value which serves as a unique identifier for the vendor.</p>
+<p>You can find examples of vendor PIID mapping data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/vendors/fixtures/poolmemberships.json">vendor pool membership fixture data</a> or the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/app/data/pools">pool data spreadsheets</a>.</p>
+<p><br/></p>
+</div>
+<div class="section" id="sam-registrations">
+<span id="sam-registrations"></span><h3>SAM registrations<a class="headerlink" href="#sam-registrations" title="Permalink to this headline">¶</a></h3>
+<p>We collect vendor information from the <a class="reference external" href="https://gsa.github.io/sam_api/sam/">SAM API</a>.  This service provides information such as status, location, CAGE code, setasides granted, etc...</p>
+<p>See the <strong>vendors/management/commands/load_sam.py</strong> command for more detailed information.</p>
+<p><br/></p>
+</div>
+<div class="section" id="capability-statements">
+<span id="capability-statements"></span><h3>Capability statements<a class="headerlink" href="#capability-statements" title="Permalink to this headline">¶</a></h3>
+<p>Any Vendor Capability Statements that are added to <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/discovery_site/static/discovery_site/capability_statements">this folder</a> and will automatically be linked to on the vendor&#8217;s page. The file must be a PDF, and its name must be only the vendor&#8217;s DUNS number.</p>
+<p>There will be more work on tighter integration of vendor capability statements in future Discovery application development.</p>
+<p><br/></p>
+</div>
+</div>
+<div class="section" id="contract-information">
+<span id="contract-information"></span><h2>Contract information<a class="headerlink" href="#contract-information" title="Permalink to this headline">¶</a></h2>
+<p>The Discovery application collects information on contracts in order to generate information for vendors in the followed acquisition vehicle vendor pools.  The Discovery application looks primarily at contract awards and modifications, which amend contract information in our system as they occur.</p>
+<p>You can find examples of contract data elements in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/contract/fixtures/contracts.json">contract fixture data</a>.</p>
+<p><br/></p>
+<div class="section" id="fpds-records">
+<span id="fpds-records"></span><h3>FPDS records<a class="headerlink" href="#fpds-records" title="Permalink to this headline">¶</a></h3>
+<p>We collect contract information from the <a class="reference external" href="https://www.fpds.gov/wiki/index.php/ATOM_Feed_FAQ">FPDS ATOM Feeds</a>.  This service provides all of our contract data, of which we use contract dates, amounts, contact information, revenue and employee figures, and agency information.</p>
+<p>See the <strong>contract/management/commands/load_fpds.py</strong> command for more detailed information.</p>
+<p><br/></p>
+</div>
+</div>
+<div class="section" id="scheduling-updates-and-monitoring-progress">
+<span id="scheduling-updates-and-monitoring-progress"></span><h2>Scheduling updates and monitoring progress<a class="headerlink" href="#scheduling-updates-and-monitoring-progress" title="Permalink to this headline">¶</a></h2>
+<p>See the scheduling section in the <a class="reference internal" href="../start/setup.html"><span class="doc">Discovery setup documentation</span></a> for more information on how to schedule data updates in the Discovery system.</p>
+<p><br/></p>
+</div>
+<div class="section" id="a-look-at-how-discovery-data-fits-together">
+<span id="a-look-at-how-discovery-data-fits-together"></span><h2>A look at how Discovery data fits together<a class="headerlink" href="#a-look-at-how-discovery-data-fits-together" title="Permalink to this headline">¶</a></h2>
+<p><img alt="Discovery schema" src="../_images/Discovery-DB-Schema.png" /></p>
+<p><br/></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="assets.html" class="btn btn-neutral float-right" title="Discovery static assets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="design.html" class="btn btn-neutral" title="Discovery system and frontend design" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, GSA Federal Acquisition Service
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'3.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

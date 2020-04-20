@@ -81,7 +81,7 @@ then
     
     # Fetch source repository
     git clone -b "$SOURCE_BRANCH" "$GH_PAGES_REMOTE" "$BUILD_DIR"
-    cd "$BUILD_DIR/docs"
+    cd "$BUILD_DIR/app/frontend/src/docs"
     
     # Build and preserve documentation
     make html
