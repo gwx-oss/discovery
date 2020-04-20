@@ -5,7 +5,7 @@ declare let API_HOST: string;
 declare let SAM_API_KEY: string;
 // declare let $: any;
 @Component({
-  templateUrl: './../../../docs/index.html',
+  templateUrl: './../../../docs/build/html/index.html',
   styleUrls: ['./docs.component.css']
 })
 export class DocsComponent implements OnInit {

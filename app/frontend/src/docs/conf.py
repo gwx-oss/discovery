@@ -8,8 +8,7 @@ import sphinx_rtd_theme
 
 
 DOCS_DIR = os.path.dirname(__file__)
-BASE_DIR = os.path.dirname(DOCS_DIR)
-# BASE_DIR = os.path.dirname('./../../../../')
+BASE_DIR = os.path.dirname('./../../../../')
 
 # -- General configuration ------------------------------------------------
 
