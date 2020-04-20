@@ -9,7 +9,7 @@ import sphinx_rtd_theme
 
 DOCS_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(DOCS_DIR)
-
+# BASE_DIR = os.path.dirname('./../../../../')
 
 # -- General configuration ------------------------------------------------
 
@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'GSA Discovery'
-copyright = '2017, GSA Federal Acquisition Service'
+copyright = '2020, GSA Federal Acquisition Service'
 author = 'GSA FAS PSHC with 18F'
 
 # The version info for the project you're documenting, acts as replacement for
