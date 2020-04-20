@@ -187,6 +187,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "../frontend/src/docs"),
 )
+
 #
 # File compression
 #
@@ -263,13 +264,6 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': os.path.join(PROJ_DIR, 'logs/fpds_data.csv'),
             'formatter': 'csv'
-        },
-        'applogfile': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(PROJ_DIR, 'logs/discoveryApp.log'),
-            'maxBytes': 1024*1024*15, # 15MB
-            'backupCount': 10,
         }
     },
     'loggers': {
@@ -316,10 +310,6 @@ LOGGING = {
             'handlers': ['fpds_data_file'],
             'level': 'INFO',
             'propagate': False
-        },
-        'discoveryApp': {
-            'handlers': ['applogfile'],
-            'level': 'DEBUG',
         }
     },
     'root': {
