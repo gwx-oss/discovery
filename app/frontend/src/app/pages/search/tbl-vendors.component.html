@@ -32,13 +32,13 @@
         <th scope="col" [hidden]="service_categories_selected.length === 0 || isHideEligibleServiceCategory">
           Eligible Service Categories
         </th>
-        <!-- <th scope="col" class="sbd">
+        <th scope="col" class="sbd">
           <span class="tooltip left"
             >Contract Actions<span class="tooltiptext"
               >Contract count for 5 years of work related to search</span
             ></span
           >
-        </th> -->
+        </th>
         <th scope="col" [class.hide]="!sbd_col" class="sbd">
           <span class="tooltip"
             >SB<span class="tooltiptext">Small Business</span></span
@@ -100,7 +100,7 @@
         <td [hidden]="service_categories_selected.length === 0 || isHideEligibleServiceCategory">
           <span [innerHTML]="poolMeetCriteria(item.pools_ids)"></span>
         </td>
-        <!-- <td>{{ item.contracts }}</td> -->
+        <td>{{ item.contracts }}</td>
         <td
           [class.hide]="!sbd_col"
           class="sbd"
