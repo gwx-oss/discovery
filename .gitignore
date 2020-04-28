@@ -15,7 +15,7 @@ __pycache__
 /.coverage
 /.vagrant/
 /tmp/
-_*/
+# removed for /docs assets _*/
 .~lock.*
 
 /app/discovery/local_settings.py
@@ -23,8 +23,11 @@ _*/
 /db/*.sql
 /docker/django-env.vars
 /docs/build
+/docs/static
 /logs/*.log
 /logs/*.csv
 /logs/celerybeat.pid
 /vagrant/config.yml
 celerybeat-schedule
+
+/.idea/

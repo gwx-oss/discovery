@@ -81,7 +81,7 @@ then
     
     # Fetch source repository
     git clone -b "$SOURCE_BRANCH" "$GH_PAGES_REMOTE" "$BUILD_DIR"
-    cd "$BUILD_DIR/docs"
+    cd "$BUILD_DIR"
     
     # Build and preserve documentation
     make html
@@ -91,7 +91,7 @@ then
     cd "$BUILD_DIR"
     git checkout "$GH_PAGES_BRANCH"
     rm -Rf *
-    mv $SITE_TEMP_DIR/* ./
+    mv $SITE_TEMP_DIR/* ./src/app/frontend/docs
         
     # Disable GitHub Jekyll
     touch .nojekyll
