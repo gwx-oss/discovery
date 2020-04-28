@@ -189,7 +189,7 @@ STATICFILES_DIRS = [
 ]
 
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #DOCS_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'docs')
 #
 # File compression
