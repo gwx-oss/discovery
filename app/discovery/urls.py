@@ -1,7 +1,8 @@
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import include, url, static
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
+from django.urls import path, include
 
 from rest_framework.documentation import include_docs_urls
 from drf_yasg.views import get_schema_view
@@ -40,7 +41,6 @@ urlpatterns = [
     url(r'^api$', RedirectView.as_view(url='/api/', permanent=False)),
     url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
     #url(r'^docs/$', RedirectView.as_view(url='/docs/', permanent=False)),
-
     # Data export endpoints
     url(r'^csv/vendors', vendors.VendorCSV.as_view(), name="vendor-csv"),
     url(r'^csv/contracts/(?P<vendor_duns>\w+)', contracts.ContractCSV.as_view(), name="contract-csv"),
@@ -58,5 +58,7 @@ urlpatterns = [
     url(r'^erm.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^accounts.*$', TemplateView.as_view(template_name='index.html')),
     #url(r'^docs.*$', TemplateView.as_view(template_name='index.html')),
-    url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
+    url(r'^.*$', RedirectView.as_view(url='/404', permanent=False))
+    #path('docs/', lambda request: redirect('docs/index.html', permanent=False)),
 ]
+#urlpatterns += static(settings.STATIC_URL, document_root=settings.DOCS_ROOT)
