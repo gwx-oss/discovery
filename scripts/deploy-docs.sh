@@ -91,7 +91,7 @@ then
     cd "$BUILD_DIR"
     git checkout "$GH_PAGES_BRANCH"
     rm -Rf *
-    mv $SITE_TEMP_DIR/* ./src/app/frontend/docs
+    mv $SITE_TEMP_DIR/* ./app/static/docs
         
     # Disable GitHub Jekyll
     touch .nojekyll
