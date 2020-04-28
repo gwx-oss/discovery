@@ -41,7 +41,6 @@ urlpatterns = [
     url(r'^api$', RedirectView.as_view(url='/api/', permanent=False)),
     url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
     #url(r'^docs/$', RedirectView.as_view(url='/docs/', permanent=False)),
-    #url(r'^docs/', RedirectView.as_view(pattern_name='/docs/index.html', permanent=False)),
     # Data export endpoints
     url(r'^csv/vendors', vendors.VendorCSV.as_view(), name="vendor-csv"),
     url(r'^csv/contracts/(?P<vendor_duns>\w+)', contracts.ContractCSV.as_view(), name="contract-csv"),
@@ -59,9 +58,7 @@ urlpatterns = [
     url(r'^erm.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^accounts.*$', TemplateView.as_view(template_name='index.html')),
     #url(r'^docs.*$', TemplateView.as_view(template_name='index.html')),
-    url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
-    path(r'^docs/(?P<path>.*)$', serve,{
-        'document_root': settings.DOCS_ROOT
-    })
+    url(r'^.*$', RedirectView.as_view(url='/404', permanent=False))
     #path('docs/', lambda request: redirect('docs/index.html', permanent=False)),
-] #+ static(settings.STATIC_URL, document_root=settings.DOCS_ROOT)
+]
+#urlpatterns += static(settings.STATIC_URL, document_root=settings.DOCS_ROOT)
