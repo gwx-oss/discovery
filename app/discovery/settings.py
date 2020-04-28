@@ -184,13 +184,11 @@ TEMPLATES = [
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, 'static'),
     os.path.join(os.path.dirname(BASE_DIR), 'app/frontend/src'),
 ]
 
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#DOCS_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'docs')
+
 #
 # File compression
 #
