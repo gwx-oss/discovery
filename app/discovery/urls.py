@@ -60,5 +60,8 @@ urlpatterns = [
     url(r'^accounts.*$', TemplateView.as_view(template_name='index.html')),
     #url(r'^docs.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
+    path(r'^docs/(?P<path>.*)$', serve,{
+        'document_root': settings.DOCS_ROOT
+    })
     #path('docs/', lambda request: redirect('docs/index.html', permanent=False)),
-] + static(settings.STATIC_URL, document_root=settings.DOCS_ROOT)
+] #+ static(settings.STATIC_URL, document_root=settings.DOCS_ROOT)
