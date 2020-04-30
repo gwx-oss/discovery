@@ -11,3 +11,12 @@ from django.core.wsgi import get_wsgi_application
 from whitenoise import WhiteNoise
 
 application = WhiteNoise(get_wsgi_application(), root="{}/{}".format(settings.BASE_DIR, 'static'))
+
+try:
+    application = static_url_rewriter(
+        get_wsgi_application(),
+        '/docs/',
+        '/static/docs/'
+    )
+except Exception as e:
+    print(e)
