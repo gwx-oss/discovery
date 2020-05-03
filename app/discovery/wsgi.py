@@ -10,7 +10,7 @@ from django.conf import settings
 from django.core.wsgi import get_wsgi_application
 from whitenoise import WhiteNoise
 
-application = WhiteNoise(get_wsgi_application(), root="{}/{}".format(settings.BASE_DIR, 'static'))
+application = WhiteNoise(get_wsgi_application(), root="{}/{}".format(settings.BASE_DIR, 'static'), index_file=True)
 
 try:
     application = static_url_rewriter(
