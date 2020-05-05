@@ -93,9 +93,8 @@ then
     git checkout "$GH_PAGES_BRANCH"
     rm -Rf *
     mv $SITE_TEMP_DIR/* ./src/app/static/docs
-    cd ./src/app/static/docs
-    #Redirecting /docs to /docs/html
-    touch .htaccess
+    cd ./src/app/static/
+    touch dev.txt
     echo "<IfModule mod_rewrite.c>
 	      RewriteEngine On
 	      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
