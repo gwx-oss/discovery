@@ -68,7 +68,7 @@ TEMPLATE_DEBUG = False
 #
 # General configurations
 #
-SECRET_KEY = config_value('SECRET_KEY', '')
+SECRET_KEY = 'This1is2Teddys3Secret4key' #config_value('SECRET_KEY', '')
 APPEND_SLASH = True
 
 #
@@ -183,9 +183,9 @@ TEMPLATES = [
 #
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(os.path.dirname(BASE_DIR), 'app/frontend/src'),
-]
+#STATICFILES_DIRS = [
+#    os.path.join(os.path.dirname(BASE_DIR), 'app/frontend/src'),
+#]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
