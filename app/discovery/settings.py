@@ -68,7 +68,7 @@ TEMPLATE_DEBUG = False
 #
 # General configurations
 #
-SECRET_KEY = 'This1is2Teddys3Secret4key' #config_value('SECRET_KEY', '')
+SECRET_KEY = config_value('SECRET_KEY', '')
 APPEND_SLASH = True
 
 #
