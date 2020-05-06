@@ -22,7 +22,7 @@ cd "$SCRIPT_DIR/.."
 
 DEFAULT_SOURCE_BRANCH="`git branch | grep '*' | sed -r -e 's/^\*[[:space:]]+//'`"
 GH_PAGES_BRANCH="gh-pages"
-GH_PAGES_REMOTE="git@github.com:PSHCDevOps/discovery.git"
+GH_PAGES_REMOTE="https://github.com/PSHCDevOps/discovery.git"
 
 DOC_UPDATE_MESSAGE="Building and publishing documentation updates"
 
@@ -78,7 +78,7 @@ then
     # Ensure a clean build
     rm -Rf "$BUILD_DIR"
     rm -Rf "$SITE_TEMP_DIR"
-    
+
     # Fetch source repository
     git clone -b "$SOURCE_BRANCH" "$GH_PAGES_REMOTE" "$BUILD_DIR"
     cd "$BUILD_DIR"
@@ -92,17 +92,11 @@ then
     cd "$BUILD_DIR"
     git checkout "$GH_PAGES_BRANCH"
     rm -Rf *
-    mv $SITE_TEMP_DIR/* ./src/app/static/docs
-    cd ./src/app/static/
+    mv $SITE_TEMP_DIR/* /app/app/static/docs2
+    cd /app/app/static/docs2
     touch dev.txt
-    echo "<IfModule mod_rewrite.c>
-	      RewriteEngine On
-	      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
-	      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
-	      RewriteRule ^.*$ - [NC,L]
-	      RewriteRule ^(.*) index.html [NC,L]
-        </IfModule>" >> .htaccess
 
+    cd "$BUILD_DIR"
     # Disable GitHub Jekyll
     touch .nojekyll
     
@@ -113,7 +107,7 @@ then
     
     # Clean up after ourselves
     rm -Rf "$SITE_TEMP_DIR"
-    rm -Rf "$BUILD_DIR"    
+    rm -Rf "$BUILD_DIR"
 
 else
     echo "The update-docs script requires git and make to be installed"

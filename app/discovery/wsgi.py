@@ -12,5 +12,4 @@ from django.core.wsgi import get_wsgi_application
 from whitenoise import WhiteNoise
 
 application = WhiteNoise(get_wsgi_application(), root="{}/{}".format(settings.BASE_DIR, 'static'))
-application.add_files(settings.BASE_DIR, 'static/docs')
 application.index_file = True
