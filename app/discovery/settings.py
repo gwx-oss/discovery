@@ -117,6 +117,7 @@ INSTALLED_APPS = [
     'categories',
     'vendors',
     'contracts',
+    'docs',
     
     'django.contrib.contenttypes',
     'django.contrib.auth',
