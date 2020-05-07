@@ -92,6 +92,8 @@ then
     cd "$BUILD_DIR"
     git checkout "$GH_PAGES_BRANCH"
     rm -Rf *
+    # Testing
+    mkdir /app/app/static/docs2
     mv $SITE_TEMP_DIR/* /app/app/static/docs2
     cd /app/app/static/docs2
     touch dev.txt
