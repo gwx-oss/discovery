@@ -18,7 +18,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets","src/docs"],
+            "assets": ["src/favicon.ico", "src/assets","src/docs","src/docs/index.html"],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
               "src/assets/select2/select2.min.js"
