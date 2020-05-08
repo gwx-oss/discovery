@@ -93,6 +93,9 @@ then
     git checkout "$GH_PAGES_BRANCH"
     rm -Rf *
     # Testing
+    # TODO: Need to copy index file into app/docs for django
+    # template. Might also have to manually change html for
+    # new links to open in new tabs.
     mkdir -p /app/app/static/docs2
     mv $SITE_TEMP_DIR/* /app/app/static/docs2
     cd /app/app/static/docs2
