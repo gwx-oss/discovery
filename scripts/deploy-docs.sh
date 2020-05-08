@@ -22,7 +22,7 @@ cd "$SCRIPT_DIR/.."
 
 DEFAULT_SOURCE_BRANCH="`git branch | grep '*' | sed -r -e 's/^\*[[:space:]]+//'`"
 GH_PAGES_BRANCH="gh-pages"
-GH_PAGES_REMOTE="https://github.com/PSHCDevOps/discovery.git"
+GH_PAGES_REMOTE="git@github.com:PSHCDevOps/discovery.git"
 
 DOC_UPDATE_MESSAGE="Building and publishing documentation updates"
 
