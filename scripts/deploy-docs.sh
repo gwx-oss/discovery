@@ -85,7 +85,7 @@ then
     
     # Build and preserve documentation
     make html
-    mkdir $SITE_TEMP_DIR/docs
+    mkdir -p $SITE_TEMP_DIR/docs
     mv build/html "$SITE_TEMP_DIR"/docs
     
     # Replace all files with generated documentation site
