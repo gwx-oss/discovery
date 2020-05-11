@@ -5,7 +5,7 @@ set -e
 
 #-------------------------------------------------------------------------------
 GH_PAGES_BRANCH="gh-pages"
-GH_PAGES_REMOTE="git@github.com:PSHCDevOps/discovery.git"
+GH_PAGES_REMOTE="https://github.com/PSHCDevOps/discovery.git"
 #Testing locally directory
 #SCRIPT_DIR=./
 #Cloud directory
