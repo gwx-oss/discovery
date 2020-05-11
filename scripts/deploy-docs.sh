@@ -76,42 +76,67 @@ fi
 if which git >/dev/null && which make >/dev/null
 then
     # Ensure a clean build
+    echo "cleaning $BUILD_DIR"
     rm -Rf "$BUILD_DIR"
+    echo "cleaing $SITE_TEMP_DIR"
     rm -Rf "$SITE_TEMP_DIR"
 
     # Fetch source repository
+    echo "cloning $SOURCH_BRANCH $GH_PAGES_REMOTE into $BUILD_DIR"
     git clone -b "$SOURCE_BRANCH" "$GH_PAGES_REMOTE" "$BUILD_DIR"
+
     cd "$BUILD_DIR"/docs
-    
+    pwd 
+
     # Build and preserve documentation
+    echo "generating html"
     make html
+    
+    echo "making $SITE_TEMP_DIR/docs"
     mkdir -p $SITE_TEMP_DIR/docs
+
+    echo "moving build/html into $SITE_TEMP_DIR/docs"
     mv build/html "$SITE_TEMP_DIR"/docs
     
     # Replace all files with generated documentation site
     cd "$BUILD_DIR"
+    pwd
+
+    echo "checking out $GH_PAGES_BRANCH"
     git checkout "$GH_PAGES_BRANCH"
+
+    echo "cleaning git branch $GH_PAGES_BRANCH"
     rm -Rf *
+
     # Testing
     # TODO: Need to copy index file into app/docs for django
     # template. Might also have to manually change html for
     # new links to open in new tabs.
-    mkdir -p /app/app/static/docs2
-    mv $SITE_TEMP_DIR/* /app/app/static/docs2
-    cd /app/app/static/docs2
-    touch dev.txt
+    # mkdir -p /app/app/static/docs2
+    
+    echo "moving $SITE_TEMP_DIR into $BUILD_DIR"
+    mv $SITE_TEMP_DIR/* "$BUILD_DIR"
+    
+    #cd /app/app/static/docs2
+    #touch dev.txt
 
-    cd "$BUILD_DIR"
+    # cd "$BUILD_DIR"
     # Disable GitHub Jekyll
     touch .nojekyll
     
     # Update Git repository and publish site updates
+    echo "Adding files"
     git add -A
     git diff-index --quiet HEAD || git commit -m "$DOC_UPDATE_MESSAGE"
+    
+    echo "Pushing files"
     git push origin "$GH_PAGES_BRANCH"
     
     # Clean up after ourselves
+    echo "cleaning $SITE_TEMP_DIR"
     rm -Rf "$SITE_TEMP_DIR"
+
+    echo "cleaning $BUILD_DIR"
     rm -Rf "$BUILD_DIR"
 
 else
