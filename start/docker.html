@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Discovery on Docker &mdash; GSA Discovery 3.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Discovery setup" href="setup.html" />
+    <link rel="prev" title="Discovery on Vagrant" href="vagrant.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSA Discovery
+          
+
+          
+            
+            <img src="../_static/discovery.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Discovery overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://discovery.gsa.gov/">Discovery live</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="readme.html">Getting started with Discovery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readme.html#overview">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="readme.html#topics">Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="about.html">About Discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html">Development options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vagrant.html">Running with Vagrant</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Discovery on Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-docker-services">Running the Docker services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-docker-commands">Common Docker commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html">Discovery setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Discovery development options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Discovery on Vagrant</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Discovery on Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#application-configurations">Application configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-docker-services">Running the Docker services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-docker-commands">Common Docker commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting help</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Discovery setup</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/readme.html">Architecture and design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/technologies.html">Discovery technologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/design.html">Discovery system and frontend design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/data.html">Discovery data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/assets.html">Discovery static assets</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Processes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../process/readme.html">Discovery processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/development.html">Discovery development process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/testing.html">Discovery testing process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/deployment.html">Discovery deployment process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/management.html">Discovery management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../process/contributing.html">Contributing to Discovery</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSA Discovery</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../readme.html">Discovery overview</a> &raquo;</li>
+        
+      <li>Discovery on Docker</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="discovery-on-docker">
+<span id="discovery-on-docker"></span><h1>Discovery on Docker<a class="headerlink" href="#discovery-on-docker" title="Permalink to this headline">¶</a></h1>
+<p><strong>&lt;</strong> <a class="reference internal" href="vagrant.html"><span class="doc">Running with Vagrant</span></a> | <strong>^</strong> <strong><a class="reference internal" href="readme.html"><span class="doc">Getting Started</span></a></strong> | <a class="reference internal" href="setup.html"><span class="doc">Application setup</span></a> <strong>&gt;</strong></p>
+<p><br/></p>
+<div class="section" id="installation">
+<span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Docker installation is fairly easy.  Our use of Docker requires two systems; the core Docker server, and Docker Compose for orchestrating container clusters.  Docker Compose makes it easy to work with projects containing many interlocking systems.</p>
+<p>If you are using the Discovery Vagrant development environment you do not need to install Docker and Docker Compose.</p>
+<ol class="simple">
+<li><strong>Docker</strong> - Install Docker from: <a class="reference external" href="https://www.docker.com/community-edition">https://www.docker.com/community-edition</a>
+<em>- If running Debian or Ubuntu, you can install by running the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh">scripts/setup-docker.sh</a> script</em></li>
+</ol>
+<ol class="simple">
+<li><strong>Docker Compose</strong> - Install Docker Compose from: <a class="reference external" href="https://docs.docker.com/compose/install">https://docs.docker.com/compose/install</a>
+<em>- This is included in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh">scripts/setup-docker.sh</a> setup</em></li>
+</ol>
+<p><br/></p>
+</div>
+<div class="section" id="configuration">
+<span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>You will need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Fetch Discovery project</span>
+$ git clone https://github.com/PSHCDevOps/discovery.git <span class="o">{</span>project_directory<span class="o">}</span>
+$ <span class="nb">cd</span> <span class="o">{</span>project_directory<span class="o">}</span>
+
+<span class="c1"># docker/django-env.vars is ignored by Git so your configuration will not be versioned</span>
+$ cp docker/django-env.example.vars docker/django-env.vars
+</pre></div>
+</div>
+<p><em>See below for notes on the available configurations...</em></p>
+<p><br/></p>
+<div class="section" id="application-configurations">
+<span id="application-configurations"></span><h3>Application configurations<a class="headerlink" href="#application-configurations" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>API_HOST</strong> <em>default: http://localhost:8080</em></p>
+<p>Sets the API request location for the Discovery frontend. The Discovery application passes the host and port of the API interface to the frontend Javascript.  This enables the Javascript to make requests to the API which basically power the frontend displays.  If no data is loading in the interface, chances are that this value is wrong.</p>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>SAM_API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
+<p>Sets the <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
+</li>
+</ul>
+<ul>
+<li><p class="first"><strong>SECRET_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
+<p>Sets a secret alpha-numeric key that is required by Django for certain operations.  This key can be anything you like but it should be lengthy and randomistic.</p>
+</li>
+<li><p class="first"><strong>GA_TRACKING_ID</strong> <em>default: <strong>None</strong></em></p>
+<p>Sets a Google Analytics tracking id for the environment.  This is fed into the frontend HTML tracking snippet in the Discovery template.</p>
+</li>
+</ul>
+<p><br/></p>
+</div>
+</div>
+<div class="section" id="running-the-docker-services">
+<span id="running-the-docker-services"></span><h2>Running the Docker services<a class="headerlink" href="#running-the-docker-services" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> <span class="o">{</span>project directory<span class="o">}</span>
+
+<span class="c1"># Ensure all Docker services are up to date and running if possible</span>
+$ docker-compose up -d
+
+<span class="c1"># You can verify all Docker services are running with</span>
+$ docker-compose ps
+<span class="c1">#</span>
+<span class="c1"># You should see 5 containers running</span>
+<span class="c1">#   1 web server</span>
+<span class="c1">#   1 scheduler</span>
+<span class="c1">#   1 worker</span>
+<span class="c1">#   1 PostgreSQL database</span>
+<span class="c1">#   1 Redis instance (tasks)</span>
+
+<span class="c1"># &quot;SSH&quot; into a Docker container and have a look around</span>
+<span class="c1">#</span>
+<span class="c1"># full-container-name = {network}_{name}_{instance_num}</span>
+<span class="c1">#</span>
+<span class="c1"># ex;  discovery_web_1</span>
+<span class="c1">#      vagrant_worker_1</span>
+<span class="c1">#</span>
+$ docker <span class="nb">exec</span> -it <span class="o">{</span>full-container-name<span class="o">}</span> bash
+
+<span class="c1"># Build frontend Angular application</span>
+$ scripts/build-frontend.sh
+
+<span class="c1"># Wait for database migration to complete (should see &quot;beat: Starting&quot;)</span>
+$ docker-compose logs --follow scheduler
+
+<span class="c1"># Load data fixtures if migration complete</span>
+$ scripts/load-fixtures.sh
+</pre></div>
+</div>
+<p>You are now in the shared project directory: <strong>/discovery</strong></p>
+<ul class="simple">
+<li><strong>/discovery</strong> live at <strong>localhost:8080</strong></li>
+</ul>
+<p><br/></p>
+</div>
+<div class="section" id="common-docker-commands">
+<span id="common-docker-commands"></span><h2>Common Docker commands<a class="headerlink" href="#common-docker-commands" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Run on either the <strong>host</strong> or <strong>vagrant</strong> machine (<em>if installed and used</em>)</li>
+<li>Run from the <strong>top level project</strong> directory</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ docker-compose ps                      <span class="c1"># List all running containers from the docker-compose images</span>
+
+$ docker-compose logs web                <span class="c1"># Display recent log entries from the discovery_web_1 container</span>
+$ docker-compose logs -f web             <span class="c1"># Follow log entries from the discovery_web_1 container</span>
+
+$ docker <span class="nb">exec</span> -it discovery_web_1 bash   <span class="c1"># &quot;SSH&quot; into the running discovery_web_1 container</span>
+
+$ docker-compose up -d                   <span class="c1"># Create and run all site containers/services in the background</span>
+$ docker-compose build                   <span class="c1"># Rebuild docker images for all docker-compose services</span>
+                                         <span class="c1"># - run &quot;docker-compose up -d&quot; after to update running services</span>
+
+$ docker-compose stop web                <span class="c1"># Stop the Discovery web service</span>
+$ docker-compose rm web                  <span class="c1"># Remove the Discovery web service</span>
+</pre></div>
+</div>
+<p>More on the <a class="reference external" href="https://docs.docker.com/engine/reference/commandline/cli/">docker commands</a></p>
+<p><br/></p>
+</div>
+<div class="section" id="getting-help">
+<span id="getting-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<p>If you run into issues please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you can not get them resolved through Docker documentation or help channels.  Docker has pretty <a class="reference external" href="https://docs.docker.com/">comprehensive documentation</a> available and there are plenty of tutorials available covering pretty much all aspects of Docker usage.  Being an open source project there is a lot of discussion and question/answers related to Docker and Docker Compose.</p>
+<p>Docker maintains <a class="reference external" href="https://forums.docker.com/">forums</a> you can discuss Docker related issues and there are many groups that meet to support those trying to dig deeper into the world of containerization.</p>
+<p><br/></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="setup.html" class="btn btn-neutral float-right" title="Discovery setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="vagrant.html" class="btn btn-neutral" title="Discovery on Vagrant" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, GSA Federal Acquisition Service
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'3.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
