@@ -287,8 +287,8 @@ class VendorCSV(BaseCSVView):
 
  
     def _render_vendors(self, writer):
-        #labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'No. of Contracts', 'Vehicles']
-        labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'Vehicles']
+        labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'No. of Contracts', 'Vehicles']
+        #labels = ['Vendor DUNS', 'Vendor Name', 'Location', 'Vehicles']
         labels.extend([sa_obj.name for sa_obj in self.setaside_data])
         labels.append("Selected Vehicle")
         writer.writerow(labels)
@@ -332,8 +332,8 @@ class VendorCSV(BaseCSVView):
 
             if len(vendor_vehicles) > 0:
                 selected_vehicles = str(self.vehicles).replace('[', '').replace(']', '').strip("'")
-            #v_row = [format_duns(vendor.duns), vendor.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
-            v_row = [format_duns(vendor.duns), vendor.name, location, ", ".join(vendor_vehicles)]
+            v_row = [format_duns(vendor.duns), vendor.name, location, contract_list.count(), ", ".join(vendor_vehicles)]
+            #v_row = [format_duns(vendor.duns), vendor.name, location, ", ".join(vendor_vehicles)]
             v_row.extend(setaside_list)
             if selected_vehicles:
                 v_row.append(selected_vehicles)
