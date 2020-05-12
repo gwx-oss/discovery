@@ -11,7 +11,7 @@
 version: '2.3'
 services:
   web:
-    command: bash -c "scripts/init-webserver.sh /dev/stderr && cd app && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
+    command: bash -c "scripts/init-webserver.sh /dev/stderr && scripts/init-docs.sh && cd app && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
     depends_on:
       - scheduler
     ports:
