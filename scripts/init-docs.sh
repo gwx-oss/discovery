@@ -13,15 +13,15 @@ SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || 
 #-------------------------------------------------------------------------------
 
 echo "navigating to $SCRIPT_DIR/../app/static"
-cd "$SCRIPT_DIR/../app/static"
 
-if [ -d "docs/" ] 
+# Testing with /docs2/
+if [ -d "docs2/" ] 
 then
-    echo "cleaning /docs/ subdirectory"
-    rm -r "docs"/*
+    echo "cleaning /docs2/ subdirectory"
+    rm -r "docs2"/*
 else
-    echo "creating /docs/ subdirectory"
-    mkdir "docs"
+    echo "creating /docs2/ subdirectory"
+    mkdir "docs2"
 fi
 
 echo "cloning generated documentation"
