@@ -13,6 +13,7 @@ SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || 
 #-------------------------------------------------------------------------------
 
 echo "navigating to $SCRIPT_DIR/../app/static"
+cd "$SCRIPT_DIR/../app/static"
 
 # Testing with /docs2/
 if [ -d "docs2/" ] 
@@ -31,4 +32,4 @@ echo "moving generated documentation into $SCRIPT_DIR/../app/static/docs2"
 mv "discovery/docs/html"/* "docs2"
 
 echo "cleaning up cloned repo"
-rm -Rf "discovery"
+rm -rf "discovery"
