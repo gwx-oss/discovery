@@ -108,19 +108,13 @@ then
     echo "cleaning git branch $GH_PAGES_BRANCH"
     rm -Rf *
 
-    # Testing
     # TODO: Need to copy index file into app/docs for django
     # template. Might also have to manually change html for
     # new links to open in new tabs.
-    # mkdir -p /app/app/static/docs2
     
     echo "moving $SITE_TEMP_DIR into $BUILD_DIR"
     mv $SITE_TEMP_DIR/* "$BUILD_DIR"
-    
-    #cd /app/app/static/docs2
-    #touch dev.txt
 
-    # cd "$BUILD_DIR"
     # Disable GitHub Jekyll
     touch .nojekyll
     

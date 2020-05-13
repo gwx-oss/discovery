@@ -29,7 +29,7 @@ echo "cloning generated documentation"
 git clone -b $GH_PAGES_BRANCH --depth 1 --single-branch $GH_PAGES_REMOTE
 
 echo "moving generated documentation into $SCRIPT_DIR/../app/static/docs2"
-mv "discovery/docs/html"/* "docs2"
+mv "$SCRIPT_DIR/../app/static/discovery/docs/html"/* "$SCRIPT_DIR/../app/static/docs2"
 
 echo "cleaning up cloned repo"
 rm -rf "discovery"

@@ -46,6 +46,7 @@ django: &django
     pip install --no-cache-dir -r ./requirements-dev.txt
 
     ./scripts/init-webserver.sh /dev/stderr
+    ./scripts/init-docs.sh
 
 angular: &angular
   name: Install Angular CLI
