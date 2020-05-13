@@ -12,10 +12,10 @@ Welcome to GSA Discovery's documentation!
     :maxdepth: 2
     :caption: Links
 
-    Discovery live <https://discovery.gsa.gov/>
-    Discovery development <https://discovery-dev.app.cloud.gov/>
-    GitHub project <https://github.com/PSHCDevOps/discovery/>
-    Trello board <https://trello.com/b/AEoWtET7/discovery-20/>
+    <a href="https://discovery.gsa.gov/" target="_blank">Discovery live</a>
+    <a href="https://discovery-dev.app.cloud.gov/" target="_blank">Discovery development</a>
+    <a href="https://github.com/PSHCDevOps/discovery/" target="_blank">GitHub project</a>
+    <a href="https://trello.com/b/AEoWtET7/discovery-20/" target="_blank">Trello board</a>
 
 .. toctree::
     :maxdepth: 2
