@@ -21,7 +21,7 @@ services:
       service: lb
 
   web:
-    command: bash -c "scripts/init-webserver.sh /dev/stderr && scripts/init-docs.sh && cd app && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
+    command: bash -c "scripts/init-webserver.sh /dev/stderr && cd app && waitress-serve --expose-tracebacks --port=80 discovery.wsgi:application"
     scale: 3
     depends_on:
       - scheduler
