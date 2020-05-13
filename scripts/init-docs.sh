@@ -15,6 +15,12 @@ SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || 
 echo "navigating to $SCRIPT_DIR/../app/static"
 cd "$SCRIPT_DIR/../app/static"
 
+LOG_FILE="${1:-$SCRIPT_DIR/../logs/discovery-init.log}"
+if [ "$LOG_FILE" != "/dev/stdout" -a "$LOG_FILE" != "/dev/stderr" ]
+then
+  rm -f "$LOG_FILE"
+fi
+
 # Testing with /docs2/
 if [ -d "docs2/" ] 
 then
@@ -29,7 +35,7 @@ echo "cloning generated documentation"
 git clone -b $GH_PAGES_BRANCH --depth 1 --single-branch $GH_PAGES_REMOTE
 
 echo "moving generated documentation into $SCRIPT_DIR/../app/static/docs2"
-mv "discovery/docs/html"/* "docs2"
+mv "$SCRIPT_DIR/../app/static/discovery/docs/html"/* "$SCRIPT_DIR/../app/static/docs2"
 
 echo "cleaning up cloned repo"
 rm -rf "discovery"
