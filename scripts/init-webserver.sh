@@ -3,6 +3,10 @@
 
 set -e
 
+#-------------------------------------------------------------------------------
+# Variables
+#-------------------------------------------------------------------------------
+
 SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || echo "$0")")"; pwd -P)"
 GH_PAGES_BRANCH="gh-pages"
 GH_PAGES_REMOTE="https://github.com/PSHCDevOps/discovery.git"
@@ -23,7 +27,7 @@ echo "> Collecting Django static files" | tee -a "$LOG_FILE"
 python3 manage.py collectstatic --noinput >>"$LOG_FILE" 2>&1
 
 #-------------------------------------------------------------------------------
-# Copying documentation into static folder
+# Copy documentation into static folder
 #-------------------------------------------------------------------------------
 
 echo "navigating to $SCRIPT_DIR/../app/static"
@@ -38,6 +42,7 @@ else
     mkdir "docs"
 fi
 
+# Shallow clone to save space
 echo "cloning generated documentation"
 git clone -b $GH_PAGES_BRANCH --depth 1 --single-branch $GH_PAGES_REMOTE
 
