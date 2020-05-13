@@ -15,6 +15,12 @@ SCRIPT_DIR="$(cd "$(dirname "$([ `readlink "$0"` ] && echo "`readlink "$0"`" || 
 echo "navigating to $SCRIPT_DIR/../app/static"
 cd "$SCRIPT_DIR/../app/static"
 
+LOG_FILE="${1:-$SCRIPT_DIR/../logs/discovery-init.log}"
+if [ "$LOG_FILE" != "/dev/stdout" -a "$LOG_FILE" != "/dev/stderr" ]
+then
+  rm -f "$LOG_FILE"
+fi
+
 # Testing with /docs2/
 if [ -d "docs2/" ] 
 then
