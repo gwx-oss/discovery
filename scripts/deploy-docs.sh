@@ -95,24 +95,40 @@ then
     # Edit generated files so external links open in new tab
     echo "editing generated html to open external links in new tabs"
     HTML_FILES="build/html"/*
-    echo "location of generated files: $HTML_FILES"
+    echo "editing collection $HTML_FILES"
     for file in $HTML_FILES
     do 
-      if [ ${file: -4} == ".html" ]
+      if [ -d $file ]
       then
-        echo "editing $file"
-        sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $file &> /dev/null
+        for inner_file in $file/*
+          do
+            if [ -d $inner_file ]
+            then
+              echo "$inner_file is directory"
+              for inner_inner_file in $inner_file/*
+              do
+                if [[ $inner_inner_file =~ \.html$ ]]
+                then
+                  echo "editing $inner_inner_file"
+                  sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $inner_inner_file
+                fi
+              done
+            else
+              if [[ $inner_file =~ \.html$ ]]
+              then
+                echo "editing $inner_file"
+                sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $inner_file
+              fi
+            fi
+          done
       else  
-        for inner_file in $file
-        do
-          if [ ${inner_file: -4} == ".html" ]
-          then 
-            echo "editing $inner_file"
-            sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $inner_file &> /dev/null
-          fi
-        done
+        if [[ $file =~ \.html$ ]]
+        then
+          echo "editing $file"
+          sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $file
+        fi
       fi 
-    done 
+    done  
 
     echo "making $SITE_TEMP_DIR/docs"
     mkdir -p $SITE_TEMP_DIR/docs
