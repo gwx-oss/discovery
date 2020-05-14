@@ -92,13 +92,26 @@ then
     echo "generating html"
     make html
 
+    # Edit generated files so external links open in new tab
     echo "editing generated html to open external links in new tabs"
     HTML_FILES="build/html"/*
     echo "location of generated files: $HTML_FILES"
-    for f in $HTML_FILES
+    for file in $HTML_FILES
     do 
-      echo "editing $HTML_FILES/$f"
-      sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $f &> /dev/null
+      if [ ${file: -4} == ".html" ]
+      then
+        echo "editing $file"
+        sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $file &> /dev/null
+      else  
+        for inner_file in $file
+        do
+          if [ ${inner_file: -4} == ".html" ]
+          then 
+            echo "editing $inner_file"
+            sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $inner_file &> /dev/null
+          fi
+        done
+      fi 
     done 
 
     echo "making $SITE_TEMP_DIR/docs"
