@@ -90,10 +90,10 @@
 </ul>
 <p class="caption"><span class="caption-text">Links</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://discovery.gsa.gov/">Discovery live</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery.gsa.gov/">Discovery live</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
@@ -221,18 +221,18 @@
 <p>Docker installation is fairly easy.  Our use of Docker requires two systems; the core Docker server, and Docker Compose for orchestrating container clusters.  Docker Compose makes it easy to work with projects containing many interlocking systems.</p>
 <p>If you are using the Discovery Vagrant development environment you do not need to install Docker and Docker Compose.</p>
 <ol class="simple">
-<li><strong>Docker</strong> - Install Docker from: <a class="reference external" href="https://www.docker.com/community-edition">https://www.docker.com/community-edition</a>
-<em>- If running Debian or Ubuntu, you can install by running the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh">scripts/setup-docker.sh</a> script</em></li>
+<li><strong>Docker</strong> - Install Docker from: <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.docker.com/community-edition">https://www.docker.com/community-edition</a>
+<em>- If running Debian or Ubuntu, you can install by running the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh">scripts/setup-docker.sh</a> script</em></li>
 </ol>
 <ol class="simple">
-<li><strong>Docker Compose</strong> - Install Docker Compose from: <a class="reference external" href="https://docs.docker.com/compose/install">https://docs.docker.com/compose/install</a>
-<em>- This is included in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh">scripts/setup-docker.sh</a> setup</em></li>
+<li><strong>Docker Compose</strong> - Install Docker Compose from: <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/compose/install">https://docs.docker.com/compose/install</a>
+<em>- This is included in the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/setup-docker.sh">scripts/setup-docker.sh</a> setup</em></li>
 </ol>
 <p><br/></p>
 </div>
 <div class="section" id="configuration">
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>You will need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
+<p>You will need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Fetch Discovery project</span>
 $ git clone https://github.com/PSHCDevOps/discovery.git <span class="o">{</span>project_directory<span class="o">}</span>
 $ <span class="nb">cd</span> <span class="o">{</span>project_directory<span class="o">}</span>
@@ -252,7 +252,7 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 </ul>
 <ul>
 <li><p class="first"><strong>SAM_API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
-<p>Sets the <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
+<p>Sets the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
 </li>
 </ul>
 <ul>
@@ -329,13 +329,13 @@ $ docker-compose stop web                <span class="c1"># Stop the Discovery w
 $ docker-compose rm web                  <span class="c1"># Remove the Discovery web service</span>
 </pre></div>
 </div>
-<p>More on the <a class="reference external" href="https://docs.docker.com/engine/reference/commandline/cli/">docker commands</a></p>
+<p>More on the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/engine/reference/commandline/cli/">docker commands</a></p>
 <p><br/></p>
 </div>
 <div class="section" id="getting-help">
 <span id="getting-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
-<p>If you run into issues please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you can not get them resolved through Docker documentation or help channels.  Docker has pretty <a class="reference external" href="https://docs.docker.com/">comprehensive documentation</a> available and there are plenty of tutorials available covering pretty much all aspects of Docker usage.  Being an open source project there is a lot of discussion and question/answers related to Docker and Docker Compose.</p>
-<p>Docker maintains <a class="reference external" href="https://forums.docker.com/">forums</a> you can discuss Docker related issues and there are many groups that meet to support those trying to dig deeper into the world of containerization.</p>
+<p>If you run into issues please <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you can not get them resolved through Docker documentation or help channels.  Docker has pretty <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://docs.docker.com/">comprehensive documentation</a> available and there are plenty of tutorials available covering pretty much all aspects of Docker usage.  Being an open source project there is a lot of discussion and question/answers related to Docker and Docker Compose.</p>
+<p>Docker maintains <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://forums.docker.com/">forums</a> you can discuss Docker related issues and there are many groups that meet to support those trying to dig deeper into the world of containerization.</p>
 <p><br/></p>
 </div>
 </div>
