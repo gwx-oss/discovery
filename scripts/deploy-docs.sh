@@ -76,31 +76,48 @@ fi
 if which git >/dev/null && which make >/dev/null
 then
     # Ensure a clean build
-    echo "cleaning $BUILD_DIR"
+    echo "> Cleaning $BUILD_DIR"
     rm -Rf "$BUILD_DIR"
-    echo "cleaing $SITE_TEMP_DIR"
+    echo "> Cleaning $SITE_TEMP_DIR"
     rm -Rf "$SITE_TEMP_DIR"
 
     # Fetch source repository
-    echo "cloning $SOURCH_BRANCH $GH_PAGES_REMOTE into $BUILD_DIR"
+    echo "> Cloning $SOURCH_BRANCH $GH_PAGES_REMOTE into $BUILD_DIR"
     git clone -b "$SOURCE_BRANCH" "$GH_PAGES_REMOTE" "$BUILD_DIR"
     cd "$BUILD_DIR"/docs
     pwd 
 
     # Build and preserve documentation
-    echo "generating html"
+    echo "> Generating html"
     make html
 
-    # Edit generated files so external links open in new tab
-    # Edit index pages so it can be copied over to Django app doc template during initialization
-    echo "editing generated index html for Django app coherence"
-    sed -i 's/class="reference internal" href="architecture/class="reference internal" href="docs\/architecture/g' "build/html/index.html"
-    sed -i 's/class="reference internal" href="start/class="reference internal" href="docs\/start/g' "build/html/index.html"
-    sed -i 's/class="reference internal" href="process/class="reference internal" href="docs\/process/g' "build/html/index.html"
+    # Edit generated files so external links open in new tab and specifically,
+    # edit the index page internal links so it can be copied over to Django app doc 
+    # template during initialization
 
-    echo "editing generated html to open external links in new tabs"
+    #-------------------------------------------------------------------------------
+    # NOTE: if, in the future, further pages are added or removed from documentation,
+    # the index page will need its new/removed routes added/subtracted from this
+    # this section to maintain the integrity of the Django template.
+    #-------------------------------------------------------------------------------
+    echo "> Editing generated index html for Django app coherence"
+    INDEX="build/html/index.html"
+    sed -i 's/class="reference internal" href="architecture/class="reference internal" href="docs\/architecture/g' $INDEX
+    sed -i 's/class="reference internal" href="start/class="reference internal" href="docs\/start/g' $INDEX
+    sed -i 's/class="reference internal" href="process/class="reference internal" href="docs\/process/g' $INDEX
+    sed -i 's/href="genindex/href="docs\/genindex/g' $INDEX
+    sed -i 's/href="search/href="docs\/search/g' $INDEX
+    sed -i 's/href="readme/href="docs\/readme/g' $INDEX
+    sed -i 's/href="#/href="\/docs/g' $INDEX
+    # Static resources
+    sed -i 's/_static/docs\/_static/g' $INDEX
+    # HTML actions
+    sed -i 's/action="search/action="docs\/search/g' $INDEX
+
+
+    echo "> Editing generated html to open external links in new tabs"
     HTML_FILES="build/html"/*
-    echo "editing collection $HTML_FILES"
+    echo ">> Editing collection $HTML_FILES"
     for file in $HTML_FILES
     do 
       if [ -d $file ]
@@ -109,19 +126,19 @@ then
           do
             if [ -d $inner_file ]
             then
-              echo "$inner_file is directory"
+              echo ">>> $inner_file is directory"
               for inner_inner_file in $inner_file/*
               do
                 if [[ $inner_inner_file =~ \.html$ ]]
                 then
-                  echo "editing $inner_inner_file"
+                  echo ">>>> Editing $inner_inner_file"
                   sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $inner_inner_file
                 fi
               done
             else
               if [[ $inner_file =~ \.html$ ]]
               then
-                echo "editing $inner_file"
+                echo ">>> Editing $inner_file"
                 sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $inner_file
               fi
             fi
@@ -129,50 +146,50 @@ then
       else  
         if [[ $file =~ \.html$ ]]
         then
-          echo "editing $file"
+          echo ">> Editing $file"
           sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $file
         fi
       fi 
     done  
 
-    echo "making $SITE_TEMP_DIR/docs"
+    echo "> Creating $SITE_TEMP_DIR/docs"
     mkdir -p $SITE_TEMP_DIR/docs
 
-    echo "moving build/html into $SITE_TEMP_DIR/docs"
+    echo "> Moving build/html into $SITE_TEMP_DIR/docs"
     mv build/html "$SITE_TEMP_DIR"/docs
     
     # Replace all files with generated documentation site
     cd "$BUILD_DIR"
     pwd
 
-    echo "checking out $GH_PAGES_BRANCH"
+    echo "> Checking out $GH_PAGES_BRANCH"
     git checkout "$GH_PAGES_BRANCH"
 
-    echo "cleaning git branch $GH_PAGES_BRANCH"
+    echo "> Initializing clean git branch $GH_PAGES_BRANCH"
     rm -Rf *
     
-    echo "moving $SITE_TEMP_DIR into $BUILD_DIR"
+    echo "> Moving $SITE_TEMP_DIR into $BUILD_DIR"
     mv $SITE_TEMP_DIR/* "$BUILD_DIR"
 
     # Disable GitHub Jekyll
     touch .nojekyll
     
     # Update Git repository and publish site updates
-    echo "Adding files"
+    echo "> Adding generated files"
     git add -A
     git diff-index --quiet HEAD || git commit -m "$DOC_UPDATE_MESSAGE"
     
-    echo "Pushing files"
+    echo "> Pushing files"
     git push origin "$GH_PAGES_BRANCH"
     
     # Clean up after ourselves
-    echo "cleaning $SITE_TEMP_DIR"
+    echo "> Cleaning $SITE_TEMP_DIR"
     rm -Rf "$SITE_TEMP_DIR"
 
-    echo "cleaning $BUILD_DIR"
+    echo "> Cleaning $BUILD_DIR"
     rm -Rf "$BUILD_DIR"
 
 else
-    echo "The update-docs script requires git and make to be installed"
+    echo "> The update-docs script requires git and make to be installed"
     exit 1  
 fi

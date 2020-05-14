@@ -30,32 +30,31 @@ python3 manage.py collectstatic --noinput >>"$LOG_FILE" 2>&1
 # Copy documentation into static folder
 #-------------------------------------------------------------------------------
 
-echo "navigating to $SCRIPT_DIR/../app/static"
+echo "> Navigating to $SCRIPT_DIR/../app/static"
 cd "$SCRIPT_DIR/../app/static"
 
 if [ -d "docs/" ] 
 then
-    echo "cleaning /docs/ subdirectory"
+    echo "> Cleaning /docs/ subdirectory"
     rm -r "docs"/*
 else
-    echo "creating /docs/ subdirectory"
+    echo "> Creating /docs/ subdirectory"
     mkdir "docs"
 fi
 
 # Shallow clone to save space
-echo "cloning generated documentation"
+echo "> Cloning generated documentation"
 git clone -b $GH_PAGES_BRANCH --depth 1 --single-branch $GH_PAGES_REMOTE
 
-echo "moving generated documentation into $SCRIPT_DIR/../app/static/docs"
+echo "> Copying generated index.html into $SCRIPT_DIR/../docs/templates/doc-index.html"
 cp "discovery/docs/html/index.html" "../docs/templates/doc-index.html"
+echo "> Moving generated documentation into $SCRIPT_DIR/../app/static/docs"
 mv "discovery/docs/html"/* "docs"
-
-# TODO: copy index.html that is cloned into app/docs/templates/doc-index.html
 
 echo "cleaning up cloned repo"
 rm -rf "discovery"
 
 #-------------------------------------------------------------------------------
 
-echo "returning to app directory"
+echo "> Returning to app root directory"
 cd "$SCRIPT_DIR/../app"
