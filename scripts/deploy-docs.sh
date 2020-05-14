@@ -84,7 +84,6 @@ then
     # Fetch source repository
     echo "cloning $SOURCH_BRANCH $GH_PAGES_REMOTE into $BUILD_DIR"
     git clone -b "$SOURCE_BRANCH" "$GH_PAGES_REMOTE" "$BUILD_DIR"
-
     cd "$BUILD_DIR"/docs
     pwd 
 
@@ -93,6 +92,12 @@ then
     make html
 
     # Edit generated files so external links open in new tab
+    # Edit index pages so it can be copied over to Django app doc template during initialization
+    echo "editing generated index html for Django app coherence"
+    sed -i 's/class="reference internal" href="architecture/class="reference internal" href="docs\/architecture/g' "build/html/index.html"
+    sed -i 's/class="reference internal" href="start/class="reference internal" href="docs\/start/g' "build/html/index.html"
+    sed -i 's/class="reference internal" href="process/class="reference internal" href="docs\/process/g' "build/html/index.html"
+
     echo "editing generated html to open external links in new tabs"
     HTML_FILES="build/html"/*
     echo "editing collection $HTML_FILES"
@@ -145,10 +150,6 @@ then
 
     echo "cleaning git branch $GH_PAGES_BRANCH"
     rm -Rf *
-
-    # TODO: Need to copy index file into app/docs for django
-    # template. Might also have to manually change html for
-    # new links to open in new tabs.
     
     echo "moving $SITE_TEMP_DIR into $BUILD_DIR"
     mv $SITE_TEMP_DIR/* "$BUILD_DIR"
