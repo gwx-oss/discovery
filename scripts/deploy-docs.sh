@@ -93,9 +93,11 @@ then
     make html
 
     echo "editing generated html to open external links in new tabs"
-    HTML_FILES="$BUILD_DIR/docs/build/html"/*
+    HTML_FILES="build/html"/*
+    echo "location of generated files: $HTML_FILES"
     for f in $HTML_FILES
     do 
+      echo "editing $HTML_FILES/$f"
       sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $f &> /dev/null
     done 
 
