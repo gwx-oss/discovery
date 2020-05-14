@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:4.8.2-jessie
+      - image: mongo:3.4.4-jessie
     steps:
       - checkout
       - run:
@@ -11,6 +12,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:4.8.2-jessie
+      - image: mongo:3.4.4-jessie
     steps:
       - checkout
       - run: echo "Empty Test"
