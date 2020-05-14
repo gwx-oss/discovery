@@ -101,9 +101,19 @@ then
     # this section to maintain the integrity of the Django template.
     #-------------------------------------------------------------------------------
     echo "> Editing generated index html for Django app coherence"
-    sed -i 's/class="reference internal" href="architecture/class="reference internal" href="docs\/architecture/g' "build/html/index.html"
-    sed -i 's/class="reference internal" href="start/class="reference internal" href="docs\/start/g' "build/html/index.html"
-    sed -i 's/class="reference internal" href="process/class="reference internal" href="docs\/process/g' "build/html/index.html"
+    INDEX="build/html/index.html"
+    sed -i 's/class="reference internal" href="architecture/class="reference internal" href="docs\/architecture/g' $INDEX
+    sed -i 's/class="reference internal" href="start/class="reference internal" href="docs\/start/g' $INDEX
+    sed -i 's/class="reference internal" href="process/class="reference internal" href="docs\/process/g' $INDEX
+    sed -i 's/href="genindex/href="docs\/genindex/g' $INDEX
+    sed -i 's/href="search/href="docs\/search/g' $INDEX
+    sed -i 's/href="readme/href="docs\/readme/g' $INDEX
+    sed -i 's/href="#/href="\/docs/g' $INDEX
+    # Static resources
+    sed -i 's/_static/docs\/_static/g' $INDEX
+    # HTML actions
+    sed -i 's/action="search/action="docs\/search/g' $INDEX
+
 
     echo "> Editing generated html to open external links in new tabs"
     HTML_FILES="build/html"/*
