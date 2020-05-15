@@ -93,12 +93,14 @@ then
 
     # Edit generated files so external links open in new tab and specifically,
     # edit the index page internal links so it can be copied over to Django app doc 
-    # template during initialization
+    # template during initialization and preserve routing
 
     #-------------------------------------------------------------------------------
     # NOTE: if, in the future, further pages are added or removed from documentation,
     # the index page will need its new/removed routes added/subtracted from this
-    # this section to maintain the integrity of the Django template.
+    # this section to maintain the integrity of the Django template. The index file
+    # is deployed to Django app within the init-webserver.sh script. In other words,
+    # all references to docs/index.html should route to /docs instead!
     #-------------------------------------------------------------------------------
     echo "> Editing generated index html for Django app coherence"
     INDEX="build/html/index.html"
@@ -108,12 +110,9 @@ then
     sed -i 's/href="genindex/href="docs\/genindex/g' $INDEX
     sed -i 's/href="search/href="docs\/search/g' $INDEX
     sed -i 's/href="readme/href="docs\/readme/g' $INDEX
-    sed -i 's/href="#/href="\/docs/g' $INDEX
-    # Static resources
+    sed -i 's/href="#"/href="\/docs"/g' $INDEX
     sed -i 's/_static/docs\/_static/g' $INDEX
-    # HTML actions
     sed -i 's/action="search/action="docs\/search/g' $INDEX
-
 
     echo "> Editing generated html to open external links in new tabs"
     HTML_FILES="build/html"/*
@@ -133,6 +132,8 @@ then
                 then
                   echo ">>>> Editing $inner_inner_file"
                   sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $inner_inner_file
+                  sed -i 's/href="index\.html/href="\/docs/g' $inner_inner_file
+                  sed -i 's/href="\.\.\/index.html/href="\/docs/g' $inner_inner_file
                 fi
               done
             else
@@ -140,6 +141,8 @@ then
               then
                 echo ">>> Editing $inner_file"
                 sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $inner_file
+                sed -i 's/href="index\.html/href="\/docs/g' $inner_file
+                sed -i 's/href="\.\.\/index.html/href="\/docs/g' $inner_file
               fi
             fi
           done
@@ -148,6 +151,8 @@ then
         then
           echo ">> Editing $file"
           sed -i 's/class="reference external"/class="reference external" target="_blank" rel="noopener noreferrer"/g' $file
+          sed -i 's/href="index\.html/href="\/docs/g' $file
+          sed -i 's/href="\.\.\/index.html/href="\/docs/g' $file
         fi
       fi 
     done  
