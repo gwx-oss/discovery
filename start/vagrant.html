@@ -48,7 +48,7 @@
           
 
           
-            <a href="/docs" class="icon icon-home"> GSA Discovery
+            <a href="../index.html" class="icon icon-home"> GSA Discovery
           
 
           
@@ -90,10 +90,10 @@
 </ul>
 <p class="caption"><span class="caption-text">Links</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery.gsa.gov/">Discovery live</a></li>
-<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
-<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
-<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://discovery.gsa.gov/">Discovery live</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
@@ -163,7 +163,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="/docs">GSA Discovery</a>
+          <a href="../index.html">GSA Discovery</a>
         
       </nav>
 
@@ -192,7 +192,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="/docs">Docs</a> &raquo;</li>
+      <li><a href="../index.html">Docs</a> &raquo;</li>
         
           <li><a href="../readme.html">Discovery overview</a> &raquo;</li>
         
@@ -222,18 +222,18 @@
 <p>Vagrant installation is very easy.  It requires two things; a Virtual Machine provider, and the Vagrant application.</p>
 <p>Discovery comes packaged currently for Virtualbox so you will need to have Virtualbox installed.  See the Virtualbox install instructions below to install for your operating system.  They have an installer for most operating systems.</p>
 <ul class="simple">
-<li><strong>Virtualbox</strong> - Install Virtualbox from: <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></li>
+<li><strong>Virtualbox</strong> - Install Virtualbox from: <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></li>
 </ul>
 <p>Vagrant is available as an executable installer for Windows, Mac, and Linux.</p>
 <ul class="simple">
-<li><strong>Vagrant</strong> - Install Vagrant from: <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.vagrantup.com/downloads.html">https://www.vagrantup.com/downloads.html</a></li>
+<li><strong>Vagrant</strong> - Install Vagrant from: <a class="reference external" href="https://www.vagrantup.com/downloads.html">https://www.vagrantup.com/downloads.html</a></li>
 </ul>
 <p><br/></p>
 </div>
 <div class="section" id="configuration">
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>The Discovery Vagrantfile is meant to be configurable depending on the needs of the developer.  To keep everything that needs to be versioned, we use a pattern of a default Vagrant configuration file that can be overridden if an override exists.  All Vagrant related configurations are in the <strong>vagrant</strong> directory.</p>
-<p>You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
+<p>You will also need to ensure certain environment variables are set for the Discovery application containers.  We provide an example (<a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/docker/django-env.example.vars">docker/django-env.example.vars</a>) but you will need to create a file called <strong>docker/django-env.vars</strong> that has sensitive application information.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># If you using Git on Windows, make sure you selected &#39;Checkout as-is&#39; during setup. Then make sure that you run: git config --global  core.autocrlf false, so Git will not perform any conversions when checking out or committing text files.</span>
 
 
@@ -264,7 +264,7 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 </ul>
 <ul>
 <li><p class="first"><strong>box_name</strong> <em>default: ubuntu/trusty64</em></p>
-<p>Sets the box or image to use from the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://app.vagrantup.com/boxes/search">Vagrant Cloud</a> marketplace.</p>
+<p>Sets the box or image to use from the <a class="reference external" href="https://app.vagrantup.com/boxes/search">Vagrant Cloud</a> marketplace.</p>
 </li>
 </ul>
 <ul>
@@ -285,7 +285,7 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 </ul>
 <ul>
 <li><p class="first"><strong>db_port</strong> <em>default: 5432</em></p>
-<p>Sets the host port that the cluster PostgreSQL database is available.  This is handy for connecting with the Docker database from the host machine through a <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.postgresql.org/docs/10/static/reference-client.html">client command</a> or through a graphical management interface like <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://dbeaver.jkiss.org/">DBeaver</a></p>
+<p>Sets the host port that the cluster PostgreSQL database is available.  This is handy for connecting with the Docker database from the host machine through a <a class="reference external" href="https://www.postgresql.org/docs/10/static/reference-client.html">client command</a> or through a graphical management interface like <a class="reference external" href="https://dbeaver.jkiss.org/">DBeaver</a></p>
 </li>
 </ul>
 <ul>
@@ -321,7 +321,7 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 <ul>
 <li><p class="first"><strong>copy_bashrc</strong> <em>default: false</em></p>
 <p>Whether or not to share the host user Bash <strong>.bashrc</strong> script with the Vagrant virtual machine.  This allows for a consistent environment across host, development machine, and application containers.</p>
-<p>Note that the contents of the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/vagrant-bash.sh">scripts/vagrant-bash.sh</a> script are appended to any shared <strong>.bashrc</strong> or the default box provided one during the Vagrant provision process.</p>
+<p>Note that the contents of the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/scripts/vagrant-bash.sh">scripts/vagrant-bash.sh</a> script are appended to any shared <strong>.bashrc</strong> or the default box provided one during the Vagrant provision process.</p>
 </li>
 </ul>
 <p><br/></p>
@@ -335,7 +335,7 @@ $ cp docker/django-env.example.vars docker/django-env.vars
 </ul>
 <ul>
 <li><p class="first"><strong>SAM_API_KEY</strong> <em>default: <strong>REQUIRED!!!</strong></em></p>
-<p>Sets the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
+<p>Sets the <a class="reference external" href="https://api.data.gov/signup/">Data.gov API key</a> that is passed to requests to get SAM vendor registration information.</p>
 </li>
 </ul>
 <ul>
@@ -398,13 +398,13 @@ $ vagrant halt         <span class="c1"># Stop and save an existing virtual mach
 $ vagrant destroy      <span class="c1"># Completely destroy an existing virtual machine</span>
 </pre></div>
 </div>
-<p>More on the available <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.vagrantup.com/docs/cli/">vagrant commands</a></p>
+<p>More on the available <a class="reference external" href="https://www.vagrantup.com/docs/cli/">vagrant commands</a></p>
 <p><br/></p>
 </div>
 <div class="section" id="getting-help">
 <span id="getting-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
-<p>If you run into issues please <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you can not get them resolved through Vagrant documentation or help channels.  Vagrant has pretty <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.vagrantup.com/docs/index.html">comprehensive documentation</a> available and there are plenty of tutorials available covering pretty much all aspects of Vagrant usage.  Being an open source project there is a lot of discussion and question/answers related to Vagrant.</p>
-<p>There is a <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://groups.google.com/forum/#!forum/vagrant-up">Vagrant Google group</a> you can join and you can chat with folks about Vagrant on <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://gitter.im/mitchellh/vagrant">Gitter</a>.</p>
+<p>If you run into issues please <a class="reference external" href="https://github.com/PSHCDevOps/discovery/issues">file an issue</a> if you can not get them resolved through Vagrant documentation or help channels.  Vagrant has pretty <a class="reference external" href="https://www.vagrantup.com/docs/index.html">comprehensive documentation</a> available and there are plenty of tutorials available covering pretty much all aspects of Vagrant usage.  Being an open source project there is a lot of discussion and question/answers related to Vagrant.</p>
+<p>There is a <a class="reference external" href="https://groups.google.com/forum/#!forum/vagrant-up">Vagrant Google group</a> you can join and you can chat with folks about Vagrant on <a class="reference external" href="https://gitter.im/mitchellh/vagrant">Gitter</a>.</p>
 <p><br/></p>
 </div>
 </div>
