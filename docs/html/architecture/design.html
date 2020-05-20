@@ -48,7 +48,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> GSA Discovery
+            <a href="/docs" class="icon icon-home"> GSA Discovery
           
 
           
@@ -106,10 +106,10 @@
 </ul>
 <p class="caption"><span class="caption-text">Links</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://discovery.gsa.gov/">Discovery live</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery.gsa.gov/">Discovery live</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
@@ -170,7 +170,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">GSA Discovery</a>
+          <a href="/docs">GSA Discovery</a>
         
       </nav>
 
@@ -199,7 +199,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="/docs">Docs</a> &raquo;</li>
         
           <li><a href="../readme.html">Discovery overview</a> &raquo;</li>
         
@@ -234,7 +234,7 @@
 </div>
 <div class="section" id="configuration">
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>All configurations in the Discovery applications <em>(website, worker, and scheduler)</em> are passed as environment variables to the container to follow the <a class="reference external" href="https://12factor.net/config">twelve factor application model</a>.  This allows us to easily work between local Docker environment, CI/CD environment, and our remote hosting environments.</p>
+<p>All configurations in the Discovery applications <em>(website, worker, and scheduler)</em> are passed as environment variables to the container to follow the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://12factor.net/config">twelve factor application model</a>.  This allows us to easily work between local Docker environment, CI/CD environment, and our remote hosting environments.</p>
 <p>For a list of application specific environment variables that must be set for the application to function properly, see the <a class="reference internal" href="../start/docker.html"><span class="doc">Docker getting started documentation</span></a>.</p>
 <div class="section" id="local-docker-configuration">
 <span id="local-docker-configuration"></span><h3>Local Docker configuration<a class="headerlink" href="#local-docker-configuration" title="Permalink to this headline">¶</a></h3>
@@ -276,7 +276,7 @@
 </div>
 <div class="section" id="jquery-based-javascript-application">
 <span id="jquery-based-javascript-application"></span><h3>Jquery based Javascript application<a class="headerlink" href="#jquery-based-javascript-application" title="Permalink to this headline">¶</a></h3>
-<p>Most of the data you see rendered on the Discovery web page during the search process is rendered by an <a class="reference external" href="https://angularjs.org/">Angular JS</a> application that accesses the backend Django Discovery API and provides a single page app experience to site users built with the <a class="reference external" href="https://designsystem.digital.gov/">US Web Design System</a>.</p>
+<p>Most of the data you see rendered on the Discovery web page during the search process is rendered by an <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://angularjs.org/">Angular JS</a> application that accesses the backend Django Discovery API and provides a single page app experience to site users built with the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://designsystem.digital.gov/">US Web Design System</a>.</p>
 <p>The Django application passes a single environment variable through to the client side Javascript; <strong>API_HOST</strong>.</p>
 <ul class="simple">
 <li><strong>API_HOST</strong> - Full host of the discovery site providing the API <em>(e.g, http://localhost:8080)</em></li>
@@ -323,7 +323,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, GSA Federal Acquisition Service
+        &copy; Copyright 2020, GSA Federal Acquisition Service
 
     </p>
   </div>

@@ -48,7 +48,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> GSA Discovery
+            <a href="/docs" class="icon icon-home"> GSA Discovery
           
 
           
@@ -106,10 +106,10 @@
 </ul>
 <p class="caption"><span class="caption-text">Links</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://discovery.gsa.gov/">Discovery live</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery.gsa.gov/">Discovery live</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
@@ -142,8 +142,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#django-web-framework">Django web framework</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#benefits-that-django-provides">Benefits that Django provides</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-we-use-django">How we use Django</a><ul>
-<li class="toctree-l4"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements.txt">requirements.txt</a></li>
-<li class="toctree-l4"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements-dev.txt">requirements-dev.txt</a></li>
+<li class="toctree-l4"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements.txt">requirements.txt</a></li>
+<li class="toctree-l4"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements-dev.txt">requirements-dev.txt</a></li>
 </ul>
 </li>
 </ul>
@@ -189,7 +189,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">GSA Discovery</a>
+          <a href="/docs">GSA Discovery</a>
         
       </nav>
 
@@ -218,7 +218,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="/docs">Docs</a> &raquo;</li>
         
           <li><a href="../readme.html">Discovery overview</a> &raquo;</li>
         
@@ -266,16 +266,16 @@
 </div>
 <div class="section" id="how-we-use-docker">
 <span id="how-we-use-docker"></span><h3>How we use Docker<a class="headerlink" href="#how-we-use-docker" title="Permalink to this headline">¶</a></h3>
-<p>We currently use Docker for local development through Docker Compose, a tool for creating easily managed clusters of Docker containers.  We then use the same base Debian Stretch container images in our CircleCI environment and build our dependencies through setup scripts, housed in the <a class="reference external" href="https://github.com/PSHCDevOps/discovery/tree/master/scripts">scripts directory</a>.  This ensures that our local development environments and continuous integration and deployment environments are exactly the same, and easier to debug should issues arise.</p>
-<p>Right now for our hosted applications, we use <a class="reference external" href="https://cloud.gov/">Cloud.gov</a> (built on Cloud Foundry) and use the popular Python buildpack, which gets installed on Cloud.gov managed base container images during deployment.  In the future, when we get access to a Docker image marketplace, we are going to switch to building and using Marketplace containers as our base images for local development, CI/CD, and remote hosting on Cloud.gov.  This will allow us to align all environments behind a common architecture through Docker images.</p>
+<p>We currently use Docker for local development through Docker Compose, a tool for creating easily managed clusters of Docker containers.  We then use the same base Debian Stretch container images in our CircleCI environment and build our dependencies through setup scripts, housed in the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/tree/master/scripts">scripts directory</a>.  This ensures that our local development environments and continuous integration and deployment environments are exactly the same, and easier to debug should issues arise.</p>
+<p>Right now for our hosted applications, we use <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://cloud.gov/">Cloud.gov</a> (built on Cloud Foundry) and use the popular Python buildpack, which gets installed on Cloud.gov managed base container images during deployment.  In the future, when we get access to a Docker image marketplace, we are going to switch to building and using Marketplace containers as our base images for local development, CI/CD, and remote hosting on Cloud.gov.  This will allow us to align all environments behind a common architecture through Docker images.</p>
 <p>For information about getting started with Docker for Discovery, check out our <a class="reference internal" href="../start/docker.html"><span class="doc">getting started guide</span></a>.</p>
 <p><br/></p>
 </div>
 </div>
 <div class="section" id="cloud-foundry-hosting">
 <span id="cloud-foundry-hosting"></span><h2>Cloud Foundry hosting<a class="headerlink" href="#cloud-foundry-hosting" title="Permalink to this headline">¶</a></h2>
-<p>We host the Discovery staging environment and production infrastructure on <a class="reference external" href="https://cloud.gov/">Cloud.gov</a> to reap the benefits of a supported open source Platform as a Service with the compliance benefits of a FedRAMP JAB authorization, which lightens our paperwork to develop the application.</p>
-<p>Cloud.gov is built on <a class="reference external" href="https://www.cloudfoundry.org/">Cloud Foundry</a>, which is a popular PaaS used by enterprises across the globe, large and small.  Cloud.gov allows us to focus on developing just the application and leaves the infrastructure development and maintenance to those best qualified to handle that task.</p>
+<p>We host the Discovery staging environment and production infrastructure on <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://cloud.gov/">Cloud.gov</a> to reap the benefits of a supported open source Platform as a Service with the compliance benefits of a FedRAMP JAB authorization, which lightens our paperwork to develop the application.</p>
+<p>Cloud.gov is built on <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.cloudfoundry.org/">Cloud Foundry</a>, which is a popular PaaS used by enterprises across the globe, large and small.  Cloud.gov allows us to focus on developing just the application and leaves the infrastructure development and maintenance to those best qualified to handle that task.</p>
 <div class="section" id="benefits-that-cloud-gov-provides">
 <span id="benefits-that-cloud-gov-provides"></span><h3>Benefits that Cloud.gov provides<a class="headerlink" href="#benefits-that-cloud-gov-provides" title="Permalink to this headline">¶</a></h3>
 <ol>
@@ -295,7 +295,7 @@
 </div>
 <div class="section" id="how-we-use-cloud-foundry">
 <span id="how-we-use-cloud-foundry"></span><h3>How we use Cloud Foundry<a class="headerlink" href="#how-we-use-cloud-foundry" title="Permalink to this headline">¶</a></h3>
-<p>We currently use Cloud.gov combined with a popular <a class="reference external" href="https://github.com/cloudfoundry/python-buildpack">Python Cloud Foundry buildpack</a> to host both staging and production environments.  In each space we run multiple Django web servers, a Django Celery scheduler, some Django Celery task processors, with Redis and PostgreSQL services providing shared data stores for different purposes.</p>
+<p>We currently use Cloud.gov combined with a popular <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/cloudfoundry/python-buildpack">Python Cloud Foundry buildpack</a> to host both staging and production environments.  In each space we run multiple Django web servers, a Django Celery scheduler, some Django Celery task processors, with Redis and PostgreSQL services providing shared data stores for different purposes.</p>
 <p>In the future, as mentioned above, we will be migrating from the current buildpack architecture for Cloud Foundry to the deployment of Docker images for all Cloud.gov applications.</p>
 <p>For information about getting started with Cloud Foundry with Discovery, get access to a Cloud.gov account and organization capable of deploying applications with PostgreSQL and Redis, then check out the Deployment section in our <a class="reference internal" href="../start/setup.html"><span class="doc">getting started guide</span></a>.</p>
 <p><br/></p>
@@ -303,7 +303,7 @@
 </div>
 <div class="section" id="circleci-integration-and-deployment">
 <span id="circleci-integration-and-deployment"></span><h2>CircleCI integration and deployment<a class="headerlink" href="#circleci-integration-and-deployment" title="Permalink to this headline">¶</a></h2>
-<p>We use a GSA approved CI/CD service called <a class="reference external" href="https://circleci.com/">CircleCI</a> to perform automated testing, builds, and deployment to our various hosting environments.  CircleCI is nice because it allows us to build off of Docker to create specific runtimes that have just the tooling we need to execute our jobs.  The newer 2.0 architecture also provides an easy way to create workflows which are easy to visualize, update, and track over time.</p>
+<p>We use a GSA approved CI/CD service called <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://circleci.com/">CircleCI</a> to perform automated testing, builds, and deployment to our various hosting environments.  CircleCI is nice because it allows us to build off of Docker to create specific runtimes that have just the tooling we need to execute our jobs.  The newer 2.0 architecture also provides an easy way to create workflows which are easy to visualize, update, and track over time.</p>
 <div class="section" id="benefits-that-circleci-provides">
 <span id="benefits-that-circleci-provides"></span><h3>Benefits that CircleCI provides<a class="headerlink" href="#benefits-that-circleci-provides" title="Permalink to this headline">¶</a></h3>
 <ol>
@@ -328,7 +328,7 @@
 </div>
 <div class="section" id="django-web-framework">
 <span id="django-web-framework"></span><h2>Django web framework<a class="headerlink" href="#django-web-framework" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://www.djangoproject.com/">Django</a> is a popular Python web framework that is flexible enough to provide capable API services and rudimentary Content Management System like features with a lightweight footprint.  Django is meant to providea pluggable architecture that is easy to extend to our needs.</p>
+<p><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.djangoproject.com/">Django</a> is a popular Python web framework that is flexible enough to provide capable API services and rudimentary Content Management System like features with a lightweight footprint.  Django is meant to providea pluggable architecture that is easy to extend to our needs.</p>
 <div class="section" id="benefits-that-django-provides">
 <span id="benefits-that-django-provides"></span><h3>Benefits that Django provides<a class="headerlink" href="#benefits-that-django-provides" title="Permalink to this headline">¶</a></h3>
 <ol>
@@ -351,8 +351,8 @@
 <p>All of our web application servers, scheduling instances, and task processors are built on Django <em>(currently version 1.8)</em>.  We integrate other libraries into this system through two top level requirements files:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements.txt">requirements.txt</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements-dev.txt">requirements-dev.txt</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements.txt">requirements.txt</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/blob/master/requirements-dev.txt">requirements-dev.txt</a></li>
 </ul>
 </div>
 <p><br/></p>
@@ -360,7 +360,7 @@
 </div>
 <div class="section" id="celery-task-scheduling-and-management">
 <span id="celery-task-scheduling-and-management"></span><h2>Celery task scheduling and management<a class="headerlink" href="#celery-task-scheduling-and-management" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://www.celeryproject.org/">Celery</a> is a distributed task processing system, and is the most popular and extensible task execution system for Django currently.  The system is widely supported and has many task queue and result reporting backends that are available.  This makes it ideal for Discovery so we can change underlying technologies in the future if we need to and still keep a standardized background task execution and scheduling interface.</p>
+<p><a class="reference external" target="_blank" rel="noopener noreferrer" href="http://www.celeryproject.org/">Celery</a> is a distributed task processing system, and is the most popular and extensible task execution system for Django currently.  The system is widely supported and has many task queue and result reporting backends that are available.  This makes it ideal for Discovery so we can change underlying technologies in the future if we need to and still keep a standardized background task execution and scheduling interface.</p>
 <div class="section" id="benefits-that-celery-provides">
 <span id="benefits-that-celery-provides"></span><h3>Benefits that Celery provides<a class="headerlink" href="#benefits-that-celery-provides" title="Permalink to this headline">¶</a></h3>
 <ol>
@@ -377,13 +377,13 @@
 </div>
 <div class="section" id="how-we-use-celery">
 <span id="how-we-use-celery"></span><h3>How we use Celery<a class="headerlink" href="#how-we-use-celery" title="Permalink to this headline">¶</a></h3>
-<p>We use two primary Celery related systems; Celery workers that pull tasks from a Redis queue, and a <a class="reference external" href="https://github.com/celery/django-celery-beat">Celery Beat</a> scheduler that queries periodic tasks set through the administrative interface.</p>
+<p>We use two primary Celery related systems; Celery workers that pull tasks from a Redis queue, and a <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/celery/django-celery-beat">Celery Beat</a> scheduler that queries periodic tasks set through the administrative interface.</p>
 <p><br/></p>
 </div>
 </div>
 <div class="section" id="postgresql-database">
 <span id="postgresql-database"></span><h2>PostgreSQL database<a class="headerlink" href="#postgresql-database" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://www.postgresql.org/">PostgreSQL database</a> is a popular choice with Django projects, and is widely used at <a class="reference external" href="https://18f.gsa.gov/">18f</a>, the original developers of this Django application.  It is also available within the Cloud.gov hosting environment and approved for use at GSA.</p>
+<p>The <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://www.postgresql.org/">PostgreSQL database</a> is a popular choice with Django projects, and is widely used at <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://18f.gsa.gov/">18f</a>, the original developers of this Django application.  It is also available within the Cloud.gov hosting environment and approved for use at GSA.</p>
 <p>Since we do not write queries as much as access obect models through methods in the code, which translate queries, the syntax of the database is not as important to us as the availability, security, and performance of the underlying database engine.</p>
 <div class="section" id="how-we-use-postgresql">
 <span id="how-we-use-postgresql"></span><h3>How we use PostgreSQL<a class="headerlink" href="#how-we-use-postgresql" title="Permalink to this headline">¶</a></h3>
@@ -393,7 +393,7 @@
 </div>
 <div class="section" id="redis-datastore">
 <span id="redis-datastore"></span><h2>Redis datastore<a class="headerlink" href="#redis-datastore" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://redis.io/">Redis datastore</a> is a popular structured in-memory data store that is commonly used as a object database, cache, and message broker.  It supports many data types, and is built for high traffic applications.  Redis is also used frequently at GSA, and is readily available within the Cloud.gov hosting environment, making it an easy choice for our object store and queueing needs.</p>
+<p>The <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://redis.io/">Redis datastore</a> is a popular structured in-memory data store that is commonly used as a object database, cache, and message broker.  It supports many data types, and is built for high traffic applications.  Redis is also used frequently at GSA, and is readily available within the Cloud.gov hosting environment, making it an easy choice for our object store and queueing needs.</p>
 <div class="section" id="how-we-use-redis">
 <span id="how-we-use-redis"></span><h3>How we use Redis<a class="headerlink" href="#how-we-use-redis" title="Permalink to this headline">¶</a></h3>
 <p>We currently use Redis as a task queue for storing tasks for Celery task processing servers to fetch and execute jobs.  Celery workers are constantly pulling tasks from this queue, and our Celery Beat scheduler adds them periodically based on configurations in the administrative interface for periodic tasks needing to be run during normal operations.</p>
@@ -422,7 +422,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, GSA Federal Acquisition Service
+        &copy; Copyright 2020, GSA Federal Acquisition Service
 
     </p>
   </div>

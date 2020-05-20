@@ -48,7 +48,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> GSA Discovery
+            <a href="/docs" class="icon icon-home"> GSA Discovery
           
 
           
@@ -90,10 +90,10 @@
 </ul>
 <p class="caption"><span class="caption-text">Links</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://discovery.gsa.gov/">Discovery live</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery.gsa.gov/">Discovery live</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://discovery-dev.app.cloud.gov/">Discovery development</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://github.com/PSHCDevOps/discovery/">GitHub project</a></li>
+<li class="toctree-l1"><a class="reference external" target="_blank" rel="noopener noreferrer" href="https://trello.com/b/AEoWtET7/discovery-20/">Trello board</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
@@ -186,7 +186,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">GSA Discovery</a>
+          <a href="/docs">GSA Discovery</a>
         
       </nav>
 
@@ -215,7 +215,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="/docs">Docs</a> &raquo;</li>
         
           <li><a href="../readme.html">Discovery overview</a> &raquo;</li>
         
@@ -360,11 +360,11 @@ $ ./run load_fpds --help
 <div class="section" id="scheduled-data-updates">
 <span id="scheduled-data-updates"></span><h4>Scheduled data updates<a class="headerlink" href="#scheduled-data-updates" title="Permalink to this headline">¶</a></h4>
 <p>The Discovery application is built to periodically check for updates from remote sources based upon a schedule determined by a site administrator.  All data can be loaded initially through this mechanism as well, which is useful for testing the update mechanism.</p>
-<p>This Django application uses the well documented, extensible, and popular background task processor called <a class="reference external" href="http://docs.celeryproject.org/en/latest/django/first-steps-with-django.html">Celery</a> and an addon scheduling application built on a Celery extension; <a class="reference external" href="http://django-celery-beat.readthedocs.io/en/latest/">Celery Beat</a>.  These libraries provide Djsngo settings configuration that allows us to change the periodic schedule of updates, and audit background task results, through version control.</p>
+<p>This Django application uses the well documented, extensible, and popular background task processor called <a class="reference external" target="_blank" rel="noopener noreferrer" href="http://docs.celeryproject.org/en/latest/django/first-steps-with-django.html">Celery</a> and an addon scheduling application built on a Celery extension; <a class="reference external" target="_blank" rel="noopener noreferrer" href="http://django-celery-beat.readthedocs.io/en/latest/">Celery Beat</a>.  These libraries provide Djsngo settings configuration that allows us to change the periodic schedule of updates, and audit background task results, through version control.</p>
 <p>See the <strong>CELERY_BEAT_SCHEDULE</strong> setting in the <strong>app/discovery/settings.py</strong> configuration.</p>
 <p><em>You can schedule based on:</em></p>
 <ol class="simple">
-<li><strong>Crontabs</strong> - Very flexible schedule built on the <a class="reference external" href="https://en.wikipedia.org/wiki/Cron">Cron scheduling format</a></li>
+<li><strong>Crontabs</strong> - Very flexible schedule built on the <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Cron">Cron scheduling format</a></li>
 <li><strong>Intervals</strong> - Simple scheduling format with an interval and unit of time <em>(e.g., 3 days)</em></li>
 <li><strong>Solar Events</strong> - Scheduling based on position of sun in relation to earth at geo coordinates <em>(you probably won&#8217;t need this)</em></li>
 </ol>
@@ -374,8 +374,8 @@ $ ./run load_fpds --help
 </div>
 <div class="section" id="testing-changes">
 <span id="testing-changes"></span><h2>Testing changes<a class="headerlink" href="#testing-changes" title="Permalink to this headline">¶</a></h2>
-<p>The Discovery application is currently designed with two types of automated testing; unit tests and <a class="reference external" href="http://www.seleniumhq.org/docs/01_introducing_selenium.jsp">Selenium</a> based acceptance testing through <a class="reference external" href="https://sites.google.com/a/chromium.org/chromedriver/getting-started">ChromeDriver</a>.</p>
-<p>The Discovery <a class="reference external" href="https://circleci.com/docs/2.0/">CircleCI environment</a> is currently configured to run both unit tests and acceptance tests on pushes to branches and merges on the official PSHCDevOps source repository.</p>
+<p>The Discovery application is currently designed with two types of automated testing; unit tests and <a class="reference external" target="_blank" rel="noopener noreferrer" href="http://www.seleniumhq.org/docs/01_introducing_selenium.jsp">Selenium</a> based acceptance testing through <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://sites.google.com/a/chromium.org/chromedriver/getting-started">ChromeDriver</a>.</p>
+<p>The Discovery <a class="reference external" target="_blank" rel="noopener noreferrer" href="https://circleci.com/docs/2.0/">CircleCI environment</a> is currently configured to run both unit tests and acceptance tests on pushes to branches and merges on the official PSHCDevOps source repository.</p>
 <p><br/></p>
 <div class="section" id="testing-related-scripts-and-commands">
 <span id="testing-related-scripts-and-commands"></span><h3>Testing related scripts and commands<a class="headerlink" href="#testing-related-scripts-and-commands" title="Permalink to this headline">¶</a></h3>
@@ -442,7 +442,7 @@ $ scripts/delete-cf-space.sh --help
 <p><br/></p>
 <div class="section" id="developer-administrator-documentation">
 <span id="developer-administrator-documentation"></span><h3>Developer / Administrator documentation<a class="headerlink" href="#developer-administrator-documentation" title="Permalink to this headline">¶</a></h3>
-<p>The Discovery application generates a <a class="reference external" href="http://pshcdevops.github.io/discovery/index.html">documentation site</a> created with Sphinx that gets automatically rebuilt on pushes to a <strong>docs</strong> branch or merges to <strong>master</strong> over time.</p>
+<p>The Discovery application generates a <a class="reference external" target="_blank" rel="noopener noreferrer" href="http://pshcdevops.github.io/discovery/index.html">documentation site</a> created with Sphinx that gets automatically rebuilt on pushes to a <strong>docs</strong> branch or merges to <strong>master</strong> over time.</p>
 <p>The root documentation folder is: <strong>docs</strong>.</p>
 <p><br/></p>
 <div class="section" id="development-documentation-related-scripts">
@@ -481,7 +481,7 @@ $ scripts/deploy-docs.sh --help
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, GSA Federal Acquisition Service
+        &copy; Copyright 2020, GSA Federal Acquisition Service
 
     </p>
   </div>
