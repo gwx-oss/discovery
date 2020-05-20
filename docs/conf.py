@@ -2,6 +2,7 @@
 #
 from recommonmark.parser import CommonMarkParser
 from recommonmark.transform import AutoStructify
+from datetime import datetime
 
 import os
 import sphinx_rtd_theme
@@ -42,7 +43,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'GSA Discovery'
-copyright = '2017, GSA Federal Acquisition Service'
+now = datetime.now() # current date and time
+copyright = now.strftime("%Y") + ', GSA Federal Acquisition Service'
 author = 'GSA FAS PSHC with 18F'
 
 # The version info for the project you're documenting, acts as replacement for
