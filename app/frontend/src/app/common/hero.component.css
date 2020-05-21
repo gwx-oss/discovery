@@ -2,7 +2,7 @@
   padding-top: 50px;
   padding-bottom: 50px;
   background-color: #112e51;
-  background-image: url('/frontend/assets/images/hero.jpg');
+  background-image: url('/assets/images/hero.jpg');
   box-shadow: 0 2px 5px rgb(177, 177, 177);
 }
 select {

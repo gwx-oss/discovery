@@ -361,4 +361,10 @@ workflows:
             branches:
               only:
                 - master
+<<<<<<< HEAD
                 - docs
+=======
+                - develop
+                - docs
+                - develop-docs
+>>>>>>> origin/master

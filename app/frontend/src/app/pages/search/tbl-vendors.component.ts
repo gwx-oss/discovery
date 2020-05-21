@@ -10,6 +10,7 @@ import { SearchService } from './search.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IfStmt } from '@angular/compiler';
 declare const window: any;
+declare let API_HOST: string;
 @Component({
   selector: 'discovery-tbl-vendors',
   templateUrl: './tbl-vendors.component.html',
@@ -52,6 +53,8 @@ export class TblVendorsComponent implements OnInit, OnChanges {
   vehicles;
   results;
   vendors;
+  contract_urls:any;
+  calc_url:string =this.getCalcAPIURL();
   error_message;
   next: number;
   prev: number;
@@ -94,6 +97,20 @@ export class TblVendorsComponent implements OnInit, OnChanges {
        }
     }
   }
+  getCalcAPIURL(){
+    let calcurl = ""
+    if(API_HOST.indexOf('discovery.gsa.gov') !== -1) {
+      console.log('making calc prod url to get file');
+      calcurl = "https://calc.gsa.gov/api/";
+    } else if(API_HOST.indexOf('localhost') !== -1) {
+      console.log('making calc  dev url to get file');
+      calcurl = "https://calc-dev.app.cloud.gov/api/";
+    } else {
+      console.log('making calc  dev url to get file');
+      calcurl = "https://calc-dev.app.cloud.gov/api/";
+    }
+    return calcurl;
+}
   showSpinner(bool: boolean) {
     setTimeout(() => {
       this.emitActivateSpinner.emit(bool);
@@ -188,6 +205,26 @@ export class TblVendorsComponent implements OnInit, OnChanges {
           this.items_total = data['count'];
           this.results = data;
           this.vendors = this.buildVendorByVehicle(data['results']);
+          
+          let pids=[];
+          for(let j=0;j<data['results'].length;j++){
+            for(let i=0;i<data['results'][j].pools.length;i++){
+              pids.push(data['results'][j].pools[i].piid);
+            }
+          }
+          var pidsunique = pids.filter((v, i, a) => a.indexOf(v) === i);
+          var contract_numbers = pidsunique.join();
+          
+
+          this.searchService.getCapabilityStatementLink(contract_numbers).subscribe(
+            data => {
+              this.contract_urls = data;              
+            },
+            error => (this.error_message = <any>error)
+            );
+
+            
+
 
           this.vendors_no_results = false;
           this.show_results = true;
@@ -246,6 +283,11 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     this.hideLoader(); 
     this.emitDuns.emit(duns);
   }
+
+  checkAvailabilityForContract(duns: string) {
+    return false
+  }
+  
   prevPage() {
     this.getVendors(this.prev);
   }
@@ -282,11 +324,18 @@ export class TblVendorsComponent implements OnInit, OnChanges {
     const vehicles: any[] = [];
     for (const item of obj) {
       const vendor = {};
+      const each_contractnumber = [];
       const pools_ids_arr = [];
       vendor['name'] = item.name;
       vendor['duns'] = item.duns;
       vendor['contracts'] = item.number_of_contracts;
       vendor['vehicles'] = this.returnVehicleVendors(item.pools);
+     
+      for (const p_iids of item.pools) {
+        each_contractnumber.push( p_iids.piid )
+      }
+      var contract_numbers_unique = each_contractnumber.filter((v, i, a) => a.indexOf(v) === i);
+      vendor['contractnumber'] = contract_numbers_unique
 
       if (vehicles_submitted['selected']) {
         results['vehicles'] = this.returnVehicleValues(
