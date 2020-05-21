@@ -7,7 +7,7 @@ declare const document: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  APP_ASSETS = '/frontend/';
+  APP_ASSETS = '/';
   title = 'discovery';
   another: string;
 
