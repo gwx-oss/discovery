@@ -42,22 +42,12 @@ export class SearchService  {
 
   getAPIUrl() {
     let apiUrl : string = '';
-<<<<<<< HEAD
-    if(API_HOST.indexOf('https://discovery-dev.app.cloud.gov') !== -1) {
-      console.log('making dev url');
-=======
     if(API_HOST.indexOf('discovery.gsa.gov') !== -1) {
->>>>>>> origin/master
       apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
     } else if(API_HOST.indexOf('localhost') !== -1) {
       apiUrl = API_HOST + '/api/';
     } else {
-<<<<<<< HEAD
-      console.log('making prod url');
-      apiUrl = 'https://api.gsa.gov/acquisition/discovery/v2/';
-=======
       apiUrl = 'https://api.gsa.gov/acquisition/discovery/DEV/v2/';
->>>>>>> origin/master
     }
     return apiUrl;
   }
