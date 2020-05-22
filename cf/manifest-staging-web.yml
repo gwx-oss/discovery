@@ -3,5 +3,6 @@ inherit: base-web-manifest.yml
 
 applications:
 - name: discovery-web
-  host: discovery-staging
-  instances: 1
+  instances: 2
+  routes:
+  - route: discovery-staging.app.cloud.gov
