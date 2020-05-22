@@ -332,7 +332,7 @@ workflows:
           filters:
             branches:
               only: develop
-      - dep-stage:
+      - dep-staging:
           requires:
             - ut-components
             - ut-core-api
