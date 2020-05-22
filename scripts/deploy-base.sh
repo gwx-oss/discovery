@@ -37,24 +37,42 @@ deploy_app() {
   local hostname="$2"
   local fail=0
   
+  echo "________________________________________________________________________________"
+  echo "deploying ${branch} app"
   # Background services
+  echo "pushing ${branch}-scheduler"
   cf push discovery-scheduler -f "`get_manifest_config scheduler ${branch}`" &
+  echo "pushing ${branch}-worker"
   cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
   
   # User focused display
   cf set-env discovery-web DISABLE_COLLECTSTATIC 1
+  echo "host name is ${hostname}: "
   if [ "$hostname" ]
   then
+    echo "________________________________________________________________________________"
+    echo "cf push -n $hostname discovery-web -f get_manifest_config web ${branch}"
     cf push -n "$hostname" discovery-web -f "`get_manifest_config web ${branch}`" &
   else
+    echo "________________________________________________________________________________"
+    echo "cf zero-downtime-push discovery-web -f get_manifest_config web ${branch}"
     cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
   fi
   
+  echo "________________________________________________________________________________"
+  echo "jobs running"
+  jobs -l
+
+
   # Wait on everything to complete
   for job in `jobs -p`
   do
     wait $job || let "fail+=1"
+    echo "________________________________________________________________________________"
+    echo "current job: $job"
+    echo "fail status: $fail"
   done
   
+  echo "returning $fail"
   return "$fail"
 }
