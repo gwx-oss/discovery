@@ -46,7 +46,7 @@ deploy_app() {
   cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
   
   # User focused display
-  cf set-env discovery-web DISABLE_COLLECTSTATIC 1
+  # cf set-env discovery-web DISABLE_COLLECTSTATIC 1
   echo "host name is ${hostname}: "
   if [ "$hostname" ]
   then
