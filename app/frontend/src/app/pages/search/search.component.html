@@ -60,7 +60,7 @@
                 <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" [class.active]="vw_contracts">
                     <a
-                      aria-controls="contracts"
+                      aria-controls="contracts-toogle"
                       data-toggle="tab"
                       (click)="viewContracts()"
                     >
@@ -69,7 +69,7 @@
                   </li>
                   <li role="presentation" [class.active]="vw_vendors">
                     <a
-                      aria-controls="vendors"
+                      aria-controls="vendors-toggle"
                       data-toggle="tab"
                       (click)="viewVendors()"
                     >
@@ -163,7 +163,7 @@
                                 >
                                   <thead>
                                     <tr>
-                                      <th scope="col">&nbsp;</th>
+                                      <th scope="col" id="vehicle-index">Vehicle Index</th>
                                       <th
                                         scope="col"
                                         class="th-vehicle"
@@ -347,6 +347,7 @@
                                           href="https://www.gsa.gov/cdnstatic/BIC_%26_SUM_One-pager_252018.pdf"
                                           target="_blank"
                                           class="info-tip db"
+                                          aria-label="Learn More (Opens In New Window)"
                                         >
                                           <div class="tooltip db">
                                             &nbsp;
