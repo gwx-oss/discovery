@@ -60,7 +60,8 @@
                 <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" [class.active]="vw_contracts">
                     <a
-                      aria-controls="contracts-toogle"
+                      role="tab"
+                      aria-controls="contracts-toggle"
                       data-toggle="tab"
                       (click)="viewContracts()"
                     >
@@ -69,6 +70,7 @@
                   </li>
                   <li role="presentation" [class.active]="vw_vendors">
                     <a
+                      role="tab"
                       aria-controls="vendors-toggle"
                       data-toggle="tab"
                       (click)="viewVendors()"
