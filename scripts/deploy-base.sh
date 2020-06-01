@@ -46,7 +46,7 @@ deploy_app() {
   then
     cf push -n "$hostname" discovery-web -f "`get_manifest_config web ${branch}`" &
   else
-    if [ "$1" == "prod "]
+    if [ "$1" == "master"]
     then
       echo "pushing to prod, using cf zero-downtime-push plugin"
       cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
