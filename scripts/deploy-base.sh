@@ -52,7 +52,7 @@ deploy_app() {
       cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
     else
       echo "pushing to $1, using ordinary cf push"
-      cf push discovery-web -f "`get_manifest_config web ${branch}`"
+      cf push discovery-web -f "`get_manifest_config web ${branch}`" &
     fi
   fi
   
