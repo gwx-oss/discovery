@@ -25,11 +25,7 @@
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       pageUrl = window.location.href;
-      if(pageUrl.indexOf('discovery.gsa.gov') != -1){
-        ga('create', "{{GA_TRACKING_ID}}", 'auto');
-      }else{
-        ga('create', "UA-167013434-1", 'auto');
-      }
+      ga('create', "{{GA_TRACKING_ID}}", 'auto');
 
       ga('require', 'urlChangeTracker', {
         fieldsObj: {
