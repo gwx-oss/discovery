@@ -5,7 +5,3 @@ docker:
     image: chinchalinchin/discovery-kibana:5.6
 services:
     - discovery-elastic-service
-env:
-   ELASTICSEARCH_URI: $(echo "${VCAP_SERVICES}" | jq -r .elasticsearch56[0].credentials.uri)
-   ELASTICSEARCH_URL: $(echo "${VCAP_SERVICES}" | jq -r .elasticsearch56[0].credentials.hostname)
-   ELASTICSEARCH_PORT: $(echo "${VCAP_SERVICES}" | jq -r .elasticsearch56[0].credentials.port)
