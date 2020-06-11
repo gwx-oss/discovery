@@ -18,8 +18,6 @@ sed -i "s/elasticsearch.password:/elasticsearch.password: \"${es_password}\"/" /
 
 cat /etc/kibana/kibana.yml
 
-echo "> Kibana.yml configured. Switching to kibana user..."
-
-echo "> Starting kibana..."
+echo "> Kibana.yml configured. Starting Kibana..."
 
 bash /usr/share/kibana/bin/kibana
