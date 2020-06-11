@@ -1,0 +1,5 @@
+applications:
+    - name: grant-zookeeper
+disk_quota: 1G
+docker:
+    image: chinchalinchin/discovery-zookeeper:1
