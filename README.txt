@@ -25,7 +25,7 @@ After the image has been pushed to the Docker repo, you will need to edit the Cl
 	docker:
 		image: chinchalinchin/discovery-kibana:5.6
 
-Then login into CloudFoundry and target the organization and space you want to push it,
+Then login into CloudFoundry and target the organization and space you want to push it to,
 
 	cf login
 
