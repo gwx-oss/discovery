@@ -1,0 +1,6 @@
+applications: 
+    - name: discovery-logstash
+docker:
+    image: chinchalinchin/discovery-logstash:6
+services:
+    - discovery-elastic-service
