@@ -8,8 +8,8 @@ apt install -y wget jq
 
 WORKDIR /home/
 
-RUN wget https://artifacts.elastic.co/downloads/kibana/kibana-5.6.0-amd64.deb
-RUN dpkg -i kibana-5.6.0-amd64.deb
+RUN wget https://artifacts.elastic.co/downloads/kibana/kibana-5.6.5-amd64.deb
+RUN dpkg -i kibana-5.6.5-amd64.deb
 
 EXPOSE 5601
 

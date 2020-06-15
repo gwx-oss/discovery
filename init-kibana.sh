@@ -16,8 +16,12 @@ sed -i "s/elasticsearch.url:/elasticsearch.url: \"http:\/\/${es_username}:${es_p
 sed -i "s/elasticsearch.username:/elasticsearch.username: \"${es_username}\"/" /etc/kibana/kibana.yml
 sed -i "s/elasticsearch.password:/elasticsearch.password: \"${es_password}\"/" /etc/kibana/kibana.yml
 
+echo "> Kibana.yml configured. Echoing Kibana Configuration..."
+echo ">>"
+echo ">>>"
 cat /etc/kibana/kibana.yml
-
-echo "> Kibana.yml configured. Starting Kibana..."
+echo ">>>"
+echo ">>"
+echo "> Starting Kibana. Hold onto your pants..."
 
 bash /usr/share/kibana/bin/kibana

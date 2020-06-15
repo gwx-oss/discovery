@@ -1,6 +1,7 @@
 applications:
     - name: discovery-kibana
 disk_quota: 1200M
+memory: 200M
 docker:
     image: chinchalinchin/discovery-kibana:5.6
 services:
