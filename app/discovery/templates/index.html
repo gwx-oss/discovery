@@ -25,7 +25,11 @@
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       pageUrl = window.location.href;
-      ga('create', "{{GA_TRACKING_ID}}", {cookieFlags: 'secure;httponly'});
+      ga('create',  {
+        trackingId: '{{GA_TRACKING_ID}}',
+        cookieFlags: 'secure',
+        cookieDomain: 'auto'
+        });
 
       ga('require', 'urlChangeTracker', {
         fieldsObj: {
