@@ -9,6 +9,9 @@
     <link rel="icon" type="image/x-icon" href="{% static 'frontend/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'frontend/assets/uswds/css/uswds.min.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/styles.css' %}">
+    <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
+    <script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA" id="_fed_an_ua_tag"></script>
+
 </head>
 <body>
     <discovery-root>Loading...</discovery-root>
@@ -25,7 +28,11 @@
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       pageUrl = window.location.href;
-      ga('create', "{{GA_TRACKING_ID}}", 'auto');
+      ga('create',  {
+        trackingId: '{{GA_TRACKING_ID}}',
+        cookieFlags: 'secure',
+        cookieDomain: 'auto'
+        });
 
       ga('require', 'urlChangeTracker', {
         fieldsObj: {
