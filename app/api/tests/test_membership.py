@@ -147,9 +147,9 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 },
                 'pool__vehicle__ordering_guide': {
                     'tags': ('membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
-                    '@exact': 'https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf',
-                    '@iexact': 'https://WWW.GSA.GOV/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf',
-                    '@in': ("https://www.gsa.gov/cdnstatic/CONSOLIDATED_OASIS_U_SB_Ordering_Guide_8-15-2018.pdf", "https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering%20Guide%20V5_0.pdf"),
+                    '@exact': 'https://www.gsa.gov/buying-selling/products-services/professional-services/buy-services/oasis/how-to-use-oasis',
+                    '@iexact': 'https://www.gsa.gov/buying-selling/products-services/professional-services/buy-services/oasis/how-to-use-oasis',
+                    '@in': ("https://www.gsa.gov/buying-selling/products-services/professional-services/buy-services/oasis/how-to-use-oasis", "https://www.gsa.gov/cdnstatic/General_Supplies__Services/Ordering%20Guide%20V5_0.pdf"),
                     '@contains': 'OASIS',
                     '@icontains': 'oasis',
                     '@startswith': 'https',
