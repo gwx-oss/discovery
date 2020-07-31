@@ -373,14 +373,28 @@
                                     </tr>
                                     <tr>
                                       <th scope="row">Contract Details</th>
-                                      <td *ngFor="let vehicle of compare_tbl"
-                                          [hidden]="vehicle.vendors_results_total === 0">
-                                        <a href="{{vehicle.ordering_guide}}"
-                                           title="Ordering guide for "
-                                           *ngIf="vehicle.ordering_guide !== ''"
-                                           target="_blank"
-                                           class="min-h db"
-                                           aria-label="Ordering Guide (Opens New Window)">Ordering Guide</a>
+                                      <td
+                                        *ngFor="let vehicle of compare_tbl"
+                                        [hidden]="
+                                          vehicle.vendors_results_total === 0
+                                        "
+                                      >
+                                        <a
+                                          href="mailto:{{vehicle.gsa}}"
+                                          *ngIf="vehicle.gsa !== ''"
+                                          class="min-h"
+                                          aria-label = "Contract Point of Contact (Opens New Window)"
+                                          >Contract Point of Contact</a
+                                        >
+                                        <a
+                                          href="{{vehicle.ordering_guide}}"
+                                          title="Ordering guide for "
+                                          *ngIf="vehicle.ordering_guide !== ''"
+                                          target="_blank"
+                                          class="min-h db"
+                                          aria-label="Ordering Guide (Opens New Window)"
+                                          >Ordering Guide</a
+                                        >
                                       </td>
                                     </tr>
                                   </tbody>
