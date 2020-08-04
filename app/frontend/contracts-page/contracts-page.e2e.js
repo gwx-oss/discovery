@@ -952,7 +952,7 @@ describe('Contracts Page', function() {
 	
 	verifyOASISLinks = function(){
 		var OASISlinks=['OASIS Ordering Guide', 'OASIS Contracts', 'Upcoming Trainings', 'NAICS Codes per Pool'];
-		var OASISurls=['/oasis/how-to-use-oasis', '/oasis-contracts', '/training-and-scope-reviews', 'NEW_NAICS_Definitions_-_March_2020.pdf'];
+		var OASISurls=['/how-to-use-oasis', '/oasis-contracts', '/training-and-scope-reviews', 'NEW_NAICS_Definitions_-_March_2020.pdf'];
 		var j=0;
 		for(var i=0; i<OASISlinks.length; i++){	
 			element(by.xpath("//a[contains(text(),'"+OASISlinks[i]+"')]")).click();

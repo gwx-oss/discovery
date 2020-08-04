@@ -99,13 +99,13 @@ class VehicleTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@iexact': 'https://www.gsa.gov/buying-selling/products-services/professional-services/buy-services/oasis/how-to-use-oasis',
                 '@in': ("https://www.gsa.gov/buying-selling/products-services/professional-services/buy-services/oasis/how-to-use-oasis",
                     "https%3A%2F%2Fwww.gsa.gov%2Fbuying-selling%2Fproducts-services%2Fprofessional-services%2Fbuy-services%2Foasis%2Fhow-to-use-oasis"),
-                '@contains': 'OASIS',
+                '@contains': 'oasis',
                 '@icontains': 'oasis',
                 '@startswith': 'https',
-                '@istartswith': 'HTTPS',
+                '@istartswith': 'https',
                 '@endswith': 'how-to-use-oasis',
                 '@iendswith': 'how-to-use-oasis',
-                '@regex': '(OASIS|HCaTS)',
+                '@regex': '(oasis|HCaTS)',
                 '@iregex': '(oasis|hcats)'
             },
             'small_business': {
