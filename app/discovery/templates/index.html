@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- Google Analytics -->
-    <!-- {% if GA_TRACKING_ID %}
+    {% if GA_TRACKING_ID %}
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       pageUrl = window.location.href;
@@ -38,7 +38,7 @@
         dimension1: 'Page load'
       });
     </script>
-    <script async src="https://www.google-analytics.com/analytics.js"></script -->
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
     <script async src="{% static 'frontend/assets/autotrack/autotrack.js' %}"></script>
     {% endif %}
     <discovery-root>Loading...</discovery-root>
