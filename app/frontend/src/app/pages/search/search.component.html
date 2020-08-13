@@ -60,7 +60,8 @@
                 <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" [class.active]="vw_contracts">
                     <a
-                      aria-controls="contracts"
+                      role="tab"
+                      aria-controls="contracts-toggle"
                       data-toggle="tab"
                       (click)="viewContracts()"
                     >
@@ -69,7 +70,8 @@
                   </li>
                   <li role="presentation" [class.active]="vw_vendors">
                     <a
-                      aria-controls="vendors"
+                      role="tab"
+                      aria-controls="vendors-toggle"
                       data-toggle="tab"
                       (click)="viewVendors()"
                     >
@@ -159,11 +161,12 @@
                                 <table
                                   id="tbl-compare"
                                   class="usa-table-borderless margin-bottom"
+                                  role="presentation"
                                   *ngIf="compare_tbl.length > 0"
                                 >
                                   <thead>
                                     <tr>
-                                      <th scope="col">&nbsp;</th>
+                                      <th scope="col" id="vehicle-index">Vehicle Index</th>
                                       <th
                                         scope="col"
                                         class="th-vehicle"
@@ -347,6 +350,7 @@
                                           href="https://www.gsa.gov/cdnstatic/BIC_%26_SUM_One-pager_252018.pdf"
                                           target="_blank"
                                           class="info-tip db"
+                                          aria-label="Learn More (Opens In New Window)"
                                         >
                                           <div class="tooltip db">
                                             &nbsp;
