@@ -9,20 +9,9 @@
     <link rel="icon" type="image/x-icon" href="{% static 'frontend/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'frontend/assets/uswds/css/uswds.min.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/styles.css' %}">
-    <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
-    <script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA" id="_fed_an_ua_tag"></script>
 </head>
 <body>
-    <discovery-root>Loading...</discovery-root>
-
-    <script type="text/javascript">
-        var API_HOST = "{{API_HOST}}";
-        var SAM_API_KEY = "{{SAM_API_KEY}}";
-        if (API_HOST.substring(API_HOST.length - 1) == '/') {
-            API_HOST = API_HOST.substring(0, API_HOST.length - 1);
-        }
-    </script>
-
+    <!-- Google Analytics -->
     {% if GA_TRACKING_ID %}
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -52,11 +41,23 @@
     <script async src="https://www.google-analytics.com/analytics.js"></script>
     <script async src="{% static 'frontend/assets/autotrack/autotrack.js' %}"></script>
     {% endif %}
+    <discovery-root>Loading...</discovery-root>
+
+    <script type="text/javascript">
+        var API_HOST = "{{API_HOST}}";
+        var SAM_API_KEY = "{{SAM_API_KEY}}";
+        if (API_HOST.substring(API_HOST.length - 1) == '/') {
+            API_HOST = API_HOST.substring(0, API_HOST.length - 1);
+        }
+    </script>
 
     <script type="text/javascript" src="{% static 'frontend/assets/uswds/js/uswds.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/runtime.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/polyfills.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/scripts.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/main.js' %}"></script>
+    <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
+    <script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA" id="_fed_an_ua_tag"></script>
+
 </body>
 </html>
