@@ -70,7 +70,7 @@
   "fields": {
     "name": "OASIS Small Business",
     "tier": 3,
-    "poc": "oasissb@gsa.gov",
+    "poc": "oasis@gsa.gov",
     "ordering_guide": "https://www.gsa.gov/buying-selling/products-services/professional-services/buy-services/oasis/how-to-use-oasis",
     "small_business": true,
     "numeric_pool": false,
