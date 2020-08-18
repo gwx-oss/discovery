@@ -24,7 +24,7 @@ schema_view = get_schema_view(
         title="Discovery API",
         default_version='v2',
         description="Discovery API Documentation",
-        contact=openapi.Contact(email="pshc-dev@gsa.gov"),
+        contact=openapi.Contact(email="fasdigitalsupport@gsa.gov"),
     ),
     url=getHostName(),
     public=True,
