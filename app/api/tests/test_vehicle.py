@@ -81,9 +81,9 @@ class VehicleTest(case.APITestCase, metaclass = case.MetaAPISchema):
             },
             'poc': {
                 'tags': ('vehicle_field', 'fuzzy_text'),
-                '@exact': 'oasissb@gsa.gov',
+                '@exact': 'oasis@gsa.gov',
                 '@iexact': 'OASIS@GSA.GOV',
-                '@in': ("oasissb@gsa.gov", "sbhcats@gsa.gov", "fssi.bmo@gsa.gov"),
+                '@in': ("oasis@gsa.gov", "sbhcats@gsa.gov", "fssi.bmo@gsa.gov"),
                 '@contains': 'professionalservices',
                 '@icontains': 'ProfessionalServices',
                 '@startswith': 'oasis',
