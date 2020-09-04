@@ -29,7 +29,6 @@ describe('Contracts Page', function() {
 			 verifyContract('OASIS','One Acquisition Solution for Integrated Service');
 			 verifyContract('BMO','Building Maintenance and Operations');
 			 verifyContract('HCaTS','Human Capital and Training Solutions');
-			 verifyContract('PSS','Professional Services Schedule');
 			 verifyContract('ERM','Electronic Records Management');
 		 });
 		 
@@ -127,52 +126,6 @@ describe('Contracts Page', function() {
 		 it('should verify HCATS links', function(){
 			 browser.get(baseURL + '/hcats');
 			 verifyHCATSLinks();
-		 });
-		 
-	});
-	
-	describe('Verify Pool Links For PSS Contract Vehicle', function(){
-
-		 it('should verify pool links on PSS Contract Page', function(){
-			 browser.get(baseURL + '/pss');
-			 browser.sleep(5000);
-		 });	
-		 
-		 it('should display \'Language Services\' Pool', function(){
-			 verifyPSSpools('1');
-		 });
-		 
-		 it('should display \'Financial and Business Solutions\' Pool', function(){
-			 verifyPSSpools('2');
-		 });
-		 
-		 it('should display \'Advertising & Integrated Marketing Solutions\' Pool', function(){
-			 verifyPSSpools('3');
-		 });
-		 
-		 it('should display \'Professional Engineering Services\' Pool', function(){
-			 verifyPSSpools('4');
-		 });
-		 
-		 it('should display \'Mission Oriented Business Integrated Services\' Pool', function(){
-			 verifyPSSpools('5');
-		 });
-		 
-		 it('should display \'Environmental Services\' Pool', function(){
-			 verifyPSSpools('6');
-		 });
-		 
-		 it('should display \'Logistics Worldwide\' Pool', function(){
-			 verifyPSSpools('7');
-		 });
-		 
-	});
-	
-	describe('Verify Links For PSS Contract Vehicle', function(){
-
-		 it('should verify PSS links', function(){
-			 browser.get(baseURL + '/pss');
-			 verifyPSSLinks();
 		 });
 		 
 	});
@@ -920,27 +873,6 @@ describe('Contracts Page', function() {
 		     browser.switchTo().window(newWindowHandle).then(function () {
 		     browser.ignoreSynchronization = true;			  
 		     expect(browser.getCurrentUrl()).toContain(HCATSurls[j]);
-	           browser.driver.close().then(function () {
-		       browser.switchTo().window(handles[0]);
-		       j++;
-		      });
-		    });
-		   });
-		}
-	}
-	//bug - 'PSS Customer Support' should open in new tab	
-	verifyPSSLinks = function(){
-		var PSSlinks=['Schedules Ordering', 'Schedules Training', 'Schedules FAQs'/*, 'PSS Customer Support'*/];	
-		var PSSurls=['/schedule-buyers', '/schedules-news-and-updates', '/we-are-here-to-help'/*, '/professional-services-schedule-pss'*/];
-		var j=0;
-		for(var i=0; i<PSSlinks.length; i++){	
-			element(by.xpath("//a[contains(text(),'"+PSSlinks[i]+"')]")).click();
-			browser.sleep(3000);
-			browser.getAllWindowHandles().then(function (handles) {
-		     var newWindowHandle = handles[1];
-		     browser.switchTo().window(newWindowHandle).then(function () {
-		     browser.ignoreSynchronization = true;			  
-		     expect(browser.getCurrentUrl()).toContain(PSSurls[j]);
 	           browser.driver.close().then(function () {
 		       browser.switchTo().window(handles[0]);
 		       j++;
