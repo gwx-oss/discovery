@@ -79,19 +79,6 @@
 },
 {
   "model": "categories.vehicle",
-  "pk": "PSS",
-  "fields": {
-    "name": "Professional Services Schedule",
-    "tier": 2,
-    "poc": "professionalservices@gsa.gov",
-    "ordering_guide": "https://www.gsa.gov/acquisition/products-services/professional-services/professional-services-schedule/buy-off-the-professional-services-schedule",
-    "small_business": true,
-    "numeric_pool": false,
-    "display_number": true
-  }
-},
-{
-  "model": "categories.vehicle",
   "pk": "ERM",
   "fields": {
     "name": "Electronic Records Management",
