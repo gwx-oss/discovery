@@ -283,7 +283,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 'pools__contacts__name': {
                     'tags': ('vendor_field', 'membership_field', 'contact_field', 'fuzzy_text'),
                     '@exact': 'Ken Scott',
-                    '@iexact': 'daniel eke',
+                    '@iexact': 'daniel eke', #pss contractor name
                     '@in': ("Ken Scott", "Daniel Eke"),
                     '@contains': 'Taylor',
                     '@icontains': 'taylor',
