@@ -52,8 +52,8 @@ class VehicleTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@istartswith': 'hcats',
                 '@endswith': 'Business',
                 '@iendswith': 'unrestricted',
-                '@regex': 'Prof.*$',
-                '@iregex': 'prof.*$'
+                # '@regex': 'Prof.*$',
+                # '@iregex': 'prof.*$'
             },
             'tier__number': {
                 'tags': ('vehicle_field', 'tier_field', 'number'),
