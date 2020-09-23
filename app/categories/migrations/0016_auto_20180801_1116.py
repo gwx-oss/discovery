@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='pool',
             name='vehicle',
-            field=models.CharField(choices=[('OASIS_SB', 'OASIS Small Business'), ('OASIS', 'OASIS Unrestricted'), ('HCATS_SB', 'HCATS Small Business'), ('HCATS', 'HCATS Unrestricted'), ('BMO_SB', 'BMO Small Business'), ('BMO', 'BMO Unrestricted')], max_length=20),
+            field=models.CharField(choices=[('OASIS_SB', 'OASIS Small Business'), ('OASIS', 'OASIS Unrestricted'), ('HCATS_SB', 'HCATS Small Business'), ('HCATS', 'HCATS Unrestricted'), ('BMO_SB', 'BMO Small Business'), ('BMO', 'BMO Unrestricted'), ('PSS', 'Professional Services Schedule')], max_length=20),
         ),
         migrations.DeleteModel(
             name='ZoneState',
