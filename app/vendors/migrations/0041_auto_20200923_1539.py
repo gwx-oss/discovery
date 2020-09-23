@@ -7,7 +7,14 @@ from django.db import migrations
 def remove_vendors_pss(apps, scheme_editor):
     
     model = apps.get_model('vendors', 'poolmembership')
-    model.objects.filter(string__contains='PSS').delete()
+    model.objects.filter(pool_id = 'PSS_382').delete()
+    model.objects.filter(pool_id = 'PSS_541').delete()
+    model.objects.filter(pool_id = 'PSS_874').delete()
+    model.objects.filter(pool_id = 'PSS_871').delete()
+    model.objects.filter(pool_id = 'PSS_874500').delete()
+    model.objects.filter(pool_id = 'PSS_520').delete()
+    model.objects.filter(pool_id = 'PSS_899').delete()
+    # model.objects.filter(pool_id__contains='PSS').delete()
 
 
 class Migration(migrations.Migration):
@@ -19,3 +26,5 @@ class Migration(migrations.Migration):
     operations = [
     	migrations.RunPython(remove_vendors_pss)
     ]
+
+
