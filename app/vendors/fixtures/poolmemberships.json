@@ -3191,11 +3191,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       6,
@@ -3954,11 +3954,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -3975,11 +3975,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -4152,11 +4152,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -4173,11 +4173,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -4350,11 +4350,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -4371,11 +4371,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -4548,11 +4548,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -4569,11 +4569,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -4746,11 +4746,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -4845,12 +4845,12 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      3,
-      18,
+      20,
       19,
-      20
+      2,
+      1,
+      3,
+      18
     ],
     "zones": [
       1
@@ -4945,11 +4945,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -5044,12 +5044,12 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      3,
-      18,
+      20,
       19,
-      20
+      2,
+      1,
+      3,
+      18
     ],
     "zones": [
       1
@@ -5144,11 +5144,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -5165,11 +5165,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -5342,11 +5342,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -5363,11 +5363,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -5540,11 +5540,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -5639,12 +5639,12 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      3,
-      18,
+      20,
       19,
-      20
+      2,
+      1,
+      3,
+      18
     ],
     "zones": [
       1
@@ -5739,11 +5739,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -5760,11 +5760,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -5937,11 +5937,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -5958,11 +5958,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -6080,11 +6080,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -6101,11 +6101,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -6178,12 +6178,12 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      3,
-      18,
+      20,
       19,
-      20
+      2,
+      1,
+      3,
+      18
     ],
     "zones": [
       1
@@ -6332,11 +6332,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -6353,11 +6353,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -6530,11 +6530,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -6551,11 +6551,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      15,
+      20,
       19,
-      20
+      2,
+      1,
+      15
     ],
     "zones": [
       3
@@ -6728,11 +6728,11 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
+      20,
       3,
       15,
-      16,
       18,
-      20
+      16
     ],
     "zones": [
       1
@@ -6827,12 +6827,12 @@
     "expiration_8a_date": null,
     "contract_end_date": null,
     "setasides": [
-      1,
-      2,
-      3,
-      18,
+      20,
       19,
-      20
+      2,
+      1,
+      3,
+      18
     ],
     "zones": [
       1
