@@ -96,7 +96,7 @@ jobs:
           name: Run component tests
           no_output_timeout: 1h
           command: |
-          echo "./run test --parallel=4 discovery categories vendors contracts"
+            echo "./run test --parallel=4 discovery categories vendors contracts"
             ./run test --parallel=4 discovery categories vendors contracts
 
       - store_artifacts:
