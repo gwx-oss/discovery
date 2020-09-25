@@ -37,10 +37,12 @@ if [ -d "docs" ]
 then
     echo "> Cleaning /docs/ subdirectory"
     rm -r "docs"
-else
-    echo "> Creating /docs/ subdirectory"
     mkdir "docs"
 fi
+
+echo "> Creating /docs/ subdirectory"
+mkdir "docs"
+
 if [ -d "discovery" ]
 then
   echo "> Removing /discovery/ subdirectory"
