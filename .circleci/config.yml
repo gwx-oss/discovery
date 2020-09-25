@@ -96,6 +96,7 @@ jobs:
           name: Run component tests
           no_output_timeout: 1h
           command: |
+          echo "./run test --parallel=4 discovery categories vendors contracts"
             ./run test --parallel=4 discovery categories vendors contracts
 
       - store_artifacts:
@@ -114,11 +115,17 @@ jobs:
           name: Run core API tests
           no_output_timeout: 1h
           command: |
+            echo "./run test api --tag=object"
             ./run test api --tag=object
+            echo "./run test api --tag=ordering"
             ./run test api --tag=ordering
+            echo "./run test api --tag=pagination"
             ./run test api --tag=pagination
+            echo "./run test api --tag=search"
             ./run test api --tag=search
+            echo "./run api --tag=request"
             ./run test api --tag=request
+            echo "./run api --tag=info"
             ./run test api --tag=info
 
       - store_artifacts:
@@ -137,6 +144,7 @@ jobs:
           name: Run API field tests
           no_output_timeout: 1h
           command: |
+            echo "./run test api --tag=field_test"
             ./run test api --tag=field_test
 
       - store_artifacts:
@@ -155,6 +163,7 @@ jobs:
           name: Run API values tests
           no_output_timeout: 1h
           command: |
+            echo "./run test api --tag=values_test"
             ./run test api --tag=values_test
 
       - store_artifacts:
