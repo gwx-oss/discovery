@@ -1,7 +1,8 @@
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import include, url, static
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
+from django.urls import path, include
 
 from rest_framework.documentation import include_docs_urls
 from drf_yasg.views import get_schema_view
@@ -10,11 +11,12 @@ from drf_yasg import openapi
 from vendors import views as vendors
 from contracts import views as contracts
 from drf_yasg.generators import OpenAPISchemaGenerator
+from discovery.utils import getHostName, getBaseUrl
 
 class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
     def get_schema(self, *args, **kwargs):
         schema = super().get_schema(*args, **kwargs)
-        schema.basePath = '/acquisition/discovery/DEV/v2/'
+        schema.basePath = getBaseUrl()
         return schema
 
 schema_view = get_schema_view(
@@ -24,7 +26,7 @@ schema_view = get_schema_view(
         description="Discovery API Documentation",
         contact=openapi.Contact(email="pshc-dev@gsa.gov"),
     ),
-    url="https://api.gsa.gov/",
+    url=getHostName(),
     public=True,
     generator_class=CustomOpenAPISchemaGenerator,
 )
@@ -37,7 +39,6 @@ urlpatterns = [
     url(r'^api/$', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
     url(r'^api$', RedirectView.as_view(url='/api/', permanent=False)),
-    url(r'^docs/?', RedirectView.as_view(url='/api/', permanent=False)),
     url(r'^developers?/?', RedirectView.as_view(url='/api/', permanent=False)),
 
     # Data export endpoints
@@ -56,5 +57,6 @@ urlpatterns = [
     url(r'^pss.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^erm.*$', TemplateView.as_view(template_name='index.html')),
     url(r'^accounts.*$', TemplateView.as_view(template_name='index.html')),
-    url(r'^.*$', RedirectView.as_view(url='/404', permanent=False)),
+    url(r'^docs', include('docs.urls')),
+    url(r'^.*$', RedirectView.as_view(url='/404', permanent=False))
 ]
