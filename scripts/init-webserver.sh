@@ -33,13 +33,19 @@ python3 manage.py collectstatic --noinput >>"$LOG_FILE" 2>&1
 echo "> Navigating to $SCRIPT_DIR/../app/static"
 cd "$SCRIPT_DIR/../app/static"
 
-if [ -d "docs/" ] 
+if [ -d "docs" ] 
 then
     echo "> Cleaning /docs/ subdirectory"
-    rm -r "docs"/*
-else
-    echo "> Creating /docs/ subdirectory"
-    mkdir "docs"
+    rm -r "docs"
+fi
+
+echo "> Creating /docs/ subdirectory"
+mkdir "docs"
+
+if [ -d "discovery" ]
+then
+  echo "> Removing /discovery/ subdirectory"
+  rm -r "discovery"
 fi
 
 # Shallow clone to save space
