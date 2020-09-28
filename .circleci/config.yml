@@ -36,12 +36,14 @@ core: &core
   command: |
     apt-get update
     apt-get install -y git g++ gcc make procps
+    apt-get install python-setuptools -y
+    apt-get install python3-pip -y
 
 django: &django
   name: Install requirements
   command: |
     cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
-
+    
     pip install --no-cache-dir -r ./requirements.txt
     pip install --no-cache-dir -r ./requirements-dev.txt
 
@@ -205,28 +207,50 @@ jobs:
       - run: *xvfb
       - run: *discovery
 
+  dep-dev:
+    docker:
+      - image: debian:stretch-slim
+        environment:
+          CF_LOGIN_URL: 'https://api.fr.cloud.gov'
+
+    working_directory: /var/local
+
+    steps:
       - run:
           name: Run Django acceptance tests
           no_output_timeout: 1h
           command: |
-            ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
-            ./run test --parallel=3 acceptance
+            apt-get update
+            apt-get install -y git
 
-      - store_artifacts:
-          <<: *logging
-          destination: django-acceptance-reports
-
-  at-frontend:
-    <<: *application
-
-    steps:
-      - run: *core
       - checkout
-      - run: *django
-      - run: *angular
-      - run: *chrome
-      - run: *xvfb
-      - run: *discovery
+
+      - run:
+          name: Setup CloudFoundry client CLI
+          command: |
+            ./scripts/setup-cf.sh /dev/stderr
+
+      - run:
+          name: Deploy development applications
+          command: |
+            ./scripts/deploy-dev.sh
+
+  #dep-stage:
+   # docker:
+    #  - image: debian:stretch-slim
+     #   environment:
+      #    CF_LOGIN_URL: 'https://api.fr.cloud.gov'
+
+    #working_directory: /var/local
+
+    #steps:
+     # - run: *core
+      #- checkout
+      #- run: *django
+      #- run: *angular
+      #- run: *chrome
+      #- run: *xvfb
+      #- run: *discovery
 
       # - run:
       #     name: Run Angular acceptance tests
@@ -235,11 +259,11 @@ jobs:
       #       ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
       #       ./scripts/test-frontend.sh e2e /dev/stderr
 
-      - store_artifacts:
-          <<: *logging
-          destination: angular-acceptance-reports
+      #- store_artifacts:
+      #   <<: *logging
+      #    destination: angular-acceptance-reports
 
-  dep-dev:
+  dep-staging:
     <<: *deployer
 
     steps:
@@ -252,7 +276,7 @@ jobs:
       - run:
           name: Deploy development applications
           command: |
-            ./scripts/deploy-dev.sh
+            ./scripts/deploy-staging.sh          
 
       - store_artifacts:
           <<: *logging
@@ -306,7 +330,6 @@ workflows:
       - ut-api-values
       - ut-frontend
       - at-backend
-      - at-frontend
       - dep-dev:
           requires:
             - ut-components
@@ -315,10 +338,20 @@ workflows:
             - ut-api-values
             - ut-frontend
             - at-backend
-            - at-frontend
           filters:
             branches:
               only: develop
+      - dep-staging:
+          requires:
+            - ut-components
+            - ut-core-api
+            - ut-api-fields
+            - ut-api-values
+            - ut-frontend
+            - at-backend
+          filters:
+            branches:
+              only: staging        
       - dep-prod:
           requires:
             - ut-components
@@ -327,7 +360,6 @@ workflows:
             - ut-api-values
             - ut-frontend
             - at-backend
-            - at-frontend
           filters:
             branches:
               only: master
