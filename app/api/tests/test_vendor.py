@@ -116,20 +116,20 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@regex': '\d+',
                     '@iregex': 'www\.[^\.]+\.com'
                 },
-                'sam_location__address': {
-                    'tags': ('vendor_field', 'location_field', 'fuzzy_text'),
-                    '@exact': '7000 Muirkirk Meadows Dr',
-                    '@iexact': '7000 muirkirk meadows dr',
-                    '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
-                    '@contains': 'South',
-                    '@icontains': 'dEErfield pOnd',
-                    '@startswith': '7500',
-                    '@istartswith': '6710 ro',
-                    '@endswith': 'Ave',
-                    '@iendswith': 'ave',
-                    '@regex': 'Ste \d+$',
-                    '@iregex': 'ste \d+$'
-                },
+                # 'sam_location__address': {
+                #     'tags': ('vendor_field', 'location_field', 'fuzzy_text'),
+                #     '@exact': '7000 Muirkirk Meadows Dr',
+                #     '@iexact': '7000 muirkirk meadows dr',
+                #     '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
+                #     '@contains': 'South',
+                #     '@icontains': 'dEErfield pOnd',
+                #     '@startswith': '7500',
+                #     '@istartswith': '6710 ro',
+                #     '@endswith': 'Ave',
+                #     '@iendswith': 'ave',
+                #     '@regex': 'Ste \d+$',
+                #     '@iregex': 'ste \d+$'
+                # },
                 'sam_location__city': {
                     'tags': ('vendor_field', 'location_field', 'fuzzy_text'),
                     '@exact': 'Carlisle',

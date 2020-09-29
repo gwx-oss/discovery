@@ -11,8 +11,8 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
     schema = {
         'object': {
             'tags': ('contract_object',),
-            '&1': ('piid', 'exact', 'N0017812D6749_4Y01'),
-            '&162': ('piid', 'exact', 'GS00Q14OADS128_19AQMM18F1804'),
+            '&828': ('name', 'exact', 'USZA2202D0015_0194'),
+            '&828': ('name', 'exact', 'USZA2202D0015_0194'),
             '&828': ('name', 'exact', 'USZA2202D0015_0194'),
             '#345C': (),
             '#ABCDEFG': ()
@@ -471,16 +471,16 @@ class ContractTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@regex': '^GS\d+',
                 '@iregex': '^(gs06|gs00)'
             },
-            'vendor__pools__expiration_8a_date': {
-                'tags': ('contract_field', 'vendor_field', 'membership_field', 'date_time'),
-                '@date': '2022-07-19',
-                '@year': '2017',
-                '@month': '7',
-                '@day': '19',
-                '@week': '32',
-                '@week_day': '3',
-                '@quarter': '1'
-            }
+            # 'vendor__pools__expiration_8a_date': {
+            #     'tags': ('contract_field', 'vendor_field', 'membership_field', 'date_time'),
+            #     '@date': '2022-07-19',
+            #     '@year': '2017',
+            #     '@month': '7',
+            #     '@day': '19',
+            #     '@week': '32',
+            #     '@week_day': '3',
+            #     '@quarter': '1'
+            # }
         }
     }
         

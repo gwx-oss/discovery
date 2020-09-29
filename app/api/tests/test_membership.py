@@ -12,7 +12,7 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
     schema = {
             'object': {
                 'tags': ('membership_object',),
-                '&36': ('piid', 'exact', 'GS00Q14OADS405'),
+                '&97': ('piid', 'exact', 'GS00Q14OADU307'),
                 '&97': ('piid', 'exact', 'GS00Q14OADU307'),
                 '#ABCDEFG': ()
             },
@@ -129,16 +129,16 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@istartswith': 'hcats',
                     '@endswith': 'Business',
                     '@iendswith': 'unrestricted',
-                    # '@regex': 'Prof.*$',
-                    # '@iregex': 'prof.*$'
+                    '@regex': 'Prof.*$',
+                    '@iregex': 'prof.*$'
                 },
                 'pool__vehicle__poc': {
                     'tags': ('membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
                     '@exact': 'oasis@gsa.gov',
                     '@iexact': 'OASIS@GSA.GOV',
                     '@in': ("oasis@gsa.gov", "sbhcats@gsa.gov", "fssi.bmo@gsa.gov"),
-                    # '@contains': 'professionalservices',
-                    # '@icontains': 'ProfessionalServices',
+                    '@contains': 'professionalservices',
+                    '@icontains': 'ProfessionalServices',
                     '@startswith': 'oasis',
                     '@istartswith': 'OASIS',
                     '@endswith': 'gsa.gov',
@@ -411,20 +411,20 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 #     '@regex': '\d+',
                 #     '@iregex': 'www\.[^\.]+\.com'
                 # },
-                'vendor__sam_location__address': {
-                    'tags': ('membership_field', 'vendor_field', 'location_field', 'fuzzy_text'),
-                    '@exact': '7000 Muirkirk Meadows Dr',
-                    '@iexact': '7000 muirkirk meadows dr',
-                    '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
-                    '@contains': 'South',
-                    '@icontains': 'dEErfield pOnd',
-                    '@startswith': '7500',
-                    '@istartswith': '6710 ro',
-                    '@endswith': 'Ave',
-                    '@iendswith': 'ave',
-                    '@regex': 'Ste \d+$',
-                    '@iregex': 'ste \d+$'
-                },
+                # 'vendor__sam_location__address': {
+                #     'tags': ('membership_field', 'vendor_field', 'location_field', 'fuzzy_text'),
+                #     '@exact': '7000 Muirkirk Meadows Dr',
+                #     '@iexact': '7000 muirkirk meadows dr',
+                #     '@in': ("1002 Explorer Blvd", "8600 Boeing Dr"),
+                #     '@contains': 'South',
+                #     '@icontains': 'dEErfield pOnd',
+                #     '@startswith': '7500',
+                #     '@istartswith': '6710 ro',
+                #     '@endswith': 'Ave',
+                #     '@iendswith': 'ave',
+                #     '@regex': 'Ste \d+$',
+                #     '@iregex': 'ste \d+$'
+                # },
                 'vendor__sam_location__city': {
                     'tags': ('membership_field', 'vendor_field', 'location_field', 'fuzzy_text'),
                     '@exact': 'Carlisle',
