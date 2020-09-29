@@ -129,16 +129,16 @@ class MembershipTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@istartswith': 'hcats',
                     '@endswith': 'Business',
                     '@iendswith': 'unrestricted',
-                    '@regex': 'Prof.*$',
-                    '@iregex': 'prof.*$'
+                    # '@regex': 'Prof.*$',
+                    # '@iregex': 'prof.*$'
                 },
                 'pool__vehicle__poc': {
                     'tags': ('membership_field', 'pool_field', 'vehicle_field', 'fuzzy_text'),
                     '@exact': 'oasis@gsa.gov',
                     '@iexact': 'OASIS@GSA.GOV',
                     '@in': ("oasis@gsa.gov", "sbhcats@gsa.gov", "fssi.bmo@gsa.gov"),
-                    '@contains': 'professionalservices',
-                    '@icontains': 'ProfessionalServices',
+                    # '@contains': 'professionalservices',
+                    # '@icontains': 'ProfessionalServices',
                     '@startswith': 'oasis',
                     '@istartswith': 'OASIS',
                     '@endswith': 'gsa.gov',
