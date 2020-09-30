@@ -42,12 +42,18 @@ deploy_app() {
   cf push discovery-worker -f "`get_manifest_config worker ${branch}`" &
   
   # User focused display
-  cf set-env discovery-web DISABLE_COLLECTSTATIC 1
   if [ "$hostname" ]
   then
     cf push -n "$hostname" discovery-web -f "`get_manifest_config web ${branch}`" &
   else
-    cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
+    if [ "$1" == "master"]
+    then
+      echo "pushing to prod, using cf zero-downtime-push plugin"
+      cf zero-downtime-push discovery-web -f "`get_manifest_config web ${branch}`" &
+    else
+      echo "pushing to $1, using ordinary cf push"
+      cf push discovery-web -f "`get_manifest_config web ${branch}`" &
+    fi
   fi
   
   # Wait on everything to complete
