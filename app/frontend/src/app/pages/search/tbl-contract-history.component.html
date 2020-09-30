@@ -115,7 +115,7 @@
     <table id="tbl-contract-history" class="usa-table-borderless history" *ngIf="!history_no_results && !spinner">
       <thead>
         <tr>
-          <th scope="col"></th>
+          <th scope="col" id="contract-index">Contract Index</th>
           <th scope="col">
             <span class="tooltip">
               <discovery-th-sort [label]="'Date Signed'" [width]="'auto'" [orderBy]="'date_signed'"

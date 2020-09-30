@@ -11,7 +11,8 @@
         <option *ngFor="let item of items_filtered" value="{{item.id}}">{{item.vehicle + ' - ' +
           item.name}}</option>
       </select>
-      <button class="btn-add" type="submit" (click)="addCategory()" [disabled]="!items || category === '0'">
+      <button class="btn-add" type="submit" (click)="addCategory()" [disabled]="!items || category === '0'"
+        alt="Add Category To Filter">
         <span>Add</span>
       </button>
     </div>

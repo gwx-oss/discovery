@@ -226,22 +226,22 @@ jobs:
           command: |
             ./scripts/deploy-dev.sh
 
-  dep-stage:
-    docker:
-      - image: debian:stretch-slim
-        environment:
-          CF_LOGIN_URL: 'https://api.fr.cloud.gov'
+  #dep-stage:
+   # docker:
+    #  - image: debian:stretch-slim
+     #   environment:
+      #    CF_LOGIN_URL: 'https://api.fr.cloud.gov'
 
-    working_directory: /var/local
+    #working_directory: /var/local
 
-    steps:
-      - run: *core
-      - checkout
-      - run: *django
-      - run: *angular
-      - run: *chrome
-      - run: *xvfb
-      - run: *discovery
+    #steps:
+     # - run: *core
+      #- checkout
+      #- run: *django
+      #- run: *angular
+      #- run: *chrome
+      #- run: *xvfb
+      #- run: *discovery
 
       # - run:
       #     name: Run Angular acceptance tests
@@ -250,11 +250,11 @@ jobs:
       #       ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
       #       ./scripts/test-frontend.sh e2e /dev/stderr
 
-      - store_artifacts:
-          <<: *logging
-          destination: angular-acceptance-reports
+      #- store_artifacts:
+      #   <<: *logging
+      #    destination: angular-acceptance-reports
 
-  dep-dev:
+  dep-staging:
     <<: *deployer
 
     steps:
@@ -332,7 +332,7 @@ workflows:
           filters:
             branches:
               only: develop
-      - dep-stage:
+      - dep-staging:
           requires:
             - ut-components
             - ut-core-api
