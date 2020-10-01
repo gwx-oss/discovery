@@ -306,7 +306,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 }
             },
             'requests': {
-                '-membership2': {
+                '@membership1': {
                     'tags': ('vendor_request',),
                     'params': {'membership': '(pool__vehicle__id=BMO)&(setasides__code=A6)&(setasides__code=XX)'},
                     'tests': (
@@ -326,7 +326,7 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
         resp.is_int(base_key + ['duns'])
         resp.is_int(base_key + ['duns_4'])
                 
-        if resp.check('is_not_in', base_key + ['duns'], ('614155380', '148815173', '831340356', '246802545')):
+        if resp.check('is_not_in', base_key + ['duns'], ('614155380', '614155380', '614155380', '614155380')):
             resp.is_not_empty(base_key + ['cage'])
             resp.is_not_empty(base_key + ['sam_status'])
             resp.is_not_none(base_key + ['sam_exclusion'])
