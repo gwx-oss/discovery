@@ -36,35 +36,26 @@ core: &core
   command: |
     apt-get update
     apt-get install -y git g++ gcc make procps
-    apt-get install python-setuptools -y
-    apt-get install python3-pip -y
-
 django: &django
   name: Install requirements
   command: |
     cp ./app/discovery/local_settings.circle.py ./app/discovery/local_settings.py
-    
     pip install --no-cache-dir -r ./requirements.txt
     pip install --no-cache-dir -r ./requirements-dev.txt
-
     ./scripts/init-webserver.sh /dev/stderr
-
 angular: &angular
   name: Install Angular CLI
   command: |
     ./scripts/setup-angular.sh /dev/stderr
     ./scripts/build-frontend.sh /dev/stderr
-
 cloudfoundry: &cloudfoundry
   name: Setup CloudFoundry client CLI
   command: |
     ./scripts/setup-cf.sh /dev/stderr
-
 chrome: &chrome
   name: Install Chrome web driver
   command: |
     ./scripts/setup-chrome.sh /dev/stderr
-
 xvfb: &xvfb
   name: Running Xvfb server
   background: true
@@ -79,8 +70,6 @@ discovery: &discovery
     ./scripts/load-fixtures.sh
     cd app
     waitress-serve --expose-tracebacks --port=8080 discovery.wsgi:application
-
-
 logging: &logging
   path: logs
 
@@ -99,7 +88,6 @@ jobs:
           no_output_timeout: 1h
           command: |
             ./run test --parallel=4 discovery categories vendors contracts
-
       - store_artifacts:
           <<: *logging
           destination: component-test-reports
@@ -122,7 +110,6 @@ jobs:
             ./run test api --tag=search
             ./run test api --tag=request
             ./run test api --tag=info
-
       - store_artifacts:
           <<: *logging
           destination: core-api-test-reports
@@ -140,7 +127,6 @@ jobs:
           no_output_timeout: 1h
           command: |
             ./run test api --tag=field_test
-
       - store_artifacts:
           <<: *logging
           destination: api-field-test-reports
@@ -158,7 +144,6 @@ jobs:
           no_output_timeout: 1h
           command: |
             ./run test api --tag=values_test
-
       - store_artifacts:
           <<: *logging
           destination: api-values-test-reports
@@ -181,7 +166,6 @@ jobs:
           command: |
             ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
             ./scripts/test-frontend.sh karma /dev/stderr
-
       - store_artifacts:
           <<: *logging
           destination: angular-test-reports
@@ -198,63 +182,40 @@ jobs:
       - run: *xvfb
       - run: *discovery
 
-  dep-dev:
-    docker:
-      - image: debian:stretch-slim
-        environment:
-          CF_LOGIN_URL: 'https://api.fr.cloud.gov'
-
-    working_directory: /var/local
-
-    steps:
       - run:
           name: Run Django acceptance tests
           no_output_timeout: 1h
           command: |
-            apt-get update
-            apt-get install -y git
+            ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+            ./run test --parallel=3 acceptance
+      - store_artifacts:
+          <<: *logging
+          destination: django-acceptance-reports
 
+  at-frontend:
+    <<: *application
+
+    steps:
+      - run: *core
       - checkout
+      - run: *django
+      - run: *angular
+      - run: *chrome
+      - run: *xvfb
+      - run: *discovery
 
       - run:
-          name: Setup CloudFoundry client CLI
+          name: Run Angular acceptance tests
+          no_output_timeout: 1h
           command: |
-            ./scripts/setup-cf.sh /dev/stderr
+             ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
+             ./scripts/test-frontend.sh e2e /dev/stderr
 
-      - run:
-          name: Deploy development applications
-          command: |
-            ./scripts/deploy-dev.sh
+      - store_artifacts:
+          <<: *logging
+          destination: angular-acceptance-reports
 
-  #dep-stage:
-   # docker:
-    #  - image: debian:stretch-slim
-     #   environment:
-      #    CF_LOGIN_URL: 'https://api.fr.cloud.gov'
-
-    #working_directory: /var/local
-
-    #steps:
-     # - run: *core
-      #- checkout
-      #- run: *django
-      #- run: *angular
-      #- run: *chrome
-      #- run: *xvfb
-      #- run: *discovery
-
-      # - run:
-      #     name: Run Angular acceptance tests
-      #     no_output_timeout: 1h
-      #     command: |
-      #       ./scripts/wait-for-it.sh --host="localhost" --port=8080 --timeout=300
-      #       ./scripts/test-frontend.sh e2e /dev/stderr
-
-      #- store_artifacts:
-      #   <<: *logging
-      #    destination: angular-acceptance-reports
-
-  dep-staging:
+  dep-dev:
     <<: *deployer
 
     steps:
@@ -267,8 +228,7 @@ jobs:
       - run:
           name: Deploy development applications
           command: |
-            ./scripts/deploy-staging.sh          
-
+            ./scripts/deploy-dev.sh
       - store_artifacts:
           <<: *logging
           destination: dev-deploy-reports
@@ -287,7 +247,6 @@ jobs:
           name: Deploy production applications
           command: |
             ./scripts/deploy-prod.sh
-
       - store_artifacts:
           <<: *logging
           destination: prod-deploy-reports
@@ -306,7 +265,6 @@ jobs:
             git config --global user.name "CircleCI ( ${CIRCLE_USERNAME} )"
             git config --global user.email "${CIRCLE_USERNAME}@${CIRCLE_BRANCH}"
             ./scripts/deploy-docs.sh "${CIRCLE_BRANCH}"
-
       - store_artifacts:
           <<: *logging
           destination: docs-deploy-reports
@@ -321,6 +279,7 @@ workflows:
       - ut-api-values
       - ut-frontend
       - at-backend
+      - at-frontend
       - dep-dev:
           requires:
             - ut-components
@@ -329,20 +288,10 @@ workflows:
             - ut-api-values
             - ut-frontend
             - at-backend
+            - at-frontend
           filters:
             branches:
               only: develop
-      - dep-staging:
-          requires:
-            - ut-components
-            - ut-core-api
-            - ut-api-fields
-            - ut-api-values
-            - ut-frontend
-            - at-backend
-          filters:
-            branches:
-              only: staging        
       - dep-prod:
           requires:
             - ut-components
@@ -351,6 +300,7 @@ workflows:
             - ut-api-values
             - ut-frontend
             - at-backend
+            - at-frontend
           filters:
             branches:
               only: master
