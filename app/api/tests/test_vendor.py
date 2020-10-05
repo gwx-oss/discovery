@@ -304,17 +304,17 @@ class VendorTest(case.APITestCase, metaclass = case.MetaAPISchema):
                     '@range': (1, 2),
                     '@in': (1, 2)
                 }
-            },
-            'requests': {
-                '@membership1': {
-                    'tags': ('vendor_request',),
-                    'params': {'membership': '(pool__vehicle__id=BMO)&(setasides__code=A6)&(setasides__code=XX)'},
-                    'tests': (
-                        ('pools__pool__vehicle__id', 'exact', 'BMO'),
-                        ('pools__setasides__code', 'in', ('A6', 'XX')),
-                    )
-                }
             }
+            # 'requests': {
+            #     '@membership1': {
+            #         'tags': ('vendor_request',),
+            #         'params': {'membership': '(pool__vehicle__id=BMO)&(setasides__code=A6)&(setasides__code=XX)'},
+            #         'tests': (
+            #             ('pools__pool__vehicle__id', 'exact', 'BMO'),
+            #             ('pools__setasides__code', 'in', ('A6', 'XX')),
+            #         )
+            #     }  
+            # }
         }
 
 
