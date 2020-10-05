@@ -46,10 +46,6 @@ describe('Contracts Page', function() {
 			 
 			 navigateToContract('BMO');
 			 contractsPage('BMO','Building Maintenance and Operations');
-			 browser.navigate().back();			
-			 
-			 navigateToContract('PSS');
-			 contractsPage('PSS','Professional Services Schedule');
 			 browser.navigate().back();
 			 
 			 navigateToContract('HCaTS');
@@ -322,9 +318,6 @@ describe('Contracts Page', function() {
 	contractsPage = function(contract,title){
 		 expect(element(by.xpath("//h1[text()='"+contract+"']")).isDisplayed()).toBe(true);
 		 expect(element(by.xpath("//h3[text()='"+title+"']")).isDisplayed()).toBe(true);
-		 if (!contract=='PSS'){
-		     expect(element(by.css(".best-in-class")).isDisplayed()).toBe(true);
-		  }
 		 expect(element(by.xpath("//h3[text()='"+contract+" Links:']")).isDisplayed()).toBe(true);
 		 expect(element(by.xpath("//h3[text()='"+contract+" Links:']/../ul")).isDisplayed()).toBe(true);
 	}		
@@ -459,83 +452,6 @@ describe('Contracts Page', function() {
 		
 	}
 	
-	
-	verifyPSSpools = function(pool){
-
-		switch (pool) {
-		case '1':
-			 element.all(by.xpath("//ul[@class='usa-font-lead']//a")).get(0).click();
-			 browser.sleep(3000);
-			 browser.ignoreSynchronization = true;
-			 expect(browser.getCurrentUrl()).toContain('service_categories=PSS_382');
-			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Professional Services Schedule');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('139');
-			 expect(element(by.xpath("(//li[contains(@id,'PSS-3')])[1]")).getText()).toEqual('Language Services');			 
-			 browser.navigate().back();
-			break;
-		case '2':
-			 element.all(by.xpath("//ul[@class='usa-font-lead']//a")).get(1).click();
-			 browser.sleep(3000);
-			 browser.ignoreSynchronization = true;
-			 expect(browser.getCurrentUrl()).toContain('service_categories=PSS_520');
-			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Professional Services Schedule');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('617');
-			 expect(element(by.xpath("(//li[contains(@id,'PSS-2')])[1]")).getText()).toEqual('Financial and Business Solutions');			 
-			 browser.navigate().back();
-			break;
-		case '3':
-			 element.all(by.xpath("//ul[@class='usa-font-lead']//a")).get(2).click();
-			 browser.sleep(3000);
-			 browser.ignoreSynchronization = true;
-			 expect(browser.getCurrentUrl()).toContain('service_categories=PSS_541');
-			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Professional Services Schedule');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('578');
-			 expect(element(by.xpath("(//li[contains(@id,'PSS-0')])[1]")).getText()).toEqual('Advertising & Integrated Marketing Solutions');			 
-			 browser.navigate().back();
-			break;
-		case '4':
-			 element.all(by.xpath("//ul[@class='usa-font-lead']//a")).get(3).click();
-			 browser.sleep(3000);
-			 browser.ignoreSynchronization = true;
-			 expect(browser.getCurrentUrl()).toContain('service_categories=PSS_871');
-			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Professional Services Schedule');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('880');
-			 expect(element(by.xpath("(//li[contains(@id,'PSS-6')])[1]")).getText()).toEqual('Professional Engineering Services');			 
-			 browser.navigate().back();
-			break;
-		case '5':
-			 element.all(by.xpath("//ul[@class='usa-font-lead']//a")).get(4).click();
-			 browser.sleep(3000);
-			 browser.ignoreSynchronization = true;
-			 expect(browser.getCurrentUrl()).toContain('service_categories=PSS_874');
-			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Professional Services Schedule');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('2146');
-			 expect(element(by.xpath("(//li[contains(@id,'PSS-5')])[1]")).getText()).toEqual('Mission Oriented Business Integrated Services');			 
-			 browser.navigate().back();
-			break;
-		case '6':
-			 element.all(by.xpath("//ul[@class='usa-font-lead']//a")).get(5).click();
-			 browser.sleep(3000);
-			 browser.ignoreSynchronization = true;
-			 expect(browser.getCurrentUrl()).toContain('service_categories=PSS_899');
-			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Professional Services Schedule');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('641');
-			 expect(element(by.xpath("(//li[contains(@id,'PSS-1')])[1]")).getText()).toEqual('Environmental Services');			 
-			 browser.navigate().back();
-			break;
-		case '7':
-			 element.all(by.xpath("//ul[@class='usa-font-lead']//a")).get(6).click();
-			 browser.sleep(3000);
-			 browser.ignoreSynchronization = true;
-			 expect(browser.getCurrentUrl()).toContain('service_categories=PSS_874500');
-			 expect(element(by.xpath("//*[@id='tbl-compare']//th/following-sibling::th[1]")).getText()).toContain('Professional Services Schedule');
-			 expect(element(by.xpath("//button[@class='tooltip-bottom']")).getText()).toContain('302');
-			 expect(element(by.xpath("(//li[contains(@id,'PSS-4')])[1]")).getText()).toEqual('Logistics Worldwide');			 
-			 browser.navigate().back();
-			break;
-		}
-		
-	}
 	
 	verifyBMOpools = function(pool){
 
