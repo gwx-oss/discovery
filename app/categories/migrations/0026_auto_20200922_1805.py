@@ -15,9 +15,8 @@ def remove_pss(apps, scheme_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendors', '0041_auto_20200923_1539'),
         ('categories', '0024_auto_20180918_1959'),
-
+        ('vendors', '0041_auto_20200923_1539')
     ]
 
     operations = [
