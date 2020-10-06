@@ -331,9 +331,9 @@ workflows:
             - ut-frontend
             - at-backend
             - at-frontend
-            filters:
-              branches:
-                only: develop
+          filters:
+            branches:
+              only: staging
       - dep-docs:
           requires:
             - ut-components
