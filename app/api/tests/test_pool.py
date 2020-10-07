@@ -256,16 +256,16 @@ class PoolTest(case.APITestCase, metaclass = case.MetaAPISchema):
                 '@range': (100, 300),
                 '@in': (43, 3, 54)
             },
-            'keywords__parent__id': {
-                'tags': ('pool_field', 'keyword_field', 'number'),
-                '@exact': 43,
-                '@lt': 500,
-                '@lte': 500, 
-                '@gt': 500, 
-                '@gte': 500,
-                '@range': (100, 300),
-                '@in': (43, 326, 568)
-            },
+            # 'keywords__parent__id': {
+            #     'tags': ('pool_field', 'keyword_field', 'number'),
+            #     '@exact': 43,
+            #     '@lt': 500,
+            #     '@lte': 500, 
+            #     '@gt': 500, 
+            #     '@gte': 500,
+            #     '@range': (100, 300),
+            #     '@in': (43, 326, 568)
+            # },
             'keywords__name': {
                 'tags': ('pool_field', 'keyword_field', 'fuzzy_text'),
                 '@exact': 'Disaster Management',
