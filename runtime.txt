@@ -1,5 +1,2 @@
-<<<<<<< HEAD
 python-3.6.12
-=======
-python-3.6.10
->>>>>>> parent of 1f4d8770... update python version
+
