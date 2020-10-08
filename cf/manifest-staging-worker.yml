@@ -4,3 +4,4 @@ inherit: base-worker-manifest.yml
 applications:
 - name: discovery-worker
   instances: 1
+  disk_quota: 2G
