@@ -14,13 +14,12 @@ def remove_pss(apps, scheme_editor):
     model = apps.get_model('categories', 'keywords')
     model.objects.filter(pool='PSS').delete()
     
-    model = apps.get_model('categories', 'vehicle')
-    model.objects.filter(id='PSS').delete()
-    
     model = apps.get_model('categories', 'pool')
     model.objects.filter(id='PSS').delete()
 
-
+    model = apps.get_model('categories', 'vehicle')
+    model.objects.filter(id='PSS').delete()
+    
 
 class Migration(migrations.Migration):
 
