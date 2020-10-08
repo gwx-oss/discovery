@@ -4,6 +4,16 @@ from django.db import migrations
 
 
 def remove_pss(apps, scheme_editor):
+
+    model = apps.get_model('categories', 'naics')
+    model.objects.filter(id='PSS').delete()
+    
+    model = apps.get_model('categories', 'psc')
+    model.objects.filter(id='PSS').delete()
+    
+    model = apps.get_model('categories', 'keywords')
+    model.objects.filter(id='PSS').delete()
+    
     model = apps.get_model('categories', 'vehicle')
     model.objects.filter(id='PSS').delete()
     
