@@ -15,14 +15,14 @@ def remove_pss(apps, scheme_editor):
     # model.objects.filter(pool='PSS').delete()
     
 
-    model = apps.get_model('categories', 'pool')
-    model.objects.filter(naics='PSS').delete()
+    model = apps.get_model('categories', 'pool_naics')
+    model.objects.filter(pool_id = 'PSS').delete()    
 
-    model = apps.get_model('categories', 'pool')
-    model.objects.filter(psc='PSS').delete()
-    
-    model = apps.get_model('categories', 'pool')
-    model.objects.filter(keywords='PSS').delete()
+    model = apps.get_model('categories', 'pool_psc')
+    model.objects.filter(pool_id = 'PSS').delete()    
+
+    model = apps.get_model('categories', 'pool_keywords')
+    model.objects.filter(pool_id = 'PSS').delete()
 
     model = apps.get_model('categories', 'pool')
     model.objects.filter(id='PSS').delete()
