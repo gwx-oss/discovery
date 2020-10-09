@@ -5,15 +5,25 @@ from django.db import migrations
 
 def remove_pss(apps, scheme_editor):
 
-    model = apps.get_model('categories', 'naics')
-    model.objects.filter(pool='PSS').delete()
+    # model = apps.get_model('categories', 'naics')
+    # model.objects.filter(pool='PSS').delete()
     
-    model = apps.get_model('categories', 'psc')
-    model.objects.filter(pool='PSS').delete()
+    # model = apps.get_model('categories', 'psc')
+    # model.objects.filter(pool='PSS').delete()
     
-    model = apps.get_model('categories', 'keywords')
-    model.objects.filter(pool='PSS').delete()
+    # model = apps.get_model('categories', 'keywords')
+    # model.objects.filter(pool='PSS').delete()
     
+
+    model = apps.get_model('categories', 'pool')
+    model.objects.filter(naics='PSS').delete()
+
+    model = apps.get_model('categories', 'pool')
+    model.objects.filter(psc='PSS').delete()
+    
+    model = apps.get_model('categories', 'pool')
+    model.objects.filter(keywords='PSS').delete()
+
     model = apps.get_model('categories', 'pool')
     model.objects.filter(id='PSS').delete()
 
